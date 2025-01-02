@@ -40,7 +40,7 @@ function Home(){
             }
            })
            .catch((err) => {
-              setError('failed to fetch user')
+              setError(err)
            })
         }else{
            setError('No user data available')
