@@ -18,8 +18,8 @@ export async function POST(req: NextRequest) {
                 data: {
                     telegramId: userData.id,
                     username: userData.username || '',
-                    firstname: userData.first_name || '',
-                    lastname: userData.last_name || ''
+                    firstName: userData.first_name || '',
+                    lastName: userData.last_name || ''
                 }
             })
         }
