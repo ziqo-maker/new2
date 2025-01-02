@@ -13,19 +13,19 @@ export async function POST(req: NextRequest) {
             where: { telegramId: userData.id }
         })
 
-         if (!user) {
-            user = await prisma.user.create({
-                data: {
-                    telegramId: userData.id,
-                    username: userData.username || '',
-                    firstname: userData.first_name || '',
-                    lastname: userData.last_name || ''
-                }
-            })
-        }
+         // if (!user) {
+            // user = await prisma.user.create({
+            //     data: {
+            //         telegramId: userData.id,
+            //         username: userData.username || '',
+            //         firstname: userData.first_name || '',
+            //         lastname: userData.last_name || ''
+            //     }
+            // })
+        // }
     
 
-        return NextResponse.json('')
+        return NextResponse.json(user)
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
