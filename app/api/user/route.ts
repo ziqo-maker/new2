@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
         }
 
          let user = await prisma.user.findUnique({
-            where: { telegramId: userData.id }
+            where: { telegramId: 22 }
         })
 
          // if (!user) {
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         // }
     
 
-        return NextResponse.json('')
+        return NextResponse.json(user)
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
