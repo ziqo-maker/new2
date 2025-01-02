@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
         }
 
          let user = await prisma.user.findUnique({
-            where: { telegramId: 22 }
+            where: { username: userData.username }
         })
 
          // if (!user) {
