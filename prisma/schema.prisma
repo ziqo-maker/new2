@@ -14,5 +14,5 @@ model User {
   username String @db.VarChar(50)
   firstName String @db.VarChar(500) @map("first_name")
   lastName String @db.VarChar(500) @map("last_name")
-  telegramid String @db.VarChar(255) @unique
+   telegramid Int @default(0)
 }
