@@ -11,14 +11,13 @@ export async function POST(req: NextRequest) {
 
 
         
-         let user = await prisma.user.findFirst({
-            where: { telegramid: userData.id }
+        let user = await prisma.user.findFirst({
+            where: { id: userData.id }
         })
 
         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    telegramid: userData.id,
                     username: userData.username,
                     firstName: userData.first_name || '',
                     lastName: userData.last_name || ''
