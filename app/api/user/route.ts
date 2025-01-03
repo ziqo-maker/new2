@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    telegramId: 5468,
+                    idd: userData.id,
                     username: userData.username,
                     firstName: userData.first_name || '',
                     lastName: userData.last_name || ''
@@ -27,6 +27,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(user)
     } catch (error) {
         console.error('Error processing user data:', error)
-        return NextResponse.json({ error: error }, { status: 500 })
+        return NextResponse.json({ error: 'server error' }, { status: 500 })
     }
 }
