@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
         }
 
        let user = await prisma.user.findFirst({
-            where: { idd: userData.id }
+            where: { idd: String(userData.id) }
         })
 
         if (!user) {
