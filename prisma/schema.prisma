@@ -8,6 +8,10 @@ generator client {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @db.VarChar(255)
+  id         Int    @id @default(autoincrement())
+  firstName  String @db.VarChar(255)
+  lastName   String @db.VarChar(255)
+  points     Int    @default(0)
+  telegramid Int    @unique
+  username   String @db.VarChar(50)
 }
