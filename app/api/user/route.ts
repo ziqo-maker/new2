@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 export async function POST(req: NextRequest) {
     try {
         const userData = await req.json()
-
+  
         if (!userData || !userData.id) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
         }
