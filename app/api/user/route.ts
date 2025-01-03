@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
             where: { id: userData.id }
         })
 
-        
+         
         if (!user) {
             user = await prisma.user.create({
                 data: {
