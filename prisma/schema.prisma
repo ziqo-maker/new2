@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
+k
 model User {
   id Int @id @default(autoincrement())
   points Int @default(0)
