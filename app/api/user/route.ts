@@ -12,20 +12,16 @@ export async function POST(req: NextRequest) {
 
         
         let user = await prisma.user.findUnique({
-            where: { telegramId: userData.id }
+            where: { id: userData.id }
         })
 
         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    telegramId: userData.id,
-                    username: userData.username || '',
-                    firstname: userData.first_name || '',
-                    lastname: userData.last_name || ''
+                    email: userData.username,
                 }
             })
         }
-    
 
         return NextResponse.json(user)
     } catch (error) {
