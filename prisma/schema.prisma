@@ -9,9 +9,11 @@ generator client {
 
  
 model User {
-  id Int @id @default(autoincrement())
-  points Int @default(0)
+  id BigInt @id @default(autoincrement())
+  points BigInt @default(0)
   username String @db.VarChar(50)
   firstName String @db.VarChar(500) @map("first_name")
   lastName String @db.VarChar(500) @map("last_name")
+  telegramid BigInt @unique
 }
+
