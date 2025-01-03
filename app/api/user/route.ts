@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    username: userData.username,
+                    username: userData.id,
                     firstName: userData.first_name || '',
                     lastName: userData.last_name || ''
                 }
