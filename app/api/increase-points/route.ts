@@ -9,12 +9,9 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Invalid telegramId' }, { status: 400 })
         }
 
-        const updatedUser = await prisma.user.update({
-            where: { telegramId },
-            data: { points: { increment: 1 } }
-        })
+       
 
-        return NextResponse.json({ success: true, points: updatedUser.points })
+        return NextResponse.json('')
     } catch (error) {
         console.error('Error increasing points:', error)
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
