@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
 
         
-         let user = await prisma.user.findFirst({
+         let user = await prisma.user.findUnique({
             where: { telegramid: userData.id }
         })
 
