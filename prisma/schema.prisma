@@ -12,4 +12,6 @@ model User {
   id Int @id @default(autoincrement())
   points Int @default(0)
   username String @db.VarChar(50)
+  firstName String @db.VarChar(255) @map("first_name")
+  lastName String @db.VarChar(255) @map("last_name")
 }
