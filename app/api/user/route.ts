@@ -9,14 +9,14 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
         }
 
-        let user = await prisma.user.findFirst({
-            where: { id: userData.id }
+           let user = await prisma.user.findUnique({
+            where: { telegramid: userData.id }
         })
 
-         
         if (!user) {
             user = await prisma.user.create({
                 data: {
+                    telegramid: userData.id,
                     username: userData.username,
                     firstName: userData.first_name || '',
                     lastName: userData.last_name || ''
