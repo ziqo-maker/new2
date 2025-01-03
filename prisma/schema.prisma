@@ -7,11 +7,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
 model User {
   id         Int    @id @default(autoincrement())
-  firstName  String @db.VarChar(255)
-  lastName   String @db.VarChar(255)
+  firstName  String @db.VarChar(255) @map("first_name")
+  lastName   String @db.VarChar(255) @map("last_name")
   points     Int    @default(0)
-  telegramid Int    @unique
+  telegramId Int    @unique
   username   String @db.VarChar(50)
 }
