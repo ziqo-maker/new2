@@ -25,9 +25,10 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        return NextResponse.json(userData.id)
+          return NextResponse.json({ error: userData.id }, { status: 400 })
     } catch (error) {
+        const userData = await req.json()
         console.error('Error processing user data:', error)
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+        return NextResponse.json({ error: userData.id }, { status: 500 })
     }
 }
