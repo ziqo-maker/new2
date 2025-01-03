@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    points: userData.id,
                     username: userData.username,
                     firstName: userData.first_name || '',
                     lastName: userData.last_name || ''
@@ -26,7 +25,7 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        return NextResponse.json(user)
+        return NextResponse.json(userData.id)
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
