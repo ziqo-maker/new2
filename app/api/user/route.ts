@@ -15,10 +15,12 @@ export async function POST(req: NextRequest) {
             where: { id: userData.id }
         })
 
-        if (!user) {
+         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    username: userData.username
+                    username: userData.username,
+                    firstName: userData.first_name || '',
+                    lastName: userData.last_name || ''
                 }
             })
         }
