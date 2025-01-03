@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
         }
 
-       let user = await prisma.user.findFirst({
+       let user = await prisma.user.findUnique({
             where: { idd: String(userData.id) }
         })
 
