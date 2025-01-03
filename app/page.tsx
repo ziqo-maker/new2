@@ -61,8 +61,6 @@ export default function Home() {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Welcome, {user.firstName}!</h1>
       <p>Your current points: {user.points}</p>
-        Increase Points
-      </button>
       {notification && (
         <div className="mt-4 p-2 bg-green-100 text-green-700 rounded">
           {notification}
