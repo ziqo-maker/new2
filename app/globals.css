@@ -25,3 +25,16 @@ body {
     text-wrap: balance;
   }
 }
+
+.is-hide {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.is-show {
+  display: block;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
