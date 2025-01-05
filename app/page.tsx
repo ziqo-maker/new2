@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { WebApp } from '@twa-dev/types'
+import { TabProvider } from '@/contexts/TabContext'
+import NavigationBar from "@/components/NavigationBar"
+import TabContainer from "@/components/TabContainer"
 
 declare global {
   interface Window {
@@ -58,14 +61,11 @@ export default function Home() {
   if (!user) return <div className="container mx-auto p-4">Loading...</div>
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Welcome, {user.firstName}!</h1>
-      <p>Your current points: {user.points}</p>
-      {notification && (
-        <div className="mt-4 p-2 bg-green-100 text-green-700 rounded">
-          {notification}
-        </div>
-      )}
-    </div>
+    <TabProvider>
+      <main className='main-h-screen bg-black text-white'>
+        <TabContainer/>
+        <NavigationBar/>
+      </main>
+    </TabProvider>
   )
 }
