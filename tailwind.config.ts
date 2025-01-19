@@ -12,7 +12,17 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        wave: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
+      animation: {
+        'waving-hand': 'spin 10s linear infinite',
+      },
     },
   },
   plugins: [],
+  
 } satisfies Config;
