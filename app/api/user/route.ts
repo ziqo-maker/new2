@@ -26,9 +26,6 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        window.localStorage.setItem("userid", "");
-
-
         return NextResponse.json(user)
     } catch (error) {
         console.error('Error processing user data:', error)
