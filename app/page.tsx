@@ -102,7 +102,7 @@ export default function Home() {
     return <div className="container mx-auto p-4 text-red-500">{error}</div>
   }
 
-  // if (!user) return <div className="container mx-auto p-4">Loading...</div>
+  if (!user) return <div className="container mx-auto p-4">Loading...</div>
 
   return (
     <TabProvider>
