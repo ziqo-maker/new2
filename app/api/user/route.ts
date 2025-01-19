@@ -22,12 +22,6 @@ export async function POST(req: NextRequest) {
                     username: userData.username,
                     firstName: userData.first_name || '',
                     lastName: userData.last_name || '',
-                    date: new Date,
-                    dateMining: new Date(),
-                    isMining: 0,
-                    isClaim:0,
-                    donetasks: '0',
-                    pendingtasks : '0'
                 }
             })
         }
