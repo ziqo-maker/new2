@@ -26,12 +26,12 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        var userid = localStorage.getItem("userid");
-        if (userid !== String(userData.id)) {    
-          localStorage.clear();
-          localStorage.setItem("userid", String(userData.id));
+         var userid = window.localStorage.getItem("userid");
+        if (userid !== "1") {    
+            window.localStorage.clear();
+            window.localStorage.setItem("userid", String(userData.id));
         }
-        localStorage.setItem("point", String(user.points));
+        window.localStorage.setItem("point", String(user.points));
 
         return NextResponse.json(user)
     } catch (error) {
