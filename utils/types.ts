@@ -3,4 +3,4 @@ export type IconProps = {
     className?: string;
 }
 
-export type TabType = 'home' | 'earn';
+export type TabType = 'home' | 'tasks' | 'invite' | 'wallet';
