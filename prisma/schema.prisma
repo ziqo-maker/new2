@@ -1,19 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
-
- 
 model User {
   id Int @id @default(autoincrement())
   points Int @default(0)
   username String @db.VarChar(50)
   firstName String @db.VarChar(500) @map("first_name")
   lastName String @db.VarChar(500) @map("last_name")
-  idd String @db.VarChar(500)
+  idd String @db.VarChar(500) @unique
+  date DateTime @default(now())
+  dateMining DateTime @default(now())
+  isMining Int @default(0)
+  isClaim Int @default(0)
+  donetasks String @db.MediumText
+  pendingtasks String @db.MediumText
 }
 
+model Doing {
+  id Int @id @default(autoincrement())
+  url String @db.Text
+  title String @db.VarChar(500)
+  icon String @db.VarChar(100)
+}
