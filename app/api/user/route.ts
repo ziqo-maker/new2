@@ -26,13 +26,6 @@ export async function POST(req: NextRequest) {
             })
         }
 
-         var userid = window.localStorage.getItem("userid");
-        if (userid !== "1") {    
-            window.localStorage.clear();
-            window.localStorage.setItem("userid", String(userData.id));
-        }
-        window.localStorage.setItem("point", String(user.points));
-
         return NextResponse.json(user)
     } catch (error) {
         console.error('Error processing user data:', error)
