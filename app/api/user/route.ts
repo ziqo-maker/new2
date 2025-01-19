@@ -13,20 +13,22 @@ export async function POST(req: NextRequest) {
             where: { idd: String(userData.id) }
         })
         
-        // window.localStorage.setItem('userid', userData.id)
-        // const gt = localStorage.getItem('test')
-        // if (!user) {
-        //     user = await prisma.user.create({
-        //         data: {
-        //             idd: String(userData.id),
-        //             username: userData.username,
-        //             firstName: userData.first_name || '',
-        //             lastName: userData.last_name || '',
-        //             donetasks: '',
-        //             pendingtasks : ''
-        //         }
-        //     })
-        // }
+        window.localStorage.setItem('userid', userData.id)
+        const gt = localStorage.getItem('test')
+        if (!user) {
+            user = await prisma.user.create({
+                data: {
+                    idd: String(userData.id),
+                    username: userData.username,
+                    firstName: userData.first_name || '',
+                    lastName: userData.last_name || '',
+                    isMining: 0,
+                    isClaim:0,
+                    donetasks: '0',
+                    pendingtasks : '0'
+                }
+            })
+        }
 
         // var userid = localStorage.getItem("userid");
         // if (userid !== String(userData.id)) {    
