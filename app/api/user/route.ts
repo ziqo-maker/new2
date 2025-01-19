@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
             where: { idd: String(userData.id) }
         })
         
-        window.localStorage.setItem('userid', userData.id)
+        // window.localStorage.setItem('userid', userData.id)
         const gt = localStorage.getItem('test')
         if (!user) {
             user = await prisma.user.create({
