@@ -54,7 +54,7 @@ const TasksTab = () => {
          .then((res) => res.json())
          .then((data) => {
           if(data.success){
-          
+             window.open("https://t.me/ShibaFarmChannel"); 
           }
          })
        } catch (err) {
