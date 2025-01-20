@@ -152,7 +152,7 @@ const HomeTab = () => {
      <div className="w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl">
     <div className="h-7"/>
        <center>
-       <div className="flex  glowWite items-center w-2/4 border-2 border-white rounded-full px-3 py-[3px] max-w-64 ">
+       <div className="flex  glowWite items-center w-2/2 border-2 border-white rounded-full px-3 py-[3px] max-w-64 ">
         <Image
         src={Shiba as StaticImageData}
       className="w-10 h-10 aspect-square object-cover"
