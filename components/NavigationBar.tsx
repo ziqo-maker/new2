@@ -5,7 +5,7 @@ import Earn from '@/icons/Earn'
 import Invite from '@/icons/inviteicon'
 import Wallet from '@/icons/walleticon'
 import { TabType } from '@/utils/types'
-import ShibaMining from '@/imgs/miningshiba.jpg'
+import ShibaMining from '@/imgs/logonav.png'
 
 
 const NavigationBar = () => {
