@@ -149,14 +149,10 @@ const HomeTab = () => {
   },[isActive])
 
     return (
-
-        <div className="flex justify-center">
-          
      <div className="w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl">
-    
-     <div className="w-full">
-     <center>
-        <div className="flex glowWite mt-5 items-center w-2/3 border-2 border-white rounded-full px-3 py-[3px] max-w-64 ">
+    <div className="h-7"/>
+       <center>
+       <div className="flex  glowWite items-center w-2/4 border-2 border-white rounded-full px-3 py-[3px] max-w-64 ">
         <Image
         src={Shiba as StaticImageData}
       className="w-10 h-10 aspect-square object-cover"
@@ -172,10 +168,7 @@ const HomeTab = () => {
               </div>
               </div>
               </div>
-        </center>
-     
-
-     </div>
+       </center>
 
        <div className="flex-grow mt-5 bg-[#f3ba2f] rounded-t-[48px] relative top-glow z-0">
        { <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-[#1d2025] rounded-t-[46px]">
@@ -192,7 +185,7 @@ const HomeTab = () => {
         <p className="text-2xl text-[#ffae19] font-Large gloworange truncate">{miningPoint}</p>
         </div>
         <div className="flex px-10 justify-center">
-        <button onClick={handleStart} className="flex mt-5 items-center w-full rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+        <button onClick={handleStart} className="flex mt-5 items-center  w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
@@ -222,7 +215,6 @@ const HomeTab = () => {
        </div>
      </div>
 
-     </div>
     )
 }
 
