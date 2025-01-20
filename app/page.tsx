@@ -109,7 +109,7 @@ export default function Home() {
        <>
       <Script src="https://sad.adsgram.ai/js/sad.min.js" strategy="afterInteractive" />
       </>
-      <main className='main-h-screen bg-black text-white'>
+      <main className='main-h-screen bg-[#1d2025] text-white'>
         <TabContainer/>
         <NavigationBar/>
       </main>
