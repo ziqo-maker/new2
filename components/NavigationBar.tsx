@@ -18,16 +18,23 @@ const NavigationBar = () => {
     ]
    
     return (
-        <div className="fixed bottom-3  left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-md bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs ">
+        <div className="fixed bottom-1  left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-md bg-[#272a2f] flex justify-around items-center z-50 text-xs ">
              <button
                 onClick={() => setActiveTab('home')}
                    className={`flex flex-col items-center m-1 p-2 rounded-2xl ${chsHome ? 'w-1/6 bg-[#1c1f24]' : 'w-1/6'}`}
                >
               <Image
         src={ShibaMining as StaticImageData}
-      className="w-12 h-12 rounded-full "
+      className="w-8 h-8 rounded-full mx-auto "
       alt="Home"
     />
+       <span
+                                    className={`text-xs font-medium ${chsHome ? 'text-[#ffffff]' : 'text-[#727272]'
+                                        }`}
+                                >
+                                 Home   
+                                </span>
+
                             </button>
            {tabs.map((tab) => {
                         const isActive = activeTab === tab.id
