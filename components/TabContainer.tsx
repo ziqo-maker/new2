@@ -10,7 +10,7 @@ const TabContainer = () => {
     const { activeTab } = useTab()
 
     return (
-        <div className="flex-1 overflow-hidden max-w-md mx-auto pt-[44px] pb-[72px]">
+        <div className="flex-1 overflow-hidden max-w-xl mx-auto  pb-[10px]">
             <div className={`${activeTab === 'home' ? 'is-show' : 'is-hide'}`}>
                 <HomeTab />
             </div>
