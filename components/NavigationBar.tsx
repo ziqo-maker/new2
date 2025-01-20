@@ -18,7 +18,7 @@ const NavigationBar = () => {
     ]
    
     return (
-        <div className="fixed bottom-0  left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 text-xs ">
+        <div className="fixed bottom-0  left-1/2 transform -translate-x-1/2 w-full max-w-xl bg-[#272a2f] grow flex justify-around items-center z-50 text-xs ">
              <button
                 onClick={() => setActiveTab('home')}
                    className={`flex flex-col items-center m-1 p-2 rounded-2xl ${chsHome ? 'w-1/6 bg-[#1c1f24]' : 'w-1/6'}`}
