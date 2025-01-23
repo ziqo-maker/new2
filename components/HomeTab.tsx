@@ -5,14 +5,9 @@ import ShibaMining from '@/imgs/firefly.jpg'
 import miningicon from '@/icons/miningicon.svg'
 import { useEffect,useState,useRef } from "react"
 import React from 'react';
-import Video from 'next-video';
-import ply from '@/videos/video.mp4'
 import gif from '@/imgs/video.gif'
 
 
-import Player from 'next-video/player';
-import BackgroundPlayer from 'next-video/background-player';
-import { CldVideoPlayer } from 'next-cloudinary';
 
 interface Props {
   point: number;
