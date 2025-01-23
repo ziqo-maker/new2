@@ -13,7 +13,6 @@ import gif from '@/imgs/video.gif'
 import Player from 'next-video/player';
 import BackgroundPlayer from 'next-video/background-player';
 import { CldVideoPlayer } from 'next-cloudinary';
-import 'next-cloudinary/dist/cld-video-player.css';
 
 interface Props {
   point: number;
