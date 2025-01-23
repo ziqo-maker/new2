@@ -1,14 +1,19 @@
 'use client'
 import Image, {StaticImageData} from "next/image"
 import Shiba from '@/imgs/shibalogo.png'
-import ShibaMining from '@/imgs/miningshiba.jpg'
+import ShibaMining from '@/imgs/firefly.jpg'
 import miningicon from '@/icons/miningicon.svg'
 import { useEffect,useState,useRef } from "react"
 import React from 'react';
+import Video from 'next-video';
+import ply from '@/videos/video.mp4'
+import gif from '@/imgs/video.gif'
 
 
-
-
+import Player from 'next-video/player';
+import BackgroundPlayer from 'next-video/background-player';
+import { CldVideoPlayer } from 'next-cloudinary';
+import 'next-cloudinary/dist/cld-video-player.css';
 
 interface Props {
   point: number;
@@ -182,17 +187,26 @@ const HomeTab = ({ point }: Props) => {
         <div className="px-4 mt-4 flex justify-center">
           <div className="w-80 h-80 p-5">
           <Image
-        src={ShibaMining as StaticImageData}
+        src={gif as StaticImageData}
+        unoptimized={true}
       className={`w-full h-full rounded-full ${isActive? 'animate-pulse' : ''}`}
       alt="Shiba Inu"
     />
+      
+      <Image
+        src={gif as StaticImageData}
+        unoptimized={true}
+      className={`w-full h-full rounded-full ${isActive? 'animate-pulse' : ''}`}
+      alt="Shiba Inu"
+    />
+       
           </div>
         </div>
         <div className="flex px-50 justify-center">
         <p className="text-2xl text-[#ffae19] font-Large gloworange truncate">{miningPoint}</p>
         </div>
         <div className="flex px-10 justify-center">
-        <button onClick={handleStart} className="flex mt-5 items-center  w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+        {/* <button onClick={handleStart} className="flex mt-5 items-center  w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
@@ -216,7 +230,7 @@ const HomeTab = ({ point }: Props) => {
      </div>
         </div>
         </div>
-        </button>
+        </button> */}
         </div>
        </div> }
        </div>
