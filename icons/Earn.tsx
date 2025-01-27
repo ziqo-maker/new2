@@ -3,7 +3,7 @@ import { IconProps } from "../utils/types";
 const Earn: React.FC<IconProps> = ({ size = 24, className = "" }) => {
 
     const svgSize = `${size}px`;
-
+   
     return (
         <svg
         className={className} height={svgSize} width={svgSize}
@@ -16,3 +16,7 @@ const Earn: React.FC<IconProps> = ({ size = 24, className = "" }) => {
 };
 
 export default Earn;
+
+
+
+
