@@ -6,38 +6,15 @@ import TasksTab from './TasksTab'
 import InviteTab from './InviteTab'
 import WalletTab from './WalletTab'
 import { useEffect,useState } from "react"
+import SpeedTab from './SpeedTab'
 
 const TabContainer = () => {
     const { activeTab } = useTab()
-    const [points,setPoint] = useState(0);
-
-    try {
-        fetch('/api/getpoint', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ idd: String("6124587322") }),
-       })
-       .then((res) => res.json())
-       .then((data) => {
-         if (data.success) {
-          setPoint(data.gtpoint)
-         } else {
-          
-         }
-       })
-     } catch (err) {
-     }
-
-      useEffect(() => {
-
-      },[activeTab === 'home'])
 
     return (
-        <div className="flex-1 overflow-hidden max-w-xl mx-auto  pb-[50px]">
+        <div className="flex-1 overflow-hidden max-w-xl mx-auto">
             <div className={`${activeTab === 'home' ? 'is-show' : 'is-hide'}`}>
-                <HomeTab  point={points} />
+                <HomeTab />
             </div>
             <div className={`${activeTab === 'tasks' ? 'is-show' : 'is-hide'}`}>
                 <TasksTab />
@@ -47,6 +24,9 @@ const TabContainer = () => {
             </div>
             <div className={`${activeTab === 'wallet' ? 'is-show' : 'is-hide'}`}>
                 <WalletTab />
+            </div>
+            <div className={`${activeTab === 'speed' ? 'is-show' : 'is-hide'}`}>
+                <SpeedTab />
             </div>
         </div>
     )
