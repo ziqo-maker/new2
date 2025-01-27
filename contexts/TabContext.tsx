@@ -3,9 +3,11 @@
 import {TabType} from "@/utils/types"
 import {createContext,useContext,useState} from "react"
 
+
 type TabContextType = {
-    activeTab: TabType
-    setActiveTab: (tab: TabType) => void
+    activeTab: TabType;
+    setActiveTab: (tab: TabType) => void;
+   
 }
 
 const TabContext = createContext<TabContextType | undefined>(undefined)
