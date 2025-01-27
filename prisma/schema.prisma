@@ -20,6 +20,8 @@ model User {
   isClaim Int @default(0)
   donetasks String @db.MediumText
   pendingtasks String @db.MediumText
+  speedlvl Int @default(1)
+  upgrade Int @default(1)
 }
 
 model Doing {
