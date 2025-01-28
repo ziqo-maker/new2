@@ -180,7 +180,7 @@ const HomeTab = () => {
         
 
         <div className="flex justify-center items-center  relative mt-4 ">
-          <div className="flex w-80 h-80">   
+          <div className="flex w-60 h-60">   
           <div className="relative inline-flex items-center  text-center text-white">
         <Image
         src={isActive? toyspeed1 as StaticImageData : toypic}
