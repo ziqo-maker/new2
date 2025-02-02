@@ -6,8 +6,8 @@ import { useEffect,useState,useRef } from "react"
 import React, { useContext } from 'react';
 import toyspeed1 from '@/gif/toyspeed1.gif'
 import UpgradeIcon from '@/icons/upgrade.svg';
+import Marquee from 'react-fast-marquee'
 import { useTab } from '@/contexts/TabContext'
-import { UserContext } from '@/contexts/userContext';
 import { NewUserContext } from '@/contexts/UserContextB';
 import toypic from '@/imgs/toypic.png';
 
@@ -29,7 +29,6 @@ const HomeTab = () => {
   
   const { activeTab, setActiveTab } = useTab()
 
-  // const userContext = useContext(UserContext);
   
   const handleStart = async () => {
 
@@ -46,7 +45,7 @@ const HomeTab = () => {
        .then((data) => {
          if (data.success) {
           const plus = Number(userData?.gtpoint) + miningPoint
-          // userContext?.updateUserPoint(String(plus))
+          setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(plus),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
           setClaim(false)
           setReady(true)
           setMiningPoint(0)
@@ -157,18 +156,29 @@ const HomeTab = () => {
     return (
      <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
 
- 
+    <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
+        <div className="items-center justify ">
+          <Marquee gradient className=" items-center py-2 overflow-hidden ">
+          <div className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
+          <p className="text-white font-Large">use***66 withdrawn 0.5 USDT</p>
+          </div>
+          <div className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
+          <p className="text-white font-Large">use***66 withdrawn 0.5 USDT</p>
+          </div>
+          </Marquee>
+        </div>
+      </section>
 
        <div className="flex w-full  items-center justify-center items-center">
-       <div className="flex bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center w-2/4  text-wrap  rounded-full px-1 py-[3px] ">
-        <Image
+       <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
+        <Image 
         src={FootPrint as StaticImageData} 
       className="w-10 h-10 aspect-square object-cover"
       alt="Shiba Inu"
     />
               <div className="flex-1 text-center">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base truncate">{userData?.gtpoint}</p>
+              <p className=" text-white font-Large glow text-base truncate">{Number(userData?.gtpoint).toLocaleString()}</p>
               </div>
               </div>
               </div>
@@ -179,42 +189,33 @@ const HomeTab = () => {
         <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-white rounded-t-[46px]">        
         
 
-        <div className="flex justify-center items-center  relative mt-4 ">
-          <div className="flex w-60 h-60">   
-          <div className="relative inline-flex items-center  text-center text-white">
-        <Image
-        src={isActive? toyspeed1 as StaticImageData : toypic}
-        unoptimized={true}
-      className={`h-full rounded-full border-4 border-double`}
-      alt="Shiba Inu"
+        <div className="flex justify-center items-center  mt-4 ">
+          <div className="flex w-80 h-80 p-3"> 
+            <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
+        <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="auto" playsInline>
+        <source 
+          src= "https://php-dkgtrx.chbk.app/speed4_Trim.mkv"
+          type="video/mp4"
         />
-  <div className="absolute inline-flex items-center justify-center w-6 h-6 rounded-full -top-2 -end-2">
-  
-  <div className=" mt-4 justify-end items-center ">
-        <button className="flex  border-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 rounded-full px-3 py-[6px] ">
-         <p className="text-lg text-[#ffae19]/[0.9] font-Large">Change</p>
+      Your browser does not support the video tag.
+    </video>
+    <Image
+        src={toypic}
+      className={`${isActive? 'w-0 h-0' : 'h-full'} rounded-full absolute object-fill`}
+      alt="Toy"
+        />  
+            </div> 
+   
+          </div>
+          
+        </div>
+
+        <div className="flex grow w-[calc(100%-1rem)] justify-between items-between">
+ 
+        <button onClick={() => setActiveTab('character')} className="flex border-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 rounded-full px-3 py-[6px] ">
+         <p className="text-lg text-[#ffae19]/[0.9] font-Large">Characters</p>
         </button>
-        </div>
-  </div>
-</div>
-          </div>
-          
-        </div>
-        <div className="flex grow px-50 justify-center items-center space-x-1">
-        <div className="flex invisible grow-0 bg-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 border-white rounded-full px-3 py-[6px] ">
-        <Image
-        src={UpgradeIcon as StaticImageData} 
-      className="w-7 h-7 aspect-square object-cover"
-      alt="Shiba Inu"
-       />
-         <p className="text-lg text-white font-Large">Speed Up</p>
-        </div>
-          
-          <div className="flex space-x-2 items-center text-wrap">
-          <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint}</p>
-          <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{userData?.speedlvl}</p>
-          </div>
-          
+
         <button onClick={() => setActiveTab('speed')} className="flex grow-0 bg-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 border-white rounded-full px-3 py-[6px] ">
         <Image
         src={UpgradeIcon as StaticImageData} 
@@ -223,6 +224,20 @@ const HomeTab = () => {
        />
          <p className="text-lg text-white font-Large">Speed Up</p>
         </button>
+  </div>
+
+        <div className="flex grow px-50 justify-center items-center space-x-1">
+        <Image
+        src={FootPrint as StaticImageData} 
+      className="w-10 h-10"
+      alt=""
+       />
+          <div className="flex space-x-2 items-center text-wrap">
+          <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
+          <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{userData?.speedlvl}</p>
+          </div>
+          
+        
         </div>
         <div className="flex px-10 justify-center">
         <button onClick={handleStart} className="flex mt-5 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">

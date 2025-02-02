@@ -7,6 +7,8 @@ import InviteTab from './InviteTab'
 import WalletTab from './WalletTab'
 import { useEffect,useState } from "react"
 import SpeedTab from './SpeedTab'
+import CharactersTab from './CharactersTab'
+import CreateTask from './CreateTask'
 
 const TabContainer = () => {
     const { activeTab } = useTab()
@@ -27,6 +29,12 @@ const TabContainer = () => {
             </div>
             <div className={`${activeTab === 'speed' ? 'is-show' : 'is-hide'}`}>
                 <SpeedTab />
+            </div>
+            <div className={`${activeTab === 'character' ? 'is-show' : 'is-hide'}`}>
+                <CharactersTab />
+            </div>
+            <div className={`${activeTab === 'createtask' ? 'is-show' : 'is-hide'}`}>
+                <CreateTask />
             </div>
         </div>
     )

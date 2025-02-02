@@ -19,13 +19,13 @@ const SpeedTab = () => {
 
     const { userData,setUserData } = React.useContext(NewUserContext);
     const tasks: { id: number; label: string; Icon: StaticImageData,cost:string }[] = [
-        { id: 1, label: 'x1 tokens every 2 hours', Icon: Speed1,cost : 'Free' },
-        { id: 2, label: 'x2 tokens every 2 hours', Icon: Speed2,cost : '100' },
-        { id: 3, label: 'x3 tokens every 2 hours', Icon: Speed3,cost : '100' },
-        { id: 4, label: 'x4 tokens every 2 hours', Icon: Speed4,cost : '100' },
-        { id: 5, label: 'x5 tokens every 2 hours', Icon: Speed5,cost : '100' },
-        { id: 6, label: 'x6 tokens every 2 hours', Icon: Speed6,cost : '100' },
-        { id: 7, label: 'x7 tokens every 2 hours', Icon: Speed7,cost : '100' },
+        { id: 1, label: 'x1 tokens every 2 hours', Icon: Speed1,cost : '0' },
+        { id: 2, label: 'x2 tokens every 2 hours', Icon: Speed2,cost : '250000' },
+        { id: 3, label: 'x3 tokens every 2 hours', Icon: Speed3,cost : '500000' },
+        { id: 4, label: 'x4 tokens every 2 hours', Icon: Speed4,cost : '1000000' },
+        { id: 5, label: 'x5 tokens every 2 hours', Icon: Speed5,cost : '2000000' },
+        { id: 6, label: 'x6 tokens every 2 hours', Icon: Speed6,cost : '3000000' },
+        { id: 7, label: 'x7 tokens every 2 hours', Icon: Speed7,cost : '5000000' },
     ]
 
 
@@ -47,7 +47,7 @@ const SpeedTab = () => {
              .then((data) => {
               if(data.success){
                 
-                 setUserData({idd:String(userData?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint)})
+                 setUserData({idd:String(userData?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value)})
                  new Toast({
                                position: "top-center",
                                toastMsg: "Done.",
@@ -92,7 +92,7 @@ const SpeedTab = () => {
 
                              <Image
         src={tab.Icon as StaticImageData} 
-      className="w-1/3 aspect-square object-cover rounded-full text-[#ffae19]/[0.9] border-4 border-double"
+      className="w-1/2 aspect-square object-cover rounded-full text-[#ffae19]/[0.9] border-4 border-double"
       alt="Shiba Inu"
        />
                 <p className="text-base mt-1 text-black/[0.9] font-Large">{tab.label}</p>
@@ -102,10 +102,10 @@ const SpeedTab = () => {
       className="w-12 h-12 aspect-square object-cover"
       alt="Shiba Inu"
        />
-                       <p className="text-base mt-1 text-black/[0.9] font-Large">{tab.cost}</p>
+                       <p className="text-base mt-1 text-black/[0.9] font-Large">{Number(tab.cost) == 0 ? 'Free' : Number(tab.cost).toLocaleString()}</p>
                     
                  </div>
-                 <button onClick={() => handle(Number(tab.cost),tab.id)} className={`${ Number(userData?.speedlvl)+1 == tab.id && Number(userData?.gtpoint) >= Number(tab.cost) ? 'bg-[#ffae19]/[0.9]' : 'bg-[#ffae19]/[0.6]'} flex w-1/3 bg-[#ffae19]/[0.9] rounded-full  py-[10px] items-center justify-center text-center`}>
+                 <button onClick={() => handle(Number(tab.cost),tab.id)} className={`${ Number(userData?.speedlvl)+1 == tab.id && Number(userData?.gtpoint) >= Number(tab.cost) ? 'bg-[#ffae19]/[0.9]' : 'bg-[#ffae19]/[0.6]'} flex w-1/3 rounded-full  py-[10px] items-center justify-center text-center`}>
                  <p className="text-base text-black/[0.9] font-Large">{userData?.speedlvl == String(tab.id) ? 'Selected' :  Number(userData?.speedlvl)+1 == tab.id && Number(userData?.gtpoint) >= Number(tab.cost) ? 'Speed Up' : Number(tab.id) > Number(userData?.speedlvl)+1 ? 'Unavailable' :  Number(tab.id) < Number(userData?.speedlvl) ? 'Passed' : 'Not enough' }</p>
                   </button>
                             </div>
