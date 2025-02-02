@@ -19,9 +19,13 @@ model User {
   isMining Int @default(0)
   isClaim Int @default(0)
   donetasks String @db.MediumText
+  donecreatedtasks String @db.MediumText
   pendingtasks String @db.MediumText
+  pendingcreatedtasks String @db.MediumText
   speedlvl Int @default(1)
-  upgrade Int @default(1)
+  upgrade String @db.VarChar(50)
+  selectcharacter Int @default(1)
+  tokenvalue String @db.VarChar(50)
 }
 
 model Doing {
@@ -29,4 +33,18 @@ model Doing {
   url String @db.Text
   title String @db.VarChar(500)
   icon String @db.VarChar(100)
+  cost Int @default(15000)
+}
+
+model taskuser {
+  id Int @id @default(autoincrement())
+  describe String @db.Text
+  url String @db.VarChar(250)
+  platform String @db.VarChar(100)
+  keyword String @db.VarChar(50)
+  keyworddescribe String @db.VarChar(100)
+  contact String @db.VarChar(300)
+  project String @db.Text
+  clicks Int @default(0)
+  verify String @db.VarChar(50)
 }
