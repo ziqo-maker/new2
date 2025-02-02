@@ -4,13 +4,13 @@ import { prisma } from '@/lib/prisma'
 export async function POST(req: NextRequest) {
     try {
         
-        const {idd,pendingtasks,donetasks,points} = await req.json()
+        const {idd,pendingcreatedtasks,donecreatedtasks,points} = await req.json()
 
          await prisma.user.update({
             where: { idd },
             data: { 
-                pendingtasks,
-                donetasks,
+                pendingcreatedtasks,
+                donecreatedtasks,
                 points
             }
         })

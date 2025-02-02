@@ -7,17 +7,20 @@ export async function POST(req: NextRequest) {
       const user = await prisma.user.findUnique({
         where: { idd, }
         })
-        const str: string = String(user?.donetasks);
+        const str: string = String(user?.donecreatedtasks);
         const t = str.split(',').map(Number);
-        const getTasks = await prisma.doing.findMany({
+        const getTasks = await prisma.taskuser.findMany({
           take: 7,
             where: {
               NOT: {
                 id: {in: t}
+              },
+              verify:{
+                contains:'true'
               }
             }
         })
-        const strpending: string = String(user?.pendingtasks);
+        const strpending: string = String(user?.pendingcreatedtasks);
         const tpending = strpending.split(',').map(Number);
         return NextResponse.json({success:true,all:getTasks,donetasks:t,pendingtasks:tpending})
     } catch (error) {

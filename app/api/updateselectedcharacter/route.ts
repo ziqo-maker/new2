@@ -4,15 +4,11 @@ import { prisma } from '@/lib/prisma'
 export async function POST(req: NextRequest) {
     try {
         
-        const {idd,pendingtasks,donetasks,points} = await req.json()
+        const {idd,selectcharacter} = await req.json()
 
          await prisma.user.update({
             where: { idd },
-            data: { 
-                pendingtasks,
-                donetasks,
-                points
-            }
+            data: { selectcharacter }
         })
         
         return NextResponse.json({success :true})

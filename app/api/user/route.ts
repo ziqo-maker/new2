@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { UserContext } from '@/contexts/userContext';
 import { useContext } from 'react';
 
 export async function POST(req: NextRequest) {
     try {
         const userData = await req.json()
-        const userContext = useContext(UserContext);
         
         if (!userData || !userData.id) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
@@ -26,11 +24,13 @@ export async function POST(req: NextRequest) {
                     lastName: userData.last_name || '',
                     donetasks: '',
                     pendingtasks : '',
+                    tokenvalue: '0.00000001',
+                    upgrade :'1,',
 
                 }
             })
         }else{
-            userContext!.updateUser(String(userData.id),String(user.points),String(user.speedlvl))
+            // userContext!.updateUser(String(userData.id),String(user.points),String(user.speedlvl),)
         }
 
 
