@@ -7,6 +7,10 @@ type UserData = {
   idd: string;
   gtpoint: string;
   speedlvl:string;
+  upgrade:string;
+  selectcharacter:string;
+  value:string,
+  username:string
   }
 
   interface ContextProps {
@@ -22,7 +26,7 @@ export const NewUserContext = React.createContext<ContextProps>({
   });
 
 export function UserNew({ children }: { children: React.ReactNode }) {
-    const [userData, setUserData] = React.useState<UserData | null>({idd:'6124587322',gtpoint:'1001',speedlvl:'1'});
+    const [userData, setUserData] = React.useState<UserData | null>({idd:'6124587322',gtpoint:'10000001',speedlvl:'1',upgrade:'1,',selectcharacter:'1',value:'0.00000001',username:''});
 
   const loadUserData = async () => {
     console.log('load')
