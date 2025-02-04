@@ -82,26 +82,26 @@ export default function Home() {
 
     initWebApp();
 
-    if(String(prm).length != 0){
-      try {
-        fetch('/api/invitereferal', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ prm,idd: String(user.idd) }),
-       })
-       .then((res) => res.json())
-       .then((data) => {
-         if (data.success) {
+    // if(String(prm).length != 0){
+    //   try {
+    //     fetch('/api/invitereferal', {
+    //      method: 'POST',
+    //      headers: {
+    //        'Content-Type': 'application/json',
+    //      },
+    //      body: JSON.stringify({ prm,idd: String(user.idd) }),
+    //    })
+    //    .then((res) => res.json())
+    //    .then((data) => {
+    //      if (data.success) {
           
-         } else {
+    //      } else {
           
-         }
-       })
-     } catch (err) {
-     }
-    }
+    //      }
+    //    })
+    //  } catch (err) {
+    //  }
+    // }
 
   }, [])
 
