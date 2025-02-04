@@ -23,11 +23,12 @@ export default function Home() {
   useEffect(() => {
 
     const initWebApp = async () => {
-      if (typeof window !== 'undefined') {
-        const WebApp = (await import('@twa-dev/sdk')).default;
-        WebApp.ready();
-       
-        setStartParam(WebApp.initDataUnsafe.start_param || '');
+      if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+        // const WebApp = (await import('@twa-dev/sdk')).default;
+        // WebApp.ready();
+        const tg = window.Telegram.WebApp
+        tg.ready()
+        setStartParam(tg.initDataUnsafe.start_param || '');
       }
     };
 
@@ -91,18 +92,18 @@ export default function Home() {
     return <div className="container mx-auto p-4 text-red-500">{error}</div>
   }
 
-  // if (!user) return <div className="container mx-auto p-4">Loading...</div>
+  if (!user) return <div className="container mx-auto p-4">Loading...{startParam}</div>
 
   return (
     <UserNew>
-  {/* <UserProvider> */}
+  
 <TabProvider>
       <main className='main-h-screen bg-white '>
         <TabContainer/>
         <NavigationBar/>
       </main>
     </TabProvider>
-    {/* </UserProvider> */}
+ 
     </UserNew>
     
   )
