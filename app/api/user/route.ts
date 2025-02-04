@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
     try {
         const {gtuser} = await req.json()
         
-        const userData = gtuser.userData
+        const userData = gtuser
         if (!userData || !userData.id) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
         }
