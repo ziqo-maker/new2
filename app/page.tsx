@@ -65,7 +65,26 @@ export default function Home() {
             if (data.error) {
               setError(data.error)
             } else {
-              setUser(data.id)
+              if(String(prm).length != 0){
+                try {
+                  fetch('/api/invitereferal', {
+                   method: 'POST',
+                   headers: {
+                     'Content-Type': 'application/json',
+                   },
+                   body: JSON.stringify({ prm,idd: String(data.id) }),
+                 })
+                 .then((res) => res.json())
+                 .then((data) => {
+                   if (data.success) {
+                    
+                   } else {
+                    
+                   }
+                 })
+               } catch (err) {
+               }
+              }
             }
           })
           .catch((err) => {
@@ -81,27 +100,6 @@ export default function Home() {
     };
 
     initWebApp();
-
-    // if(String(prm).length != 0){
-    //   try {
-    //     fetch('/api/invitereferal', {
-    //      method: 'POST',
-    //      headers: {
-    //        'Content-Type': 'application/json',
-    //      },
-    //      body: JSON.stringify({ prm,idd: String(user.idd) }),
-    //    })
-    //    .then((res) => res.json())
-    //    .then((data) => {
-    //      if (data.success) {
-          
-    //      } else {
-          
-    //      }
-    //    })
-    //  } catch (err) {
-    //  }
-    // }
 
   }, [])
 
