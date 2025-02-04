@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 export async function POST(req: NextRequest) {
     try {
-        const {gtuser,prm} = await req.json()
+        const {gtuser} = await req.json()
         
         const userData = gtuser.userData
         if (!userData || !userData.id) {
@@ -15,21 +15,21 @@ export async function POST(req: NextRequest) {
             where: { idd: String(userData.id) }
         })
 
-        const gtprm = prm.prm || ''
+        // const gtprm = prm.prm || ''
 
-        if(String(gtprm).length != 0){
-            let userB = await prisma.user.findFirst({
-                where: { idd: String(gtprm) }
-            })
-            const str: string = String(userB?.invite)+','+String(userData.id);
-            await prisma.user.update({
-                where: { idd:String(gtprm) },
-                data: {  
-                    invite : str
-                }
-            })
+        // if(String(gtprm).length != 0){
+        //     let userB = await prisma.user.findFirst({
+        //         where: { idd: String(gtprm) }
+        //     })
+        //     const str: string = String(userB?.invite)+','+String(userData.id);
+        //     await prisma.user.update({
+        //         where: { idd:String(gtprm) },
+        //         data: {  
+        //             invite : str
+        //         }
+        //     })
             
-        }
+        // }
         
         
 
@@ -48,7 +48,6 @@ export async function POST(req: NextRequest) {
                     donecreatedtasks :'',
                     invite:'',
                     pendingcreatedtasks:'',
-                    referal:gtprm
                 }
             })
         }else{
