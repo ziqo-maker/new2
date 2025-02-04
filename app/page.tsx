@@ -65,7 +65,7 @@ export default function Home() {
             if (data.error) {
               setError(data.error)
             } else {
-              setUser(data)
+              setUser(data.id)
             }
           })
           .catch((err) => {
@@ -109,7 +109,7 @@ export default function Home() {
     return <div className="container mx-auto p-4 text-red-500">{error}</div>
   }
 
-  if (!user) return <div className="container mx-auto p-4">Loading...{user.idd}</div>
+  if (!user) return <div className="container mx-auto p-4">Loading...{user}</div>
 
   return (
     <UserNew>
