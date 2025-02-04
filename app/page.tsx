@@ -65,7 +65,7 @@ export default function Home() {
             if (data.error) {
               setError(data.error)
             } else {
-              if(String(prm).length != 0){
+              // if(String(prm).length != 0){
                //  try {
                //    fetch('/api/invitereferal', {
                //     method: 'POST',
@@ -84,7 +84,7 @@ export default function Home() {
                //   })
                // } catch (err) {
                // }
-              }
+              // }
             }
           })
           .catch((err) => {
