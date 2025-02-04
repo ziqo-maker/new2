@@ -5,7 +5,6 @@ import { WebApp } from '@twa-dev/types'
 import { TabProvider } from '@/contexts/TabContext'
 import NavigationBar from "@/components/NavigationBar"
 import TabContainer from "@/components/TabContainer"
-import { UserProvider } from '@/contexts/userContext'
 import { UserNew } from '@/contexts/UserContextB'
 
 declare global {
@@ -19,8 +18,21 @@ declare global {
 export default function Home() {
   const [user, setUser] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
+  const [startParam, setStartParam] = useState('')
 
   useEffect(() => {
+
+    const initWebApp = async () => {
+      if (typeof window !== 'undefined') {
+        const WebApp = (await import('@twa-dev/sdk')).default;
+        WebApp.ready();
+       
+        setStartParam(WebApp.initDataUnsafe.start_param || '');
+      }
+    };
+
+    initWebApp();
+
     try {
       fetch('/api/updatedt', {
        method: 'POST',
