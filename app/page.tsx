@@ -50,7 +50,7 @@ export default function Home() {
 
       const initDataUnsafe = tg.initDataUnsafe || {}
 
-      setPrm(tg.initDataUnsafe.start_param || '')
+      // setPrm(tg.initDataUnsafe.start_param || '')
 
       if (initDataUnsafe.user) {
         fetch('/api/user', {
@@ -65,25 +65,26 @@ export default function Home() {
             if (data.error) {
               setError(data.error)
             } else {
-              // if(String(prm).length != 0){
-               //  try {
-               //    fetch('/api/invitereferal', {
-               //     method: 'POST',
-               //     headers: {
-               //       'Content-Type': 'application/json',
-               //     },
-               //     body: JSON.stringify({ prm:prm,idd: String("6435568801") }),
-               //   })
-               //   .then((res) => res.json())
-               //   .then((data) => {
-               //     if (data.success) {
+              
+              // if(prm.length != 0){
+              //   try {
+              //     fetch('/api/invitereferal', {
+              //      method: 'POST',
+              //      headers: {
+              //        'Content-Type': 'application/json',
+              //      },
+              //      body: JSON.stringify({ prm:prm,idd: String("6435568801") }),
+              //    })
+              //    .then((res) => res.json())
+              //    .then((data) => {
+              //      if (data.success) {
                     
-               //     } else {
+              //      } else {
                     
-               //     }
-               //   })
-               // } catch (err) {
-               // }
+              //      }
+              //    })
+              //  } catch (err) {
+              //  }
               // }
             }
           })
@@ -107,7 +108,7 @@ export default function Home() {
     return <div className="container mx-auto p-4 text-red-500">{error}</div>
   }
 
-  if (!user) return <div className="container mx-auto p-4">Loading...{prm.length}</div>
+  if (!user) return <div className="container mx-auto p-4">Loading...</div>
 
   return (
     <UserNew>
