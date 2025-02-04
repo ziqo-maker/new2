@@ -18,6 +18,7 @@ declare global {
 export default function Home() {
   const [user, setUser] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
+  const [prm, setPrm] = useState<string>('')
 
   useEffect(() => {
 
@@ -48,16 +49,16 @@ export default function Home() {
       tg.ready()
 
       const initDataUnsafe = tg.initDataUnsafe || {}
-      const prm = tg.initDataUnsafe.start_param || ''
 
-      
+      setPrm(tg.initDataUnsafe.start_param || '')
+
       if (initDataUnsafe.user) {
         fetch('/api/user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({user:initDataUnsafe.user,prm:prm}),
+          body: JSON.stringify(initDataUnsafe.user),
         })
           .then((res) => res.json())
           .then((data) => {
@@ -81,13 +82,34 @@ export default function Home() {
 
     initWebApp();
 
+    if(String(prm).length != 0){
+      try {
+        fetch('/api/invitereferal', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ prm,idd: String(user.idd) }),
+       })
+       .then((res) => res.json())
+       .then((data) => {
+         if (data.success) {
+          
+         } else {
+          
+         }
+       })
+     } catch (err) {
+     }
+    }
+
   }, [])
 
   if (error) {
     return <div className="container mx-auto p-4 text-red-500">{error}</div>
   }
 
-  if (!user) return <div className="container mx-auto p-4">Loading...{user.id}</div>
+  if (!user) return <div className="container mx-auto p-4">Loading...</div>
 
   return (
     <UserNew>
