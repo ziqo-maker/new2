@@ -6,7 +6,6 @@ import { useEffect,useState,useRef } from "react"
 import React, { useContext } from 'react';
 import toyspeed1 from '@/gif/toyspeed1.gif'
 import UpgradeIcon from '@/icons/upgrade.svg';
-import Marquee from 'react-fast-marquee'
 import { useTab } from '@/contexts/TabContext'
 import { NewUserContext } from '@/contexts/UserContextB';
 import toypic from '@/imgs/toypic.png';
@@ -156,18 +155,7 @@ const HomeTab = () => {
     return (
      <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
 
-    <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
-        <div className="items-center justify ">
-          <Marquee gradient className=" items-center py-2 overflow-hidden ">
-          <div className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
-          <p className="text-white font-Large">use***66 withdrawn 0.5 USDT</p>
-          </div>
-          <div className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
-          <p className="text-white font-Large">use***66 withdrawn 0.5 USDT</p>
-          </div>
-          </Marquee>
-        </div>
-      </section>
+   
 
        <div className="flex w-full  items-center justify-center items-center">
        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
