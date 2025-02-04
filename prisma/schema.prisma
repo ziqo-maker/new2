@@ -26,6 +26,8 @@ model User {
   upgrade String @db.VarChar(50)
   selectcharacter Int @default(1)
   tokenvalue String @db.VarChar(50)
+  referal String @db.MediumText
+  invite String @db.MediumText
 }
 
 model Doing {
