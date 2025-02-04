@@ -6,8 +6,6 @@ import FootPrint from '@/icons/footprint.svg';
 import Image, {StaticImageData} from "next/image";
 import React,{ useState,useEffect } from 'react'
 import { NewUserContext } from '@/contexts/UserContextB';
-import { Button, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Info from '@/icons/info.svg';
 import Toast from 'typescript-toastify';
 import { useTab } from '@/contexts/TabContext'
@@ -184,71 +182,6 @@ const CreateTask = () => {
     <input type="text" id="floating_filled" value={link} onChange={(e) => setLink(e.target.value)} className="block rounded-xl px-2.5 pb-2.5 pt-5 w-full text-base text-white bg-[#6b4d11]/[0.8] dark:bg-[#6b4d11]/[0.8] border-0 border-b-4 border-[#ffae19]/[0.9] appearance-none dark:text-white dark:border-[#ffae19]/[0.9] dark:focus:border-[#ffae19]/[0.9] focus:outline-none focus:ring-0 focus:border-[#ffae19]/[0.9] peer" placeholder=" " />
     <label form="floating_filled" className="absolute text-sm  text-white dark:text-white/[0.9] italic font-bold  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Enter the link</label>
     </div>
-
-    <Menu as="div" className="relative  w-[calc(100%-4rem)] mt-4">
-        <MenuButton className="inline-flex block justify-between rounded-xl px-2.5 pb-2.5 pt-5 w-full text-base text-white bg-[#6b4d11]/[0.8] dark:bg-[#6b4d11]/[0.8] border-0 border-b-4 border-[#ffae19]/[0.9] appearance-none dark:text-white dark:border-[#ffae19]/[0.9] dark:focus:border-[#ffae19]/[0.9] focus:outline-none focus:ring-0 focus:border-[#ffae19]/[0.9] peer">
-        <p className={`font-normal text-base ${platform == 'Select platform' ? 'text-white/[0.9] italic font-bold' : 'text-white font-normal'}`}>{platform}</p>
-          <ChevronDownIcon aria-hidden="true" className="-mr-1 size-7 text-white" />
-        </MenuButton>
-        <label form="floating_filled" className="absolute text-sm  text-white dark:text-white/[0.9] italic font-bold  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Platform</label>
-
-
-      <MenuItems 
-        transition
-        className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-[#ffae19] ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-      >
-        <div >
-          <button  onClick={() => setPlatform('Telegram')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
-            <a
-              className="block text-sm font-bold text-black "
-            >
-              Telegram
-            </a>
-          </button>
-          <div className='flex grow w-full border-0 border-b-4 border-white'/>
-          <button  onClick={() => setPlatform('Youtube')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
-            <a
-              className="block text-sm font-bold text-black "
-            >
-              Youtube
-            </a>
-          </button>
-          <div className='flex grow w-full border-0 border-b-4 border-white'/>
-          <button  onClick={() => setPlatform('Instagram')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
-            <a
-              className="block text-sm font-bold text-black "
-            >
-             Instagram
-            </a>
-          </button>
-          <div className='flex grow w-full border-0 border-b-4 border-white'/>
-          <button  onClick={() => setPlatform('Google Play Store')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
-            <a
-              className="block text-sm font-bold text-black "
-            >
-              Google Play Store
-            </a>
-          </button>
-          <div className='flex grow w-full border-0 border-b-4 border-white'/>
-          <button  onClick={() => setPlatform('Apple App Store')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
-            <a
-              className="block text-sm font-bold text-black "
-            >
-              Apple App Store
-            </a>
-          </button>
-          <div className='flex grow w-full border-0 border-b-4 border-white'/>
-          <button  onClick={() => setPlatform('Etc')} className='flex px-4 py-4  grow w-full text-center items-center justify-center'>
-            <a
-              className="block text-sm font-bold text-black "
-            >
-              Etc
-            </a>
-          </button>
-
-        </div>
-      </MenuItems>
-    </Menu>
 
   
 
