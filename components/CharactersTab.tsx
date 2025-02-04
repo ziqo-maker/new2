@@ -74,7 +74,7 @@ const CharactersTab = () => {
            .then((res) => res.json())
            .then((data) => {
             if(data.success){
-                setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(userData?.gtpoint),selectcharacter:String(id),upgrade:String(userData?.upgrade),value:String(userData?.value)})
+                setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(userData?.gtpoint),selectcharacter:String(id),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
                new Toast({
                              position: "top-center",
                              toastMsg: "Done.",
@@ -127,7 +127,7 @@ const CharactersTab = () => {
                             return el
                         });
                          setTask(newData)
-                         setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(id),upgrade:String(updatepgrade),value:String(updatevalue)})
+                         setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(id),upgrade:String(updatepgrade),value:String(updatevalue),username:String(userData?.username)})
                          new Toast({
                                        position: "top-center",
                                        toastMsg: "Done.",
