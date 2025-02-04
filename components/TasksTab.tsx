@@ -14,10 +14,7 @@ import { NewUserContext } from '@/contexts/UserContextB';
 import React,{ useRef }  from 'react';
 import Touch from '@/icons/touch.svg';
 import { useTab } from '@/contexts/TabContext'
-import {motion,AnimatePresence} from "framer-motion"
-import { describe } from "node:test";
 import Info from '@/icons/info.svg';
-import { text } from "stream/consumers";
 
 //15000
 
