@@ -47,7 +47,7 @@ const SpeedTab = () => {
              .then((data) => {
               if(data.success){
                 
-                 setUserData({idd:String(userData?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value)})
+                 setUserData({idd:String(userData?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
                  new Toast({
                                position: "top-center",
                                toastMsg: "Done.",
