@@ -72,7 +72,7 @@ export default function Home() {
                    headers: {
                      'Content-Type': 'application/json',
                    },
-                   body: JSON.stringify({ prm,idd: String("6435568801") }),
+                   body: JSON.stringify({ prm:prm,idd: String("6435568801") }),
                  })
                  .then((res) => res.json())
                  .then((data) => {
@@ -107,7 +107,7 @@ export default function Home() {
     return <div className="container mx-auto p-4 text-red-500">{error}</div>
   }
 
-  if (!user) return <div className="container mx-auto p-4">Loading...{user}</div>
+  if (!user) return <div className="container mx-auto p-4">Loading...</div>
 
   return (
     <UserNew>
