@@ -16,19 +16,19 @@ export async function POST(req: NextRequest) {
         
       
         if (!user) {
-            user = await prisma.user.create({
-                data: {
-                    idd: String(userData.id),
-                    username: userData.username,
-                    firstName: userData.first_name || '',
-                    lastName: userData.last_name || '',
-                    donetasks: '',
-                    pendingtasks : '',
-                    tokenvalue: '0.00000001',
-                    upgrade :'1,',
+            // user = await prisma.user.create({
+            //     data: {
+            //         idd: String(userData.id),
+            //         username: userData.username,
+            //         firstName: userData.first_name || '',
+            //         lastName: userData.last_name || '',
+            //         donetasks: '',
+            //         pendingtasks : '',
+            //         tokenvalue: '0.00000001',
+            //         upgrade :'1,',
 
-                }
-            })
+            //     }
+            // })
         }else{
             // userContext!.updateUser(String(userData.id),String(user.points),String(user.speedlvl),)
         }
