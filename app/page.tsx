@@ -66,7 +66,7 @@
                 setError(data.error)
               } else {
                 setUser(data)
-                if(prm.length != 0){
+                if(prm.length > 0){
 setError("s")
                   try {
                     fetch('/api/invitereferal', {
@@ -109,7 +109,7 @@ setError("s")
       return <div className="container mx-auto p-4 text-red-500">{error}</div>
     }
 
-    if (!user) return <div className="container mx-auto p-4">Loading...{error}</div>
+    if (!user) return <div className="container mx-auto p-4">Loading...{error}:{prm}</div>
 
     return (
       <UserNew>
