@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 
 
 
-        return NextResponse.json('')
+        return NextResponse.json(user)
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: error }, { status: 500 })
