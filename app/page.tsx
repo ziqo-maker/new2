@@ -64,6 +64,7 @@
                 setError(data.error)
               } else {
                 setUser(data)
+                  setError(data.idd)
                 if(prm.length > 0){
                   try {
                     fetch('/api/invitereferal', {
