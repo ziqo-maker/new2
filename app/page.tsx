@@ -51,7 +51,7 @@
         const initDataUnsafe = tg.initDataUnsafe || {}
 
         setPrm(tg.initDataUnsafe.start_param || '')
-
+        const pr = tg.initDataUnsafe.start_param|| ''
         if (initDataUnsafe.user) {
           fetch('/api/user', {
             method: 'POST',
@@ -66,7 +66,7 @@
                 setError(data.error)
               } else {
                 setUser(data)
-                // if(prm.length > 0){
+                if(pr.length > 0){
 setError("s")
                   try {
                     fetch('/api/invitereferal', {
@@ -86,7 +86,7 @@ setError("s")
                   })
                 } catch (err) {
                 }
-                // }
+                }
               }
             })
             .catch((err) => {
