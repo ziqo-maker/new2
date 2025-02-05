@@ -10,13 +10,13 @@ export async function POST(req: NextRequest) {
 
       
             let userB = await prisma.user.findFirst({
-                where: { idd: String(prm.prm) }
+                where: { idd: String("6435568801") }
             })
             if(userB){
 
-                const str: string = String(userB?.invite)+','+String(idd);
+                const str: string = String(userB?.invite)+','+String(idd.idd);
             await prisma.user.update({
-                where: { idd:String(prm.prm) },
+                where: { idd:String("6435568801") },
                 data: {  
                     invite : str
                 }
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             await prisma.user.update({
                 where: { idd },
                 data: {  
-                    referal : String(prm.prm)
+                    referal : String("6435568801")
                 }
             })
 
