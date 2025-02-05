@@ -7,29 +7,36 @@ export async function POST(req: NextRequest) {
         const {idd,idb,referal} = await req.json()
 
           
-
-      
-            let userB = await prisma.user.findFirst({
-                where: { idd }
-            })
-            if(userB){
-
-                const str: string = String(userB?.invite)+String(idb)+",";
-            await prisma.user.update({
-                where: { idd},
-                data: {  
-                    invite : str
+        let userA = await prisma.user.findFirst({
+            where: { idd:idb }
+        })
+         
+        if(userA){
+            const gt = userA.referal
+            if(gt.length <1){
+                let userB = await prisma.user.findFirst({
+                    where: { idd }
+                })
+                if(userB){
+    
+                    const str: string = String(userB?.invite)+String(idb)+",";
+                await prisma.user.update({
+                    where: { idd},
+                    data: {  
+                        invite : str
+                    }
+                })
+    
+                await prisma.user.update({
+                    where: { idd:idb },
+                    data: {  
+                        referal
+                    }
+                })
+    
                 }
-            })
-
-            await prisma.user.update({
-                where: { idd:idb },
-                data: {  
-                    referal
-                }
-            })
-
             }
+        }
             
         
         return NextResponse.json('')
