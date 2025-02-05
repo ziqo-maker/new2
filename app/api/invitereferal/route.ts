@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
             })
 
             await prisma.user.update({
-                where: { idd },
+                where: { idd:idb },
                 data: {  
                     referal
                 }
