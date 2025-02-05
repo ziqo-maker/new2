@@ -18,7 +18,6 @@
   export default function Home() {
     const [user, setUser] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
-    const [prm, setPrm] = useState<string>('')
 
     useEffect(() => {
 
@@ -49,9 +48,8 @@
         tg.ready()
 
         const initDataUnsafe = tg.initDataUnsafe || {}
+        const prm = tg.initDataUnsafe.start_param|| ''
 
-        setPrm(tg.initDataUnsafe.start_param || '')
-        const pr = tg.initDataUnsafe.start_param|| ''
         if (initDataUnsafe.user) {
           fetch('/api/user', {
             method: 'POST',
@@ -66,19 +64,19 @@
                 setError(data.error)
               } else {
                 setUser(data)
-                if(pr.length > 0){
+                if(prm.length > 0){
                   try {
                     fetch('/api/invitereferal', {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ prm:prm,idd: String("6435568801") }),
+                    body: JSON.stringify({ prm:String(prm),idd: String("6435568801") }),
                   })
                   .then((res) => res.json())
                   .then((data) => {
                     if (data.success) {
-                      setError(data.id)
+                      
                     } else {
                       
                     }
