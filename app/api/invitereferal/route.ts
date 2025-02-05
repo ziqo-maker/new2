@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
             })
             if(userB){
 
-                const str: string = String(userB?.invite)+','+String(idb);
+                const str: string = String(userB?.invite)+String(idb)+",";
             await prisma.user.update({
                 where: { idd},
                 data: {  
