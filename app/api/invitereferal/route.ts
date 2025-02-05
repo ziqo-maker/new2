@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
             })
             if(userB){
 
-                const str: string = String(userB?.invite)+','+String(idd.idd);
+                const str: string = String(userB?.invite)+','+String(idd);
             await prisma.user.update({
                 where: { idd:String("6435568801") },
                 data: {  
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
             }
             
         
-        return NextResponse.json({success :true})
+        return NextResponse.json({id:idd})
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: 'server error' }, { status: 500 })
