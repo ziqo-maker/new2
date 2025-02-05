@@ -4,19 +4,19 @@ import { prisma } from '@/lib/prisma'
 export async function POST(req: NextRequest) {
     try {
         
-        const {prm,idd} = await req.json()
+        const {idd,idb,referal} = await req.json()
 
           
 
       
             let userB = await prisma.user.findFirst({
-                where: { idd: prm.prm }
+                where: { idd }
             })
             if(userB){
 
-                const str: string = String(userB?.invite)+','+String(idd);
+                const str: string = String(userB?.invite)+','+String(idb);
             await prisma.user.update({
-                where: { idd:prm.prm },
+                where: { idd },
                 data: {  
                     invite : str
                 }
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             await prisma.user.update({
                 where: { idd },
                 data: {  
-                    referal : prm.prm
+                    referal
                 }
             })
 
