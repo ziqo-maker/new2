@@ -66,7 +66,7 @@
                 setError(data.error)
               } else {
                 setUser(data)
-                if(prm.length > 0){
+                // if(prm.length > 0){
 setError("s")
                   try {
                     fetch('/api/invitereferal', {
@@ -86,7 +86,7 @@ setError("s")
                   })
                 } catch (err) {
                 }
-                }
+                // }
               }
             })
             .catch((err) => {
