@@ -67,7 +67,6 @@
               } else {
                 setUser(data)
                 if(pr.length > 0){
-setError("s")
                   try {
                     fetch('/api/invitereferal', {
                     method: 'POST',
@@ -79,7 +78,7 @@ setError("s")
                   .then((res) => res.json())
                   .then((data) => {
                     if (data.success) {
-                      
+                      setError(data.id)
                     } else {
                       
                     }
@@ -109,7 +108,7 @@ setError("s")
       return <div className="container mx-auto p-4 text-red-500">{error}</div>
     }
 
-    if (!user) return <div className="container mx-auto p-4">Loading...{error}:{prm}</div>
+    if (!user) return <div className="container mx-auto p-4">Loading...</div>
 
     return (
       <UserNew>
