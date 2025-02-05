@@ -50,7 +50,7 @@ export default function Home() {
 
       const initDataUnsafe = tg.initDataUnsafe || {}
 
-      // setPrm(tg.initDataUnsafe.start_param || '')
+      setPrm(tg.initDataUnsafe.start_param || '')
 
       if (initDataUnsafe.user) {
         fetch('/api/user', {
@@ -65,7 +65,7 @@ export default function Home() {
             if (data.error) {
               setError(data.error)
             } else {
-              
+              setUser(data)
               // if(prm.length != 0){
               //   try {
               //     fetch('/api/invitereferal', {
