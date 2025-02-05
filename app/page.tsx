@@ -64,7 +64,6 @@
                 setError(data.error)
               } else {
                 setUser(data)
-                  setError(data.idd)
                 if(prm.length > 0){
                   try {
                     fetch('/api/invitereferal', {
@@ -72,7 +71,7 @@
                     headers: {
                       'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ idd:String(prm),idb: String("6124587322"),referal:String(prm) }),
+                    body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
                   })
                   .then((res) => res.json())
                   .then((data) => {
