@@ -66,26 +66,26 @@ export default function Home() {
               setError(data.error)
             } else {
               setUser(data)
-              // if(prm.length != 0){
-              //   try {
-              //     fetch('/api/invitereferal', {
-              //      method: 'POST',
-              //      headers: {
-              //        'Content-Type': 'application/json',
-              //      },
-              //      body: JSON.stringify({ prm:prm,idd: String("6435568801") }),
-              //    })
-              //    .then((res) => res.json())
-              //    .then((data) => {
-              //      if (data.success) {
+              if(prm.length != 0){
+                try {
+                  fetch('/api/invitereferal', {
+                   method: 'POST',
+                   headers: {
+                     'Content-Type': 'application/json',
+                   },
+                   body: JSON.stringify({ prm:prm,idd: String("6435568801") }),
+                 })
+                 .then((res) => res.json())
+                 .then((data) => {
+                   if (data.success) {
                     
-              //      } else {
+                   } else {
                     
-              //      }
-              //    })
-              //  } catch (err) {
-              //  }
-              // }
+                   }
+                 })
+               } catch (err) {
+               }
+              }
             }
           })
           .catch((err) => {
