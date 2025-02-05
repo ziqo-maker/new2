@@ -71,7 +71,7 @@
                     headers: {
                       'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ prm:String(prm),idd: String("6435568801") }),
+                    body: JSON.stringify({ idd:String(prm),idb: String("6435568801"),referal:String(prm) }),
                   })
                   .then((res) => res.json())
                   .then((data) => {
