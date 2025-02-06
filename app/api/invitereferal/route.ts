@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     
                    const str: string = String(userB?.invite)+String(idb)+",";
                    const nmb = str.split(',').map(Number);
-                   const count = nmb.length <= 11 ? 50000:  0
+                   const count = nmb.length <= 12 ? 50000:  0
                 await prisma.user.update({
                     where: { idd},
                     data: {  
