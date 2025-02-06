@@ -19,18 +19,22 @@ export async function POST(req: NextRequest) {
                 })
                 if(userB){
     
-                    const str: string = String(userB?.invite)+String(idb)+",";
+                   const str: string = String(userB?.invite)+String(idb)+",";
+                   const nmb = str.split(',').map(Number);
+                   const count = nmb.length <= 10? 50000:0
                 await prisma.user.update({
                     where: { idd},
                     data: {  
-                        invite : str
+                        invite : str,
+                        points : {increment : count}
                     }
                 })
     
                 await prisma.user.update({
                     where: { idd:idb },
                     data: {  
-                        referal
+                        referal,
+                        points : {increment : 30000}
                     }
                 })
     
