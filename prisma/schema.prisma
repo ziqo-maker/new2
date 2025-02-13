@@ -50,3 +50,13 @@ model taskuser {
   clicks Int @default(0)
   verify String @db.VarChar(50)
 }
+
+model Payment {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  network String @db.VarChar(100)
+  address String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  status String @db.VarChar(50)
+}
