@@ -6,7 +6,7 @@ import React from 'react';
 
 export async function POST(req: NextRequest) {
     try {
-        const userdata = await req.json()
+        const userdata = await req.json() 
 
          const { userData,setUserData } = React.useContext(NewUserContext);
         
