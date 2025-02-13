@@ -26,8 +26,12 @@
     const [user, setUser] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
     const { UserDt,setUserData } = React.useContext(NewUserContext);
-    const [gtid, setid] = useState<string>("")
-
+    const [gtid, setid] = useState<string | null>("")
+    const delay = async (ms:number) => {
+      return new Promise((resolve) => 
+          setTimeout(resolve, ms));
+  };
+ 
     useEffect(() => {
 
       const initWebApp = async () => {
@@ -95,8 +99,11 @@
                 } catch (err) {
                 }
                 }
-                setid(data.idd)
-                setUser(data)
+                setid("es")
+                delay(8000).then(() => {
+                  setid(data.idd)
+                });
+                
               }
             })
             .catch((err) => {
@@ -119,7 +126,7 @@
     //   return <div className="container mx-auto p-4 text-red-500">{error}</div>
     // }
 
-    if (!user) return (
+    if (!gtid) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
           <div className='flex h-10'/>
 
