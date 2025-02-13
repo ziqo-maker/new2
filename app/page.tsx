@@ -111,7 +111,7 @@
       } else {
         setError('This app should be opened in Telegram')
       } 
-      // await delay(9000);
+      await delay(20000);
       setUser("www")
       };
 
