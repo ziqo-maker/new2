@@ -119,12 +119,12 @@
 
                <Image 
         src={StartPic as StaticImageData} 
-      className="w-1/6 h-1/3 p-10 aspect-square object-fit"
+      className="size-60 aspect-square object-fit"
       alt=""
     />
            
          
-       <div className='flex'>
+       <div className='flex space-x-1'>
         <div className='flex flex-col justify-center items-center'>
           <Image 
         src={WalkTask as StaticImageData}
@@ -144,14 +144,7 @@
          alt=""
        />
        </button>
-       <button onClick={() => window.open("https://apps.apple.com/us/app/walktask-walking-step-counter/id6636529552")}>
-          
-          <Image 
-           src={AppleStore as StaticImageData} 
-         className="size-40 p-3 aspect-square object-cover"
-         alt=""
-       />
-       </button>
+       
        
       
        </div>
