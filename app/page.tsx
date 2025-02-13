@@ -24,6 +24,7 @@
   export default function Home() {
     const [user, setUser] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
+    const [bln, setBln] = useState<boolean>(false)
 
     useEffect(() => {
 
@@ -69,6 +70,7 @@
                 setError(data.error)
               } else {
                 setUser(data)
+                setBln(true)
                 if(prm.length > 0){
                   try {
                     fetch('/api/invitereferal', {
@@ -107,9 +109,9 @@
 
     }, [])
 
-    if (error) {
-      return <div className="container mx-auto p-4 text-red-500">{error}</div>
-    }
+    // if (error) {
+    //   return <div className="container mx-auto p-4 text-red-500">{error}</div>
+    // }
 
     if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
@@ -133,7 +135,7 @@
       alt=""
     />
       
-                  <p className="text-white font-Large">WalkTask</p>
+                  <p className="text-white font-Large">WalkTask {String(bln)}</p>
 
         </div>
         <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
