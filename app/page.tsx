@@ -112,7 +112,7 @@
         setError('This app should be opened in Telegram')
       } 
       // await delay(9000);
-      setUser(gtid)
+      setUser("www")
       };
 
       initWebApp();
