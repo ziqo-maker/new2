@@ -208,9 +208,9 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
         <div className="items-center justify ">
           <Marquee gradient={true} className=" items-center py-2 overflow-hidden ">
          
-          {chsLst.map((str) => {
+          {chsLst.map((str,index) => {
             return (
-              <div className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
+              <div key={index} className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
               <p className="text-white font-Large">{str.str}</p>
               </div>
             )
