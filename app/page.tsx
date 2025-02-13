@@ -6,6 +6,12 @@
   import NavigationBar from "@/components/NavigationBar"
   import TabContainer from "@/components/TabContainer"
   import { UserNew } from '@/contexts/UserContextB'
+  import Image, {StaticImageData} from "next/image"
+  import StartPic from '@/imgs/startpic.webp';  
+  import getGoogleplay from '@/imgs/getgoogleplay.webp';  
+  import WalkTask from '@/imgs/walktask.webp';  
+  import AppleStore from '@/imgs/applestore.webp';  
+
 
   declare global {
     interface Window {
@@ -41,7 +47,6 @@
         })
       } catch (err) {
       }
-      
 
       if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp
@@ -49,7 +54,7 @@
 
         const initDataUnsafe = tg.initDataUnsafe || {}
         const prm = tg.initDataUnsafe.start_param|| ''
-
+       
         if (initDataUnsafe.user) {
           fetch('/api/user', {
             method: 'POST',
@@ -102,17 +107,62 @@
 
     }, [])
 
-    if (error) {
-      return <div className="container mx-auto p-4 text-red-500">{error}</div>
-    }
+    // if (error) {
+    //   return <div className="container mx-auto p-4 text-red-500">{error}</div>
+    // }
 
-    if (!user) return <div className="container mx-auto p-4">Loading...</div>
+    if (!user) return (
+      <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
+          <div className='flex h-5'/>
+
+       
+
+               <Image 
+        src={StartPic as StaticImageData} 
+      className="w-1/6 h-1/3 p-10 aspect-square object-fit"
+      alt=""
+    />
+           
+         
+       <div className='flex'>
+        <div className='flex flex-col justify-center items-center'>
+          <Image 
+        src={WalkTask as StaticImageData}
+         
+      className="size-10  aspect-square rounded-xl object-cover"
+      alt=""
+    />
+      
+                  <p className="text-white font-Large">WalkTask</p>
+
+        </div>
+        <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
+          
+          <Image 
+           src={getGoogleplay as StaticImageData} 
+         className="size-40 aspect-square object-cover"
+         alt=""
+       />
+       </button>
+       <button onClick={() => window.open("https://apps.apple.com/us/app/walktask-walking-step-counter/id6636529552")}>
+          
+          <Image 
+           src={AppleStore as StaticImageData} 
+         className="size-40 p-3 aspect-square object-cover"
+         alt=""
+       />
+       </button>
+       
+      
+       </div>
+      </div>
+    )
 
     return (
       <UserNew>
     
   <TabProvider>
-        <main className='main-h-screen bg-white '>
+        <main className='main-h-screen content-around bg-white '>
           <TabContainer/>
           <NavigationBar/>
         </main>

@@ -1,46 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { useContext } from 'react';
+import { NewUserContext } from '@/contexts/UserContextB';
+import React from 'react';
+
 
 export async function POST(req: NextRequest) {
     try {
-        const userData = await req.json()
+        const userdata = await req.json()
+
+         const { userData,setUserData } = React.useContext(NewUserContext);
         
-      
-        if (!userData || !userData.id) {
+        if (!userdata || !userdata.id) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
         }
 
        let user = await prisma.user.findFirst({
-            where: { idd: String(userData.id) }
+            where: { idd: String(userdata.id) }
         })
-
-        // const gtprm = prm || ''
-
-        // if(String(gtprm).length != 0){
-        //     let userB = await prisma.user.findFirst({
-        //         where: { idd: String(gtprm) }
-        //     })
-        //     const str: string = String(userB?.invite)+','+String(userData.id);
-        //     await prisma.user.update({
-        //         where: { idd:String(gtprm) },
-        //         data: {  
-        //             invite : str
-        //         }
-        //     })
-            
-        // }
-        
-        
-
-      
+              
         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    idd: String(userData.id),
-                    username: userData.username,
-                    firstName: userData.first_name || '',
-                    lastName: userData.last_name || '',
+                    idd: String(userdata.id),
+                    username: userdata.username,
+                    firstName: userdata.first_name || '',
+                    lastName: userdata.last_name || '',
                     donetasks: '',
                     pendingtasks : '',
                     tokenvalue: '0.00000001',
@@ -48,14 +32,20 @@ export async function POST(req: NextRequest) {
                     donecreatedtasks :'',
                     invite:'',
                     pendingcreatedtasks:'',
-                    referal:''
+                    referal:'',
+                    speedlvl:1,
+                    points:0,
+                    selectcharacter:1
                 }
             })
+            setUserData({idd:String(userdata.id),gtpoint:"0",selectcharacter:"1",speedlvl:"1",
+                upgrade:"1",username:String(userdata.username),value:"0.00000001"
+              })
         }else{
-
+          setUserData({idd:String(userdata.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
+            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue)
+          })
         }
-
-
 
         return NextResponse.json(user)
     } catch (error) {

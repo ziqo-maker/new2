@@ -38,12 +38,12 @@ body {
   transition: opacity 0.3s ease-in-out;
 }
 
-.top-glow{
-  box-shadow: 0px -25px 20px #ff0000;
-}
+
 .top-glow{
   box-shadow: 0px -25px 20px #ffae194d;
+
 }
+
 .glow {
   text-shadow: 0px 0px 2px rgb(255, 255, 255);
 }
@@ -52,19 +52,17 @@ body {
   text-shadow: 0px 0px 1px #ffffff;
 }
 
+.glowbox {
+  box-shadow: 0px 0px 5px #ffae19;
+}
+
 .gloworange {
   text-shadow: 0px 0px 4px #ffae19;
 }
 
-.team {
-  background-image: url('../imgs/grdnt.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-
-}
 
 .glowWite {
-  background-color: rgb(255, 174, 25);
+  background-color: #ffae19;
 }
 
 .glowNormal{
@@ -79,9 +77,22 @@ body {
 .glowwhite{
   box-shadow: 0px 0px 5px rgb(255, 255, 255);
 }
+
 .margin{
   margin: 2;
 }
 
+input::placeholder {
+  font-weight: bold;
+  font-style: italic;
+  opacity: 0.9;
+  color: rgb(255, 255, 255);
+  color: #00000093;
 
+}
+
+input:focus-visible {
+  outline: 0px
+  
+}
 
