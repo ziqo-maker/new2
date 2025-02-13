@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
         }
 
        let user = await prisma.user.findFirst({
-            where: { idd: String("6435568801") }
+            where: { idd: String(userData.id) }
         })
               
         if (!user) {
@@ -38,13 +38,13 @@ export async function POST(req: NextRequest) {
                     selectcharacter:1
                 }
             })
-            setUserData({idd:String(userData.id),gtpoint:"0",selectcharacter:"1",speedlvl:"1",
-                upgrade:"1",username:String(userData.username),value:"0.00000001"
-              })
+            // setUserData({idd:String(userData.id),gtpoint:"0",selectcharacter:"1",speedlvl:"1",
+            //     upgrade:"1",username:String(userData.username),value:"0.00000001"
+            //   })
         }else{
-          setUserData({idd:String(userData.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
-            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue)
-          })
+        //   setUserData({idd:String(userData.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
+        //     upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue)
+        //   })
         }
 
         return NextResponse.json(user)
