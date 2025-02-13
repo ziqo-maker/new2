@@ -78,7 +78,7 @@
                 setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                   upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
                 })
-               
+                setid(data)
                 if(prm.length > 0){
                   try {
                     fetch('/api/invitereferal', {
@@ -99,10 +99,6 @@
                 } catch (err) {
                 }
                 }
-                setid("es")
-                delay(8000).then(() => {
-                  setid(data.idd)
-                });
                 
               }
             })
@@ -115,18 +111,19 @@
       } else {
         setError('This app should be opened in Telegram')
       } 
-
+      await delay(20000);
+      setUser(gtid)
       };
 
       initWebApp();
-
+      
     }, [])
 
     // if (error) {
     //   return <div className="container mx-auto p-4 text-red-500">{error}</div>
     // }
 
-    if (!gtid) return (
+    if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
           <div className='flex h-10'/>
 
