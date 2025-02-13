@@ -11,7 +11,8 @@
   import getGoogleplay from '@/imgs/getgoogleplay.webp';  
   import WalkTask from '@/imgs/walktask.webp';  
   import AppleStore from '@/imgs/applestore.webp';  
-
+  import { NewUserContext } from '@/contexts/UserContextB';
+  import React from 'react';
 
   declare global {
     interface Window {
@@ -24,6 +25,7 @@
   export default function Home() {
     const [user, setUser] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
+    const { UserDt,setUserData } = React.useContext(NewUserContext);
 
     useEffect(() => {
 
@@ -69,6 +71,9 @@
                 setError(data.error)
               } else {
                 setUser(data)
+                setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
+                  upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
+                })
                
                 if(prm.length > 0){
                   try {
@@ -134,7 +139,7 @@
       alt=""
     />
       
-                  <p className="text-white font-Large">WalkTask{user.idd}</p>
+                  <p className="text-white font-Large">WalkTask{UserDt?.idd}</p>
 
         </div>
         <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
