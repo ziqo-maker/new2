@@ -119,7 +119,7 @@
 
                <Image 
         src={StartPic as StaticImageData} 
-      className="size-40 aspect-square object-fit"
+      className="size-36 animate-waving-hand aspect-square object-fit"
       alt=""
     />
            
