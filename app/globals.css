@@ -56,6 +56,10 @@ body {
   box-shadow: 0px 0px 5px #ffae19;
 }
 
+.glowbx {
+  box-shadow: 0px 0px 10px #fda500;
+}
+
 .gloworange {
   text-shadow: 0px 0px 4px #ffae19;
 }
