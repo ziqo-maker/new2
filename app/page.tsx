@@ -113,13 +113,13 @@
 
     if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
-          <div className='flex h-5'/>
+          <div className='flex h-10'/>
 
        
 
                <Image 
         src={StartPic as StaticImageData} 
-      className="size-60 aspect-square object-fit"
+      className="size-40 aspect-square object-fit"
       alt=""
     />
            
@@ -140,7 +140,7 @@
           
           <Image 
            src={getGoogleplay as StaticImageData} 
-         className="size-40 aspect-square object-cover"
+         className="size-28 aspect-square object-cover"
          alt=""
        />
        </button>
