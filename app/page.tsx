@@ -107,9 +107,9 @@
 
     }, [])
 
-    // if (error) {
-    //   return <div className="container mx-auto p-4 text-red-500">{error}</div>
-    // }
+    if (error) {
+      return <div className="container mx-auto p-4 text-red-500">{error}</div>
+    }
 
     if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
