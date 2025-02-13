@@ -6,25 +6,25 @@ import React from 'react';
 
 export async function POST(req: NextRequest) {
     try {
-        const userdata = await req.json() 
+        const userData = await req.json()
 
-         const { userData,setUserData } = React.useContext(NewUserContext);
+        //  const { userData,setUserData } = React.useContext(NewUserContext);
         
-        if (!userdata || !userdata.id) {
+        if (!userData || !userData.id) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
         }
 
        let user = await prisma.user.findFirst({
-            where: { idd: String(userdata.id) }
+            where: { idd: String(userData.id) }
         })
               
         if (!user) {
             user = await prisma.user.create({
                 data: {
-                    idd: String(userdata.id),
-                    username: userdata.username,
-                    firstName: userdata.first_name || '',
-                    lastName: userdata.last_name || '',
+                    idd: String(userData.id),
+                    username: userData.username,
+                    firstName: userData.first_name || '',
+                    lastName: userData.last_name || '',
                     donetasks: '',
                     pendingtasks : '',
                     tokenvalue: '0.00000001',
@@ -38,13 +38,13 @@ export async function POST(req: NextRequest) {
                     selectcharacter:1
                 }
             })
-            setUserData({idd:String(userdata.id),gtpoint:"0",selectcharacter:"1",speedlvl:"1",
-                upgrade:"1",username:String(userdata.username),value:"0.00000001"
-              })
+            // setUserData({idd:String(userData.id),gtpoint:"0",selectcharacter:"1",speedlvl:"1",
+            //     upgrade:"1",username:String(userData.username),value:"0.00000001"
+            //   })
         }else{
-          setUserData({idd:String(userdata.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
-            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue)
-          })
+        //   setUserData({idd:String(userData.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
+        //     upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue)
+        //   })
         }
 
         return NextResponse.json(user)
