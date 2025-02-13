@@ -3,7 +3,7 @@
 import {useContext} from "react"
 import React from 'react';
 
-type UserData = {
+type UserDt = {
   idd: string;
   gtpoint: string;
   speedlvl:string;
@@ -14,26 +14,26 @@ type UserData = {
   }
 
   interface ContextProps {
-    readonly userData: UserData | null;
-    readonly setUserData: (userData: UserData) => void;
+    readonly UserDt: UserDt | null;
+    readonly setUserData: (UserDt: UserDt) => void;
     readonly loadUserData: () => Promise<void>;
   }
 
 export const NewUserContext = React.createContext<ContextProps>({
-    userData: null,
+  UserDt: null,
     setUserData: () => null,
     loadUserData: async () => {},
   });
 
 export function UserNew({ children }: { children: React.ReactNode }) {
-    const [userData, setUserData] = React.useState<UserData | null>({idd:'',gtpoint:'0',speedlvl:'1',upgrade:'1',selectcharacter:'1',value:'0.00000001',username:''});
+    const [UserDt, setUserData] = React.useState<UserDt | null>({idd:'',gtpoint:'0',speedlvl:'1',upgrade:'1',selectcharacter:'1',value:'0.00000001',username:''});
 
   const loadUserData = async () => {
     console.log('load')
   };
 
   const value = {
-    userData,
+    UserDt,
     setUserData,
     loadUserData,
   };
