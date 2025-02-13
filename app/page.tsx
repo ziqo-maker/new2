@@ -35,6 +35,10 @@
     useEffect(() => {
 
       const initWebApp = async () => {
+       
+        setUserData({idd:String("eeee"),gtpoint:String(""),selectcharacter:String(""),speedlvl:String(""),
+          upgrade:String(""),username:String(""),value:String("")
+        })
 
         try {
           fetch('/api/updatedt', {
