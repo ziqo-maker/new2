@@ -134,7 +134,7 @@
       alt=""
     />
       
-                  <p className="text-white font-Large">WalkTask</p>
+                  <p className="text-white font-Large">WalkTask{user.id}</p>
 
         </div>
         <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
