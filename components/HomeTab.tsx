@@ -316,9 +316,9 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
         </div>
         </button>
         </div>
+        <div className="h-20 mt-5" />
        </div> 
        </div>
-       <div className="h-20 mt-5" />
      </div>
 
     )
