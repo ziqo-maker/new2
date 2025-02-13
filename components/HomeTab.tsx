@@ -3,13 +3,17 @@ import Image, {StaticImageData} from "next/image"
 import FootPrint from '@/icons/footprint.svg';
 import FootPrintA from '@/icons/footprinta.svg';  
 import { useEffect,useState,useRef } from "react"
-import React, { useContext } from 'react';
-import toyspeed1 from '@/gif/toyspeed1.gif'
+import React from 'react';
 import UpgradeIcon from '@/icons/upgrade.svg';
+import Marquee from 'react-fast-marquee'
 import { useTab } from '@/contexts/TabContext'
 import { NewUserContext } from '@/contexts/UserContextB';
-import toypic from '@/imgs/toypic.png';
-
+import toypic from '@/imgs/toypic.webp';
+import AlienSoldier from '@/charactermg/AlienSoldier.webp';
+import Mousey from '@/charactermg/Mousey.webp';
+import ev from '@/charactermg/ev.webp';
+import jackie from '@/charactermg/jackie.webp';
+import swatguy from '@/charactermg/swatguy.webp';
 
 
 const HomeTab = () => {
@@ -27,7 +31,51 @@ const HomeTab = () => {
   const { userData,setUserData } = React.useContext(NewUserContext);
   
   const { activeTab, setActiveTab } = useTab()
+  
 
+  const list: { str: string }[] = [
+    { str: 'loveutilld*** withdrawn 1.55 USDT' },
+    { str: 'Mr_TA*** withdrawn 1.55 USDT' },
+    { str: 'ali_dr*** withdrawn 1.84 USDT' },
+    { str: 'A_HS*** withdrawn 2.00 USDT' },
+    { str: 'Shl*** withdrawn 1.67 USDT' },
+    { str: 'Elna*** withdrawn 2.65 USDT' },  
+    { str: 'ramsaini*** withdrawn 1.73 USDT' },
+    { str: 'Arifsikder*** withdrawn 2.03 USDT' },
+]
+
+const listB: { str: string }[] = [
+  { str: 'MasterSyp*** withdrawn 1.90 USDT' },
+  { str: 'DanielN_*** withdrawn 2.16 USDT' },
+  { str: 'Bestfuri*** withdrawn 1.70 USDT' },
+  { str: 'Ma_joo*** withdrawn 1.81 USDT' },
+  { str: 'xlT*** withdrawn 1.53 USDT' },
+  { str: 'Mokkach*** withdrawn 1.51 USDT' },
+  { str: 'iamsappry*** withdrawn 1.94 USDT' },
+  { str: 'Sajidali*** withdrawn 1.79 USDT' },
+  
+]
+
+const listC: { str: string }[] = [
+  { str: 'sheikh_arabi*** withdrawn 1.89 USDT' },
+  { str: 'Hola*** withdrawn 1.71 USDT' },
+  { str: 'Mejza*** withdrawn 2.22 USDT' },
+  { str: 'itshemantsa*** withdrawn 1.88 USDT' },
+
+]
+
+const listD: { str: string }[] = [
+  { str: 'zbornik*** withdrawn 1.63 USDT' },
+  { str: 'Titanwta*** withdrawn 1.57 USDT' },
+  { str: 'Asnaza*** withdrawn 1.94 USDT' },
+  { str: 'Zzeuus_*** withdrawn 1.68 USDT' },
+  { str: 'pan_d*** withdrawn 1.79 USDT' },
+
+]
+
+const rndNmb = Math.floor(Math.random() * 5) + 1
+
+const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
   
   const handleStart = async () => {
 
@@ -146,18 +194,33 @@ const HomeTab = () => {
    } catch (err) {
     
    }
-
+  
     return () => {  if (timerRef.current) {
       clearInterval(timerRef.current);
     }
   };
   },[isActive])
+  
     return (
-     <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
+     <div className="w-full bg-white text-white h-screen overflow-auto text-wrap font-bold flex flex-col max-w-xl">
 
-   
+    <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
+        <div className="items-center justify ">
+          <Marquee gradient={true} className=" items-center py-2 overflow-hidden ">
+         
+          {chsLst.map((str) => {
+            return (
+              <div className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
+              <p className="text-white font-Large">{str.str}</p>
+              </div>
+            )
+          })}
+         
+          </Marquee>
+        </div>
+      </section>
 
-       <div className="flex w-full  items-center justify-center items-center">
+       <div className="flex w-full   items-center justify-center items-center">
        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
         <Image 
         src={FootPrint as StaticImageData} 
@@ -182,23 +245,24 @@ const HomeTab = () => {
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
         <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="auto" playsInline>
         <source 
-          src= "https://php-dkgtrx.chbk.app/speed4_Trim.mkv"
+          src={`https://ftp-whtvfw.chbk.app/${String(userData?.selectcharacter)}-${String(userData?.speedlvl)}.mkv`}
           type="video/mp4"
+          
         />
       Your browser does not support the video tag.
     </video>
     <Image
-        src={toypic}
-      className={`${isActive? 'w-0 h-0' : 'h-full'} rounded-full absolute object-fill`}
-      alt="Toy"
-        />  
+       src={userData?.selectcharacter == "1"?  toypic:userData?.selectcharacter == "2" ? Mousey:userData?.selectcharacter == "3"?jackie:userData?.selectcharacter == "4"? swatguy:userData?.selectcharacter == "5"? ev:AlienSoldier}
+       className={`${isActive? 'w-0 h-0' : 'h-full'} rounded-full absolute object-fill`}
+       alt="Toy"
+         />  
             </div> 
    
           </div>
           
         </div>
 
-        <div className="flex grow w-[calc(100%-1rem)] justify-between items-between">
+        <div className="flex grow mr-4 ml-4 justify-between items-between">
  
         <button onClick={() => setActiveTab('character')} className="flex border-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 rounded-full px-3 py-[6px] ">
          <p className="text-lg text-[#ffae19]/[0.9] font-Large">Characters</p>
@@ -214,7 +278,7 @@ const HomeTab = () => {
         </button>
   </div>
 
-        <div className="flex grow px-50 justify-center items-center space-x-1">
+        <div className="flex grow px-50 mt-2 justify-center items-center space-x-1">
         <Image
         src={FootPrint as StaticImageData} 
       className="w-10 h-10"
@@ -254,6 +318,7 @@ const HomeTab = () => {
         </div>
        </div> 
        </div>
+       <div className="h-20 mt-5" />
      </div>
 
     )

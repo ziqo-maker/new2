@@ -4,8 +4,10 @@
 import Etc from '@/icons/etc.svg';
 import FootPrint from '@/icons/footprint.svg';
 import Image, {StaticImageData} from "next/image";
-import React,{ useState,useEffect } from 'react'
+import React,{ useState } from 'react'
 import { NewUserContext } from '@/contexts/UserContextB';
+import { Menu, MenuButton, MenuItems } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import Info from '@/icons/info.svg';
 import Toast from 'typescript-toastify';
 import { useTab } from '@/contexts/TabContext'
@@ -123,8 +125,8 @@ const CreateTask = () => {
         <div className="flex justify-center overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">
          <div className="flex-1 mt-5 text-center font-bold text-wrap">
-              <p className="mr-20 ml-20 text-[#ffae19]/[0.9] font-Large text-xl glow">Reach Your Goals & Achieve Success FASTER</p>
-              <p className="mr-15 ml-15 text-[#ffae19]/[0.9] font-normal  text-lg">The effective way to promote your social media, app, etc.</p>
+              <p className="mr-4 ml-4 text-[#ffae19]/[0.9] font-Large text-xl glow">Reach Your Goals & Achieve Success FASTER</p>
+              <p className="mr-4 ml-4 text-[#ffae19]/[0.9] font-normal  text-lg">The effective way to promote your social media, app, etc.</p>
               </div>
               <div className="flex flex-col justify-center items-center mt-6">
               <p className="text-black w-[calc(100%-2rem)] font-Large text-base">Demo preview:</p>
@@ -168,7 +170,7 @@ const CreateTask = () => {
 
               </div>
               <center>
-              <p className={`mr-20 ml-20 text-[#db0000]/[0.9] font-bold font-Large text-xl glow mt-5`}>All fields are required</p>
+              <p className={`mr-4 ml-4 flex justify-center grow text-[#db0000]/[0.9] font-bold font-Large text-xl glow mt-5`}>All fields are required</p>
              
         <div className="relative w-[calc(100%-4rem)] mt-4">
     <input type="text" id="floating_filled" value={describe} onChange={(e) => setDescribe(e.target.value)}  maxLength={40} className="block rounded-xl px-2.5 pb-2.5 pt-5 w-full text-base text-white bg-[#6b4d11]/[0.8] dark:bg-[#6b4d11]/[0.8] border-0 border-b-4 border-[#ffae19]/[0.9] appearance-none dark:text-white dark:border-[#ffae19]/[0.9] dark:focus:border-[#ffae19]/[0.9] focus:outline-none focus:ring-0 focus:border-[#ffae19]/[0.9] peer" placeholder=" " />
@@ -182,6 +184,71 @@ const CreateTask = () => {
     <input type="text" id="floating_filled" value={link} onChange={(e) => setLink(e.target.value)} className="block rounded-xl px-2.5 pb-2.5 pt-5 w-full text-base text-white bg-[#6b4d11]/[0.8] dark:bg-[#6b4d11]/[0.8] border-0 border-b-4 border-[#ffae19]/[0.9] appearance-none dark:text-white dark:border-[#ffae19]/[0.9] dark:focus:border-[#ffae19]/[0.9] focus:outline-none focus:ring-0 focus:border-[#ffae19]/[0.9] peer" placeholder=" " />
     <label form="floating_filled" className="absolute text-sm  text-white dark:text-white/[0.9] italic font-bold  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Enter the link</label>
     </div>
+
+    <Menu as="div" className="relative  w-[calc(100%-4rem)] mt-4">
+        <MenuButton className="inline-flex block justify-between rounded-xl px-2.5 pb-2.5 pt-5 w-full text-base text-white bg-[#6b4d11]/[0.8] dark:bg-[#6b4d11]/[0.8] border-0 border-b-4 border-[#ffae19]/[0.9] appearance-none dark:text-white dark:border-[#ffae19]/[0.9] dark:focus:border-[#ffae19]/[0.9] focus:outline-none focus:ring-0 focus:border-[#ffae19]/[0.9] peer">
+        <p className={`font-normal text-base ${platform == 'Select platform' ? 'text-white/[0.9] italic font-bold' : 'text-white font-normal'}`}>{platform}</p>
+          <ChevronDownIcon aria-hidden="true" className="-mr-1 size-7 text-white" />
+        </MenuButton>
+        <label form="floating_filled" className="absolute text-sm  text-white dark:text-white/[0.9] italic font-bold  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Platform</label>
+
+
+      <MenuItems 
+        transition
+        className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-[#ffae19] ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+      >
+        <div >
+          <button  onClick={() => setPlatform('Telegram')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
+            <a
+              className="block text-sm font-bold text-black "
+            >
+              Telegram
+            </a>
+          </button>
+          <div className='flex grow w-full border-0 border-b-4 border-white'/>
+          <button  onClick={() => setPlatform('Youtube')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
+            <a
+              className="block text-sm font-bold text-black "
+            >
+              Youtube
+            </a>
+          </button>
+          <div className='flex grow w-full border-0 border-b-4 border-white'/>
+          <button  onClick={() => setPlatform('Instagram')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
+            <a
+              className="block text-sm font-bold text-black "
+            >
+             Instagram
+            </a>
+          </button>
+          <div className='flex grow w-full border-0 border-b-4 border-white'/>
+          <button  onClick={() => setPlatform('Google Play Store')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
+            <a
+              className="block text-sm font-bold text-black "
+            >
+              Google Play Store
+            </a>
+          </button>
+          <div className='flex grow w-full border-0 border-b-4 border-white'/>
+          <button  onClick={() => setPlatform('Apple App Store')} className='flex px-4 py-4   grow w-full text-center items-center justify-center'>
+            <a
+              className="block text-sm font-bold text-black "
+            >
+              Apple App Store
+            </a>
+          </button>
+          <div className='flex grow w-full border-0 border-b-4 border-white'/>
+          <button  onClick={() => setPlatform('Etc')} className='flex px-4 py-4  grow w-full text-center items-center justify-center'>
+            <a
+              className="block text-sm font-bold text-black "
+            >
+              Etc
+            </a>
+          </button>
+
+        </div>
+      </MenuItems>
+    </Menu>
 
   
 
@@ -238,7 +305,7 @@ const CreateTask = () => {
     <Image 
         src={FootPrint as StaticImageData} 
       className="w-8 h-8 aspect-square object-cover"
-      alt="Shiba Inu"
+      alt=""
     />
     <p className={`font-normal text-base text-black text-wrap`}>{(Number(click)*20000).toLocaleString()}</p>        
     </div>
@@ -289,7 +356,7 @@ const CreateTask = () => {
       <Image 
         src={FootPrint as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"
-      alt="Shiba Inu"
+      alt=""
     />
      <p className={`flex font-normal text-base text-black text-wrap`}>{(Number(click)*20000).toLocaleString()}</p>        
 
@@ -305,7 +372,7 @@ const CreateTask = () => {
     </div>
      </button>  
 
-     <div className='flex w-[calc(100%-4rem)] mt-1 justify-center items-center'>
+     <div className='flex w-[calc(100%-2rem)] mt-1 justify-center items-center'>
      <Image 
         src={Info as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"

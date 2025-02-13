@@ -15,6 +15,9 @@ import React,{ useRef }  from 'react';
 import Touch from '@/icons/touch.svg';
 import { useTab } from '@/contexts/TabContext'
 import Info from '@/icons/info.svg';
+import NoTask from '@/icons/no-task.svg';
+
+import { text } from "stream/consumers";
 
 //15000
 
@@ -102,8 +105,10 @@ const TasksTab = () => {
       });
       
        setTask(newData)
-        const str = `${pendingtasks},${id}`
+       const rndNmb = Math.floor(Math.random() * 3) + 1
+       const str = `${pendingtasks},${id}`
         setPendingTasks(str)
+       if(rndNmb == 2){
         try {
           fetch('/api/pendingtask', {
            method: 'POST',
@@ -121,7 +126,9 @@ const TasksTab = () => {
        } catch (err) {
         
        }
-      }
+       }
+        
+     }
      
     }
 
@@ -384,8 +391,8 @@ const TasksTab = () => {
         
       </center>
               <div className="flex-1 mt-1 text-center font-bold ">
-              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-Large text-2xl glow">Earn More WalkCoin</p>
-              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal glow text-lg">Receive rewards by completing any task</p>
+              <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-Large text-2xl glow">Earn More WalkCoin</p>
+              <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">Receive rewards by completing any task</p>
               </div>
               </div>
               <div className="flex w-full  items-center justify-center items-center">
@@ -601,7 +608,15 @@ const TasksTab = () => {
                           
                         )
                     }) }
-                     
+                    
+                    <div className={`${gtTasks.length == 0 && gtTasksCreated.length ==0 && Loading == false? 'mt-10' : 'w-0 h-0'} grow flex flex-col items-center justify-center text-center`}>
+                            <Image
+        src={NoTask as StaticImageData}
+      className={`${gtTasks.length == 0 && gtTasksCreated.length ==0 && Loading == false? 'w-20 h-20' : ''} object-fill`}
+      alt=""
+    />     
+              <p className={`${gtTasks.length == 0 && gtTasksCreated.length ==0 && Loading == false? 'text-base' : 'w-0 h-0 text-[0px]'} text-[#00000093] font-bold `}>No Task</p> 
+                            </div>
 
                      <div className="h-20 mt-5" />
 

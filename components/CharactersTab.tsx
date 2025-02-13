@@ -6,12 +6,12 @@ import Dollar from '@/icons/Dollar.svg';
 import React,{useEffect,useState} from 'react';
 import Toast from 'typescript-toastify';
 import { NewUserContext } from '@/contexts/UserContextB';
-import AlienSoldier from '@/charactermg/AlienSoldier.png'
-import Ev from '@/charactermg/ev.png'
-import Jackie from '@/charactermg/jackie.png'
-import Mousey from '@/charactermg/Mousey.png'
-import SwatGuy from '@/charactermg/swatguy.png'
-import Toy from '@/imgs/toypic.png'
+import AlienSoldier from '@/charactermg/AlienSoldier.webp'
+import Ev from '@/charactermg/ev.webp'
+import Jackie from '@/charactermg/jackie.webp'
+import Mousey from '@/charactermg/Mousey.webp'
+import SwatGuy from '@/charactermg/swatguy.webp'
+import Toy from '@/imgs/toypic.webp'
 import Lock from '@/icons/lock.svg';
 
 
@@ -32,14 +32,6 @@ const CharactersTab = () => {
         { id: 5, label: 'Eve', Icon: Ev,cost : 20000000,dollar:'0.00000001',unlock:false },
         { id: 6, label: 'Alien Soldier', Icon: AlienSoldier,cost : 30000000,dollar:'0.00000001',unlock:false },
     ]);
-    // const tasks: { id: number; label: string; Icon: StaticImageData,cost:string,dollar:string,unlock:boolean}[] = [
-    //     { id: 1, label: 'Ty', Icon: Toy,cost : 'Free',dollar:'0',unlock:true },
-    //     { id: 2, label: 'Mousey', Icon: Mousey,cost : '10010',dollar:'0',unlock:true },
-    //     { id: 3, label: 'Jackie', Icon: Jackie,cost : '100',dollar:'0',unlock:false },
-    //     { id: 4, label: 'Swat Guy', Icon: SwatGuy,cost : '10010',dollar:'0',unlock:false },
-    //     { id: 5, label: 'Eve', Icon: Ev,cost : '100',dollar:'0',unlock:false },
-    //     { id: 6, label: 'Alien Soldier', Icon: AlienSoldier,cost : '100',dollar:'0',unlock:false },
-    // ]
 
     useEffect(() => {
         const mapstr = userData?.upgrade.split(',').map(Number);
@@ -77,8 +69,8 @@ const CharactersTab = () => {
                 setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(userData?.gtpoint),selectcharacter:String(id),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
                new Toast({
                              position: "top-center",
-                             toastMsg: "Done.",
-                             autoCloseTime: 4500,
+                             toastMsg: "Close and reopen the mini app to see the changes",
+                             autoCloseTime: 8500,
                              canClose: true,
                              showProgress: true,
                              pauseOnHover: true,
@@ -129,16 +121,16 @@ const CharactersTab = () => {
                          setTask(newData)
                          setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(id),upgrade:String(updatepgrade),value:String(updatevalue),username:String(userData?.username)})
                          new Toast({
-                                       position: "top-center",
-                                       toastMsg: "Done.",
-                                       autoCloseTime: 4500,
-                                       canClose: true,
-                                       showProgress: true,
-                                       pauseOnHover: true,
-                                       pauseOnFocusLoss: true,
-                                       type: "default",
-                                       theme: "light"
-                                     });
+                          position: "top-center",
+                          toastMsg: "Close and reopen the mini app to see the changes",
+                          autoCloseTime: 8500,
+                          canClose: true,
+                          showProgress: true,
+                          pauseOnHover: true,
+                          pauseOnFocusLoss: true,
+                          type: "default",
+                          theme: "light"
+                        });
                       }else{
                         new Toast({
                             position: "top-center",
@@ -176,7 +168,7 @@ const CharactersTab = () => {
               <div className="flex-1 text-center">
               <div className="flex-col items-center justify-center">
               <p className="text-lg text-white font-Large">Current value</p>
-              <p className=" text-white font-Large glow text-base truncate">${userData?.value}</p>
+              <p className=" text-white font-Large glow text-base truncate">${(Number(userData?.value)).toFixed(8)}</p>
               </div>
               </div>
               </div>

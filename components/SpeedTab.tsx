@@ -2,13 +2,13 @@
 
 import Image, {StaticImageData} from "next/image";
 import FootPrint from '@/icons/footprint.svg';
-import Speed1 from '@/speedmg/speed1.jpg';
-import Speed2 from '@/speedmg/speed2.jpg';
-import Speed3 from '@/speedmg/speed3.jpg';
-import Speed4 from '@/speedmg/speed4.jpg';
-import Speed5 from '@/speedmg/speed5.jpg';
-import Speed6 from '@/speedmg/speed6.jpg';
-import Speed7 from '@/speedmg/speed7.jpg';
+import Speed1 from '@/speedmg/speed1.webp';
+import Speed2 from '@/speedmg/speed2.webp';
+import Speed3 from '@/speedmg/speed3.webp';
+import Speed4 from '@/speedmg/speed4.webp';
+import Speed5 from '@/speedmg/speed5.webp';
+import Speed6 from '@/speedmg/speed6.webp';
+import Speed7 from '@/speedmg/speed7.webp';
 import React from 'react';
 import Toast from 'typescript-toastify';
 import { NewUserContext } from '@/contexts/UserContextB';
@@ -46,7 +46,6 @@ const SpeedTab = () => {
              .then((res) => res.json())
              .then((data) => {
               if(data.success){
-                
                  setUserData({idd:String(userData?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
                  new Toast({
                                position: "top-center",
