@@ -1,6 +1,5 @@
 'use client'
-// Reach Your Goals & Achieve Success FASTER
-// The effective way to promote your social media,app,etc.
+
 import Etc from '@/icons/etc.svg';
 import FootPrint from '@/icons/footprint.svg';
 import Image, {StaticImageData} from "next/image";
@@ -16,14 +15,14 @@ import { useTab } from '@/contexts/TabContext'
 const CreateTask = () => {
      
 
-  const { userData,setUserData } = React.useContext(NewUserContext);
+  const { UserDt,setUserData } = React.useContext(NewUserContext);
  
     const [describe, setDescribe] = useState<string>('');
     const [link, setLink] = useState<string>('');
     const [keyword, setKeyword] = useState<string>('');
     const [keyworddescribe, setDescribeKeyword] = useState<string>('');
 
-    const [contact, setContact] = useState<string>(String(userData?.username));
+    const [contact, setContact] = useState<string>(String(UserDt?.username));
     const [project, setProject] = useState<string>('');
     const [click, setClick] = useState<string>('');
     const [platform, setPlatform] = useState<string>('Select platform');
@@ -33,7 +32,7 @@ const CreateTask = () => {
     const handle = async(describe:string,link:string,keyword:string,contact:string,project:string,clicks:number,platform:string,keyworddescribe:string) => {
 
       const calclicks = clicks*20000
-      const nmbpoint = Number(userData?.gtpoint)
+      const nmbpoint = Number(UserDt?.gtpoint)
   
       if(link.length == 0 || describe.length == 0 || contact.length ==0 || project.length ==0|| clicks==0 || platform.length ==0){
         new Toast({
@@ -69,12 +68,12 @@ const CreateTask = () => {
              headers: {
                'Content-Type': 'application/json',
              },
-             body: JSON.stringify({describe:String(describe),url:String(link),keyword:String(keyword),contact:String(contact),project:String(project),clicks:Number(clicks),platform:String(platform),points:Number(decreasepoint),idd:String(userData?.idd),keyworddescribe:String(keyworddescribe) }),
+             body: JSON.stringify({describe:String(describe),url:String(link),keyword:String(keyword),contact:String(contact),project:String(project),clicks:Number(clicks),platform:String(platform),points:Number(decreasepoint),idd:String(UserDt?.idd),keyworddescribe:String(keyworddescribe) }),
            })
            .then((res) => res.json())
            .then((data) => {
             if(data.success){
-              setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+              setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
               new Toast({
                 position: "top-center",
                 toastMsg: "Done.",

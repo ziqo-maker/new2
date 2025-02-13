@@ -4,8 +4,6 @@ import Image, {StaticImageData} from "next/image"
 import FootPrint from '@/icons/footprint.svg';
 import { useEffect,useState } from "react"
 import React from 'react';
-import { useTab } from '@/contexts/TabContext'
-import { NewUserContext } from '@/contexts/UserContextB';
 
 
 type Task = {
@@ -16,8 +14,6 @@ type Task = {
 
 const RatingTab = () => {
     const [gtTasks,setTask] = useState<Task[]>([]);
-          const { activeTab, setActiveTab } = useTab()
-          const { userData,setUserData } = React.useContext(NewUserContext);
         const [Loading,setLoading] = useState<boolean> (true);
 
         useEffect(() => {

@@ -17,7 +17,7 @@ import { NewUserContext } from '@/contexts/UserContextB';
 
 const SpeedTab = () => {
 
-    const { userData,setUserData } = React.useContext(NewUserContext);
+    const { UserDt,setUserData } = React.useContext(NewUserContext);
     const tasks: { id: number; label: string; Icon: StaticImageData,cost:string }[] = [
         { id: 1, label: 'x1 tokens every 2 hours', Icon: Speed1,cost : '0' },
         { id: 2, label: 'x2 tokens every 2 hours', Icon: Speed2,cost : '250000' },
@@ -31,22 +31,22 @@ const SpeedTab = () => {
 
     const handle = async(cost:number,id:number) => {
 
-        if(Number(userData?.speedlvl)+1 == id && Number(userData?.gtpoint) >= Number(cost)){
+        if(Number(UserDt?.speedlvl)+1 == id && Number(UserDt?.gtpoint) >= Number(cost)){
           
-            const lvl = Number(userData?.speedlvl) +1
-            const decreasepoint = Number(userData?.gtpoint) - cost
+            const lvl = Number(UserDt?.speedlvl) +1
+            const decreasepoint = Number(UserDt?.gtpoint) - cost
             try {
               fetch('/api/updatespeed', {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
-               body: JSON.stringify({ idd: String(userData?.idd),speedlvl:lvl,points: decreasepoint}),
+               body: JSON.stringify({ idd: String(UserDt?.idd),speedlvl:lvl,points: decreasepoint}),
              })
              .then((res) => res.json())
              .then((data) => {
               if(data.success){
-                 setUserData({idd:String(userData?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+                 setUserData({idd:String(UserDt?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
                  new Toast({
                                position: "top-center",
                                toastMsg: "Done.",
@@ -104,8 +104,8 @@ const SpeedTab = () => {
                        <p className="text-base mt-1 text-black/[0.9] font-Large">{Number(tab.cost) == 0 ? 'Free' : Number(tab.cost).toLocaleString()}</p>
                     
                  </div>
-                 <button onClick={() => handle(Number(tab.cost),tab.id)} className={`${ Number(userData?.speedlvl)+1 == tab.id && Number(userData?.gtpoint) >= Number(tab.cost) ? 'bg-[#ffae19]/[0.9]' : 'bg-[#ffae19]/[0.6]'} flex w-1/3 rounded-full  py-[10px] items-center justify-center text-center`}>
-                 <p className="text-base text-black/[0.9] font-Large">{userData?.speedlvl == String(tab.id) ? 'Selected' :  Number(userData?.speedlvl)+1 == tab.id && Number(userData?.gtpoint) >= Number(tab.cost) ? 'Speed Up' : Number(tab.id) > Number(userData?.speedlvl)+1 ? 'Unavailable' :  Number(tab.id) < Number(userData?.speedlvl) ? 'Passed' : 'Not enough' }</p>
+                 <button onClick={() => handle(Number(tab.cost),tab.id)} className={`${ Number(UserDt?.speedlvl)+1 == tab.id && Number(UserDt?.gtpoint) >= Number(tab.cost) ? 'bg-[#ffae19]/[0.9]' : 'bg-[#ffae19]/[0.6]'} flex w-1/3 rounded-full  py-[10px] items-center justify-center text-center`}>
+                 <p className="text-base text-black/[0.9] font-Large">{UserDt?.speedlvl == String(tab.id) ? 'Selected' :  Number(UserDt?.speedlvl)+1 == tab.id && Number(UserDt?.gtpoint) >= Number(tab.cost) ? 'Speed Up' : Number(tab.id) > Number(UserDt?.speedlvl)+1 ? 'Unavailable' :  Number(tab.id) < Number(UserDt?.speedlvl) ? 'Passed' : 'Not enough' }</p>
                   </button>
                             </div>
                         )

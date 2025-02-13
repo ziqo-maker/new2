@@ -18,7 +18,7 @@ const InviteTab = () => {
 
       const [gtTasks,setTask] = useState<Task[]>([]);
      const [Loading,setLoading] = useState<boolean> (true);
-     const { userData,setUserData } = React.useContext(NewUserContext);
+     const { UserDt,setUserData } = React.useContext(NewUserContext);
      
      const inviteurl = ""
 
@@ -26,7 +26,7 @@ const InviteTab = () => {
       if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp
       tg.ready()
-      const invitelink = `${inviteurl}?startapp=${userData?.idd}`
+      const invitelink = `${inviteurl}?startapp=${UserDt?.idd}`
       const sharetext = `Play WalkCoin and earn cash for free!🤑
                          i've already withdrawn-don't miss out!💸`;
        const fullUrl = `https://t.me/share/url?url=${encodeURIComponent(invitelink)}&text=${encodeURIComponent(sharetext)}`
@@ -35,7 +35,7 @@ const InviteTab = () => {
      }
 
      const handleCopyLink = () => {
-      const inviteLink = `${inviteurl}?startapp=${userData?.idd}`
+      const inviteLink = `${inviteurl}?startapp=${UserDt?.idd}`
       navigator.clipboard.writeText(inviteLink)
       alert('Referral link is copied')
     }
@@ -48,7 +48,7 @@ const InviteTab = () => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String("6435568801") }),
+           body: JSON.stringify({ idd: String(UserDt?.idd) }),
          })
          .then((res) => res.json())
          .then((data) => {

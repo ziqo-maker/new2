@@ -11,13 +11,12 @@ import Telegram from '@/icons/telegram.svg';
 import Instagram from '@/icons/instagram.svg';
 import Etc from '@/icons/etc.svg';
 import { NewUserContext } from '@/contexts/UserContextB';
-import React,{ useRef }  from 'react';
+import React from 'react';
 import Touch from '@/icons/touch.svg';
 import { useTab } from '@/contexts/TabContext'
 import Info from '@/icons/info.svg';
 import NoTask from '@/icons/no-task.svg';
 
-import { text } from "stream/consumers";
 
 //15000
 
@@ -47,12 +46,11 @@ type TaskCreated = {
 }
 
 const TasksTab = () => {
-  const [open, setOpen] = useState(false)
 
     const [gtTasks,setTask] = useState<Task[]>([]);
     const [pendingtasks,setPendingTasks] = useState<string> ();
     const [gtdonetasks,setDoneTasks] = useState<string> ();
-    const { userData,setUserData } = React.useContext(NewUserContext);
+    const { UserDt,setUserData } = React.useContext(NewUserContext);
     const [Loading,setLoading] = useState<boolean> (true);
     const { activeTab, setActiveTab } = useTab()
     const [gtTasksCreated,setTaskCreated] = useState<TaskCreated[]>([]);
@@ -79,7 +77,7 @@ const TasksTab = () => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String("6124587322"),pendingcreatedtasks:str}),
+           body: JSON.stringify({ idd: String(UserDt?.idd),pendingcreatedtasks:str}),
          })
          .then((res) => res.json())
          .then((data) => {
@@ -115,7 +113,7 @@ const TasksTab = () => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String("6124587322"),pendingtasks:str}),
+           body: JSON.stringify({ idd: String(UserDt?.idd),pendingtasks:str}),
          })
          .then((res) => res.json())
          .then((data) => {
@@ -145,7 +143,7 @@ const TasksTab = () => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String("6124587322"),pendingcreatedtasks:String(array),donecreatedtasks:str,points : {increment : cost}}),
+           body: JSON.stringify({ idd: String(UserDt?.idd),pendingcreatedtasks:String(array),donecreatedtasks:str,points : {increment : cost}}),
          })
          .then((res) => res.json())
          .then((data) => {
@@ -167,8 +165,8 @@ const TasksTab = () => {
               type: "default",
               theme: "light"
             });
-            const getpoint = Number(userData?.gtpoint) + cost
-            setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+            const getpoint = Number(UserDt?.gtpoint) + cost
+            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
 
           }
          })
@@ -193,7 +191,7 @@ const TasksTab = () => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String("6124587322"),pendingcreatedtasks:String(array),donecreatedtasks:str,points : {increment : cost}}),
+           body: JSON.stringify({ idd: String(UserDt?.idd),pendingcreatedtasks:String(array),donecreatedtasks:str,points : {increment : cost}}),
          })
          .then((res) => res.json())
          .then((data) => {
@@ -215,8 +213,8 @@ const TasksTab = () => {
               type: "default",
               theme: "light"
             });
-            const getpoint = Number(userData?.gtpoint) + cost
-            setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+            const getpoint = Number(UserDt?.gtpoint) + cost
+            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
 
           }
          })
@@ -255,7 +253,7 @@ const TasksTab = () => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String("6124587322"),pendingtasks:String(array),donetasks:str,points : {increment : cost}}),
+           body: JSON.stringify({ idd:String(UserDt?.idd),pendingtasks:String(array),donetasks:str,points : {increment : cost}}),
          })
          .then((res) => res.json())
          .then((data) => {
@@ -277,8 +275,8 @@ const TasksTab = () => {
               type: "default",
               theme: "light"
             });
-            const getpoint = Number(userData?.gtpoint) + cost
-            setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+            const getpoint = Number(UserDt?.gtpoint) + cost
+            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
 
           }
          })
@@ -296,7 +294,7 @@ const TasksTab = () => {
              headers: {
                'Content-Type': 'application/json',
              },
-             body: JSON.stringify({ idd: String("6124587322") }),
+             body: JSON.stringify({ idd: String(UserDt?.idd) }),
            })
            .then((res) => res.json())
            .then((data) => {
@@ -334,7 +332,7 @@ const TasksTab = () => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String("6124587322") }),
+           body: JSON.stringify({ idd: String(UserDt?.idd) }),
          })
          .then((res) => res.json())
          .then((data) => {

@@ -28,7 +28,7 @@ const HomeTab = () => {
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const { userData,setUserData } = React.useContext(NewUserContext);
+  const { UserDt,setUserData } = React.useContext(NewUserContext);
   
   const { activeTab, setActiveTab } = useTab()
   
@@ -86,13 +86,13 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
          headers: {
            'Content-Type': 'application/json',
          },
-         body: JSON.stringify({ idd: String(userData?.idd),miningPoint: miningPoint }),
+         body: JSON.stringify({ idd: String(UserDt?.idd),miningPoint: miningPoint }),
        })
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          const plus = Number(userData?.gtpoint) + miningPoint
-          setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(plus),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+          const plus = Number(UserDt?.gtpoint) + miningPoint
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
           setClaim(false)
           setReady(true)
           setMiningPoint(0)
@@ -111,7 +111,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
          headers: {
            'Content-Type': 'application/json',
          },
-         body: JSON.stringify({ idd: String(userData?.idd),dateTime: dateA }),
+         body: JSON.stringify({ idd: String(UserDt?.idd),dateTime: dateA }),
        })
        .then((res) => res.json())
        .then((data) => {
@@ -136,7 +136,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
        headers: {
          'Content-Type': 'application/json',
        },
-       body: JSON.stringify({ idd: String(userData?.idd) }),
+       body: JSON.stringify({ idd: String(UserDt?.idd) }),
      })
      .then((res) => res.json())
      .then((data) => {
@@ -145,7 +145,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
         const now = new Date(data.dt);
           const difference = target.getTime() - now.getTime();
           if(data.mining == 1 && difference < 0 && data.claim == 0){
-            setMiningPoint(7200*Number(userData?.speedlvl))
+            setMiningPoint(7200*Number(UserDt?.speedlvl))
             setClaim(true);
             setSpin(false);
           }else if(data.mining == 0){
@@ -182,7 +182,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
           setIsActive(false);
         }else{
            var t = totaldiff - difference 
-          setMiningPoint(Math.trunc(t/1000)*Number(userData?.speedlvl))
+          setMiningPoint(Math.trunc(t/1000)*Number(UserDt?.speedlvl))
         }
       },1000);
     }
@@ -229,7 +229,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     />
               <div className="flex-1 text-center">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base truncate">{Number(userData?.gtpoint).toLocaleString()}</p>
+              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
               </div>
               </div>
@@ -245,14 +245,14 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
         <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="auto" playsInline>
         <source 
-          src={`https://ftp-whtvfw.chbk.app/${String(userData?.selectcharacter)}-${String(userData?.speedlvl)}.mkv`}
+          src={`https://ftp-whtvfw.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mkv`}
           type="video/mp4"
           
         />
       Your browser does not support the video tag.
     </video>
     <Image
-       src={userData?.selectcharacter == "1"?  toypic:userData?.selectcharacter == "2" ? Mousey:userData?.selectcharacter == "3"?jackie:userData?.selectcharacter == "4"? swatguy:userData?.selectcharacter == "5"? ev:AlienSoldier}
+       src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:AlienSoldier}
        className={`${isActive? 'w-0 h-0' : 'h-full'} rounded-full absolute object-fill`}
        alt="Toy"
          />  
@@ -286,7 +286,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
        />
           <div className="flex space-x-2 items-center text-wrap">
           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
-          <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{userData?.speedlvl}</p>
+          <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
           </div>
           
         

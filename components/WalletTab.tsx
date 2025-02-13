@@ -24,7 +24,7 @@ const WalletTab = () => {
 
       const [gtTasks,setTask] = useState<Task[]>([]);
       const { activeTab, setActiveTab } = useTab()
-      const { userData,setUserData } = React.useContext(NewUserContext);
+      const { UserDt,setUserData } = React.useContext(NewUserContext);
     const [Loading,setLoading] = useState<boolean> (true);
 
 
@@ -36,7 +36,7 @@ const WalletTab = () => {
                headers: {
                  'Content-Type': 'application/json',
                },
-               body: JSON.stringify({ idd: String(userData?.idd) }),
+               body: JSON.stringify({ idd: String(UserDt?.idd) }),
              })
              .then((res) => res.json())
              .then((data) => {
@@ -78,7 +78,7 @@ const WalletTab = () => {
     />
               <div className="flex-1 text-center ">
               <div className="flex items-center justify-center px-2">
-              <p className=" text-white font-bold glow text-base text-wrap">{Number(userData?.gtpoint).toLocaleString()}</p>
+              <p className=" text-white font-bold glow text-base text-wrap">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
               </div>
               </div>
@@ -98,7 +98,7 @@ const WalletTab = () => {
     />
               <div className="flex-1 text-center ">
               <div className="flex items-center justify-center px-2">
-              <p className=" text-white font-bold glow text-base text-wrap">{(Number(userData?.value)).toFixed(8)}</p>
+              <p className=" text-white font-bold glow text-base text-wrap">{(Number(UserDt?.value)).toFixed(8)}</p>
               </div>
               </div>
               </div>
@@ -106,7 +106,7 @@ const WalletTab = () => {
 
             <div className="flex grow  mt-1 ml-4 mr-4">
             <div className="flex items-center justify-start px-2 space-x-1">
-              <p className=" text-black font-semibold font-serif glow text-sm text-wrap">= {(Number(userData?.gtpoint)*Number(userData?.value)).toFixed(8)}</p>
+              <p className=" text-black font-semibold font-serif glow text-sm text-wrap">= {(Number(UserDt?.gtpoint)*Number(UserDt?.value)).toFixed(8)}</p>
               <Image 
         src={Tether as StaticImageData} 
       className="w-6 h-6 aspect-square object-cover"

@@ -22,7 +22,7 @@ const CharactersTab = () => {
         id: number; label: string; Icon: StaticImageData,cost:number,dollar:string,unlock:boolean
     }
 
-    const { userData,setUserData } = React.useContext(NewUserContext);
+    const { UserDt,setUserData } = React.useContext(NewUserContext);
 
     const [gtTasks,setTask] = useState<model[]>([
         { id: 1, label: 'Ty', Icon: Toy,cost : 0,dollar:'0.00000001',unlock:true },
@@ -34,7 +34,7 @@ const CharactersTab = () => {
     ]);
 
     useEffect(() => {
-        const mapstr = userData?.upgrade.split(',').map(Number);
+        const mapstr = UserDt?.upgrade.split(',').map(Number);
         gtTasks.forEach((t: any)=> {
             const found = mapstr?.find(item => item === t.id);
             const contain = found !== undefined
@@ -61,12 +61,12 @@ const CharactersTab = () => {
              headers: {
                'Content-Type': 'application/json',
              },
-             body: JSON.stringify({ idd: String(userData?.idd),selectcharacter:id}),
+             body: JSON.stringify({ idd: String(UserDt?.idd),selectcharacter:id}),
            })
            .then((res) => res.json())
            .then((data) => {
             if(data.success){
-                setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(userData?.gtpoint),selectcharacter:String(id),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+                setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(id),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
                new Toast({
                              position: "top-center",
                              toastMsg: "Close and reopen the mini app to see the changes",
@@ -96,11 +96,11 @@ const CharactersTab = () => {
           
          }
 
-    }else if(Number(userData?.gtpoint) >= Number(cost) && unlock == false){
+    }else if(Number(UserDt?.gtpoint) >= Number(cost) && unlock == false){
       
-        const decreasepoint = Number(userData?.gtpoint) - cost
-        const updatepgrade = userData?.upgrade+','+String(id)
-        const updatevalue = Number(userData?.value)+0.00000001
+        const decreasepoint = Number(UserDt?.gtpoint) - cost
+        const updatepgrade = UserDt?.upgrade+','+String(id)
+        const updatevalue = Number(UserDt?.value)+0.00000001
 
          try {
                       fetch('/api/upgradecharacter', {
@@ -108,7 +108,7 @@ const CharactersTab = () => {
                        headers: {
                          'Content-Type': 'application/json',
                        },
-                       body: JSON.stringify({ idd: String(userData?.idd),upgrade:updatepgrade,points: decreasepoint,selectcharacter:id,tokenvalue:String(updatevalue)}),
+                       body: JSON.stringify({ idd: String(UserDt?.idd),upgrade:updatepgrade,points: decreasepoint,selectcharacter:id,tokenvalue:String(updatevalue)}),
                      })
                      .then((res) => res.json())
                      .then((data) => {
@@ -119,7 +119,7 @@ const CharactersTab = () => {
                             return el
                         });
                          setTask(newData)
-                         setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(id),upgrade:String(updatepgrade),value:String(updatevalue),username:String(userData?.username)})
+                         setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(id),upgrade:String(updatepgrade),value:String(updatevalue),username:String(UserDt?.username)})
                          new Toast({
                           position: "top-center",
                           toastMsg: "Close and reopen the mini app to see the changes",
@@ -168,7 +168,7 @@ const CharactersTab = () => {
               <div className="flex-1 text-center">
               <div className="flex-col items-center justify-center">
               <p className="text-lg text-white font-Large">Current value</p>
-              <p className=" text-white font-Large glow text-base truncate">${(Number(userData?.value)).toFixed(8)}</p>
+              <p className=" text-white font-Large glow text-base truncate">${(Number(UserDt?.value)).toFixed(8)}</p>
               </div>
               </div>
               </div>
@@ -207,13 +207,13 @@ const CharactersTab = () => {
                        <p className="text-base mt-1 text-black/[0.9] font-Large">{tab.cost == 0 ? 'Free' : tab.cost.toLocaleString()}</p>
                     
                  </div>
-                 <button onClick={() => handle(Number(tab.cost),tab.id,tab.unlock)} className={`${tab.unlock == true && Number(userData?.selectcharacter) == tab.id ? 'bg-[#ffae19]/[0.9]' : tab.unlock == true && Number(userData?.selectcharacter) != tab.id? 'bg-[#ffae19]/[0.5] ' : Number(userData?.gtpoint) >= Number(tab.cost) ? 'bg-[#ffae19]/[0.9]' : 'bg-[#ffae19]/[0.5]' } flex w-1/3 rounded-full  py-[10px] items-center justify-center text-center space-x-`}>
+                 <button onClick={() => handle(Number(tab.cost),tab.id,tab.unlock)} className={`${tab.unlock == true && Number(UserDt?.selectcharacter) == tab.id ? 'bg-[#ffae19]/[0.9]' : tab.unlock == true && Number(UserDt?.selectcharacter) != tab.id? 'bg-[#ffae19]/[0.5] ' : Number(UserDt?.gtpoint) >= Number(tab.cost) ? 'bg-[#ffae19]/[0.9]' : 'bg-[#ffae19]/[0.5]' } flex w-1/3 rounded-full  py-[10px] items-center justify-center text-center space-x-`}>
                  <Image
         src={Lock as StaticImageData} 
       className={`${tab.unlock == true ? 'w-0 h-0' : 'w-5 h-5'}`}
       alt="Shiba Inu"
        />
-                 <p className="text-base text-black/[0.9] font-Large">{tab.unlock == true && Number(userData?.selectcharacter) == tab.id ? 'Selected' : tab.unlock == true && Number(userData?.selectcharacter) != tab.id? 'Select' :  'Unlock' }</p>
+                 <p className="text-base text-black/[0.9] font-Large">{tab.unlock == true && Number(UserDt?.selectcharacter) == tab.id ? 'Selected' : tab.unlock == true && Number(UserDt?.selectcharacter) != tab.id? 'Select' :  'Unlock' }</p>
                   </button>
                             </div>
                         )

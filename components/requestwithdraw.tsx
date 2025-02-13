@@ -14,7 +14,7 @@ import { useTab } from '@/contexts/TabContext'
 const Withdraw = () => {
      
 
-  const { userData,setUserData } = React.useContext(NewUserContext);
+  const { UserDt,setUserData } = React.useContext(NewUserContext);
  
     const [network, setNetwork] = useState<string>('Select Network');
     const [address, setAddress] = useState<string>('');
@@ -25,7 +25,7 @@ const Withdraw = () => {
 
    const handle = async (network:string,address:string,amount:string,) => {
     const deduction = network == 'TON'? String((Number(amount)+0.65).toFixed(2)) : network == 'BSC(BEP20)'?String((Number(amount)+0.11).toFixed(2)): '0';
-    const calpoint = Number(deduction) / Number(userData?.value)
+    const calpoint = Number(deduction) / Number(UserDt?.value)
     if(network == 'Select Network' || address.length ==0 || amount == '0'){
  new Toast({
           position: "top-center",
@@ -38,7 +38,7 @@ const Withdraw = () => {
           type: "default",
           theme: "light"
         });
-    }else if(calpoint > Number(userData?.gtpoint)){
+    }else if(calpoint > Number(UserDt?.gtpoint)){
       new Toast({
         position: "top-center",
         toastMsg: "Not enough balance",
@@ -55,7 +55,7 @@ const Withdraw = () => {
      
       const actualreceive = network == 'TON' && (Number(amount)-0.65) > 0? String((Number(amount)-0.65).toFixed(2)) : network == 'BSC(BEP20)' && (Number(amount)-0.11)>0?String((Number(amount)-0.11).toFixed(2)): '0';
       
-      const points = Number(userData?.gtpoint) - calpoint
+      const points = Number(UserDt?.gtpoint) - calpoint
       
       try {
         fetch('/api/request-withdraw', {
@@ -63,12 +63,12 @@ const Withdraw = () => {
          headers: {
            'Content-Type':'application/json',
          },
-         body: JSON.stringify({idd:String(userData?.idd),points:points,amount:String(actualreceive),address:address,network:network,status:'pending' }),
+         body: JSON.stringify({idd:String(UserDt?.idd),points:points,amount:String(actualreceive),address:address,network:network,status:'pending' }),
        })
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          setUserData({idd:String(userData?.idd),speedlvl:String(userData?.speedlvl),gtpoint:String(points),selectcharacter:String(userData?.selectcharacter),upgrade:String(userData?.upgrade),value:String(userData?.value),username:String(userData?.username)})
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(points),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
           new Toast({
             position: "top-center",
             toastMsg: "Your request has been registered.",
@@ -172,8 +172,8 @@ const Withdraw = () => {
     <p className="text-white absolute end-2.5 bottom-2.5  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 ">USDT</p>
     </div>
     <div className='flex w-[calc(100%-4rem)] mt-1 justify-between items-start'>
-    <p className={`font-normal text-sm glow text-black`}>Available: {(Number(userData?.gtpoint)*Number(userData?.value)).toFixed(8)} USDT</p>
-    <Button onClick={() => setAmount(String(Number(userData?.gtpoint)*Number(userData?.value)))} className={`font-semibold text-base text-[#26A17B] mr-2`}>All</Button>
+    <p className={`font-normal text-sm glow text-black`}>Available: {(Number(UserDt?.gtpoint)*Number(UserDt?.value)).toFixed(8)} USDT</p>
+    <Button onClick={() => setAmount(String(Number(UserDt?.gtpoint)*Number(UserDt?.value)))} className={`font-semibold text-base text-[#26A17B] mr-2`}>All</Button>
     </div>
 
     <div className='flex w-[calc(100%-4rem)] mt-3 justify-between items-start'>
