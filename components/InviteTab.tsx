@@ -27,8 +27,7 @@ const InviteTab = () => {
         const tg = window.Telegram.WebApp
       tg.ready()
       const invitelink = `${inviteurl}?startapp=${UserDt?.idd}`
-      const sharetext = `Play WalkCoin and earn cash for free!🤑
-                         i've already withdrawn-don't miss out!💸`;
+      const sharetext = `Play WalkCoin and earn cash for free!🤑 i've already withdrawn-don't miss out!💸`;
        const fullUrl = `https://t.me/share/url?url=${encodeURIComponent(invitelink)}&text=${encodeURIComponent(sharetext)}`
          tg.openTelegramLink(fullUrl)     
       }
