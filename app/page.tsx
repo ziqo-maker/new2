@@ -25,7 +25,7 @@
   export default function Home() {
     const [user, setUser] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
-    const { UserDt,setUserData } = React.useContext(NewUserContext);
+    const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
     const [gtid, setid] = useState<string | null>("")
     const delay = async (ms:number) => {
       return new Promise((resolve) => 
@@ -33,13 +33,10 @@
   };
  
     useEffect(() => {
-
+     
+      loadUserData()
       const initWebApp = async () => {
-       
-        setUserData({idd:String("eeee"),gtpoint:String(""),selectcharacter:String(""),speedlvl:String(""),
-          upgrade:String(""),username:String(""),value:String("")
-        })
-
+      
         try {
           fetch('/api/updatedt', {
           method: 'POST',
@@ -59,74 +56,74 @@
       } catch (err) {
       }
 
-      if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-        const tg = window.Telegram.WebApp
-        tg.ready()
+      // if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+      //   const tg = window.Telegram.WebApp
+      //   tg.ready()
 
-        const initDataUnsafe = tg.initDataUnsafe || {}
-        const prm = tg.initDataUnsafe.start_param|| ''
+      //   const initDataUnsafe = tg.initDataUnsafe || {}
+      //   const prm = tg.initDataUnsafe.start_param|| ''
        
-        if (initDataUnsafe.user) {
-          fetch('/api/user', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(initDataUnsafe.user),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.error) {
-                setError(data.error)
-              } else {
-                setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
-                  upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
-                })
+      //   if (initDataUnsafe.user) {
+      //     fetch('/api/user', {
+      //       method: 'POST',
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //       },
+      //       body: JSON.stringify(initDataUnsafe.user),
+      //     })
+      //       .then((res) => res.json())
+      //       .then((data) => {
+      //         if (data.error) {
+      //           setError(data.error)
+      //         } else {
+      //           setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
+      //             upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
+      //           })
 
-                if(prm.length > 0){
-                  try {
-                    fetch('/api/invitereferal', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
-                  })
-                  .then((res) => res.json())
-                  .then((data) => {
-                    if (data.success) {
+      //           if(prm.length > 0){
+      //             try {
+      //               fetch('/api/invitereferal', {
+      //               method: 'POST',
+      //               headers: {
+      //                 'Content-Type': 'application/json',
+      //               },
+      //               body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
+      //             })
+      //             .then((res) => res.json())
+      //             .then((data) => {
+      //               if (data.success) {
                       
-                    } else {
+      //               } else {
                       
-                    }
-                  })
-                } catch (err) {
-                }
-                }
-                setTimeout(() => {
-                  setUser(data)
-                }, 20000);
+      //               }
+      //             })
+      //           } catch (err) {
+      //           }
+      //           }
+      //           setTimeout(() => {
+      //             setUser(data)
+      //           }, 20000);
                 
-              }
-            })
-            .catch((err) => {
-              setError('Failed to fetch user data')
-            })
-        } else {
-          setError('No user data available')
-        }
-      } else {
-        setError('This app should be opened in Telegram')
-      } 
+      //         }
+      //       })
+      //       .catch((err) => {
+      //         setError('Failed to fetch user data')
+      //       })
+      //   } else {
+      //     setError('No user data available')
+      //   }
+      // } else {
+      //   setError('This app should be opened in Telegram')
+      // } 
      };
 
       initWebApp();
       
     }, [])
 
-    // if (error) {
-    //   return <div className="container mx-auto p-4 text-red-500">{error}</div>
-    // }
+    if (error) {
+      return <div className="container mx-auto p-4 text-red-500">{error}</div>
+    }
 
     if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
