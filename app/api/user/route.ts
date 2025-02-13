@@ -19,25 +19,25 @@ export async function POST(req: NextRequest) {
         })
               
         if (!user) {
-            user = await prisma.user.create({
-                data: {
-                    idd: String(userdata.id),
-                    username: userdata.username,
-                    firstName: userdata.first_name || '',
-                    lastName: userdata.last_name || '',
-                    donetasks: '',
-                    pendingtasks : '',
-                    tokenvalue: '0.00000001',
-                    upgrade :'1,',
-                    donecreatedtasks :'',
-                    invite:'',
-                    pendingcreatedtasks:'',
-                    referal:'',
-                    speedlvl:1,
-                    points:0,
-                    selectcharacter:1
-                }
-            })
+            // user = await prisma.user.create({
+            //     data: {
+            //         idd: String(userdata.id),
+            //         username: userdata.username,
+            //         firstName: userdata.first_name || '',
+            //         lastName: userdata.last_name || '',
+            //         donetasks: '',
+            //         pendingtasks : '',
+            //         tokenvalue: '0.00000001',
+            //         upgrade :'1,',
+            //         donecreatedtasks :'',
+            //         invite:'',
+            //         pendingcreatedtasks:'',
+            //         referal:'',
+            //         speedlvl:1,
+            //         points:0,
+            //         selectcharacter:1
+            //     }
+            // })
             setUserData({idd:String(userdata.id),gtpoint:"0",selectcharacter:"1",speedlvl:"1",
                 upgrade:"1",username:String(userdata.username),value:"0.00000001"
               })
