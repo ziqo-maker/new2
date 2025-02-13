@@ -26,6 +26,7 @@
     const [user, setUser] = useState<any>(null)
     const [error, setError] = useState<string | null>(null)
     const { UserDt,setUserData } = React.useContext(NewUserContext);
+    const [gtid, setid] = useState<string>("")
 
     useEffect(() => {
 
@@ -71,6 +72,7 @@
                 setError(data.error)
               } else {
                 setUser(data)
+                setid(data.idd)
                 setUserData({idd:String("6435568801"),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                   upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
                 })
@@ -139,7 +141,7 @@
       alt=""
     />
       
-                  <p className="text-white font-Large">WalkTask{UserDt?.idd}</p>
+                  <p className="text-white font-Large">WalkTask{gtid}</p>
 
         </div>
         <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
