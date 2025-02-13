@@ -71,9 +71,7 @@
               if (data.error) {
                 setError(data.error)
               } else {
-                // setUser(data)
-                setid(data.idd)
-                setUserData({idd:String("6435568801"),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
+                setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                   upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
                 })
                
@@ -97,6 +95,8 @@
                 } catch (err) {
                 }
                 }
+                setid(data.idd)
+                setUser(data)
               }
             })
             .catch((err) => {
