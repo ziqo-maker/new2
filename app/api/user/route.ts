@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     try {
         const userData = await req.json()
 
-         const { UserDt,setUserData } = React.useContext(NewUserContext);
+         // const { UserDt,setUserData } = React.useContext(NewUserContext);
         
         if (!userData || !userData.id) {
             return NextResponse.json({ error: 'Invalid user data' }, { status: 400 })
