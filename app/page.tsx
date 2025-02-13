@@ -101,7 +101,7 @@
         }
       } else {
         setError('This app should be opened in Telegram')
-      }
+      } 
 
       };
 
@@ -113,45 +113,45 @@
     //   return <div className="container mx-auto p-4 text-red-500">{error}</div>
     // }
 
-    if (!user) return (
-      <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
-          <div className='flex h-10'/>
+    // if (!user) return (
+    //   <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
+    //       <div className='flex h-10'/>
 
        
 
-               <Image 
-        src={StartPic as StaticImageData} 
-      className="size-20 glowbx rounded-full border-2 border-[#fda500] animate-waving-hand aspect-square object-fit"
-      alt=""
-    />
+    //            <Image 
+    //     src={StartPic as StaticImageData} 
+    //   className="size-20 glowbx rounded-full border-2 border-[#fda500] animate-waving-hand aspect-square object-fit"
+    //   alt=""
+    // />
            
          
-       <div className='flex space-x-1'>
-        <div className='flex flex-col justify-center items-center'>
-          <Image 
-        src={WalkTask as StaticImageData}
+    //    <div className='flex space-x-1'>
+    //     <div className='flex flex-col justify-center items-center'>
+    //       <Image 
+    //     src={WalkTask as StaticImageData}
          
-      className="size-10  aspect-square rounded-xl object-cover"
-      alt=""
-    />
+    //   className="size-10  aspect-square rounded-xl object-cover"
+    //   alt=""
+    // />
       
-                  <p className="text-white font-Large">WalkTask {String(bln)}</p>
+    //               <p className="text-white font-Large">WalkTask {String(bln)}</p>
 
-        </div>
-        <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
+    //     </div>
+    //     <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
           
-          <Image 
-           src={getGoogleplay as StaticImageData} 
-         className="size-28 aspect-square object-cover"
-         alt=""
-       />
-       </button>
+    //       <Image 
+    //        src={getGoogleplay as StaticImageData} 
+    //      className="size-28 aspect-square object-cover"
+    //      alt=""
+    //    />
+    //    </button>
        
        
       
-       </div>
-      </div>
-    )
+    //    </div>
+    //   </div>
+    // )
 
     return (
       <UserNew>
