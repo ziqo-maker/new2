@@ -78,7 +78,11 @@
                 setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                   upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
                 })
-                setid(data)
+                setid("eeeee")
+                setTimeout(() => {
+                  setUser(data)
+                }, 10000);
+                
                 if(prm.length > 0){
                   try {
                     fetch('/api/invitereferal', {
@@ -111,9 +115,7 @@
       } else {
         setError('This app should be opened in Telegram')
       } 
-      await delay(20000);
-      setUser("www")
-      };
+     };
 
       initWebApp();
       
