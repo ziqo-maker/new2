@@ -28,7 +28,7 @@ const HomeTab = () => {
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const { UserDt,setUserData } = React.useContext(NewUserContext);
+  const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   
   const { activeTab, setActiveTab } = useTab()
   
@@ -130,6 +130,8 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
 
 
   useEffect(() => {
+    
+    loadUserData()
     try {
       fetch('/api/gtdate', {
        method: 'POST',
@@ -152,8 +154,9 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
             setReady(true);
             setSpin(false);
           }else if(data.mining == 1 && !isClaim && difference > 0){
+           
             setIsActive(true)
-            setSpin(false);
+            setSpin(false)
             setDateA(data.dt)
             var q = 0
             var totaldiff = 7200000
@@ -188,7 +191,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     }
       
        } else {
-        
+       
        }
      })
    } catch (err) {
@@ -229,7 +232,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     />
               <div className="flex-1 text-center">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
+              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}{UserDt?.idd}</p>
               </div>
               </div>
               </div>
