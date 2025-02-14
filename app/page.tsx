@@ -10,7 +10,7 @@
   import StartPic from '@/imgs/startpic.webp';  
   import getGoogleplay from '@/imgs/getgoogleplay.webp';  
   import WalkTask from '@/imgs/walktask.webp';  
-  import React from 'react';
+  import React,{useRef} from 'react';
 
   declare global {
     interface Window {
@@ -22,9 +22,10 @@
 
   export default function Home() {
     const [user, setUser] = useState<any>(null)  
-    const [error, setError] = useState<any>(null)  
-
-  
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const [refresh, setRefresh] = useState<boolean>(false);
+      const [refreshB, setRefreshB] = useState<boolean>(false);
+    
     useEffect(() => {
 
       const initWebApp = async () => {
@@ -46,9 +47,9 @@
             .then((res) => res.json())
             .then((data) => {
               if (data.error) {
-                setError(data.error)
+                
               } else {
-              
+                 setRefresh(true)
                 setTimeout(() => {
                   setUser(data)
                 }, 3000);
@@ -61,13 +62,23 @@
         }
       } else {
       } 
+      
      };
 
       initWebApp();
+      if(refresh == false) {
+        timerRef.current = setInterval(() =>{
+        setRefreshB(!refreshB)
+        },2500);
+       }
+      return () => {  if (timerRef.current) {
+        clearInterval(timerRef.current);
+      };
+      
+    };
       
     }, [])
 
-    if (!error) <div className='flex bg-black'> <p className="text-black font-Large">{error}</p></div>
 
     if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
