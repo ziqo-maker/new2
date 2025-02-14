@@ -210,7 +210,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
    if(refresh == false) {
     timerRefB.current = setInterval(() =>{
     setRefreshB(!refreshB)
-    setNmb(w++)
+    setNmb(nmb+1)
     },2500);
    }
   
