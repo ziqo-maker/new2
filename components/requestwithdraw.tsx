@@ -221,7 +221,7 @@ const Withdraw = () => {
       className="w-7 h-7 aspect-square object-cover"
       alt=""
     />
-    <p className={`font-normal text-center text-base glow text-black text-wrap`}>It takes about 1 to 3 days to process your request</p>    
+    <p className={`font-normal text-start text-base glow text-black text-wrap`}>It takes about 1 to 3 days to process your request</p>    
     </div>
    
 
