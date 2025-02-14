@@ -132,14 +132,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     
   }
 
- const [nmb, setNmb] = useState<number>(0);
-
   useEffect(() => {
-    
-    // setTimeout(() => {
-    //   setRefresh(true)
-    // }, 2500);
-
 
     try {
       fetch('/api/gtdate', {
@@ -206,12 +199,11 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
    } catch (err) {
     
    }
-   var w = 2
+
    if(refresh == false) {
     timerRefB.current = setInterval(() =>{
     setRefreshB(!refreshB)
-    setNmb(nmb+1)
-    },2500);
+    },3000);
    }
   
     return () => {  if (timerRef.current) {
@@ -251,7 +243,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     />
               <div className="flex-grow text-center ">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}: {nmb}</p>
+              <p className=" text-white font-Large glow text-base mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
               </div>
               </div>
