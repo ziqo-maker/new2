@@ -3,7 +3,7 @@
 import Image, {StaticImageData} from "next/image";
 import FootPrint from '@/icons/footprint.svg';
 import addperson from '@/icons/addperson.svg';  
-import { useEffect,useState } from "react"
+import { useEffect,useState,useRef } from "react"
 import React from 'react';
 import copy from '@/icons/copy.svg'
 import Gift from '@/icons/gift.svg';
@@ -19,7 +19,9 @@ const InviteTab = () => {
       const [gtTasks,setTask] = useState<Task[]>([]);
      const [Loading,setLoading] = useState<boolean> (true);
      const { UserDt,setUserData } = React.useContext(NewUserContext);
-       const [refresh, setRefresh] = useState<boolean>(false);
+      const [refresh, setRefresh] = useState<boolean>(false);
+        const timerRef = useRef<NodeJS.Timeout | null>(null);
+           const [refreshB, setRefreshB] = useState<boolean>(false);
      
      const inviteurl = ""
 
@@ -37,13 +39,10 @@ const InviteTab = () => {
      const handleCopyLink = () => {
       const inviteLink = `${inviteurl}?startapp=${UserDt?.idd}`
       navigator.clipboard.writeText(inviteLink)
-      alert('Referral link is copied')
     }
 
       useEffect(() => {
-        setTimeout(() => {
-          setRefresh(true)
-        }, 1000);    
+            
         try {
           fetch('/api/get-friends', {
            method: 'POST',
@@ -55,6 +54,7 @@ const InviteTab = () => {
          .then((res) => res.json())
          .then((data) => {
           if(data.success){
+            setRefresh(true)
             data.all.forEach((t: any)=> {
              
               let model = {
@@ -72,7 +72,19 @@ const InviteTab = () => {
         
        }
 
-      },[refresh])
+       if(refresh == false) {
+        timerRef.current = setInterval(() =>{
+         
+        setRefreshB(!refreshB)
+        },3000);
+       }
+      return () => {  if (timerRef.current) {
+        clearInterval(timerRef.current);
+      };
+    };
+
+      },[refreshB])
+      
     return (
       <div className=" flex justify-center  overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">
