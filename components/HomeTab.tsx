@@ -157,7 +157,6 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
             setReady(true);
             setSpin(false);
           }else if(data.mining == 1 && !isClaim && difference > 0){
-           
             setIsActive(true)
             setSpin(false)
             setDateA(data.dt)
@@ -233,9 +232,9 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
       className="w-10 h-10 aspect-square object-cover"
       alt="Shiba Inu"
     />
-              <div className="flex-1 text-center">
+              <div className="flex-grow text-center ">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
+              <p className=" text-white font-Large glow text-base mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
               </div>
               </div>
@@ -284,7 +283,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
         </button>
   </div>
 
-        <div className="flex grow px-50 mt-2 justify-center items-center space-x-1">
+        <div className="flex grow px-50 mt-3 justify-center items-center space-x-1">
         <Image
         src={FootPrint as StaticImageData} 
       className="w-10 h-10"
@@ -298,7 +297,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
         
         </div>
         <div className="flex px-10 justify-center">
-        <button onClick={handleStart} className="flex mt-5 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+        <button onClick={handleStart} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
