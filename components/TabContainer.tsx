@@ -57,7 +57,7 @@ const TabContainer = () => {
                         setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                           upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
                         })
-                        setHours(String("eee"))
+                        setHours(String(data.idd))
                         if(prm.length > 0){
                           try {
                             fetch('/api/invitereferal', {
@@ -78,9 +78,7 @@ const TabContainer = () => {
                         } catch (err) {
                         }
                         }
-                        setTimeout(() => {
-                          setUser(data)
-                        }, 20000);
+                      
                         
                       }
                     })
