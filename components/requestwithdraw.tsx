@@ -109,7 +109,7 @@ const Withdraw = () => {
 
         <div className="flex-1 text-center font-bold text-wrap">
               </div>
-              <p className={`mr-20 ml-20 text-[#db0000]/[0.9] font-bold font-Large text-xl glow mt-3`}>All fields are required</p>
+              <p className={`mr-4 ml-4 flex justify-center grow text-[#db0000]/[0.9] font-bold font-Large text-xl glow mt-5`}>All fields are required</p>
 
       </center>
               
@@ -215,13 +215,13 @@ const Withdraw = () => {
     </div>
      </button>  
 
-     <div className='flex w-[calc(100%-4rem)] mt-1 justify-center items-center'>
+     <div className='flex space-x-1 w-[calc(100%-4rem)] mt-1 justify-center items-center'>
      <Image 
         src={Info as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"
       alt=""
     />
-    <p className={`font-normal text-base glow text-black text-wrap`}>It takes about 1 to 3 days to process your request</p>    
+    <p className={`font-normal text-start text-base glow text-black text-wrap`}>It takes about 1 to 3 days to process your request</p>    
     </div>
    
 
