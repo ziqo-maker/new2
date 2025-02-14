@@ -11,7 +11,7 @@ import Telegram from '@/icons/telegram.svg';
 import Instagram from '@/icons/instagram.svg';
 import Etc from '@/icons/etc.svg';
 import { NewUserContext } from '@/contexts/UserContextB';
-import React from 'react';
+import React,{useRef} from 'react';
 import Touch from '@/icons/touch.svg';
 import { useTab } from '@/contexts/TabContext'
 import Info from '@/icons/info.svg';
@@ -58,7 +58,8 @@ const TasksTab = () => {
     const [gtdoneCreatedtasks,setDoneCreatedTasks] = useState<string> ();
     const [NoteKeyword,setNoteKeyword] = useState<boolean> (false);
     const [refresh, setRefresh] = useState<boolean>(false);
-
+   const timerRef = useRef<NodeJS.Timeout | null>(null);
+      const [refreshB, setRefreshB] = useState<boolean>(false);
 
     const handlePendingB = async(id:string,pendingcreatedtasks:string | undefined,click:boolean | undefined,isDoing:boolean | undefined,url:string) => {
      
@@ -286,12 +287,10 @@ const TasksTab = () => {
        }
       }
     }
+  const [nmb, setNmb] = useState<number>(0);
 
     useEffect(() => {
-      setTimeout(() => {
-        setRefresh(true)
-      }, 1000);
-  
+      
         try {
             fetch('/api/get-tasks', {
              method: 'POST',
@@ -374,7 +373,18 @@ const TasksTab = () => {
         
        }
 
-    },[refresh])
+       if(refresh == false) {
+        timerRef.current = setInterval(() =>{
+          setNmb(nmb+1)
+        setRefreshB(!refreshB)
+        },3000);
+       }
+      return () => {  if (timerRef.current) {
+        clearInterval(timerRef.current);
+      };
+    };
+
+    },[refreshB])
     
     return (
         <div className=" flex justify-center overflow-auto">
@@ -394,7 +404,7 @@ const TasksTab = () => {
       </center>
               <div className="flex-1 mt-1 text-center font-bold ">
               <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-Large text-2xl glow">Earn More WalkCoin</p>
-              <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">Receive rewards by completing any task</p>
+              <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">Receive rewards by completing any task{nmb}</p>
               </div>
               </div>
               <div className="flex w-full  items-center justify-center items-center">
