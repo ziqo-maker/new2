@@ -27,8 +27,12 @@ const HomeTab = () => {
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRefB = useRef<NodeJS.Timeout | null>(null);
+
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const [refresh, setRefresh] = useState<boolean>(false);
+  const [refreshB, setRefreshB] = useState<boolean>(false);
+
 
   const { activeTab, setActiveTab } = useTab()
   
@@ -131,9 +135,10 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
 
   useEffect(() => {
     
-    setTimeout(() => {
-      setRefresh(true)
-    }, 1000);
+    // setTimeout(() => {
+    //   setRefresh(true)
+    // }, 2500);
+
 
     try {
       fetch('/api/gtdate', {
@@ -146,6 +151,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
      .then((res) => res.json())
      .then((data) => {
        if (data.success) {
+        setRefresh(true)
         const target = new Date(data.dtMining);
         const now = new Date(data.dt);
           const difference = target.getTime() - now.getTime();
@@ -199,12 +205,21 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
    } catch (err) {
     
    }
+   
+   if(refresh == false) {
+    timerRefB.current = setInterval(() =>{
+    setRefreshB(!refreshB)
+    },2500);
+   }
   
     return () => {  if (timerRef.current) {
       clearInterval(timerRef.current);
+    };
+    if (timerRefB.current) {
+      clearInterval(timerRefB.current);
     }
   };
-  },[isActive,refresh])
+  },[isActive,refreshB])
   
     return (
      <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
