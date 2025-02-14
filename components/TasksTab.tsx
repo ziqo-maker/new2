@@ -291,45 +291,49 @@ const TasksTab = () => {
 
     useEffect(() => {
       
+      if(gtTasks.length == 0){
         try {
-            fetch('/api/get-tasks', {
-             method: 'POST',
-             headers: {
-               'Content-Type': 'application/json',
-             },
-             body: JSON.stringify({ idd: String(UserDt?.idd) }),
-           })
-           .then((res) => res.json())
-           .then((data) => {
-            if(data.success){
-              const findpending: number[] = data.pendingtasks
-              data.all.forEach((t: any)=> {
-                const found = findpending.find(item => item === t.id);
-                const contain = found !== undefined
-                const gticon = t.icon == "Telegram" ? Telegram : t.icon == 'Youtube' ? Youtube :  t.icon == 'Instagram' ? Instagram :  t.icon == 'Google Play Store' ? GooglePlay :  t.icon == 'Apple App Store' ? AppleStore : Etc
-                
-                let model = {
-                  id:t.id,
-                  icon:gticon,
-                  title :t.title,
-                  isDoing:contain,
-                  url:t.url,
-                  cost:t.cost
-               }
-               setPendingTasks(findpending.toString())
-               const doneTasks: number[] = data.donetasks
-               setDoneTasks(doneTasks.toString())
-               gtTasks.push(model)
-               setLoading(false)
-              })
-            
-            }
-           })
-         } catch (err) {
+          fetch('/api/get-tasks', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({ idd: String(UserDt?.idd) }),
+         })
+         .then((res) => res.json())
+         .then((data) => {
+          if(data.success){
+            setRefresh(true)
+            const findpending: number[] = data.pendingtasks
+            data.all.forEach((t: any)=> {
+              const found = findpending.find(item => item === t.id);
+              const contain = found !== undefined
+              const gticon = t.icon == "Telegram" ? Telegram : t.icon == 'Youtube' ? Youtube :  t.icon == 'Instagram' ? Instagram :  t.icon == 'Google Play Store' ? GooglePlay :  t.icon == 'Apple App Store' ? AppleStore : Etc
+              
+              let model = {
+                id:t.id,
+                icon:gticon,
+                title :t.title,
+                isDoing:contain,
+                url:t.url,
+                cost:t.cost
+             }
+             setPendingTasks(findpending.toString())
+             const doneTasks: number[] = data.donetasks
+             setDoneTasks(doneTasks.toString())
+             gtTasks.push(model)
+             setLoading(false)
+            })
           
-         }
+          }
+         })
+       } catch (err) {
+        
+       }
+      }
 
-         try {
+      if(gtTasksCreated.length == 0){
+        try {
           fetch('/api/get-createtask', {
            method: 'POST',
            headers: {
@@ -373,6 +377,7 @@ const TasksTab = () => {
        } catch (err) {
         
        }
+      }
 
        if(refresh == false) {
         timerRef.current = setInterval(() =>{
@@ -405,7 +410,7 @@ const TasksTab = () => {
       </center>
               <div className="flex-1 mt-1 text-center font-bold ">
               <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-Large text-2xl glow">Earn More WalkCoin</p>
-              <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">Receive rewards by completing any task{nmb}</p>
+              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">Receive rewards by completing any task{nmb}</p>
               </div>
               </div>
               <div className="flex w-full  items-center justify-center items-center">
