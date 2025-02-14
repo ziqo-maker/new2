@@ -10,8 +10,6 @@
   import StartPic from '@/imgs/startpic.webp';  
   import getGoogleplay from '@/imgs/getgoogleplay.webp';  
   import WalkTask from '@/imgs/walktask.webp';  
-  import AppleStore from '@/imgs/applestore.webp';  
-  import { NewUserContext } from '@/contexts/UserContextB';
   import React from 'react';
 
   declare global {
@@ -23,146 +21,175 @@
   }
 
   export default function Home() {
-    const [user, setUser] = useState<any>(null)
-    const [error, setError] = useState<string | null>(null)
-    const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
-    const [gtid, setid] = useState<string | null>("")
-    const delay = async (ms:number) => {
-      return new Promise((resolve) => 
-          setTimeout(resolve, ms));
-  };
- 
-    useEffect(() => {
-      
-      const initWebApp = async () => {
-       
-        try {
-          fetch('/api/updatedt', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ idd: String("6124587322") }),
-        })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            
-          } else {
-            
-          }
-        })
-      } catch (err) {
-      }
+    const [user, setUser] = useState<any>(null)  
+    const [point, setPoi] = useState<string>("")  
 
-      // if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-      //   const tg = window.Telegram.WebApp
-      //   tg.ready()
 
-      //   const initDataUnsafe = tg.initDataUnsafe || {}
-      //   const prm = tg.initDataUnsafe.start_param|| ''
-       
-      //   if (initDataUnsafe.user) {
-      //     fetch('/api/user', {
-      //       method: 'POST',
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //       },
-      //       body: JSON.stringify(initDataUnsafe.user),
-      //     })
-      //       .then((res) => res.json())
-      //       .then((data) => {
-      //         if (data.error) {
-      //           setError(data.error)
-      //         } else {
-      //           setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
-      //             upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
-      //           })
-
-      //           if(prm.length > 0){
-      //             try {
-      //               fetch('/api/invitereferal', {
-      //               method: 'POST',
-      //               headers: {
-      //                 'Content-Type': 'application/json',
-      //               },
-      //               body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
-      //             })
-      //             .then((res) => res.json())
-      //             .then((data) => {
-      //               if (data.success) {
-                      
-      //               } else {
-                      
-      //               }
-      //             })
-      //           } catch (err) {
-      //           }
-      //           }
-      //           setTimeout(() => {
-      //             setUser(data)
-      //           }, 20000);
+     useEffect(() => {
+               
+               const initWebApp = async () => {
+    
+               
+               if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+                 const tg = window.Telegram.WebApp
+                 tg.ready()
+         
+                 const initDataUnsafe = tg.initDataUnsafe || {}
+                 const prm = tg.initDataUnsafe.start_param|| ''
                 
-      //         }
-      //       })
-      //       .catch((err) => {
-      //         setError('Failed to fetch user data')
-      //       })
-      //   } else {
-      //     setError('No user data available')
-      //   }
-      // } else {
-      //   setError('This app should be opened in Telegram')
-      // } 
-     };
+                 if (initDataUnsafe.user) {
+                   fetch('/api/user', {
+                     method: 'POST',
+                     headers: {
+                       'Content-Type': 'application/json',
+                     },
+                     body: JSON.stringify(initDataUnsafe.user),
+                   })
+                     .then((res) => res.json())
+                     .then((data) => {
+                       if (data.error) {
+                        
+                       } else {
+                        
+                         
+                         setPoi(String(data.points))
+         
+                         if(prm.length > 0){
+                           try {
+                             fetch('/api/invitereferal', {
+                             method: 'POST',
+                             headers: {
+                               'Content-Type': 'application/json',
+                             },
+                             body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
+                           })
+                           .then((res) => res.json())
+                           .then((data) => {
+                             if (data.success) {
+                               
+                             } else {
+                               
+                             }
+                           })
+                         } catch (err) {
+                         }
+                         }
+                         
+    
+                         try {
+                          fetch('/api/updatedt', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({ idd: String(data.idd) }),
+                        })
+                        .then((res) => res.json())
+                        .then((data) => {
+                          if (data.success) {
+                            
+                          } else {
+                            
+                          }
+                        })
+                      } catch (err) {
+                      }
+    
+                       }
+                     })
+                     .catch((err) => {
+                       
+                     })
+                 }
+               } 
+              };
+         
+               initWebApp();
+               
+             }, [])
+  
+    // useEffect(() => {
 
-      initWebApp();
+    //   const initWebApp = async () => {
       
-    }, [])
+    //   if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+    //     const tg = window.Telegram.WebApp
+    //     tg.ready()
 
-    if (error) {
-      return <div className="container mx-auto p-4 text-red-500">{error}</div>
-    }
+    //     const initDataUnsafe = tg.initDataUnsafe || {}
+       
+    //     if (initDataUnsafe.user) {
+    //       fetch('/api/user', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(initDataUnsafe.user),
+    //       })
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //           if (data.error) {
+                
+    //           } else {
+              
+    //             setTimeout(() => {
+    //               setUser(data)
+    //             }, 8000);
+                
+    //           }
+    //         })
+    //         .catch((err) => {
+    //         })
+    //     } else {
+    //     }
+    //   } else {
+    //   } 
+    //  };
 
-    // if (!user) return (
-    //   <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
-    //       <div className='flex h-10'/>
+    //   initWebApp();
+      
+    // }, [])
+
+
+    if (!user) return (
+      <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
+          <div className='flex h-10'/>
 
        
 
-    //            <Image 
-    //     src={StartPic as StaticImageData} 
-    //   className="size-20 glowbx rounded-full border-2 border-[#fda500] animate-waving-hand aspect-square object-fit"
-    //   alt=""
-    // />
+               <Image 
+        src={StartPic as StaticImageData} 
+      className="size-20 glowbx rounded-full border-2 border-[#fda500] animate-waving-hand aspect-square object-fit"
+      alt=""
+    />
            
          
-    //    <div className='flex space-x-1'>
-    //     <div className='flex flex-col justify-center items-center'>
-    //       <Image 
-    //     src={WalkTask as StaticImageData}
+       <div className='flex space-x-1'>
+        <div className='flex flex-col justify-center items-center'>
+          <Image 
+        src={WalkTask as StaticImageData}
          
-    //   className="size-10  aspect-square rounded-xl object-cover"
-    //   alt=""
-    // />
+      className="size-10  aspect-square rounded-xl object-cover"
+      alt=""
+    />
       
-    //               <p className="text-white font-Large">WalkTask{UserDt?.idd}</p>
+                  <p className="text-white font-Large">WalkTask{point}</p>
 
-    //     </div>
-    //     <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
+        </div>
+        <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
           
-    //       <Image 
-    //        src={getGoogleplay as StaticImageData} 
-    //      className="size-28 aspect-square object-cover"
-    //      alt=""
-    //    />
-    //    </button>
+          <Image 
+           src={getGoogleplay as StaticImageData} 
+         className="size-28 aspect-square object-cover"
+         alt=""
+       />
+       </button>
        
        
       
-    //    </div>
-    //   </div>
-    // )
+       </div>
+      </div>
+    )
 
     return (
       <UserNew>
