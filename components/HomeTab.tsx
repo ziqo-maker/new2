@@ -15,11 +15,7 @@ import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
 
-type Props = {
-  parameter: string;
-};
-
-const HomeTab = (props: Props) => {
+const HomeTab = () => {
  
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
@@ -32,7 +28,7 @@ const HomeTab = (props: Props) => {
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
-  const [istest, setTest] = useState<boolean>(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
   const { activeTab, setActiveTab } = useTab()
   
@@ -136,8 +132,9 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
   useEffect(() => {
     
     setTimeout(() => {
-      setTest(true)
-    }, 9000);
+      setRefresh(true)
+    }, 1000);
+
     try {
       fetch('/api/gtdate', {
        method: 'POST',
@@ -208,7 +205,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
       clearInterval(timerRef.current);
     }
   };
-  },[isActive,istest])
+  },[isActive,refresh])
   
     return (
      <div className="w-full bg-white text-white h-screen overflow-auto text-wrap font-bold flex flex-col max-w-xl">
@@ -238,7 +235,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     />
               <div className="flex-1 text-center">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}{UserDt?.idd}</p>
+              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
               </div>
               </div>
