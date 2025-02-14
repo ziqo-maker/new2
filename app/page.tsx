@@ -52,7 +52,7 @@
                        } else {
                         
                          
-                         setPoi(String(data.points))
+                         setPoi(String(data.idd))
          
                          if(prm.length > 0){
                            try {
