@@ -22,133 +22,48 @@
 
   export default function Home() {
     const [user, setUser] = useState<any>(null)  
-    const [point, setPoi] = useState<string>("")  
-
-
-     useEffect(() => {
-               
-               const initWebApp = async () => {
-    
-               
-               if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-                 const tg = window.Telegram.WebApp
-                 tg.ready()
-         
-                 const initDataUnsafe = tg.initDataUnsafe || {}
-                 const prm = tg.initDataUnsafe.start_param|| ''
-                
-                 if (initDataUnsafe.user) {
-                   fetch('/api/user', {
-                     method: 'POST',
-                     headers: {
-                       'Content-Type': 'application/json',
-                     },
-                     body: JSON.stringify(initDataUnsafe.user),
-                   })
-                     .then((res) => res.json())
-                     .then((data) => {
-                       if (data.error) {
-                        
-                       } else {
-                        
-                         
-                         setPoi(String(data.idd))
-         
-                         if(prm.length > 0){
-                           try {
-                             fetch('/api/invitereferal', {
-                             method: 'POST',
-                             headers: {
-                               'Content-Type': 'application/json',
-                             },
-                             body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
-                           })
-                           .then((res) => res.json())
-                           .then((data) => {
-                             if (data.success) {
-                               
-                             } else {
-                               
-                             }
-                           })
-                         } catch (err) {
-                         }
-                         }
-                         
-    
-                         try {
-                          fetch('/api/updatedt', {
-                          method: 'POST',
-                          headers: {
-                            'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify({ idd: String(data.idd) }),
-                        })
-                        .then((res) => res.json())
-                        .then((data) => {
-                          if (data.success) {
-                            
-                          } else {
-                            
-                          }
-                        })
-                      } catch (err) {
-                      }
-    
-                       }
-                     })
-                     .catch((err) => {
-                       
-                     })
-                 }
-               } 
-              };
-         
-               initWebApp();
-               
-             }, [])
   
-    // useEffect(() => {
+    useEffect(() => {
 
-    //   const initWebApp = async () => {
+      const initWebApp = async () => {
       
-    //   if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-    //     const tg = window.Telegram.WebApp
-    //     tg.ready()
+      if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+        const tg = window.Telegram.WebApp
+        tg.ready()
 
-    //     const initDataUnsafe = tg.initDataUnsafe || {}
+        const initDataUnsafe = tg.initDataUnsafe || {}
        
-    //     if (initDataUnsafe.user) {
-    //       fetch('/api/user', {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(initDataUnsafe.user),
-    //       })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //           if (data.error) {
+        if (initDataUnsafe.user) {
+          fetch('/api/user', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(initDataUnsafe.user),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.error) {
                 
-    //           } else {
+              } else {
               
-    //             setTimeout(() => {
-    //               setUser(data)
-    //             }, 8000);
+                setTimeout(() => {
+                  setUser(data)
+                }, 8000);
                 
-    //           }
-    //         })
-    //         .catch((err) => {
-    //         })
-    //     } else {
-    //     }
-    //   } else {
-    //   } 
-    //  };
+              }
+            })
+            .catch((err) => {
+            })
+        } else {
+        }
+      } else {
+      } 
+     };
 
-    //   initWebApp();
+      initWebApp();
       
-    // }, [])
+    }, [])
 
 
     if (!user) return (
@@ -173,7 +88,7 @@
       alt=""
     />
       
-                  <p className="text-white font-Large">WalkTask{point}</p>
+                  <p className="text-white font-Large">WalkTask</p>
 
         </div>
         <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
