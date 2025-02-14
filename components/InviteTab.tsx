@@ -19,6 +19,7 @@ const InviteTab = () => {
       const [gtTasks,setTask] = useState<Task[]>([]);
      const [Loading,setLoading] = useState<boolean> (true);
      const { UserDt,setUserData } = React.useContext(NewUserContext);
+       const [refresh, setRefresh] = useState<boolean>(false);
      
      const inviteurl = ""
 
@@ -40,7 +41,9 @@ const InviteTab = () => {
     }
 
       useEffect(() => {
-       
+        setTimeout(() => {
+          setRefresh(true)
+        }, 1000);    
         try {
           fetch('/api/get-friends', {
            method: 'POST',
@@ -69,7 +72,7 @@ const InviteTab = () => {
         
        }
 
-      },[])
+      },[refresh])
     return (
       <div className=" flex justify-center  overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">

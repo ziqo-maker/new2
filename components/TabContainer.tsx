@@ -26,66 +26,93 @@ import { WebApp } from '@twa-dev/types'
 const TabContainer = () => {
     const { activeTab } = useTab()
      const { setUserData } = React.useContext(NewUserContext);
-         const [user, setUser] = useState<any>(null)
-       
-       
-    useEffect(() => {
-        if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-                const tg = window.Telegram.WebApp
-                tg.ready()
-        
-                const initDataUnsafe = tg.initDataUnsafe || {}
-                const prm = tg.initDataUnsafe.start_param|| ''
-               
-                if (initDataUnsafe.user) {
-                  fetch('/api/user', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(initDataUnsafe.user),
-                  })
+      const [user, setUser] = useState<any>(null)
+
+     useEffect(() => {
+           
+           const initWebApp = async () => {
+
+           
+           if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+             const tg = window.Telegram.WebApp
+             tg.ready()
+     
+             const initDataUnsafe = tg.initDataUnsafe || {}
+             const prm = tg.initDataUnsafe.start_param|| ''
+            
+             if (initDataUnsafe.user) {
+               fetch('/api/user', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify(initDataUnsafe.user),
+               })
+                 .then((res) => res.json())
+                 .then((data) => {
+                   if (data.error) {
+                    
+                   } else {
+                    
+                     setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
+                       upgrade:String(data.upgrade),username:String(data.username),value:String(data.value)
+                     })
+     
+                     if(prm.length > 0){
+                       try {
+                         fetch('/api/invitereferal', {
+                         method: 'POST',
+                         headers: {
+                           'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
+                       })
+                       .then((res) => res.json())
+                       .then((data) => {
+                         if (data.success) {
+                           
+                         } else {
+                           
+                         }
+                       })
+                     } catch (err) {
+                     }
+                     }
+                     
+
+                     try {
+                      fetch('/api/updatedt', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({ idd: String(data.idd) }),
+                    })
                     .then((res) => res.json())
                     .then((data) => {
-                      if (data.error) {
+                      if (data.success) {
                         
                       } else {
-                        setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
-                          upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
-                        })
-      
-                        if(prm.length > 0){
-                          try {
-                            fetch('/api/invitereferal', {
-                            method: 'POST',
-                            headers: {
-                              'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
-                          })
-                          .then((res) => res.json())
-                          .then((data) => {
-                            if (data.success) {
-                              
-                            } else {
-                              
-                            }
-                          })
-                        } catch (err) {
-                        }
-                        }
-                      
                         
                       }
                     })
-                    .catch((err) => {
-                     
-                    })
-                }
-              } 
-    },[])
+                  } catch (err) {
+                  }
 
-    
+                   }
+                 })
+                 .catch((err) => {
+                   
+                 })
+             }
+           } 
+          };
+     
+           initWebApp();
+           
+         }, [])
+       
+   
     return (
         <div className="flex-1 overflow-hidden max-w-xl mx-auto">
             <div className={`${activeTab === 'home' ? 'is-show' : 'is-hide'}`}>

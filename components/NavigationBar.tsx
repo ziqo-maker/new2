@@ -10,6 +10,7 @@ import { TabType } from '@/utils/types'
 
 
 const NavigationBar = () => {
+    
     const { activeTab, setActiveTab } = useTab()
     const tabs: { id: TabType; label: string; Icon: React.FC<{ className?: string }> }[] = [
         { id: 'home', label: 'Home', Icon: Home },
@@ -18,7 +19,7 @@ const NavigationBar = () => {
         { id: 'wallet', label: 'Wallet', Icon: Wallet },
         { id: 'rank', label: 'Rating', Icon: Rank },
     ]
-   
+      
     return (
         <div className="fixed bottom-0 rounded-t-3xl left-1/2 transform -translate-x-1/2 w-full max-w-xl bg-[#ffae19] grow flex justify-around items-center z-50 text-xs ">
         

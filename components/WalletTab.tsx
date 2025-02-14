@@ -26,10 +26,13 @@ const WalletTab = () => {
       const { activeTab, setActiveTab } = useTab()
       const { UserDt,setUserData } = React.useContext(NewUserContext);
     const [Loading,setLoading] = useState<boolean> (true);
+       const [refresh, setRefresh] = useState<boolean>(false);
 
 
           useEffect(() => {
-      
+            setTimeout(() => {
+              setRefresh(true)
+            }, 1000);  
             try {
               fetch('/api/get-withdraw', {
                method: 'POST',
@@ -62,7 +65,7 @@ const WalletTab = () => {
             
            }
            
-          },[])
+          },[refresh])
     
     return (
         <div className=" flex justify-center  overflow-auto">
