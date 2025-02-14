@@ -25,6 +25,7 @@
   const timerRef = useRef<NodeJS.Timeout | null>(null);
     const [refresh, setRefresh] = useState<boolean>(false);
       const [refreshB, setRefreshB] = useState<boolean>(false);
+
     
     useEffect(() => {
 
@@ -52,7 +53,7 @@
                  setRefresh(true)
                 setTimeout(() => {
                   setUser(data)
-                }, 3000);
+                }, 2000);
                 
               }
             })
@@ -69,7 +70,7 @@
       if(refresh == false) {
         timerRef.current = setInterval(() =>{
         setRefreshB(!refreshB)
-        },2500);
+        },3000);
        }
       return () => {  if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -77,7 +78,7 @@
       
     };
       
-    }, [])
+    }, [refreshB])
 
 
     if (!user) return (
