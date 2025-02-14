@@ -340,6 +340,7 @@ const TasksTab = () => {
          .then((res) => res.json())
          .then((data) => {
           if(data.success){
+            setRefresh(true)
             const findpending: number[] = data.pendingtasks
             data.all.forEach((t: any)=> {
               const found = findpending.find(item => item === t.id);
