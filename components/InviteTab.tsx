@@ -9,6 +9,7 @@ import copy from '@/icons/copy.svg'
 import Gift from '@/icons/gift.svg';
 import { NewUserContext } from '@/contexts/UserContextB';
 import Person from '@/icons/person.svg';
+import Toast from 'typescript-toastify';
 
 type Task = {
   username:string
@@ -39,6 +40,17 @@ const InviteTab = () => {
      const handleCopyLink = () => {
       const inviteLink = `${inviteurl}?startapp=${UserDt?.idd}`
       navigator.clipboard.writeText(inviteLink)
+        new Toast({
+                    position: "top-center",
+                    toastMsg: 'Referral link is copied',
+                    autoCloseTime: 4500,
+                    canClose: true,
+                    showProgress: true,
+                    pauseOnHover: true,
+                    pauseOnFocusLoss: true,
+                    type: "default",
+                    theme: "light"
+                  });
     }
 
       useEffect(() => {
