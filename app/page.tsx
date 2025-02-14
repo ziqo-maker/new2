@@ -22,6 +22,8 @@
 
   export default function Home() {
     const [user, setUser] = useState<any>(null)  
+    const [error, setError] = useState<any>(null)  
+
   
     useEffect(() => {
 
@@ -44,12 +46,12 @@
             .then((res) => res.json())
             .then((data) => {
               if (data.error) {
-                
+                setError(data.error)
               } else {
               
                 setTimeout(() => {
                   setUser(data)
-                }, 8000);
+                }, 3000);
                 
               }
             })
@@ -65,6 +67,7 @@
       
     }, [])
 
+    if (!error) <div className='flex bg-black'> <p className="text-black font-Large">{error}</p></div>
 
     if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
