@@ -26,10 +26,10 @@ const HomeTab = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const timerRefB = useRef<NodeJS.Timeout | null>(null);
 
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [refreshB, setRefreshB] = useState<boolean>(false);
 
@@ -132,6 +132,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     
   }
 
+ const [nmb, setNmb] = useState<number>(0);
 
   useEffect(() => {
     
@@ -205,10 +206,11 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
    } catch (err) {
     
    }
-   
+   var w = 2
    if(refresh == false) {
     timerRefB.current = setInterval(() =>{
     setRefreshB(!refreshB)
+    setNmb(w++)
     },2500);
    }
   
@@ -249,7 +251,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     />
               <div className="flex-grow text-center ">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
+              <p className=" text-white font-Large glow text-base mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}: {nmb}</p>
               </div>
               </div>
               </div>
