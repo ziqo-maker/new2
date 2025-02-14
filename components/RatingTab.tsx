@@ -15,9 +15,12 @@ type Task = {
 const RatingTab = () => {
     const [gtTasks,setTask] = useState<Task[]>([]);
         const [Loading,setLoading] = useState<boolean> (true);
+  const [refresh, setRefresh] = useState<boolean>(false);
 
         useEffect(() => {
-              
+          setTimeout(() => {
+            setRefresh(true)
+          }, 1000);
                     try {
                       fetch('/api/get-user', {
                        method: 'POST',
@@ -49,7 +52,7 @@ const RatingTab = () => {
                     
                    }
                    
-                  },[])
+                  },[refresh])
 
     return (
         <div className=" flex justify-center  overflow-auto">
