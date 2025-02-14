@@ -15,8 +15,11 @@ import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
 
+type Props = {
+  parameter: string;
+};
 
-const HomeTab = () => {
+const HomeTab = (props: Props) => {
  
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
@@ -130,15 +133,14 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
 
 
   useEffect(() => {
-    
-    loadUserData()
+   
     try {
       fetch('/api/gtdate', {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json',
        },
-       body: JSON.stringify({ idd: String(UserDt?.idd) }),
+       body: JSON.stringify({ idd: String(props.parameter) }),
      })
      .then((res) => res.json())
      .then((data) => {
@@ -232,7 +234,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     />
               <div className="flex-1 text-center">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}{UserDt?.idd}</p>
+              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}{props.parameter}</p>
               </div>
               </div>
               </div>
