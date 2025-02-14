@@ -287,7 +287,6 @@ const TasksTab = () => {
        }
       }
     }
-  const [nmb, setNmb] = useState<number>(0);
 
     useEffect(() => {
       
@@ -381,7 +380,7 @@ const TasksTab = () => {
 
        if(refresh == false) {
         timerRef.current = setInterval(() =>{
-          setNmb(nmb+1)
+         
         setRefreshB(!refreshB)
         },3000);
        }
@@ -410,7 +409,7 @@ const TasksTab = () => {
       </center>
               <div className="flex-1 mt-1 text-center font-bold ">
               <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-Large text-2xl glow">Earn More WalkCoin</p>
-              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">Receive rewards by completing any task{nmb}</p>
+              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">Receive rewards by completing any task</p>
               </div>
               </div>
               <div className="flex w-full  items-center justify-center items-center">
