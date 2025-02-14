@@ -208,7 +208,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
   },[isActive,refresh])
   
     return (
-     <div className="w-full bg-white text-white h-screen overflow-auto text-wrap font-bold flex flex-col max-w-xl">
+     <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
 
     <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
         <div className="items-center justify ">
@@ -242,8 +242,8 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
        </div>
        
 
-       <div className="flex-grow mt-5 bg-[#f3ba2f] rounded-t-[48px] relative z-0">
-        <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-white rounded-t-[46px]">        
+       <div className="flex-grow mt-5 bg-[#f3ba2f]  rounded-t-[48px] relative z-0">
+        <div className="absolute top-[2px] left-0 right-0 bottom-0 overflow-auto bg-white rounded-t-[46px]">        
         
 
         <div className="flex justify-center items-center  mt-4 ">
