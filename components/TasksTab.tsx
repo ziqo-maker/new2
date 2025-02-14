@@ -57,6 +57,7 @@ const TasksTab = () => {
     const [pendingCreatedtasks,setPendingCreatedTasks] = useState<string> ();
     const [gtdoneCreatedtasks,setDoneCreatedTasks] = useState<string> ();
     const [NoteKeyword,setNoteKeyword] = useState<boolean> (false);
+    const [refresh, setRefresh] = useState<boolean>(false);
 
 
     const handlePendingB = async(id:string,pendingcreatedtasks:string | undefined,click:boolean | undefined,isDoing:boolean | undefined,url:string) => {
@@ -287,7 +288,10 @@ const TasksTab = () => {
     }
 
     useEffect(() => {
-        
+      setTimeout(() => {
+        setRefresh(true)
+      }, 1000);
+  
         try {
             fetch('/api/get-tasks', {
              method: 'POST',
@@ -370,7 +374,7 @@ const TasksTab = () => {
         
        }
 
-    },[])
+    },[refresh])
     
     return (
         <div className=" flex justify-center overflow-auto">
