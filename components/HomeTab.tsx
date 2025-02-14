@@ -32,7 +32,8 @@ const HomeTab = (props: Props) => {
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
-  
+  const [istest, setTest] = useState<boolean>(false);
+
   const { activeTab, setActiveTab } = useTab()
   
 
@@ -133,14 +134,17 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
 
 
   useEffect(() => {
-   
+    
+    setTimeout(() => {
+      setTest(true)
+    }, 9000);
     try {
       fetch('/api/gtdate', {
        method: 'POST',
        headers: {
          'Content-Type': 'application/json',
        },
-       body: JSON.stringify({ idd: String(props.parameter) }),
+       body: JSON.stringify({ idd: String(UserDt?.idd) }),
      })
      .then((res) => res.json())
      .then((data) => {
@@ -204,7 +208,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
       clearInterval(timerRef.current);
     }
   };
-  },[isActive])
+  },[isActive,istest])
   
     return (
      <div className="w-full bg-white text-white h-screen overflow-auto text-wrap font-bold flex flex-col max-w-xl">
@@ -234,7 +238,7 @@ const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
     />
               <div className="flex-1 text-center">
               <div className="flex items-center justify-center">
-              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}{props.parameter}</p>
+              <p className=" text-white font-Large glow text-base truncate">{Number(UserDt?.gtpoint).toLocaleString()}{UserDt?.idd}</p>
               </div>
               </div>
               </div>
