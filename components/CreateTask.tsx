@@ -124,8 +124,8 @@ const CreateTask = () => {
         <div className="flex justify-center overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">
          <div className="flex-1 mt-5 text-center font-bold text-wrap">
-              <p className="mr-4 ml-4 text-[#ffae19]/[0.9] font-Large text-xl glow">Reach Your Goals & Achieve Success FASTER</p>
-              <p className="mr-4 ml-4 text-[#ffae19]/[0.9] font-normal  text-lg">The effective way to promote your social media, app, etc.</p>
+              <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-Large text-xl glow">Reach Your Goals & Achieve Success FASTER</p>
+              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal  text-lg">The effective way to promote your social media, app, etc.</p>
               </div>
               <div className="flex flex-col justify-center items-center mt-6">
               <p className="text-black w-[calc(100%-2rem)] font-Large text-base">Demo preview:</p>
@@ -363,7 +363,7 @@ const CreateTask = () => {
       </div>
 
      </div>
-      <div className='h-10 mt-3' />
+      <div className='h-10 ' />
 
      <button onClick={() => handle(describe,link,keyword,contact,project,Number(click),platform,keyworddescribe)} data-dialog-target="dialog" className="relative w-[calc(100%-6rem)]">
     <div className="flex justify-center items-center space-x-2 px-4 pb-2 pt-2 w-full text-base text-white border-[#ffae19]/[0.9]  rounded-full bg-[#6b4d11]/[0.9] appearance-none dark:text-white border-4  focus:outline-none focus:ring-0 peer">
@@ -371,13 +371,13 @@ const CreateTask = () => {
     </div>
      </button>  
 
-     <div className='flex w-[calc(100%-2rem)] mt-1 justify-center items-center'>
+     <div className='flex text-start mr-3 ml-3 mt-1 justify-center items-center'>
      <Image 
         src={Info as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"
       alt=""
     />
-    <p className={`font-normal text-base glow text-black text-wrap`}>After reviewing the task, we will publish it</p>    
+    <p className={`font-normal text-start text-base glow text-black text-wrap`}>After reviewing the task, we will publish it</p>    
     </div>
      </div>
 
