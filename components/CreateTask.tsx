@@ -125,7 +125,7 @@ const CreateTask = () => {
          <div className="w-full h-screen bg-white flex-col ">
          <div className="flex-1 mt-5 text-center font-bold text-wrap">
               <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-Large text-xl glow">Reach Your Goals & Achieve Success FASTER</p>
-              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal  text-lg">The effective way to promote your social media, app, etc.</p>
+              <p className="mr-1 ml-1 text-[#ffae19]/[0.9] font-normal  text-lg">The effective way to promote your social media, app, etc.</p>
               </div>
               <div className="flex flex-col justify-center items-center mt-6">
               <p className="text-black w-[calc(100%-2rem)] font-Large text-base">Demo preview:</p>
@@ -371,7 +371,7 @@ const CreateTask = () => {
     </div>
      </button>  
 
-     <div className='flex text-start mr-3 ml-3 mt-1 justify-center items-center'>
+     <div className='flex space-x-1 text-start mr-1 ml-1 mt-1 justify-center items-center'>
      <Image 
         src={Info as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"
