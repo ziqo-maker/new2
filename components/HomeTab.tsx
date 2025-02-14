@@ -15,6 +15,7 @@ import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
 
+
 const HomeTab = () => {
  
   const [dateA,setDateA] = useState();
@@ -32,6 +33,9 @@ const HomeTab = () => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [refreshB, setRefreshB] = useState<boolean>(false);
+  const [chsLst, setChsLst] = useState([
+    { str: '' }
+     ]);
 
 
   const { activeTab, setActiveTab } = useTab()
@@ -77,10 +81,13 @@ const listD: { str: string }[] = [
 
 ]
 
-const rndNmb = Math.floor(Math.random() * 5) + 1
 
-const chsLst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
-  
+useEffect(() => {
+  const rndNmb = Math.floor(Math.random() * 5) + 1
+
+  const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
+  setChsLst(lst)
+},[])  
   const handleStart = async () => {
 
     if(isClaim){
