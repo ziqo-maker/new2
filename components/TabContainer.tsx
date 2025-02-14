@@ -25,12 +25,8 @@ import { WebApp } from '@twa-dev/types'
 
 const TabContainer = () => {
     const { activeTab } = useTab()
-
-      const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
-     const [hours,setHours] = useState("");
-      const [user, setUser] = useState<any>(null)
-         const [error, setError] = useState<string | null>(null)
-         const [gtid, setid] = useState<string | null>("")
+     const { setUserData } = React.useContext(NewUserContext);
+         const [user, setUser] = useState<any>(null)
        
        
     useEffect(() => {
@@ -52,12 +48,12 @@ const TabContainer = () => {
                     .then((res) => res.json())
                     .then((data) => {
                       if (data.error) {
-                        setError(data.error)
+                        
                       } else {
                         setUserData({idd:String(data.idd),gtpoint:String(data.points),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                           upgrade:String(data.upgrade),username:String(data.username),value:String(data.tokenvalue)
                         })
-                        setHours(String(data.idd))
+      
                         if(prm.length > 0){
                           try {
                             fetch('/api/invitereferal', {
@@ -83,19 +79,17 @@ const TabContainer = () => {
                       }
                     })
                     .catch((err) => {
-                      setError('Failed to fetch user data')
+                     
                     })
-                } else {
-                  setError('No user data available')
                 }
-              } else {
-                setError('This app should be opened in Telegram')
               } 
     },[])
+
+    
     return (
         <div className="flex-1 overflow-hidden max-w-xl mx-auto">
             <div className={`${activeTab === 'home' ? 'is-show' : 'is-hide'}`}>
-                <HomeTab parameter={hours} />
+                <HomeTab />
             </div>
             <div className={`${activeTab === 'tasks' ? 'is-show' : 'is-hide'}`}>
                 <TasksTab />
