@@ -179,11 +179,11 @@ const CharactersTab = () => {
          </div>
          {gtTasks.map((tab,index) => {
                         return (
-                            <div key={index} className="flex flex-col mt-8 items-center justify-center">
+                            <div key={index} className="flex w-full flex-col mt-8 items-center justify-center">
 
                              <Image
         src={tab.Icon as StaticImageData} 
-      className="w-1/2 aspect-square object-fill rounded-full text-[#ffae19]/[0.9] border-4 border-double"
+      className="size-80 aspect-square object-fill rounded-full text-[#ffae19]/[0.9] border-4 border-double"
       alt="Shiba Inu"
        />
                 <p className="text-base mt-1 text-black/[0.9] font-Large">{tab.label}</p>
