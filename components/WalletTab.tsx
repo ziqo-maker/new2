@@ -28,16 +28,6 @@ const WalletTab = () => {
     const [Loading,setLoading] = useState<boolean> (true);
        const [refresh, setRefresh] = useState<boolean>(false);
 
-       const handlesupport = () => {
-        if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-          const tg = window.Telegram.WebApp
-        tg.ready()
-        const invitelink = `WalkCoinSupportbot?startapp`
-         const fullUrl = `https://t.me/share/url?url=${encodeURIComponent(invitelink)}`
-           tg.openTelegramLink(fullUrl)     
-        }
-       }
-
           useEffect(() => {
             setTimeout(() => {
               setRefresh(true)
@@ -146,7 +136,7 @@ const WalletTab = () => {
                        </div>
                        </button>
               
-                       <button onClick={() => {handlesupport()}} className="flex bg-[#ffae19]/[0.9] items-center text-wrap  rounded-full px-3   py-[10px] ">
+                       <button onClick={() => {window.open("https://t.me/WalkCoinSupportbot")}} className="flex bg-[#ffae19]/[0.9] items-center text-wrap  rounded-full px-3   py-[10px] ">
                  <Image 
                  src={Support as StaticImageData} 
                className="w-8 h-8 aspect-square object-cover"
