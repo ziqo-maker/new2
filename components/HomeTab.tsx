@@ -88,9 +88,11 @@ useEffect(() => {
   const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
   setChsLst(lst)
 },[])  
-  const handleStart = async () => {
 
+  const handleStart = async () => {
+     
     if(isClaim){
+      setIsActive(false);
       try {
         fetch('/api/claim', {
          method: 'POST',
@@ -158,6 +160,7 @@ useEffect(() => {
           const difference = target.getTime() - now.getTime();
           if(data.mining == 1 && difference < 0 && data.claim == 0){
             setMiningPoint(7200*Number(UserDt?.speedlvl))
+            setIsActive(false);
             setClaim(true);
             setSpin(false);
           }else if(data.mining == 0){
