@@ -14,7 +14,7 @@ import Mousey from '@/charactermg/Mousey.webp';
 import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
-
+import ComponentWithAdBanner from './ComponentWithAdBanner';
 
 const HomeTab = () => {
  
@@ -228,7 +228,7 @@ useEffect(() => {
     return (
      <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
 
-    <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
+    {/* <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
         <div className="items-center justify ">
           <Marquee gradient={true} className=" items-center py-2 overflow-hidden ">
          
@@ -242,8 +242,10 @@ useEffect(() => {
          
           </Marquee>
         </div>
-      </section>
-
+      </section> */}
+       <div>
+      <ComponentWithAdBanner />
+    </div>
        <div className="flex w-full   items-center justify-center items-center">
        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
         <Image 
@@ -269,7 +271,7 @@ useEffect(() => {
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
         <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="auto" playsInline>
         <source 
-          src={`https://ftp-whtvfw.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mkv`}
+          src={`https://ftp-lqd4b6.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mkv`}
           type="video/mp4"
           
         />
