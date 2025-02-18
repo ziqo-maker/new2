@@ -14,7 +14,6 @@ import Mousey from '@/charactermg/Mousey.webp';
 import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
-import ComponentWithAdBanner from './ComponentWithAdBanner';
 
 const HomeTab = () => {
  
@@ -244,7 +243,7 @@ useEffect(() => {
         </div>
       </section> */}
        <div>
-      <ComponentWithAdBanner />
+     
     </div>
        <div className="flex w-full   items-center justify-center items-center">
        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
