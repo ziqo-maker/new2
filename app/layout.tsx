@@ -17,6 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="294953" strategy="beforeInteractive"/>
+        <Script 
+  src="https://js.onclckmn.com/banner/oncbanner.m.js"
+  data-onclicka-banner="294953"
+  async
+  strategy="beforeInteractive"
+/>
+<Script src="https://js.onclckvd.com/in-stream-ad-admanager/tma.js" strategy="beforeInteractive"/>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         {children}
 
