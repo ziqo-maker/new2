@@ -223,14 +223,23 @@ useEffect(() => {
     }
   };
   },[isActive,refreshB])
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://js.onclckmn.com/static/onclicka.js';
+    script.dataset.admpid = '294953'; //  AD-CODE-ID
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
   
     return (
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
       
+      
  {/* <iframe data-aa='2382049' src='//ad.a-ads.com/2382049?size=320x50' className='width:320px height-50px border-0px padding-0 overflow:hidden; bg-white'/> */}
-      <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
+      {/* <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
           <div className="items-center w-full justify ">
-            <Marquee gradient={true} className=" items-center py-2 overflow-hidden ">
+            <Marquee gradientWidth={120} gradient={true} className=" items-center py-2 overflow-hidden ">
           
             {chsLst.map((str,index) => {
               return (
@@ -242,7 +251,7 @@ useEffect(() => {
           
             </Marquee>
           </div>
-        </section>
+        </section> */}
        <div>
      
     </div>
