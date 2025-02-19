@@ -225,11 +225,11 @@ useEffect(() => {
   },[isActive,refreshB])
   
     return (
-     <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
+     <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
       
  {/* <iframe data-aa='2382049' src='//ad.a-ads.com/2382049?size=320x50' className='width:320px height-50px border-0px padding-0 overflow:hidden; bg-white'/> */}
-      {/* <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
-          <div className="items-center justify ">
+      <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
+          <div className="items-center w-full justify ">
             <Marquee gradient={true} className=" items-center py-2 overflow-hidden ">
           
             {chsLst.map((str,index) => {
@@ -242,12 +242,12 @@ useEffect(() => {
           
             </Marquee>
           </div>
-        </section> */}
+        </section>
        <div>
      
     </div>
-       <div className="flex w-full   items-center justify-center items-center">
-       <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
+       <div className="flex w-full   items-center  justify-center items-center">
+       <div className="flex w-[calc(100%-2rem)]  bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
         <Image 
         src={FootPrint as StaticImageData} 
       className="w-10 h-10 aspect-square object-cover"
@@ -262,8 +262,8 @@ useEffect(() => {
        </div>
        
 
-       <div className="flex-grow mt-5 bg-[#f3ba2f]  rounded-t-[48px] relative z-0">
-        <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-white rounded-t-[46px]">        
+       <div className="flex-grow mt-5 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
+        <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
         
 
         <div className="flex justify-center items-center  mt-4 ">
