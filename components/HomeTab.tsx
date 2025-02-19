@@ -226,22 +226,23 @@ useEffect(() => {
   
     return (
      <div className="w-full bg-white text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
-
-    {/* <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
-        <div className="items-center justify ">
-          <Marquee gradient={true} className=" items-center py-2 overflow-hidden ">
-         
-          {chsLst.map((str,index) => {
-            return (
-              <div key={index} className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
-              <p className="text-white font-Large">{str.str}</p>
-              </div>
-            )
-          })}
-         
-          </Marquee>
-        </div>
-      </section> */}
+      
+ {/* <iframe data-aa='2382049' src='//ad.a-ads.com/2382049?size=320x50' className='width:320px height-50px border-0px padding-0 overflow:hidden; bg-white'/> */}
+      {/* <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
+          <div className="items-center justify ">
+            <Marquee gradient={true} className=" items-center py-2 overflow-hidden ">
+          
+            {chsLst.map((str,index) => {
+              return (
+                <div key={index} className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
+                <p className="text-white font-Large">{str.str}</p>
+                </div>
+              )
+            })}
+          
+            </Marquee>
+          </div>
+        </section> */}
        <div>
      
     </div>
@@ -270,7 +271,7 @@ useEffect(() => {
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
         <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="auto" playsInline>
         <source 
-          src={`https://ftp-lqd4b6.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mkv`}
+          src={`https://ftp-lqd4b6.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mp4`}
           type="video/mp4"
           
         />
@@ -293,14 +294,12 @@ useEffect(() => {
          <p className="text-lg text-[#ffae19]/[0.9] font-Large">Characters</p>
         </button>
 
-        <button onClick={
-          () => window.open("https://www.effectiveratecpm.com/uesqg4qxs?key=9bd32098d78c65aa13ea9d74ee52eea2")
-          // () => setActiveTab('speed')
+        <button onClick={ () => setActiveTab('speed')
           } className="flex grow-0 bg-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 border-white rounded-full px-3 py-[6px] ">
         <Image
         src={UpgradeIcon as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"
-      alt="Shiba Inu"
+      alt=""
        />
          <p className="text-lg text-white font-Large">Speed Up</p>
         </button>
