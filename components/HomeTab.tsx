@@ -263,13 +263,13 @@ useEffect(() => {
        
 
        <div className="flex-grow mt-5 bg-[#f3ba2f]  rounded-t-[48px] relative z-0">
-        <div className="absolute top-[2px] left-0 right-0 bottom-0 overflow-auto bg-white rounded-t-[46px]">        
+        <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-white rounded-t-[46px]">        
         
 
         <div className="flex justify-center items-center  mt-4 ">
           <div className="flex w-80 h-80 p-3"> 
-            <div className="flex w-full h-full  rounded-full border-4 border-double">
-        <video className={`${isActive? 'grow' : 'w-0 h-0'}  rounded-full object-fill`} autoPlay muted loop preload="auto">
+            <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
+        <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="auto">
         <source 
           src={`https://ftp-lqd4b6.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mp4`}
           type="video/mp4"
