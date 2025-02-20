@@ -705,7 +705,7 @@ const TasksTab = () => {
                            
               <div className="px-2"/>
               <div className="grow space-y-1">
-              <p className="text-white font-Large text-[17px] text-wrap text-left">{task.title} </p>
+              <p className="text-white font-Large text-[17px] text-wrap text-justify">{task.title} </p>
               <div className="grow flex items-center space-x-1">
                             <Image
         src={FootPrint as StaticImageData}
