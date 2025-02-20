@@ -14,9 +14,11 @@ import Mousey from '@/charactermg/Mousey.webp';
 import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
+import Script from "next/script";
+
 
 const HomeTab = () => {
- 
+
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -83,7 +85,6 @@ const listD: { str: string }[] = [
 
 useEffect(() => {
   const rndNmb = Math.floor(Math.random() * 5) + 1
-
   const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
   setChsLst(lst)
 },[])  
@@ -160,6 +161,7 @@ useEffect(() => {
           if(data.mining == 1 && difference < 0 && data.claim == 0){
             setMiningPoint(7200*Number(UserDt?.speedlvl))
             setIsActive(false);
+            setReady(false);
             setClaim(true);
             setSpin(false);
           }else if(data.mining == 0){
@@ -224,13 +226,13 @@ useEffect(() => {
   };
   },[isActive,refreshB])
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://js.onclckmn.com/static/onclicka.js';
-    script.dataset.admpid = '294953'; //  AD-CODE-ID
-    script.async = true;
-    document.head.appendChild(script);
-  }, []);
+  // useEffect(() => {
+  //   const script = document.createElement('script');
+  //   script.src = 'https://js.onclckmn.com/static/onclicka.js';
+  //   script.dataset.admpid = '294953'; //  AD-CODE-ID
+  //   script.async = true;
+  //   document.head.appendChild(script);
+  // }, []);
   
     return (
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
@@ -252,6 +254,7 @@ useEffect(() => {
             </Marquee>
           </div>
         </section> */}
+        
        <div>
      
     </div>
