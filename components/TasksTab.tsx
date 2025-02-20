@@ -705,7 +705,7 @@ const TasksTab = () => {
                            
               <div className="px-2"/>
               <div className="grow space-y-1">
-              <p className="text-white font-Large text-[17px] text-wrap text-justify">{task.title} </p>
+              <p className="text-white font-Large text-[17px] text-wrap text-start">{task.title} </p>
               <div className="grow flex items-center space-x-1">
                             <Image
         src={FootPrint as StaticImageData}
@@ -715,7 +715,7 @@ const TasksTab = () => {
               <p className="text-white font-normal  text-base">+{Number(task.cost).toLocaleString()}</p> 
                             </div>
               </div>
-              {/* <div className="px-1"/> */}
+              {/* <div className="px-1"/>  */}
               <div className="flex items-center">
              
               {/* <div className=" px-1"/> */}
