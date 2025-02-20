@@ -282,7 +282,7 @@ useEffect(() => {
         <div className="flex justify-center items-center  mt-4 ">
           <div className="flex w-80 h-80 p-3"> 
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
-        <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="auto">
+        <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop preload="metadata">
         <source 
           src={`https://ftp-lqd4b6.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mp4`}
           type="video/mp4"
