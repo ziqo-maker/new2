@@ -78,7 +78,7 @@ const TasksTab = () => {
             return el
         });
         setVisit(newData)
-        window.open("https://www.effectiveratecpm.com/xcmbh93kf?key=e787faccbe04060fdf63f68cd9aa0ffa"); 
+        window.open("https://adclickad.com/get/?spot_id=6059239&cat=9&subid=896641927"); 
        setTimeout(() => {
           
         try {
