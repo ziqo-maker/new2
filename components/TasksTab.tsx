@@ -528,10 +528,10 @@ const TasksTab = () => {
                 <p className="text-white font-normal  text-base">+{Number(2000).toLocaleString()}</p> 
                               </div>
                 </div>
-                <div className="px-1"/>
+                {/* <div className="px-1"/> */}
                 <div className="flex items-center">
                
-                <div className=" px-1"/>
+                {/* <div className=" px-1"/> */}
                 <button onClick={() => {handleVisit(task.click)}} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                 <p className={`text-white font-Large ${task.click? 'text-[0px]' : ''}`}>Start</p>
                   <div className="flex">
@@ -662,10 +662,10 @@ const TasksTab = () => {
           <p className="text-white font-normal  text-base">+{Number(20000).toLocaleString()}</p> 
                         </div>
           </div>
-          <div className="px-1"/>
+          {/* <div className="px-1"/> */}
           <div className="flex items-center">
          
-          <div className=" px-1"/>
+          {/* <div className=" px-1"/> */}
           <button onClick={() => {handleClaimB(task.id,task.isDoing,gtdoneCreatedtasks,pendingCreatedtasks,20000),handlePendingB(task.id,pendingCreatedtasks,task.click,task.isDoing,task.url)}} className={`${task.isDoing || task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
           <p className={`${task.isDoing? 'text-black' : 'text-white'}  font-Large ${task.click? 'text-[0px]' : ''}`}>{task.isDoing? 'Claim' : 'Start'}</p>
             <div className="flex">
@@ -715,10 +715,10 @@ const TasksTab = () => {
               <p className="text-white font-normal  text-base">+{Number(task.cost).toLocaleString()}</p> 
                             </div>
               </div>
-              <div className="px-1"/>
+              {/* <div className="px-1"/> */}
               <div className="flex items-center">
              
-              <div className=" px-1"/>
+              {/* <div className=" px-1"/> */}
               <button onClick={() => {handleClaim(task.id,task.isDoing,gtdonetasks,pendingtasks,task.cost),handlePending(task.id,pendingtasks,task.click,task.isDoing,task.url)}} className={`${task.isDoing || task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
               <p className={`${task.isDoing? 'text-black' : 'text-white'}  font-Large ${task.click? 'text-[0px]' : ''}`}>{task.isDoing? 'Claim' : 'Start'}</p>
                 <div className="flex">
