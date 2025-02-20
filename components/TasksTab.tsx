@@ -518,7 +518,7 @@ const TasksTab = () => {
                              
                 <div className="px-2"/>
                 <div className="grow space-y-1">
-                <p className="text-white font-Large text-lg text-wrap text-left">Visit a website and earn</p>
+                <p className="text-white font-Large text-[17px] text-wrap text-left">Visit a website and earn</p>
                 <div className="grow flex items-center space-x-1">
                               <Image
           src={FootPrint as StaticImageData}
@@ -573,7 +573,7 @@ const TasksTab = () => {
            <div className="flex grow items-center">
              
             <div className="flex flex-col grow space-y-1 ">
-            <p className="text-white font-Large text-lg text-wrap text-left ">{task.describe} ext-white font-Large text-lg text-wrap text-l</p>
+            <p className="text-white font-Large text-[17px] text-wrap text-left ">{task.describe}</p>
            <div className="grow flex items-center space-x-1   ">
                         <Image
     src={FootPrint as StaticImageData}
@@ -652,7 +652,7 @@ const TasksTab = () => {
                        
           <div className="px-2"/>
           <div className="grow space-y-1">
-          <p className="text-white font-Large text-lg text-wrap text-left">{task.describe} </p>
+          <p className="text-white font-Large text-[17px] text-wrap text-left">{task.describe} </p>
           <div className="grow flex items-center space-x-1">
                         <Image
     src={FootPrint as StaticImageData}
@@ -705,7 +705,7 @@ const TasksTab = () => {
                            
               <div className="px-2"/>
               <div className="grow space-y-1">
-              <p className="text-white font-Large text-lg text-wrap text-left">{task.title} </p>
+              <p className="text-white font-Large text-[17px] text-wrap text-left">{task.title} </p>
               <div className="grow flex items-center space-x-1">
                             <Image
         src={FootPrint as StaticImageData}
