@@ -16,13 +16,7 @@ const RatingTab = () => {
     const [gtTasks,setTask] = useState<Task[]>([]);
         const [Loading,setLoading] = useState<boolean> (true);
   const [refresh, setRefresh] = useState<boolean>(false);
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://js.onclckmn.com/static/onclicka.js';
-    script.dataset.admpid = '294953';
-    script.async = true;
-    document.head.appendChild(script);
-  }, []);
+  
         useEffect(() => {
           setTimeout(() => {
             setRefresh(true)
