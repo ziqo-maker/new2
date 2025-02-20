@@ -78,7 +78,7 @@ const TasksTab = () => {
             return el
         });
         setVisit(newData)
-        window.open("https://adclickad.com/get/?spot_id=6059239&cat=9&subid=896641927"); 
+        window.open("https://adventurous-preference.com/b/3AVV0bP.3/pTvib_mPV/JEZIDj0E2WM/TWEOx/NujtA/wCLoTvYJxUMzTDE/2gMoDjEr"); 
        setTimeout(() => {
           
         try {
