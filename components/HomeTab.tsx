@@ -237,7 +237,8 @@ useEffect(() => {
     return (
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
       
-      
+       <div data-banner="2007124"></div>
+       <div data-banner="2007125"></div>
  {/* <iframe data-aa='2382049' src='//ad.a-ads.com/2382049?size=320x50' className='width:320px height-50px border-0px padding-0 overflow:hidden; bg-white'/> */}
       {/* <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
           <div className="items-center w-full justify ">
