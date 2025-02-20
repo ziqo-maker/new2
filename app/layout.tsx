@@ -36,7 +36,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>    
-      <Script async data-mbid-banner="296125" src="https://js.mbidadm.com/banner/mbid.bnr.m.js" data-mbid-banner-ar="_gn"  strategy="beforeInteractive"/>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         {children}
         
