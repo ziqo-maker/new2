@@ -78,7 +78,7 @@ const TasksTab = () => {
             return el
         });
         setVisit(newData)
-        window.open("https://adventurous-preference.com/b/3AVV0bP.3/pTvib_mPV/JEZIDj0E2WM/TWEOx/NujtA/wCLoTvYJxUMzTDE/2gMoDjEr"); 
+        window.open("https://11745.xml.4armn.com/direct-link?pubid=952506&siteid=[SITE_ID]"); 
        setTimeout(() => {
           
         try {
