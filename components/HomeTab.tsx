@@ -226,13 +226,13 @@ useEffect(() => {
   };
   },[isActive,refreshB])
 
-  // useEffect(() => {
-  //   const script = document.createElement('script');
-  //   script.src = 'https://js.onclckmn.com/static/onclicka.js';
-  //   script.dataset.admpid = '294953'; //  AD-CODE-ID
-  //   script.async = true;
-  //   document.head.appendChild(script);
-  // }, []);
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://js.onclckmn.com/static/onclicka.js';
+    script.dataset.admpid = '294953'; //  AD-CODE-ID
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
   
     return (
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
