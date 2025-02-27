@@ -17,10 +17,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>    
+
+      <Script src="https://sad.adsgram.ai/js/sad.min.js" strategy="beforeInteractive"/>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         {children}
-        
       </body>
     </html>
   )
 }
+
+
