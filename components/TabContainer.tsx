@@ -10,8 +10,10 @@ import CharactersTab from './CharactersTab'
 import CreateTask from './CreateTask'
 import Withdraw from './requestwithdraw'
 import Rating from './RatingTab'
+import Adsgram from './AdsgramTab'
+
 import { NewUserContext } from '@/contexts/UserContextB';
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState,useRef} from 'react';
 
 import { WebApp } from '@twa-dev/types'
 
@@ -26,8 +28,9 @@ import { WebApp } from '@twa-dev/types'
 const TabContainer = () => {
     const { activeTab } = useTab()
      const { setUserData } = React.useContext(NewUserContext);
-      const [user, setUser] = useState<any>(null)
-
+ const [refresh, setRefresh] = useState<boolean>(false);
+      const timerRef = useRef<NodeJS.Timeout | null>(null);
+       const [refreshB, setRefreshB] = useState<boolean>(false);
      useEffect(() => {
            
            const initWebApp = async () => {
@@ -53,7 +56,10 @@ const TabContainer = () => {
                    if (data.error) {
                     
                    } else {
-                    
+                    setRefresh(true)
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        };
                      setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                        upgrade:String(data.upgrade),username:String(data.username),value:String(data.value)
                      })
@@ -109,8 +115,20 @@ const TabContainer = () => {
           };
      
            initWebApp();
+
+           if(refresh == false) {
+            timerRef.current = setInterval(() =>{
+             
+            setRefreshB(!refreshB)
+            },3000);
+           }
+    
+          return () => {  if (timerRef.current) {
+            clearInterval(timerRef.current);
+          };
+        };
            
-         }, [])
+         }, [refreshB])
        
    
     return (
@@ -140,7 +158,7 @@ const TabContainer = () => {
                 <Withdraw />
             </div>
             <div className={`${activeTab === 'rank' ? 'is-show' : 'is-hide'}`}>
-                <Rating />
+                <Adsgram />
             </div>
         </div>
     )
