@@ -101,7 +101,7 @@ function App() {
               <p className="mr-3 ml-3 mt-1 text-[#ffae19]/[0.9] font-Large text-xl glow">{currentIndex == 0 ? 'Unlocking Characters!': 'Speed up!'}</p>
               <p className="mr-3 ml-3 mt-1 text-[#ffae19]/[0.9] font-normal  text-lg">{currentIndex == 0 ? 'By unlocking characters, you can increase the price of your WalkCoin tokens and walk with your favorite character.': "You can earn more WalkCoin tokens by increasing your character's walking speed."}</p>
               </div>
-               <div className='h-10' />
+               <div className={`${currentIndex ==0? 'h-10' : 'h-5'}`} />
                <div className='flex flex-col grow justify-center items-center'>
                <section className="flex  justify-center w-full h-full">
           <div className="items-center justify-center items-center  ">
@@ -151,14 +151,14 @@ function App() {
           
       
       <div className='flex w-full justify-center items-center'>
-      <button onClick={() => {}}>
+      <button onClick={currentIndex == 0 ? () => {goToSlide(1)} : () => {}}>
     <div className="flex items-center w-80 rounded-full px-4 py-[12px] border-white border-4 border-double bg-[#ffae19]/[0.9] items-center justify-center">
     <p className={`font-bold text-lg text-white glow text-nowrap`}>{currentIndex == 0 ? 'Next': 'Start'}</p>
     </div>
      </button>  
       </div>
      
-     <div className='h-4 '/>
+     <div className='h-5 '/>
       
     </div>
     </div>
