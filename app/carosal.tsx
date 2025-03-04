@@ -38,11 +38,9 @@ const listB: { mg: StaticImageData }[] = [
 function App() {
   const slides = [
     {
-      url: 'https://fastly.picsum.photos/id/907/200/300.jpg?hmac=BYvJHklGn1KzEhHiZTkbQtFiRXUET5zYdLLKS6RXF3I',
       nmb: 0
     },
     {
-      url: 'https://fastly.picsum.photos/id/633/200/200.jpg?hmac=3ZyIOtFWRly1tYi_sTXjhSKzDlB-94qs6KCeIdeiCJo',
       nmb:1
     },
   ];
@@ -101,7 +99,7 @@ function App() {
               <p className="mr-3 ml-3 mt-1 text-[#ffae19]/[0.9] font-Large text-xl glow">{currentIndex == 0 ? 'Unlocking Characters!': 'Speed up!'}</p>
               <p className="mr-3 ml-3 mt-1 text-[#ffae19]/[0.9] font-normal  text-lg">{currentIndex == 0 ? 'By unlocking characters, you can increase the price of your WalkCoin tokens and walk with your favorite character.': "You can earn more WalkCoin tokens by increasing your character's walking speed."}</p>
               </div>
-               <div className={`${currentIndex ==0? 'h-10' : 'h-5'}`} />
+               <div className={`${currentIndex ==0? 'h-9' : 'h-4'}`} />
                <div className='flex flex-col grow justify-center items-center'>
                <section className="flex  justify-center w-full h-full">
           <div className="items-center justify-center items-center  ">
