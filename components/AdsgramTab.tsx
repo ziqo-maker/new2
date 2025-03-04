@@ -3,7 +3,7 @@
 import { useCallback, ReactElement } from 'react'
 import { useAdsgram } from "./useAdsgram";
 import { ShowPromiseResult } from "@/types/adsgram";
-
+ 
 const Adsgram = () => {
 
     const onReward = useCallback(() => {
