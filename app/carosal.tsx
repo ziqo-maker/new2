@@ -73,14 +73,14 @@ function App() {
               <p className="mr-3 ml-3 mt-1 text-[#ffae19]/[0.9] font-normal  text-lg">By unlocking characters, you can increase the price of your WalkCoin tokens and walk with your favorite character.</p>
               </div>
                
-               <div className='flex flex-col grow justify-center items-center'>
+               <div className='flex flex-col grow  justify-center items-center'>
                <section className="flex  justify-center items-center w-full h-full">
-          <div className="items-center w-full justify ">
+          <div className="items-center justify-center w-full items-center ">
             <Marquee gradientWidth={120} gradient={true} className=" items-center overflow-hidden ">
             <Image 
                        src={test as StaticImageData}
                         
-                     className="h-full  aspect-square rounded-xl object-cover"
+                     className="grow  aspect-square rounded-xl object-cover"
                      alt=""
                    />
           
