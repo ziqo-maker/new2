@@ -11,6 +11,9 @@
   import getGoogleplay from '@/imgs/getgoogleplay.webp';  
   import WalkTask from '@/imgs/walktask.webp';  
   import React,{useRef} from 'react';
+  import Typewriter from 'typewriter-effect';
+  import { Carousel } from "@material-tailwind/react";
+  import App from './carosal';
 
   declare global {
     interface Window {
@@ -25,16 +28,18 @@
   const timerRef = useRef<NodeJS.Timeout | null>(null);
     const [refresh, setRefresh] = useState<boolean>(false);
       const [refreshB, setRefreshB] = useState<boolean>(false);
+       const [first, setFirst] = useState<boolean>(true);
 
-    
+       
     useEffect(() => {
 
       const initWebApp = async () => {
       
       if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp
+        
         tg.ready()
-
+       
         const initDataUnsafe = tg.initDataUnsafe || {}
        
         if (initDataUnsafe.user) {
@@ -53,7 +58,7 @@
                  setRefresh(true)
                 setTimeout(() => {
                   setUser(data)
-                }, 2000);
+                }, 4000);
                 
               }
             })
@@ -70,7 +75,7 @@
       if(refresh == false) {
         timerRef.current = setInterval(() =>{
         setRefreshB(!refreshB)
-        },3000);
+        },4000);
        }
       return () => {  if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -81,45 +86,63 @@
     }, [refreshB])
 
 
-    if (!user) return (
-      <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
-          <div className='flex h-10'/>
-
-       
-
-               <Image 
-        src={StartPic as StaticImageData} 
-      className="size-20 glowbx rounded-full border-2 border-[#fda500] animate-waving-hand aspect-square object-fit"
-      alt=""
-    />
+//     if (!user) return (
+//       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
+//           <div className='flex h-0'/>
+        
+//         <div className='mr-1 ml-1 flex-col text-wrap flex space-y-1 justify-center items-center text-center'>
+//         <Image 
+//         src={StartPic as StaticImageData} 
+//       className="size-20 glowbx rounded-full border-2 border-[#fda500] animate-waving-hand aspect-square object-fit"
+//       alt=""
+//     />
+//     <Typewriter
+//   options={{
+//     strings: ['Keep mining, we are getting bigger'],
+//     autoStart: true,
+//     loop: true,
+//     wrapperClassName: 'text-white text-base italic glow text-wrap text-justify'
+//   }}
+// />     
+//         </div>
+          
            
          
-       <div className='flex space-x-1'>
-        <div className='flex flex-col justify-center items-center'>
-          <Image 
-        src={WalkTask as StaticImageData}
+//         <div className='mr-1 ml-1 flex-col text-wrap flex justify-center items-center text-center'>
+//         <div className='flex space-x-1'>
+//         <div className='flex flex-col justify-center items-center'>
+//           <Image 
+//         src={WalkTask as StaticImageData}
          
-      className="size-10  aspect-square rounded-xl object-cover"
-      alt=""
-    />
+//       className="size-10  aspect-square rounded-xl object-cover"
+//       alt=""
+//     />
       
-                  <p className="text-white font-Large">WalkTask</p>
+//                   <p className="text-white font-Large">WalkTask</p>
 
-        </div>
-        <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
+//         </div>
+//         <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
           
-          <Image 
-           src={getGoogleplay as StaticImageData} 
-         className="size-28 aspect-square object-cover"
-         alt=""
-       />
-       </button>
+//           <Image 
+//            src={getGoogleplay as StaticImageData} 
+//          className="size-28 aspect-square object-cover"
+//          alt=""
+//        />
+//        </button>
        
        
       
-       </div>
-      </div>
-    )
+//        </div>
+//        <p className="text-white font-Large font-bold text-wrap">Listing Date is set for May 29, 2025</p>
+//        <div className='h-5' />
+//           </div>
+    
+//       </div>
+//     )
+    
+if (first) return (
+    <App />
+     )
 
     return (
       <UserNew>
