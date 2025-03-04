@@ -3,7 +3,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
-
+ 
 export const metadata: Metadata = {
   title: 'Telegram Mini App',
   description: 'A simple Telegram mini app using Next.js and Prisma',
