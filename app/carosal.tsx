@@ -74,13 +74,13 @@ function App() {
               </div>
                
                <div className='flex flex-col grow justify-center items-center'>
-               <section className="flex  justify-center items-center w-full">
+               <section className="flex  justify-center items-center w-full h-full">
           <div className="items-center w-full justify ">
-            <Marquee gradientWidth={120} gradient={true} className=" items-center py-2 overflow-hidden ">
+            <Marquee gradientWidth={120} gradient={true} className=" items-center overflow-hidden ">
             <Image 
                        src={test as StaticImageData}
                         
-                     className="w-full h-full  aspect-square rounded-xl object-cover"
+                     className="h-full  aspect-square rounded-xl object-cover"
                      alt=""
                    />
           
