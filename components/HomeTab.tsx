@@ -15,6 +15,12 @@ import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
 import Script from "next/script";
+import a11 from '@/gif/1-1.gif';
+import a22 from '@/gif/2-2.gif';
+import a33 from '@/gif/3-3.gif';
+import a44 from '@/gif/4-4.gif';
+import a55 from '@/gif/5-5.gif';
+import a66 from '@/gif/6-6.gif';
 
 
 const HomeTab = () => {
@@ -281,18 +287,16 @@ useEffect(() => {
         <div className="flex justify-center items-center  mt-4 ">
           <div className="flex w-80 h-80 p-3"> 
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
-        <video className={`${isActive? 'w-full h-full' : 'w-0 h-0'} absolute rounded-full object-fill`} autoPlay muted loop>
-        <source 
-          src={`https://ftp-lqd4b6.chbk.app/${String(UserDt?.selectcharacter)}-${String(UserDt?.speedlvl)}.mp4`}
-          type="video/mp4"
-          
-        />
-      Your browser does not support the video tag.
-    </video>
-    <Image
-       src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:AlienSoldier}
-       className={`${isActive? 'w-0 h-0' : 'h-full'} rounded-full absolute object-fill`}
-       alt="Toy"
+                <Image
+       src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:UserDt?.selectcharacter == "6"? AlienSoldier :Loading}
+       className={`h-full w-full rounded-full absolute object-fill`}
+       alt=""
+         /> 
+          <Image
+          unoptimized={true}
+       src={a11 as StaticImageData}
+       className={`${isActive ?'' : 'collapse'} w-full h-full absolute rounded-full object-fill`}
+       alt=""
          />  
             </div> 
    
