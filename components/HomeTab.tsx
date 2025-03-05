@@ -287,15 +287,11 @@ useEffect(() => {
         <div className="flex justify-center items-center  mt-4 ">
           <div className="flex w-80 h-80 p-3"> 
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
-                <Image
-       src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:UserDt?.selectcharacter == "6"? AlienSoldier :Loading}
-       className={`h-full w-full rounded-full absolute object-fill`}
-       alt=""
-         /> 
+            
           <Image
           unoptimized={true}
        src={a11 as StaticImageData}
-       className={`${isActive ?'' : 'collapse'} w-full h-full absolute rounded-full object-fill`}
+       className={` w-full h-full absolute rounded-full object-fill`}
        alt=""
          />  
             </div> 
