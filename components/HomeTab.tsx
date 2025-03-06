@@ -290,7 +290,7 @@ useEffect(() => {
             
           <Image
           unoptimized={true}
-       src={a55 as StaticImageData}
+       src={a66 as StaticImageData}
        className={` w-full h-full absolute rounded-full object-fill`}
        alt=""
          />  
