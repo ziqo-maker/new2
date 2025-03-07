@@ -15,6 +15,9 @@ import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
 import Script from "next/script";
+import { GoDotFill } from "react-icons/go";
+import Dollar from '@/icons/Dollar.svg';
+
 import a11 from '@/gif/1-1.gif';
 import a22 from '@/gif/2-2.gif';
 import a33 from '@/gif/3-3.gif';
@@ -278,7 +281,83 @@ useEffect(() => {
               </div>
               </div>
        </div>
+
+       <div className="flex w-full flex-col justify-center items-center mt-5">
+
+<ol className="flex items-center justify-center w-full">
+    <li className="flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
+        <span className="flex items-center justify-center w-5 h-5 bg-[#ffae19]/[0.9] rounded-full lg:h-7 lg:w-7 dark:bg-[#ffae19]/[0.9] shrink-0">
+            <svg className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+            </svg>
+        </span>
+    </li>
+    
+    <li className="flex  items-center after:content-[''] after:w-5 after:h-1 after:border-b after:border-[#ffae19]/[0.5] after:border-4 after:inline-block dark:after:border[#ffae19]/[0.5]">
+        <span className="flex items-center justify-center w-5 h-5 border-black rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2 shrink-0">
+        <GoDotFill size={25} color="#ffae19" />
+        </span>
+    </li>
+    <li className="flex  items-center after:content-[''] after:w-5 after:h-1 after:border-b after:border-[#ffae19]/[0.5] after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.5]">
+        <span className="flex items-center justify-center w-5 h-5 border-black rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2 shrink-0">
+        <GoDotFill size={25} color="#ffae19" />
+        </span>
+    </li>
+    <li className="flex  items-center after:content-[''] after:w-5 after:h-1 after:border-b after:border-[#ffae19]/[0.5] after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.5]">
+        <span className="flex items-center justify-center w-5 h-5 border-black rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2 shrink-0">
+        <GoDotFill size={25} color="#ffae19" />
+        </span>
+    </li>
+    <li className="flex items-center  ">
+        <span className="flex items-center justify-center w-5 h-5 border-black border-2 rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] shrink-0">
+        <GoDotFill size={25} color="#ffae19" />
+        </span>
+    </li>
+    
+</ol>
+
+<ol className="flex mt-4 items-center mr-10 justify-center w-full">
+    <li className="flex  items-center  after:content-[''] after:w-20 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
+    <div className="flex items-center justify-center">
+    {/* <p className="invisible">{Number(10000).toLocaleString()}</p> */}
+              <p className=" text-black font-Large glow text-base mr-1 truncate">0</p>
+              </div>
+    </li>
+    
+    <li className="flex items-center mr-2  ">
+    <div className="flex items-center justify-center">
+              <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(10000).toLocaleString()}</p>
+              </div>
+    </li>
+    
+    <div className="flex flex-col  items-center  justify-center items-center">
+       <div className="flex   bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px] ">
        
+    
+    <button onClick={() => {} } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
+    
+     
+                </button> 
+              </div>
+  <div className="flex">
+  <Image 
+        src={Dollar as StaticImageData} 
+      className="w-8 h-8 aspect-square object-cover"
+      alt=""
+    />
+    <div className="flex text-center ">
+    <div className="flex items-center justify-center">
+    <p className=" text-black font-medium  text-[15px]   truncate">+0.00000100</p>
+    </div>
+    </div>
+  </div>
+          
+       </div>
+
+</ol>
+
+</div>
 
        <div className="flex-grow mt-5 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
