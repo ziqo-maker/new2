@@ -320,13 +320,13 @@ useEffect(() => {
     <li className="flex  items-center  after:content-[''] after:w-20 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
     <div className="flex items-center justify-center">
     {/* <p className="invisible">{Number(10000).toLocaleString()}</p> */}
-              <p className=" text-black font-Large glow text-base mr-1 truncate">0</p>
+              <p className=" text-black font-Large glow text-base mr-1 truncate">500000</p>
               </div>
     </li>
     
     <li className="flex items-center mr-2  ">
     <div className="flex items-center justify-center">
-              <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(10000).toLocaleString()}</p>
+              <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(500000).toLocaleString()}</p>
               </div>
     </li>
     
