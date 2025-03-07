@@ -316,8 +316,8 @@ useEffect(() => {
     
 </ol>
 
-<ol className="flex mt-4 items-center justify-center w-full">
-    <li className="flex  items-center  after:content-[''] after:w-20 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
+<ol className="flex mt-4 items-center justify-center w-full  mr-1 ml-1">
+    <li className="flex  items-center  after:content-[''] after:w-10 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
     <div className="flex items-center justify-center">
     {/* <p className="invisible">{Number(10000).toLocaleString()}</p> */}
               <p className=" text-black font-Large glow text-base mr-1 truncate">500000</p>
