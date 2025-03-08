@@ -192,6 +192,14 @@ useEffect(() => {
       return el
   });
   setModelC(newData)
+    setTimeout(() => {
+    var newData = gtMpdelC.map(el => {
+      if(el.id == 1)
+         return Object.assign({}, el, {click:false})
+      return el
+  });
+  setModelC(newData)
+  }, 5000);
     const updatevalue = (Number(UserDt?.value)+price).toFixed(8)
     const lvlup = Number(lvl)+1
     try {
@@ -225,12 +233,7 @@ useEffect(() => {
                                     type: "default",
                                     theme: "light"
                                   });
-                                  var newData = gtMpdelC.map(el => {
-      if(el.id == 1)
-         return Object.assign({}, el, {click:false})
-      return el
-  });
-  setModelC(newData)
+                            
                                 }
                                })
                              } catch (err) {
