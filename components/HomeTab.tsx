@@ -179,6 +179,10 @@ useEffect(() => {
                                .then((data) => {
                                 if(data.success){
                                    setLvl(lvlup)
+                                  const gtPrice = lvlup == 1 ? 0.00000015 : lvlup == 2 ? 0.00000025 : lvlup == 3 ? 0.00000035 : lvlup ==4 ? 0.00000045 : lvlup ==5? 0.00000055: 0
+                            setPrice(gtPrice)
+                         const gtEndPoint = lvlup == 1 ? 100000 : lvlup == 2 ? 200000 : lvlup == 3 ? 300000 : lvlup ==4 ? 400000 : lvlup ==5? 500000: 0
+                           setEndPoint(gtEndPoint)
                                    setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username)})
                                    new Toast({
                                     position: "top-center",
