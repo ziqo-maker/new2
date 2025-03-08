@@ -377,18 +377,29 @@ useEffect(() => {
                </span>
           </li>
         )
-  }else{
+  }else if(lvl == 5){
     
     return(
       <li key={index} className="flex items-center  ">
-        <span className={`${nmb.id == lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : nmb.id < lvl ? '' : ''} flex items-center justify-center  rounded-full shrink-0`}>
-        <svg className={`${nmb.id == lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : nmb.id < lvl ? '' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '2' : nmb.id < lvl ? '0' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
+        <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? '' : 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7'} flex items-center justify-center  rounded-full shrink-0`}>
+        <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? '' : 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '0' : '2'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
           </svg>
         </span>
-        <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
-             <GoDotFill className={`${nmb.id == lvl ? 'w-0 h-0' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
+        <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
+             <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'w-0 h-0'}`} size={25} color="#ffae19" />
               </span>
+    </li>
+    )
+  }else if (lvl ==6){
+    return(
+      <li key={index} className="flex items-center  ">
+        <span className={`bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7 flex items-center justify-center  rounded-full shrink-0`}>
+        <svg className={`w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`2`} d="M1 5.917 5.724 10.5 15 1.5"/>
+          </svg>
+        </span>
+        
     </li>
     )
   }
