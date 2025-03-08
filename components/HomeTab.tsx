@@ -46,6 +46,7 @@ const HomeTab = () => {
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRefB = useRef<NodeJS.Timeout | null>(null);
+  const [activeBtn, setActiveBtn] = useState<boolean>(false);
 
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
