@@ -114,7 +114,45 @@ const listD: { str: string }[] = [
 
 ]
 
+const [refreshC, setRefreshC] = useState<boolean>(false);
+useEffect(() => {
+  setTimeout(() => {
+    setRefreshC(!refreshC)
+  }, 3000);
 
+  try {
+    fetch('/api/get-lvl', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({ idd: String(UserDt?.idd) }),
+   })
+   .then((res) => res.json())
+   .then((data) => {
+     if (data.success) {
+      const gtlvl = String(data.lvl)
+      const nmbrlvl = Number(gtlvl)
+      setLvl(nmbrlvl)
+      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
+      setPrice(gtPrice)
+      const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+      setEndPoint(gtEndPoint)
+       
+       if(nmbrlvl >= 6){
+          setBlnLvl(false)
+         }else if(nmbrlvl <= 5){
+          setBlnLvl(true)
+         }
+     } else {
+      
+     }
+   })
+ } catch (err) {
+ }
+ 
+},[refreshC]) 
+  
 useEffect(() => {
   const rndNmb = Math.floor(Math.random() * 5) + 1
   const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
@@ -227,36 +265,7 @@ useEffect(() => {
      .then((res) => res.json())
      .then((data) => {
        if (data.success) {
-          try {
-    fetch('/api/get-lvl', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({ idd: String(UserDt?.idd) }),
-   })
-   .then((res) => res.json())
-   .then((data) => {
-     if (data.success) {
-      const gtlvl = String(data.lvl)
-      const nmbrlvl = Number(gtlvl)
-      setLvl(nmbrlvl)
-      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
-      setPrice(gtPrice)
-      const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
-      setEndPoint(gtEndPoint)
-       
-       if(nmbrlvl >= 6){
-          setBlnLvl(false)
-         }else if(nmbrlvl <= 5){
-          setBlnLvl(true)
-         }
-     } else {
-      
-     }
-   })
- } catch (err) {
- }
+          
         setRefresh(true)
         const target = new Date(data.dtMining);
         const now = new Date(data.dt);
