@@ -17,6 +17,7 @@ import swatguy from '@/charactermg/swatguy.webp';
 import Script from "next/script";
 import { GoDotFill } from "react-icons/go";
 import Dollar from '@/icons/Dollar.svg';
+import Toast from 'typescript-toastify';
 
 import a11 from '@/gif/1-1.gif';
 import a22 from '@/gif/2-2.gif';
@@ -25,6 +26,9 @@ import a44 from '@/gif/4-4.gif';
 import a55 from '@/gif/5-5.gif';
 import a66 from '@/gif/6-6.gif';
 
+type modelB = {
+  id: number
+}
 
 const HomeTab = () => {
 
