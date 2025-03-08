@@ -308,7 +308,7 @@ useEffect(() => {
          }else{
           setBlnLvl(true)
          }
-      }, 3000);
+      }, 1000);
      } else {
       
      }
