@@ -55,7 +55,7 @@ const HomeTab = () => {
     { str: '' }
      ]);
 
-   const [lvl,setLvl] = useState(1);
+   const [lvl,setLvl] = useState(0);
   const [price,setPrice] = useState(0);
   const [endpoint,setEndPoint] = useState(0);
     const [blnlvl,setBlnLvl] = useState(false);
@@ -462,10 +462,10 @@ useEffect(() => {
         </li>
         
         <div className="flex flex-col  items-center  justify-center items-center">
-          <div className={`${Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
+          <div className={`${lvl == 0 ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
           
         
-        <button onClick={() => {Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+        <button onClick={() => {lvl == 0 ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                     <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
         
         
