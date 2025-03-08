@@ -14,13 +14,15 @@ export async function POST(req: NextRequest) {
         let user = await prisma.price.findFirst({
             where: { idd }
         })
-        if(user){
-            await prisma.price.update({
-                where: idd,
-                data: { lvl }
-            }) 
-        }
         
+         if(user){
+            await prisma.price.updateMany({
+                where: { idd },
+                data: { 
+                    lvl
+                }
+            })
+        }
         
         return NextResponse.json({success :true})
     } catch (error) {
