@@ -114,54 +114,98 @@ const listD: { str: string }[] = [
 
 ]
 
-const [refreshC, setRefreshC] = useState<boolean>(false);
+  const [refreshC, setRefreshC] = useState<boolean>(false);
 const [activeBtn, setActiveBtn] = useState<boolean>(false);
 useEffect(() => {
-  const gtPrice = lvl == 1 ? 0.00000015 : lvl == 2 ? 0.00000025 : lvl == 3 ? 0.00000035 : lvl ==4 ? 0.00000045 : lvl ==5? 0.00000055: 0
-  setPrice(gtPrice)
-  const gtEndPoint = lvl == 1 ? 100000 : lvl == 2 ? 200000 : lvl == 3 ? 300000 : lvl ==4 ? 400000 : lvl ==5? 500000: 0
-  setEndPoint(gtEndPoint)
+  
 
   setTimeout(() => {
-    setRefreshC(!refreshC)
-  }, 3000);
-  setTimeout(() => {
-    setActiveBtn(true)
-  }, 6000);
-
-  try {
-    fetch('/api/get-lvl', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({ idd: String(UserDt?.idd) }),
-   })
-   .then((res) => res.json())
-   .then((data) => {
-     if (data.success) {
-      const gtlvl = String(data.lvl)
-      const nmbrlvl = Number(gtlvl)
-      setLvl(nmbrlvl)
-      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
-      setPrice(gtPrice)
-      const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
-      setEndPoint(gtEndPoint)
-      
-      if(nmbrlvl >= 6){
-        setBlnLvl(false)
-       }else if(nmbrlvl <= 5){
-        setBlnLvl(true)
+    try {
+      fetch('/api/get-lvl', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ idd: String(UserDt?.idd) }),
+     })
+     .then((res) => res.json())
+     .then((data) => {
+       if (data.success) {
+        const gtlvl = String(data.lvl)
+        const nmbrlvl = Number(gtlvl)
+        setLvl(nmbrlvl)
+        const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
+        setPrice(gtPrice)
+        const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+        setEndPoint(gtEndPoint)
+        
+        if(nmbrlvl >= 6){
+          setBlnLvl(false)
+         }else if(nmbrlvl <= 5){
+          setBlnLvl(true)
+         }
+         setTimeout(() => {
+          setActiveBtn(true)
+        }, 6000);
+       } else {
+        
        }
-      
-     } else {
-      
-     }
-   })
- } catch (err) {
- }
+     })
+   } catch (err) {
+   }
+  }, 3000);
  
-},[refreshC])
+},[refreshC]) 
+
+
+// const [refreshC, setRefreshC] = useState<boolean>(false);
+// const [activeBtn, setActiveBtn] = useState<boolean>(false);
+// useEffect(() => {
+//   const gtPrice = lvl == 1 ? 0.00000015 : lvl == 2 ? 0.00000025 : lvl == 3 ? 0.00000035 : lvl ==4 ? 0.00000045 : lvl ==5? 0.00000055: 0
+//   setPrice(gtPrice)
+//   const gtEndPoint = lvl == 1 ? 100000 : lvl == 2 ? 200000 : lvl == 3 ? 300000 : lvl ==4 ? 400000 : lvl ==5? 500000: 0
+//   setEndPoint(gtEndPoint)
+
+//   setTimeout(() => {
+//     setRefreshC(!refreshC)
+//   }, 3000);
+  
+
+//   try {
+//     fetch('/api/get-lvl', {
+//      method: 'POST',
+//      headers: {
+//        'Content-Type': 'application/json',
+//      },
+//      body: JSON.stringify({ idd: String(UserDt?.idd) }),
+//    })
+//    .then((res) => res.json())
+//    .then((data) => {
+//      if (data.success) {
+//       const gtlvl = String(data.lvl)
+//       const nmbrlvl = Number(gtlvl)
+//       setLvl(nmbrlvl)
+//       const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
+//       setPrice(gtPrice)
+//       const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+//       setEndPoint(gtEndPoint)
+      
+//       if(nmbrlvl >= 6){
+//         setBlnLvl(false)
+//        }else if(nmbrlvl <= 5){
+//         setBlnLvl(true)
+//        }
+//        setTimeout(() => {
+//     setActiveBtn(true)
+//   }, 6000);
+//      } else {
+      
+//      }
+//    })
+//  } catch (err) {
+//  }
+ 
+// },[refreshC])
   
 useEffect(() => {
   const rndNmb = Math.floor(Math.random() * 5) + 1
