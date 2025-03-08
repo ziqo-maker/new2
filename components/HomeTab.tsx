@@ -119,6 +119,11 @@ useEffect(() => {
   const rndNmb = Math.floor(Math.random() * 5) + 1
   const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
   setChsLst(lst)
+  setTimeout(() => {
+  if(blnlvl == true){
+    setActiveBtn(true)
+  }
+ }, 15000);
 },[])  
 
   const handleStart = async () => {
