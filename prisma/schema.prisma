@@ -60,3 +60,15 @@ model Payment {
   date DateTime @default(now())
   status String @db.VarChar(50)
 }
+
+model InviteTask {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  task String @db.VarChar(5)
+}
+
+model price {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  lvl String @db.VarChar(10)
+}
