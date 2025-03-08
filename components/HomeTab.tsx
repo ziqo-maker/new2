@@ -31,7 +31,8 @@ type modelB = {
 }
 
 type modelC = {
-  id: number
+  id: number,
+ click:boolean
 }
 
 const HomeTab = () => {
@@ -69,7 +70,8 @@ const HomeTab = () => {
                ]);
 
    const [gtMpdelC,setModelC] = useState<modelC[]>([
-                { id: 1},
+                { id: 1,
+                click:false},
             ]);
 
 
@@ -122,7 +124,7 @@ useEffect(() => {
     if(blnlvl == true){
       setActiveBtn(true)
     }
-   }, 5000);
+   }, 8000);
 },[refreshC]) 
   
 useEffect(() => {
@@ -184,6 +186,12 @@ useEffect(() => {
   }
 
   const handleupdateprice = async () => {
+    var newData = gtMpdelC.map(el => {
+      if(el.id == 1)
+         return Object.assign({}, el, {click:true})
+      return el
+  });
+  setModelC(newData)
     const updatevalue = (Number(UserDt?.value)+price).toFixed(8)
     const lvlup = Number(lvl)+1
     try {
@@ -473,7 +481,7 @@ useEffect(() => {
         <div className="flex flex-col  items-center  justify-center items-center">
           <div className={`${activeBtn == false ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
           
-        <button onClick={() => {activeBtn == false ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+        <button onClick={() => {nmb.click == true ? '' : activeBtn == false ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                     <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
         
                     </button> 
