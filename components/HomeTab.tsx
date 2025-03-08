@@ -302,11 +302,13 @@ useEffect(() => {
       setPrice(gtPrice)
       const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
       setEndPoint(gtEndPoint)
-       if(nmbrlvl >= 6){
-        setBlnLvl(false)
-       }else{
-        setBlnLvl(true)
-       }
+       setTimeout(() => {
+        if(nmbrlvl >= 6){
+          setBlnLvl(false)
+         }else{
+          setBlnLvl(true)
+         }
+      }, 3000);
      } else {
       
      }
