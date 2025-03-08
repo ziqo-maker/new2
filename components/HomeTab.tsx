@@ -275,16 +275,8 @@ useEffect(() => {
         }
       },1000);
     }
-      
-       } else {
-       
-       }
-     })
-   } catch (err) {
-    
-   }
 
-    try {
+         try {
     fetch('/api/get-lvl', {
      method: 'POST',
      headers: {
@@ -315,6 +307,14 @@ useEffect(() => {
    })
  } catch (err) {
  }
+         
+       } else {
+       
+       }
+     })
+   } catch (err) {
+    
+   }
 
    if(refresh == false) {
     timerRefB.current = setInterval(() =>{
