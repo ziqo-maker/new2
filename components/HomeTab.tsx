@@ -30,6 +30,10 @@ type modelB = {
   id: number
 }
 
+type modelC = {
+  id: number
+}
+
 const HomeTab = () => {
 
   const [dateA,setDateA] = useState();
@@ -54,6 +58,7 @@ const HomeTab = () => {
    const [lvl,setLvl] = useState(1);
   const [price,setPrice] = useState(0);
   const [endpoint,setEndPoint] = useState(0);
+    const [blnlvl,setBlnLvl] = useState(false);
    const [gtMpdel,setModelB] = useState<modelB[]>([
                    { id: 1},
                    { id: 2 },
@@ -61,6 +66,10 @@ const HomeTab = () => {
                    { id: 4 },
                    { id: 5 },
                ]);
+
+   const [gtMpdelC,setModelC] = useState<modelC[]>([
+                { id: 1},
+            ]);
 
 
   const { activeTab, setActiveTab } = useTab()
@@ -183,6 +192,9 @@ useEffect(() => {
                             setPrice(gtPrice)
                          const gtEndPoint = lvlup == 1 ? 100000 : lvlup == 2 ? 200000 : lvlup == 3 ? 300000 : lvlup ==4 ? 400000 : lvlup ==5? 500000: 0
                            setEndPoint(gtEndPoint)
+                                   if(lvlup >= 6){
+                            setBlnLvl(false)
+                           }
                                    setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username)})
                                    new Toast({
                                     position: "top-center",
@@ -290,6 +302,11 @@ useEffect(() => {
       setPrice(gtPrice)
       const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
       setEndPoint(gtEndPoint)
+       if(nmbrlvl >= 6){
+        setBlnLvl(false)
+       }else{
+        setBlnLvl(true)
+       }
      } else {
       
      }
@@ -361,9 +378,11 @@ useEffect(() => {
 
       <div className="flex w-full flex-col justify-center items-center mt-4">
 
-<ol className="flex items-center justify-center w-full">
+        <ol className="flex items-center justify-center w-full">
 {gtMpdel.map((nmb,index) => {
-  if(nmb.id < 5 ){
+  if(blnlvl == true){
+
+    if(nmb.id < 5 ){
     return(
       <li key={index} className={`${nmb.id == lvl ? 'dark:after:border-[#ffae19]/[0.9]' : nmb.id < lvl ? 'dark:after:border-[#ffae19]/[0.9]' : 'dark:after:border-[#ffae19]/[0.5]'}  flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block `}>
               <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
@@ -402,51 +421,73 @@ useEffect(() => {
         
     </li>
     )
+  }else{
+    return(
+      <li key={index} className={`${nmb.id == lvl ? 'dark:after:border-[#ffae19]/[0.9]' : nmb.id < lvl ? 'dark:after:border-[#ffae19]/[0.9]' : 'dark:after:border-[#ffae19]/[0.5]'}  flex  items-center  after:content-['']  after:inline-block `}>
+              <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
+                  <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '2' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
+                  </svg>
+                  
+              </span>
+              <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? '' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
+              <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
+               </span>
+          </li>
+        )
   }
- 
+
+  }
+  
   }) }
     
 </ol>
 
-<ol className="flex mt-4 items-center justify-center w-full  mr-1 ml-1">
-    <li className="flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
-    <div className="flex items-center justify-center">
-              <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
-              </div>
-    </li>
-    
-    <li className="flex items-center mr-2  ">
-    <div className="flex items-center justify-center">
-              <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(endpoint).toLocaleString()}</p>
-              </div>
-    </li>
-    
-    <div className="flex flex-col  items-center  justify-center items-center">
-      <div className={`${Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
-       
-    
-    <button onClick={() => {Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
-                <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
-    
-     
-                </button> 
-              </div>
-  <div className="flex">
-  <Image 
-        src={Dollar as StaticImageData} 
-      className="w-8 h-8 aspect-square object-cover"
-      alt=""
-    />
-    <div className="flex text-center ">
-    <div className="flex items-center justify-center">
-    <p className=" text-black font-medium  text-[15px]   truncate">+{Number(price).toFixed(8)}</p>
-    </div>
-    </div>
-  </div>
+{gtMpdelC.map((nmb,index) => {
+    if(blnlvl == true){
+      return(
+        <ol className={`${blnlvl == true ? 'mt-4 w-full  mr-1 ml-1' : 'w-0 h-0'} flex  items-center justify-center `}>
+        <li className="flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
+        <div className="flex items-center justify-center">
+                  <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
+                  </div>
+        </li>
+        
+        <li className="flex items-center mr-2  ">
+        <div className="flex items-center justify-center">
+                  <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(endpoint).toLocaleString()}</p>
+                  </div>
+        </li>
+        
+        <div className="flex flex-col  items-center  justify-center items-center">
+          <div className={`${Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
           
-       </div>
-
-</ol>
+        
+        <button onClick={() => {Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                    <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
+        
+        
+                    </button> 
+                  </div>
+      <div className="flex">
+      <Image 
+            src={Dollar as StaticImageData} 
+          className="w-8 h-8 aspect-square object-cover"
+          alt=""
+        />
+        <div className="flex text-center ">
+        <div className="flex items-center justify-center">
+        <p className=" text-black font-medium  text-[15px]   truncate">+{Number(price).toFixed(8)}</p>
+        </div>
+        </div>
+      </div>
+              
+          </div>
+    
+    </ol>
+      )
+    }
+  }) }
 
 </div>
 
