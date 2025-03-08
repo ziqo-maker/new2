@@ -324,9 +324,14 @@ useEffect(() => {
      .then((data) => {
        if (data.success) {
         const gtlvl = String(data.lvl)
-        const nmbrlvl = Number(gtlvl)
-        setLvl(nmbrlvl)      
-        if(nmbrlvl >= 6){
+      const nmbrlvl = Number(gtlvl)
+      setLvl(nmbrlvl)
+      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
+      setPrice(gtPrice)
+      const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+      setEndPoint(gtEndPoint)
+      
+      if(nmbrlvl >= 6){
         setBlnLvl(false)
        }else if(nmbrlvl <= 5 && nmbrlvl != 0){
         if(lvl <= 5){
@@ -334,12 +339,6 @@ useEffect(() => {
         }
         
        }
-        
-       }
-        const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
-        setPrice(gtPrice)
-        const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
-        setEndPoint(gtEndPoint)
        } else {
         
        }
