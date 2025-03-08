@@ -124,7 +124,7 @@ useEffect(() => {
     if(blnlvl == true){
       setActiveBtn(true)
     }
-   }, 8000);
+   }, 6000);
 },[refreshC]) 
   
 useEffect(() => {
@@ -225,6 +225,12 @@ useEffect(() => {
                                     type: "default",
                                     theme: "light"
                                   });
+                                  var newData = gtMpdelC.map(el => {
+      if(el.id == 1)
+         return Object.assign({}, el, {click:false})
+      return el
+  });
+  setModelC(newData)
                                 }
                                })
                              } catch (err) {
