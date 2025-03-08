@@ -115,10 +115,19 @@ const listD: { str: string }[] = [
 ]
 
 const [refreshC, setRefreshC] = useState<boolean>(false);
+const [activeBtn, setActiveBtn] = useState<boolean>(false);
 useEffect(() => {
+  const gtPrice = lvl == 1 ? 0.00000015 : lvl == 2 ? 0.00000025 : lvl == 3 ? 0.00000035 : lvl ==4 ? 0.00000045 : lvl ==5? 0.00000055: 0
+  setPrice(gtPrice)
+  const gtEndPoint = lvl == 1 ? 100000 : lvl == 2 ? 200000 : lvl == 3 ? 300000 : lvl ==4 ? 400000 : lvl ==5? 500000: 0
+  setEndPoint(gtEndPoint)
+
   setTimeout(() => {
     setRefreshC(!refreshC)
   }, 3000);
+  setTimeout(() => {
+    setActiveBtn(true)
+  }, 6000);
 
   try {
     fetch('/api/get-lvl', {
@@ -138,12 +147,13 @@ useEffect(() => {
       setPrice(gtPrice)
       const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
       setEndPoint(gtEndPoint)
-       
-       if(nmbrlvl >= 6){
-          setBlnLvl(false)
-         }else if(nmbrlvl <= 5){
-          setBlnLvl(true)
-         }
+      
+      if(nmbrlvl >= 6){
+        setBlnLvl(false)
+       }else if(nmbrlvl <= 5){
+        setBlnLvl(true)
+       }
+      
      } else {
       
      }
@@ -151,7 +161,7 @@ useEffect(() => {
  } catch (err) {
  }
  
-},[refreshC]) 
+},[refreshC])
   
 useEffect(() => {
   const rndNmb = Math.floor(Math.random() * 5) + 1
@@ -470,12 +480,10 @@ useEffect(() => {
         </li>
         
         <div className="flex flex-col  items-center  justify-center items-center">
-          <div className={`${lvl == 0 ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
+          <div className={`${activeBtn == false ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
           
-        
-        <button onClick={() => {lvl == 0 ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+        <button onClick={() => {activeBtn == false ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                     <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
-        
         
                     </button> 
                   </div>
