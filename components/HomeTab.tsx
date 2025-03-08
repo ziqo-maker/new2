@@ -305,10 +305,10 @@ useEffect(() => {
        setTimeout(() => {
         if(nmbrlvl >= 6){
           setBlnLvl(false)
-         }else{
+         }else if(nmbrlvl <= 5){
           setBlnLvl(true)
          }
-      }, 1000);
+      }, 1500);
      } else {
       
      }
