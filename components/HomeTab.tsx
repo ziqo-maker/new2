@@ -47,9 +47,19 @@ const HomeTab = () => {
     { str: '' }
      ]);
 
+   const [lvl,setLvl] = useState(1);
+  const [price,setPrice] = useState(0);
+  const [endpoint,setEndPoint] = useState(0);
+   const [gtMpdel,setModelB] = useState<modelB[]>([
+                   { id: 1},
+                   { id: 2 },
+                   { id: 3 },
+                   { id: 4 },
+                   { id: 5 },
+               ]);
+
 
   const { activeTab, setActiveTab } = useTab()
-  
 
   const list: { str: string }[] = [
     { str: 'loveutilld*** withdrawn 1.55 USDT' },
@@ -150,6 +160,40 @@ useEffect(() => {
     
   }
 
+  const handleupdateprice = async () => {
+    const updatevalue = (Number(UserDt?.value)+price).toFixed(8)
+    const lvlup = Number(lvl)+1
+    try {
+                                fetch('/api/updatelvl', {
+                                 method: 'POST',
+                                 headers: {
+                                   'Content-Type': 'application/json',
+                                 },
+                                 body: JSON.stringify({ idd: String(UserDt?.idd),tokenvalue:String(updatevalue),lvl:String(lvlup)}),
+                               })
+                               .then((res) => res.json())
+                               .then((data) => {
+                                if(data.success){
+                                   setLvl(lvlup)
+                                   setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username)})
+                                   new Toast({
+                                    position: "top-center",
+                                    toastMsg: "Done.",
+                                    autoCloseTime: 8500,
+                                    canClose: true,
+                                    showProgress: true,
+                                    pauseOnHover: true,
+                                    pauseOnFocusLoss: true,
+                                    type: "default",
+                                    theme: "light"
+                                  });
+                                }
+                               })
+                             } catch (err) {
+                              
+                             }
+  }
+
   useEffect(() => {
 
     try {
@@ -220,6 +264,31 @@ useEffect(() => {
     
    }
 
+    try {
+    fetch('/api/get-lvl', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({ idd: String(UserDt?.idd) }),
+   })
+   .then((res) => res.json())
+   .then((data) => {
+     if (data.success) {
+      const gtlvl = String(data.lvl)
+      const nmbrlvl = Number(gtlvl)
+      setLvl(nmbrlvl)
+      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
+      setPrice(gtPrice)
+      const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+      setEndPoint(gtEndPoint)
+     } else {
+      
+     }
+   })
+ } catch (err) {
+ }
+
    if(refresh == false) {
     timerRefB.current = setInterval(() =>{
     setRefreshB(!refreshB)
@@ -282,51 +351,54 @@ useEffect(() => {
               </div>
        </div>
 
-       <div className="flex w-full flex-col justify-center items-center mt-5">
+      <div className="flex w-full flex-col justify-center items-center mt-4">
 
 <ol className="flex items-center justify-center w-full">
-    <li className="flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
-        <span className="flex items-center justify-center w-5 h-5 bg-[#ffae19]/[0.9] rounded-full lg:h-7 lg:w-7 dark:bg-[#ffae19]/[0.9] shrink-0">
-            <svg className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-            </svg>
-        </span>
-    </li>
+{gtMpdel.map((nmb,index) => {
+  if(nmb.id < 5 ){
+    return(
+      <li key={index} className={`${nmb.id == lvl ? 'dark:after:border-[#ffae19]/[0.9]' : nmb.id < lvl ? 'dark:after:border-[#ffae19]/[0.9]' : 'dark:after:border-[#ffae19]/[0.5]'}  flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block `}>
+              <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
+                  <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '2' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
+                  </svg>
+                  
+              </span>
+              <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? '' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
+              <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
+               </span>
+          </li>
+        )
+  }else{
     
-    <li className="flex  items-center after:content-[''] after:w-5 after:h-1 after:border-b after:border-[#ffae19]/[0.5] after:border-4 after:inline-block dark:after:border[#ffae19]/[0.5]">
-        <span className="flex items-center justify-center w-5 h-5 border-black rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2 shrink-0">
-        <GoDotFill size={25} color="#ffae19" />
+    return(
+      <li key={index} className="flex items-center  ">
+        <span className={`${nmb.id == lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : nmb.id < lvl ? '' : ''} flex items-center justify-center  rounded-full shrink-0`}>
+        <svg className={`${nmb.id == lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : nmb.id < lvl ? '' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '2' : nmb.id < lvl ? '0' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
+          </svg>
         </span>
+        <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
+             <GoDotFill className={`${nmb.id == lvl ? 'w-0 h-0' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
+              </span>
     </li>
-    <li className="flex  items-center after:content-[''] after:w-5 after:h-1 after:border-b after:border-[#ffae19]/[0.5] after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.5]">
-        <span className="flex items-center justify-center w-5 h-5 border-black rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2 shrink-0">
-        <GoDotFill size={25} color="#ffae19" />
-        </span>
-    </li>
-    <li className="flex  items-center after:content-[''] after:w-5 after:h-1 after:border-b after:border-[#ffae19]/[0.5] after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.5]">
-        <span className="flex items-center justify-center w-5 h-5 border-black rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2 shrink-0">
-        <GoDotFill size={25} color="#ffae19" />
-        </span>
-    </li>
-    <li className="flex items-center  ">
-        <span className="flex items-center justify-center w-5 h-5 border-black border-2 rounded-full lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] shrink-0">
-        <GoDotFill size={25} color="#ffae19" />
-        </span>
-    </li>
+    )
+  }
+ 
+  }) }
     
 </ol>
 
 <ol className="flex mt-4 items-center justify-center w-full  mr-1 ml-1">
-    <li className="flex  items-center  after:content-[''] after:w-10 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
+    <li className="flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
     <div className="flex items-center justify-center">
-    {/* <p className="invisible">{Number(10000).toLocaleString()}</p> */}
-              <p className=" text-black font-Large glow text-base mr-1 truncate">500000</p>
+              <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
     </li>
     
     <li className="flex items-center mr-2  ">
     <div className="flex items-center justify-center">
-              <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(500000).toLocaleString()}</p>
+              <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(endpoint).toLocaleString()}</p>
               </div>
     </li>
     
@@ -334,7 +406,7 @@ useEffect(() => {
        <div className="flex   bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px] ">
        
     
-    <button onClick={() => {} } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+    <button onClick={() => {Number(UserDt?.gtpoint) >= Number(price) ? handleupdateprice() : '' } } className={`${Number(UserDt?.gtpoint) >= Number(price) ? '' : 'opacity-50'}  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                 <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
     
      
@@ -348,7 +420,7 @@ useEffect(() => {
     />
     <div className="flex text-center ">
     <div className="flex items-center justify-center">
-    <p className=" text-black font-medium  text-[15px]   truncate">+0.00000100</p>
+    <p className=" text-black font-medium  text-[15px]   truncate">+{Number(price).toFixed(8)}</p>
     </div>
     </div>
   </div>
