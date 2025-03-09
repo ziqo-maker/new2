@@ -71,18 +71,18 @@ const WalletTab = () => {
          <div className="w-full h-screen bg-white flex-col ">
 
          <div className="flex-col w-full mt-4   items-center justify-start items-center">
-            <div className="flex grow ml-4 mr-4">
-            <div className="flex  bg-[#ffae19]/[0.9]  items-center  text-wrap  rounded-full px-1 py-[3px] ">
+             <div className="flex grow ml-2 mr-2">
+            <div className="flex  bg-[#ffae19]/[0.9]  items-center   rounded-full px-1 py-[3px] ">
         <Image 
         src={FootPrint as StaticImageData} 
       className="w-8 h-8 aspect-square object-cover"
       alt="Shiba Inu"
     />
-              <div className="flex flex-col text-center  mr-5 ml-3">
-                <div className="flex items-center justify-center px-2">
-              <p className=" text-white font-normal  text-base text-wrap">Balance</p>
+              <div className="flex flex-col text-center mr-2 ml-1 ">
+              <div className="flex items-center justify-center ">
+              <p className=" text-white font-normal  text-base ">Balance</p>
               </div>
-              <div className="flex items-center justify-center px-2">
+              <div className="flex items-center justify-center">
               <p className=" text-white font-bold glow text-base text-wrap">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
               </div>
@@ -95,17 +95,17 @@ const WalletTab = () => {
     />
               </div>
               
-              <div className="flex  bg-[#ffae19]/[0.9]  items-center  text-wrap  rounded-full px-1 py-[3px] ">
+              <div className="flex  bg-[#ffae19]/[0.9]  items-center   rounded-full px-1 py-[3px] ">
         <Image 
         src={DollarB as StaticImageData} 
       className="w-8 h-8 aspect-square object-cover"
       alt="Shiba Inu"
     />
-              <div className="flex flex-col text-center  mr-1 ">
-                <div className="flex items-center justify-center px-2">
-              <p className=" text-white font-normal  text-base text-wrap">WalkCoin Price</p>
+              <div className="flex flex-col text-center mr-2 ">
+              <div className="flex items-center justify-center ">
+              <p className=" text-white font-normal  text-base ">WalkCoin Price</p>
               </div>
-              <div className="flex items-center justify-center px-2">
+              <div className="flex items-center justify-center ">
               <p className=" text-white font-bold glow text-base text-wrap">{(Number(UserDt?.value)).toFixed(8)}</p>
               </div>
               </div>
