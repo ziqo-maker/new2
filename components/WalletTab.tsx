@@ -101,7 +101,7 @@ const WalletTab = () => {
       className="w-8 h-8 aspect-square object-cover"
       alt="Shiba Inu"
     />
-              <div className="flex flex-col text-center  mr-5 ml-3">
+              <div className="flex flex-col text-center  mr-1 ">
                 <div className="flex items-center justify-center px-2">
               <p className=" text-white font-normal  text-base text-wrap">WalkCoin Price</p>
               </div>
@@ -112,7 +112,7 @@ const WalletTab = () => {
               </div>
             </div>
 
-            <div className="flex grow  mt-1 ml-4 mr-4">
+            <div className="flex grow  mt-1 mr-1 ">
             <div className="flex items-center justify-start px-2 space-x-1">
               <p className=" text-black font-semibold font-serif glow text-sm text-wrap">= {(Number(UserDt?.gtpoint)*Number(UserDt?.value)).toFixed(8)}</p>
               <Image 
