@@ -78,7 +78,10 @@ const WalletTab = () => {
       className="w-8 h-8 aspect-square object-cover"
       alt="Shiba Inu"
     />
-              <div className="flex-1 text-center ">
+              <div className="flex flex-col text-center  mr-5 ml-3">
+                <div className="flex items-center justify-center px-2">
+              <p className=" text-white font-normal  text-base text-wrap">Balance</p>
+              </div>
               <div className="flex items-center justify-center px-2">
               <p className=" text-white font-bold glow text-base text-wrap">{Number(UserDt?.gtpoint).toLocaleString()}</p>
               </div>
@@ -98,7 +101,10 @@ const WalletTab = () => {
       className="w-8 h-8 aspect-square object-cover"
       alt="Shiba Inu"
     />
-              <div className="flex-1 text-center ">
+              <div className="flex flex-col text-center  mr-5 ml-3">
+                <div className="flex items-center justify-center px-2">
+              <p className=" text-white font-normal  text-base text-wrap">WalkCoin Price</p>
+              </div>
               <div className="flex items-center justify-center px-2">
               <p className=" text-white font-bold glow text-base text-wrap">{(Number(UserDt?.value)).toFixed(8)}</p>
               </div>
