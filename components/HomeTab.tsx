@@ -35,6 +35,12 @@ type modelC = {
  click:boolean
 }
 
+type claimtype = {
+  id: number,
+  clickb:boolean,
+  start:boolean
+}
+
 const HomeTab = () => {
 
   const [dateA,setDateA] = useState();
@@ -48,6 +54,7 @@ const HomeTab = () => {
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRefB = useRef<NodeJS.Timeout | null>(null);
   const [activeBtn, setActiveBtn] = useState<boolean>(false);
+  const [gtClaimType,setClaimType] = useState<claimtype[]>([]);
 
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -128,14 +135,19 @@ useEffect(() => {
 },[refreshC]) 
   
 useEffect(() => {
-  const rndNmb = Math.floor(Math.random() * 5) + 1
-  const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
-  setChsLst(lst)
+  const model = {id: 1, clickb:false,start:false}
+     gtClaimType?.push(model)
 },[])  
 
-  const handleStart = async () => {
+  const handleStart = async (id:number,clickb:boolean,start:boolean) => {
      
-    if(isClaim){
+    if(isClaim && clickb== false){
+      var newData = gtClaimType.map(el => {
+        if(el.id == id)
+           return Object.assign({}, el, {clickb:true})
+        return el
+    });
+     setClaimType(newData)
       setIsActive(false);
       try {
         fetch('/api/claim', {
@@ -172,8 +184,20 @@ useEffect(() => {
          }
        })
      } catch (err) {
+        var newData = gtClaimType.map(el => {
+        if(el.id == id)
+           return Object.assign({}, el, {clickb:false})
+        return el
+    });
+     setClaimType(newData)
      }
-    }else if (isready){
+    }else if (isready && start == false){
+       var newData = gtClaimType.map(el => {
+        if(el.id == id)
+           return Object.assign({}, el, {start:true})
+        return el
+    });
+     setClaimType(newData)
       try {
         fetch('/api/startmining', {
          method: 'POST',
@@ -192,6 +216,12 @@ useEffect(() => {
          }
        })
      } catch (err) {
+        var newData = gtClaimType.map(el => {
+        if(el.id == id)
+           return Object.assign({}, el, {start:false})
+        return el
+    });
+     setClaimType(newData)
      }
     }
     
@@ -584,7 +614,9 @@ useEffect(() => {
         
         </div>
         <div className="flex px-10 justify-center">
-        <button onClick={handleStart} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+                  {gtClaimType.map((nmb,index) => {
+
+       <button onClick={() => handleStart(nmb.id,nmb.clickb,nmb.start)} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
@@ -607,6 +639,9 @@ useEffect(() => {
         </div>
         </div>
         </button>
+       
+     }) }
+        
         </div>
         <div className="h-20 mt-5" />
        </div> 
