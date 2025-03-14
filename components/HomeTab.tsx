@@ -142,12 +142,6 @@ useEffect(() => {
   const handleStart = async (id:number,clickb:boolean,start:boolean) => {
      
     if(isClaim && clickb== false){
-      var newData = gtClaimType.map(el => {
-        if(el.id == id)
-           return Object.assign({}, el, {clickb:true})
-        return el
-    });
-     setClaimType(newData)
       setIsActive(false);
       try {
         fetch('/api/claim', {
@@ -160,6 +154,12 @@ useEffect(() => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
+           var newData = gtClaimType.map(el => {
+        if(el.id == id)
+           return Object.assign({}, el, {clickb:true})
+        return el
+    });
+     setClaimType(newData)
           const plus = Number(UserDt?.gtpoint) + miningPoint
              const lcl = miningPoint.toLocaleString()
                       new Toast({
