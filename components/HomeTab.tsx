@@ -615,8 +615,8 @@ useEffect(() => {
         </div>
         <div className="flex px-10 justify-center">
                   {gtClaimType.map((nmb,index) => {
-
-       <button onClick={() => handleStart(nmb.id,nmb.clickb,nmb.start)} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+                  return(
+                    <button onClick={() => handleStart(nmb.id,nmb.clickb,nmb.start)} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
@@ -638,7 +638,8 @@ useEffect(() => {
      </div>
         </div>
         </div>
-        </button>
+        </button> 
+                  )
        
      }) }
         
