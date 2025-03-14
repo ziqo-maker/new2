@@ -148,6 +148,7 @@ useEffect(() => {
            return Object.assign({}, el, {clickb:true})
         return el
     });
+     setClaimType(newData)
       try {
         fetch('/api/claim', {
          method: 'POST',
@@ -159,7 +160,7 @@ useEffect(() => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-     setClaimType(newData)
+     
           const plus = Number(UserDt?.gtpoint) + miningPoint
              const lcl = miningPoint.toLocaleString()
                       new Toast({
