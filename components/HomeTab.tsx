@@ -149,6 +149,18 @@ useEffect(() => {
        .then((data) => {
          if (data.success) {
           const plus = Number(UserDt?.gtpoint) + miningPoint
+             const lcl = miningPoint.toLocaleString()
+                      new Toast({
+                        position: "top-center",
+                        toastMsg: `You're received ${lcl} WalkCoin`,
+                        autoCloseTime: 4500,
+                        canClose: true,
+                        showProgress: true,
+                        pauseOnHover: true,
+                        pauseOnFocusLoss: true,
+                        type: "default",
+                        theme: "light"
+                      });
           setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
           setClaim(false)
           setReady(true)
