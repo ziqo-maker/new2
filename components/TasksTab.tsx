@@ -78,7 +78,7 @@ const TasksTab = () => {
             return el
         });
         setVisit(newData)
-        window.open("https://11745.xml.4armn.com/direct-link?pubid=952506&siteid=[SITE_ID]"); 
+        window.open("https://reyeshehadtwobri.com?r5sdp=1162038"); 
        setTimeout(() => {
           
         try {
