@@ -78,7 +78,7 @@ const TasksTab = () => {
             return el
         });
         setVisit(newData)
-        window.open("https://reyeshehadtwobri.com?1LIKv=1151969"); 
+        window.open("https://adclickad.com/get/?spot_id=6059239&cat=9&subid=896641927"); 
        setTimeout(() => {
           
         try {
