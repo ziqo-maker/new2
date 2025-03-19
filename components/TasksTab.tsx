@@ -68,6 +68,7 @@ const TasksTab = () => {
    const timerRef = useRef<NodeJS.Timeout | null>(null);
       const [refreshB, setRefreshB] = useState<boolean>(false);
       const [hideVisit, setHideVisit] = useState<boolean>(false);
+      const [wait,setWait] = useState<boolean> (false);
 
 
       const handleVisit = async(click:boolean | undefined) => {
@@ -190,6 +191,7 @@ const TasksTab = () => {
 
     const handleClaimB = async(id:string,isDoing:boolean | undefined,donecreatedtasks:string | undefined,pendingCreatedtasks:string | undefined,cost:number) => {
       if(isDoing){
+          setWait(true)
         var array = pendingCreatedtasks?.split(",");
          array?.forEach( (item, index) => {
           if(parseInt(item) === Number(id)) array?.splice(index,1);
@@ -231,6 +233,9 @@ const TasksTab = () => {
        } catch (err) {
         
        }
+           setTimeout(() => {
+        setWait(false)
+       }, 4500);
       }
     }
 
@@ -607,7 +612,7 @@ const TasksTab = () => {
     <label form="floating_filled" className="absolute text-sm  text-white dark:text-white/[0.9] italic font-bold  duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-white peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Enter the keyword</label>
     </div>
          
-    <button onClick={() => {handleClaimKeyword(task.id,gtdoneCreatedtasks,pendingCreatedtasks,20000,task.keyword,task.text)}} className={`glowwhite bg-white flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+    <button onClick={() => {wait == true? '' : handleClaimKeyword(task.id,gtdoneCreatedtasks,pendingCreatedtasks,45000,task.keyword,task.text)}} className={`${wait == true ? 'opacity-50' : ''} glowwhite bg-white flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
           <p className={`text-black  font-Large ${task.click? 'text-[0px]' : ''}`}>Claim</p>
           </button> 
          
@@ -666,7 +671,7 @@ const TasksTab = () => {
           <div className="flex items-center">
          
           {/* <div className=" px-1"/> */}
-          <button onClick={() => {handleClaimB(task.id,task.isDoing,gtdoneCreatedtasks,pendingCreatedtasks,20000),handlePendingB(task.id,pendingCreatedtasks,task.click,task.isDoing,task.url)}} className={`${task.isDoing || task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+          <button onClick={() => {wait == true ? '' : handleClaimB(task.id,task.isDoing,gtdoneCreatedtasks,pendingCreatedtasks,20000),handlePendingB(task.id,pendingCreatedtasks,task.click,task.isDoing,task.url)}} className={`${task.isDoing || task.click? 'glowwhite bg-white' : 'bg-black' } ${wait == true ? 'opacity-50' : ''} flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
           <p className={`${task.isDoing? 'text-black' : 'text-white'}  font-Large ${task.click? 'text-[0px]' : ''}`}>{task.isDoing? 'Claim' : 'Start'}</p>
             <div className="flex">
             <svg aria-hidden="true" className={`${task.click? 'w-6 h-6' : 'w-0 h-0'} flex text-gray-200 animate-spin dark:text-gray-600 fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
