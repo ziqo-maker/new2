@@ -522,9 +522,10 @@ useEffect(() => {
 {gtMpdelC.map((nmb,index) => {
     if(blnlvl == true){
       return(
-        <ol className={`${blnlvl == true ? 'mt-4 w-full  mr-2 ml-2' : 'w-0 h-0'} flex flex-col  items-center justify-center `}>
-          <div className="flex w-full justify-center items-center  ">
+        <ol className={`${blnlvl == true ? 'mt-4 w-full mr-2 ml-2' : 'w-0 h-0'} flex flex-col  items-center justify-center `}>
 
+          <div className="flex w-full justify-center items-center  ">
+           <div className="w-2"/>
           <div className="flex items-center justify-center">
                   <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
                   </div>
@@ -535,23 +536,26 @@ useEffect(() => {
   maxCompleted={Number(endpoint)}
   className="grow  rounded-full "
   customLabel=" "
-    barContainerClassName="bg-[#6b4d11d1]/[0.2] rounded-full"
+    barContainerClassName=" bg-[#6b4d11d1]/[0.2] rounded-full"
+  completedClassName=""
     bgColor="#ffae19"
 />
 </div>
     
-<div className="flex items-center justify-center">
+<div className="flex items-center  justify-center">
                   </div>
 
                   <div className="flex items-center justify-center">
                   <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(endpoint).toLocaleString()}</p>
                   </div>
+                  <div className="w-2"/>
           </div>
+          
       
         
      
         
-        <div className="flex mt-2  items-center  justify-center items-center">
+        <div className="flex mt-2 space-x-2  items-center  justify-center items-center">
         <div className="flex">
       <Image 
             src={Dollar as StaticImageData} 
@@ -575,7 +579,7 @@ useEffect(() => {
       
               
           </div>
-    
+          
     </ol>
       )
     }
