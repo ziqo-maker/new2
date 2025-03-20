@@ -18,6 +18,7 @@ import Script from "next/script";
 import { GoDotFill } from "react-icons/go";
 import Dollar from '@/icons/Dollar.svg';
 import Toast from 'typescript-toastify';
+import ProgressBar from "@ramonak/react-progress-bar";
 
 import a11 from '@/gif/1-1.gif';
 import a22 from '@/gif/2-2.gif';
@@ -521,28 +522,37 @@ useEffect(() => {
 {gtMpdelC.map((nmb,index) => {
     if(blnlvl == true){
       return(
-        <ol className={`${blnlvl == true ? 'mt-4 w-full  mr-1 ml-1' : 'w-0 h-0'} flex  items-center justify-center `}>
-        <li className="flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b  after:border-blue-100 after:border-4 after:inline-block dark:after:border-[#ffae19]/[0.9]">
-        <div className="flex items-center justify-center">
+        <ol className={`${blnlvl == true ? 'mt-4 w-full  mr-2 ml-2' : 'w-0 h-0'} flex flex-col  items-center justify-center `}>
+          <div className="flex w-full justify-center items-center  ">
+
+          <div className="flex items-center justify-center">
                   <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
                   </div>
-        </li>
-        
-        <li className="flex items-center mr-2  ">
-        <div className="flex items-center justify-center">
+
+<div className="flex grow ml-2 mr-2">
+<ProgressBar
+  completed={Number(UserDt?.gtpoint)}
+  maxCompleted={Number(endpoint)}
+  className="grow  rounded-full "
+  customLabel=" "
+    barContainerClassName="bg-[#6b4d11d1]/[0.2] rounded-full"
+    bgColor="#ffae19"
+/>
+</div>
+    
+<div className="flex items-center justify-center">
+                  </div>
+
+                  <div className="flex items-center justify-center">
                   <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(endpoint).toLocaleString()}</p>
                   </div>
-        </li>
+          </div>
+      
         
-        <div className="flex flex-col  items-center  justify-center items-center">
-          <div className={`${activeBtn == false ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
-          
-        <button onClick={() => {nmb.click == true ? '' : activeBtn == false ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
-                    <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
+     
         
-                    </button> 
-                  </div>
-      <div className="flex">
+        <div className="flex mt-2  items-center  justify-center items-center">
+        <div className="flex">
       <Image 
             src={Dollar as StaticImageData} 
           className="w-8 h-8 aspect-square object-cover"
@@ -554,6 +564,15 @@ useEffect(() => {
         </div>
         </div>
       </div>
+          <div className={`${activeBtn == false ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
+          
+        
+        <button onClick={() => {nmb.click == true ? '' : activeBtn == false ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                    <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
+        
+                    </button> 
+                  </div>
+      
               
           </div>
     
