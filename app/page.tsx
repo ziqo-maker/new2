@@ -14,6 +14,7 @@
   import Typewriter from 'typewriter-effect';
   import { Carousel } from "@material-tailwind/react";
   import App from './carosal';
+import { TonConnectUIProvider } from "@tonconnect/ui-react"
 
   declare global {
     interface Window {
