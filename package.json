@@ -33,7 +33,8 @@
     "react-icons": "^5.5.0",
     "react-toastify": "^11.0.2",
     "typescript-toastify": "^1.0.4",
-    "typewriter-effect": "^2.21.0"
+    "typewriter-effect": "^2.21.0",
+    "react-json-view": "^1.21.3",
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
