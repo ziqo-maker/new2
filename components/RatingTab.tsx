@@ -2,136 +2,308 @@
 
 import Image, {StaticImageData} from "next/image"
 import FootPrint from '@/icons/footprint.svg';
-import { useEffect,useState } from "react"
-import React from 'react';
+import React, { useContext,useState,useCallback,useEffect } from 'react';
+import { NewUserContext } from '@/contexts/UserContextB';
+import Ton from '@/imgs/ton.png';
+import Time from '@/icons/time.svg';
+import First from '@/icons/first.svg';
+import Second from '@/icons/second.svg';
+import Third from '@/icons/third.svg';
+import Fourth from '@/imgs/fourth.png';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
+import { Address } from "@ton/core";
+import test from "node:test";
 
 
-type Task = {
-    id:string
-    username: string;
-    point:string;
-  }
+const transaction: SendTransactionRequest = {
+  validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+  messages: [
+    {
+      address:
+        "0QD-SuoCHsCL2pIZfE8IAKsjc0aDpDUQAoo-ALHl2mje04A-", // message destination in user-friendly format
+      amount: "20000", // Toncoin in nanotons
+      
+    },
+  ],
+};
 
-const RatingTab = () => {
-    const [gtTasks,setTask] = useState<Task[]>([]);
-        const [Loading,setLoading] = useState<boolean> (true);
-  const [refresh, setRefresh] = useState<boolean>(false);
-  
-        useEffect(() => {
-          setTimeout(() => {
-            setRefresh(true)
-          }, 1000);
-                    try {
-                      fetch('/api/get-user', {
-                       method: 'POST',
-                       headers: {
-                         'Content-Type': 'application/json',
-                       },
-                       body: JSON.stringify({}),
-                     })
-                     .then((res) => res.json())
-                     .then((data) => {
-                      if(data.success){
-                       
-                        var nmb = 1
-                        data.all.forEach((t: any)=> {
-                          
-                          let model = {
-                            id:String(nmb),
-                            username:t.firstName,
-                            point:t.points,
-                         }
-                         nmb++
-                         gtTasks.push(model)
-                         setLoading(false)
-                        })
-                      
-                      }
-                     })
-                   } catch (err) {
-                    
-                   }
-                   
-                  },[refresh])
+const RaffleTab = () => {
 
+  const [tonConnectUI,setOptions] = useTonConnectUI()
+  const [tonAddress, setTonAddress] = useState<string | null>(null);
+  const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
+  const [value, setValue] = React.useState(0);
+  const [mx, setMx] = React.useState(Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()));
+  const [isLoading, setIsLoading] = useState(true);
+  const [istest, setTest] = useState("");
+
+
+  const handleWalletConnection = useCallback((address: string) => {
+    setTonAddress(address);
+    console.log("Wallet connected successfully!");
+    setIsLoading(false);
+  }, []);
+
+  const handleWalletDisconnection = useCallback(() => {
+    setTonAddress(null);
+    console.log("Wallet disconnected successfully!");
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const checkWalletConnection = async () => {
+      if (tonConnectUI.account?.address) {
+        handleWalletConnection(tonConnectUI.account?.address);
+      } else {
+        handleWalletDisconnection();
+      }
+    };
+
+    checkWalletConnection();
+
+    const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
+      if (wallet) {
+        handleWalletConnection(wallet.account.address);
+      } else {
+        handleWalletDisconnection();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [tonConnectUI, handleWalletConnection, handleWalletDisconnection]);
+
+
+  const handleWalletAction = async () => {
+    if (tonConnectUI.connected) {
+      setIsLoading(true);
+      await tonConnectUI.disconnect();
+    } else {
+      await tonConnectUI.openModal();
+    }
+  };
+
+  const formatAddress = (address: string) => {
+    const tempAddress = Address.parse(address).toString();
+    return `${tempAddress.slice(0, 4)}...${tempAddress.slice(-4)}`;
+  };
+
+  const handleSliderChange = (event: Event, newValue: number) => {
+    setValue(newValue);
+  };
+
+    
     return (
-        <div className=" flex justify-center  overflow-auto">
-        <div className="w-full h-screen bg-white flex-col ">
-        <div className="flex-1 mt-5 text-start font-bold text-wrap">
-              <p className="mr-20 ml-5 text-[#ffae19]/[0.9] font-Large text-xl glow">Leaderboard</p>
-              </div>
+        <div className=" flex justify-center overflow-auto">
+         <div className="w-full h-screen bg-white flex-col ">
+        
+        <div className="w-full flex flex-col items-center rounded-b-full bg-[#ffae19]/[0.9]">
+        <div className="w-full  text-center rounded-b-full bg-white ">
+        <p className="text-[#ffae19]/[0.9] font-black text-xl mt-1">Ticket Balance</p>
+        <p className="text-[#ffae19]/[0.9] font-Normal text-base mb-1">10</p>
+        </div>
 
-              <div className="relative overflow-x-auto mt-5 mr-4 ml-4  ">
-    <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-white uppercase  bg-[#ffae19]/[0.9] border-white border-4  border-double ">
-            <tr>
-                <th scope="col" className="text-start px-6 py-3">
-                Nº
-                </th>
-                <th scope="col" className="">
-                    Name
-                </th>
+             <div className="flex mt-3 mb-3 items-center justify-center space-x-5">
+             <div className="flex items-center justify-center space-x-2">
                 
-                <th scope="col" className="px-6 py-3">
-                <div className="flex grow">
-    
-    <div className="flex-1 text-center ">
-    <div className="flex items-center justify-center">
-    
-    <p className="">WalkCoin</p>
-    </div>
-    </div>
-    </div>
-                </th>
-            </tr>
-        </thead>
-        
-        {gtTasks.map((task,index) => {
-          return(
-           <tbody key={index}>
-            <tr className=" text-black text-wrap">
-            <th scope="row" className="pl-5 px-2 text-wrap text-start font-medium  whitespace-nowrap ">
-                {task.id}
-            </th>
-            <td className="text-wrap text-start">
-                {task.username}
-            </td>
-            <td className="px-6 py-4 text-[#ffae19]/[0.9] text-end text-wrap">
-            <div className="flex grow">
-    
-          <div className="flex-1 text-center ">
-          <div className="flex items-center text-start justify-center space-x-2">
-          <Image 
-    src={FootPrint as StaticImageData} 
-  className="w-6 h-6  glowbox rounded-full object-fit"
-  alt="Shiba Inu"
-/>
-          <p className=" text-[#ffae19]/[0.9] font-bold glow text-base text-wrap">{Number(task.point).toLocaleString()} </p>
-          </div>
-          </div>
-          </div>
-          
-            </td>
-            
-        </tr>
-            
-        </tbody>
-          )
-          }) }
-        
-    </table>
-</div>
-<div className={`${Loading == true? 'w-full mt-3' : 'w-0 h-0'} flex grow justify-center items-center`}>
-                <svg aria-hidden="true" className={`w-6 h-6 flex text-gray-200 animate-spin dark:text-[#6b4d11]/[0.8] fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-    </svg>
+                <Image
+            src={Ton as StaticImageData}
+          className="w-8 h-8 "
+          alt=""
+        />   
+        <div className="flex flex-col items-center text-center">
+        <p className="text-white font-black text-lg">8 TON</p>
+        <p className="text-white/[0.8] font-Normal text-sm glow">~$37.00</p>
+        </div>
                 </div>
-    <div className="h-20 mt-5" />
-           </div>
-           </div>
-    )
+                
+                <hr className="border-2 h-9 border-white"></hr>
 
+                <div className="flex items-center justify-center space-x-2">
+                
+                <Image
+            src={Time as StaticImageData}
+          className="w-8 h-8 "
+          alt=""
+        />   
+        <div className="flex flex-col items-center text-center">
+        <p className="text-white font-black text-lg">Time before draw</p>
+        <p className="text-white font-Normal text-sm glow">00:00:00</p>
+        </div>
+                </div>
+
+
+             </div>
+            
+        </div>
+
+        <div className="flex w-full space-x-2 items-center justify-center mt-2">
+           
+        <div className="flex flex-col items-center text-center space-y-1">
+          
+        <Image
+            src={First as StaticImageData}
+          className="w-8 h-8 "
+          alt=""
+        />   
+        <p className="text-white font-bold text-sm bg-[#ffae19]/[0.9] rounded-full py-1 px-2">3 TON</p>
+        </div>
+
+        <div className="flex flex-col items-center text-center space-y-1">
+          
+        <Image
+            src={Second as StaticImageData}
+          className="w-8 h-8 "
+          alt=""
+        />   
+        <p className="text-white font-bold text-sm bg-[#ffae19]/[0.9] rounded-full py-1 px-2">2 TON</p>
+        </div>
+
+        <div className="flex flex-col items-center text-center space-y-1">
+          
+        <Image
+            src={Third as StaticImageData}
+          className="w-8 h-8 "
+          alt=""
+        />   
+        <p className="text-white font-bold text-sm bg-[#ffae19]/[0.9] rounded-full py-1 px-2">2 TON</p>
+        </div>
+
+        <div className="flex flex-col items-center text-center space-y-1">
+          
+          <Image
+              src={Fourth as StaticImageData}
+            className="w-8 h-8 "
+            alt=""
+          />   
+          <p className="text-white font-bold text-sm bg-[#ffae19]/[0.9] rounded-full py-1 px-2">1 TON</p>
+          </div>
+        </div>
+
+        <div className="flex w-full space-x-2 items-center justify-center mt-4">
+          <div className="w-1"/>
+          <button onClick={() => {}} className="flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px] ">
+                           
+          
+                                 <div className="flex-1 text-center">
+                                 <div className="flex items-center space-x-1 justify-center">
+                               
+                            <p className=" text-white font-semibold text-lg truncate">Raffles</p>
+                                 </div>
+                                 </div>
+                                 </button>
+                                 <button onClick={() => {}} className="flex flex-grow bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px] ">
+                           
+          
+                                 <div className="flex-1 text-center">
+                                 <div className="flex items-center space-x-1 justify-center">
+                               
+                            <p className=" text-white font-semibold text-lg truncate">Leaderboard</p>
+                                 </div>
+                                 </div>
+                                 </button>
+
+                                 <button onClick={() => {}} className="flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px] ">
+                           
+          
+                                 <div className="flex-1 text-center">
+                                 <div className="flex items-center space-x-1 justify-center">
+                               
+                            <p className=" text-white font-semibold text-lg truncate">Winners</p>
+                                 </div>
+                                 </div>
+                                 </button>
+
+                                 <div className="w-1"/>
+        </div>
+        <div className="flex-col w-full space-x-2 items-center justify-center mt-2">
+        <div className="w-full  text-center rounded-b-full bg-white ">
+        <p className="text-[#ffae19]/[0.9] font-bold text-lg mt-1">Buy tickets - {Number(50000).toLocaleString()} WalkCoin each</p>
+          <div className="flex w-full   items-center mt-2  justify-center items-center">
+               <div className="flex w-[calc(80%-2rem)]  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
+                <Image 
+                src={FootPrint as StaticImageData} 
+              className="w-10 h-10 aspect-square object-cover"
+              alt=""
+            />
+                      <div className="flex-grow text-center ">
+                      <div className="flex flex-col items-center justify-center">
+                      <p className=" text-white font-bold text-base mr-6 truncate">Remaining WalkCoin</p>
+                      <p className=" text-white font-Large  text-sm mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
+                      </div>
+                      </div>
+                      </div>
+               </div>
+        </div>
+        <center>
+        <div className="flex w-[calc(100%-2rem)] mt-3 items-center justify-center">
+
+        <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
+        <Slider className="w-full"   size="medium"  color='warning' value={value}  onChange={handleSliderChange} min={0} defaultValue={0} max={ mx } aria-label="default" valueLabelDisplay="auto" />
+
+        <div className="flex w-full justify-between">
+        <p className=" text-[#ff7700]/[0.9] font-bold text-base  truncate">{0} min {istest}</p>
+        <p className=" text-[#ff7700]/[0.9] font-bold text-base  truncate">{mx} max</p>
+
+        </div>
+           
+         </Box>
+       
+        </div>
+        <button onClick={() => {}} className={`${value == 0? 'opacity-60' :''}  flex flex-grow mt-2 px-5 bg-[#ff7700]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px]`}>
+                           
+          
+                <div className="flex-1 text-center">
+                           <div className="flex items-center space-x-1 justify-center">
+                         
+                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket</p>
+                           </div>
+                           </div>
+                           </button>
+        </center>
+        {tonAddress ? (
+        <div className="flex flex-col items-center">
+          <p className="mb-4">Connected: {formatAddress(tonAddress)}</p>
+          <button
+            onClick={handleWalletAction}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Disconnect Wallet
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={handleWalletAction}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Connect TON Wallet
+        </button>
+      )}
+
+
+        </div>
+        <button
+            onClick={async () => {
+              const { boc } = await tonConnectUI.sendTransaction(transaction)
+              if(boc){
+                setTest("pay")
+              }else if(!boc){
+                setTest("not pay")
+              }
+
+            }}
+            className="bg-red-500 mt-4 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Buy
+          </button>
+        <div className="h-20 mt-5" />
+
+         </div>
+        </div>
+    )
 }
 
-export default RatingTab
+export default RaffleTab
