@@ -14,6 +14,7 @@ import Adsgram from './AdsgramTab'
 
 import { NewUserContext } from '@/contexts/UserContextB';
 import React,{useEffect,useState,useRef} from 'react';
+import RaffleTab from './RaffleTab'
 
 import { WebApp } from '@twa-dev/types'
 
@@ -134,7 +135,7 @@ const TabContainer = () => {
     return (
         <div className="flex-1 overflow-hidden max-w-xl mx-auto">
             <div className={`${activeTab === 'home' ? 'is-show' : 'is-hide'}`}>
-                <HomeTab />
+                 <RaffleTab />
             </div>
             <div className={`${activeTab === 'tasks' ? 'is-show' : 'is-hide'}`}>
                 <TasksTab />
