@@ -14,7 +14,6 @@ import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
-import ReactJson, {InteractionProps} from 'react-json-view';
 
 const defaultTx: SendTransactionRequest = {
   // The transaction is valid for 10 minutes from now, in unix epoch seconds.
