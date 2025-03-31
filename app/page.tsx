@@ -145,16 +145,17 @@
 //      )
 
     return (
-      <UserNew>
-    
-  <TabProvider>
-        <main className='main-h-screen content-around bg-white '>
-          <TabContainer/>
-          <NavigationBar/>
-        </main>
-      </TabProvider>
-  
-      </UserNew>
+            <UserNew>
+          <TonConnectUIProvider manifestUrl="https://emerald-rear-parrotfish-934.mypinata.cloud/ipfs/bafkreiefycb6u266ssmwexxziehzmqoffbfaumzp3dbsa2vdak6sujnffm">
+    <TabProvider>
+          <main className='main-h-screen content-around bg-white '>
+            <TabContainer/>
+            <NavigationBar/>
+          </main>
+        </TabProvider>
+        </TonConnectUIProvider>
+        </UserNew>
+   
       
     )
   }
