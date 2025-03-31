@@ -14,21 +14,53 @@ import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
+import ReactJson, {InteractionProps} from 'react-json-view';
 
-const transaction: SendTransactionRequest = {
-  validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+const defaultTx: SendTransactionRequest = {
+  // The transaction is valid for 10 minutes from now, in unix epoch seconds.
+  validUntil: Math.floor(Date.now() / 1000) + 600,
   messages: [
+
     {
-      address:
-        "0QD-SuoCHsCL2pIZfE8IAKsjc0aDpDUQAoo-ALHl2mje04A-", // message destination in user-friendly format
-      amount: "20000", // Toncoin in nanotons
-      
+      // The receiver's address.
+      address: 'EQCKWpx7cNMpvmcN5ObM5lLUZHZRFKqYA4xmw9jOry0ZsF9M',
+      // Amount to send in nanoTON. For example, 0.005 TON is 5000000 nanoTON.
+      amount: '5000000',
+      // (optional) State initialization in boc base64 format.
+      stateInit: 'te6cckEBBAEAOgACATQCAQAAART/APSkE/S88sgLAwBI0wHQ0wMBcbCRW+D6QDBwgBDIywVYzxYh+gLLagHPFsmAQPsAlxCarA==',
+      // (optional) Payload in boc base64 format.
+      payload: 'te6ccsEBAQEADAAMABQAAAAASGVsbG8hCaTc/g==',
     },
+
+    // Uncomment the following message to send two messages in one transaction.
+    /*
+    {
+      // Note: Funds sent to this address will not be returned back to the sender.
+      address: 'UQAuz15H1ZHrZ_psVrAra7HealMIVeFq0wguqlmFno1f3B-m',
+      amount: toNano('0.01').toString(),
+    }
+    */
+
   ],
 };
 
+// const transaction: SendTransactionRequest = {
+//   validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+//   messages: [
+//     {
+//       address:
+//         "0QD-SuoCHsCL2pIZfE8IAKsjc0aDpDUQAoo-ALHl2mje04A-", // message destination in user-friendly format
+//       amount: "20000", // Toncoin in nanotons
+      
+//     },
+//   ],
+// };
+
 const RaffleTab = () => {
-  
+  const [tx, setTx] = useState(defaultTx);
+  const onChange = useCallback((value: InteractionProps) => {
+    setTx(value.updated_src as SendTransactionRequest)
+  }, []);
   const [tonConnectUI,setOptions] = useTonConnectUI()
   const [tonAddress, setTonAddress] = useState<string | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
@@ -279,10 +311,11 @@ const RaffleTab = () => {
         </button>
       )}
 
+<ReactJson theme="ocean" src={defaultTx} onEdit={onChange} onAdd={onChange} onDelete={onChange}/>
 
         </div>
         <button
-            onClick={() => tonConnectUI.sendTransaction(transaction)}
+            onClick={() => tonConnectUI.sendTransaction(tx)}
             className="bg-red-500 mt-4 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           >
             Buy
