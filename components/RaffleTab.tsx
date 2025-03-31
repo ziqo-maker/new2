@@ -12,12 +12,24 @@ import Third from '@/icons/third.svg';
 import Fourth from '@/imgs/fourth.png';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
-import { useTonConnectUI } from "@tonconnect/ui-react";
+import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
 import { Address } from "@ton/core";
 
-const RaffleTab = () => {
+const transaction: SendTransactionRequest = {
+  validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+  messages: [
+    {
+      address:
+        "0QD-SuoCHsCL2pIZfE8IAKsjc0aDpDUQAoo-ALHl2mje04A-", // message destination in user-friendly format
+      amount: "20000", // Toncoin in nanotons
+      
+    },
+  ],
+};
 
-  const [tonConnectUI] = useTonConnectUI()
+const RaffleTab = () => {
+  
+  const [tonConnectUI,setOptions] = useTonConnectUI()
   const [tonAddress, setTonAddress] = useState<string | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const [value, setValue] = React.useState(0);
@@ -78,6 +90,7 @@ const RaffleTab = () => {
   const handleSliderChange = (event: Event, newValue: number) => {
     setValue(newValue);
   };
+
     
     return (
         <div className=" flex justify-center overflow-auto">
@@ -266,7 +279,16 @@ const RaffleTab = () => {
         </button>
       )}
 
+
         </div>
+        <button
+            onClick={() => tonConnectUI.sendTransaction(transaction)}
+            className="bg-red-500 mt-4 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Buy
+          </button>
+        <div className="h-20 mt-5" />
+
          </div>
         </div>
     )
