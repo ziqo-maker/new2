@@ -257,7 +257,7 @@ const RaffleTab = () => {
 
         const mintCost = 5000000 // Adding gas fees
 
-        await tonConnectUI.sendTransaction({
+        const result=  await tonConnectUI.sendTransaction({
             validUntil: Math.floor(Date.now() / 1000) + 60,
             messages: [
                 {
@@ -267,6 +267,29 @@ const RaffleTab = () => {
                 },
             ],
         });
+
+        
+        setLoading(true);
+        const hash = Cell.fromBase64(result.boc)
+          .hash()
+          .toString("base64");
+
+        const message = loadMessage(
+          Cell.fromBase64(result.boc).asSlice()
+        );
+        console.log("Message:", message.body.hash().toString("hex"));
+        setMsgHash(hash);
+
+        if (client) {
+          const txFinalized = await waitForTransaction(
+            {
+              address: tonConnectUI.account?.address ?? "",
+              hash: hash,
+            },
+            client
+          );
+          setFinalizedTx(txFinalized);
+        }
 
         alert('Minting transaction sent successfully!');
     } catch (error) {
