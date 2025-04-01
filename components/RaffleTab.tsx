@@ -22,7 +22,6 @@ import {
   storeMessage,
   Transaction,
 } from "@ton/core";
-import ReactJson, { InteractionProps } from "react-json-view";
 import { TonClient } from "@ton/ton";
 
 // const transaction: SendTransactionRequest = {
@@ -232,9 +231,7 @@ const RaffleTab = () => {
   const handleSliderChange = (event: Event, newValue: number) => {
     setValue(newValue);
   };
-  const onChange = useCallback((value: InteractionProps) => {
-    setTx(value.updated_src as SendTransactionRequest);
-  }, []);
+  
     
     return (
         <div className=" flex justify-center overflow-auto">
@@ -399,7 +396,7 @@ const RaffleTab = () => {
                 <div className="flex-1 text-center">
                            <div className="flex items-center space-x-1 justify-center">
                          
-                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket {onchange?.name}</p>
+                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket</p>
                            </div>
                            </div>
                            </button>
