@@ -12,32 +12,126 @@ import Third from '@/icons/third.svg';
 import Fourth from '@/imgs/fourth.png';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
+import { useTonClient } from './useTonClient';
 import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
-import { Address } from "@ton/core";
+import {
+  Address,
+  beginCell,
+  Cell,
+  loadMessage,
+  storeMessage,
+  Transaction,
+} from "@ton/core";
 
+import { TonClient } from "@ton/ton";
 
-const transaction: SendTransactionRequest = {
-  validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+// const transaction: SendTransactionRequest = {
+//   validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
+//   messages: [
+//     {
+//       address:
+//         "0QD-SuoCHsCL2pIZfE8IAKsjc0aDpDUQAoo-ALHl2mje04A-", // message destination in user-friendly format
+//       amount: "20000", // Toncoin in nanotons
+      
+//     },
+//   ],
+// };
+
+const defaultTx: SendTransactionRequest = {
+  // The transaction is valid for 10 minutes from now, in unix epoch seconds.
+  validUntil: Math.floor(Date.now() / 1000) + 600,
   messages: [
     {
-      address:
-        "0QD-SuoCHsCL2pIZfE8IAKsjc0aDpDUQAoo-ALHl2mje04A-", // message destination in user-friendly format
-      amount: "20000", // Toncoin in nanotons
-      
+      // The receiver's address.
+      address: "EQCKWpx7cNMpvmcN5ObM5lLUZHZRFKqYA4xmw9jOry0ZsF9M",
+      // Amount to send in nanoTON. For example, 0.005 TON is 5000000 nanoTON.
+      amount: "5000000",
+      // (optional) State initialization in boc base64 format.
+      stateInit:
+        "te6cckEBBAEAOgACATQCAQAAART/APSkE/S88sgLAwBI0wHQ0wMBcbCRW+D6QDBwgBDIywVYzxYh+gLLagHPFsmAQPsAlxCarA==",
+      // (optional) Payload in boc base64 format.
+      payload: "te6ccsEBAQEADAAMABQAAAAASGVsbG8hCaTc/g==",
     },
+
+  
   ],
 };
 
+
+interface WaitForTransactionOptions {
+  address: string;
+  hash: string;
+  refetchInterval?: number;
+  refetchLimit?: number;
+}
+
+const waitForTransaction = async (
+  options: WaitForTransactionOptions,
+  client: TonClient
+): Promise<Transaction | null> => {
+  const { hash, refetchInterval = 1000, refetchLimit, address } = options;
+
+  return new Promise((resolve) => {
+    let refetches = 0;
+    const walletAddress = Address.parse(address);
+    const interval = setInterval(async () => {
+      refetches += 1;
+
+      console.log("waiting transaction...");
+      const state = await client.getContractState(walletAddress);
+      if (!state || !state.lastTransaction) {
+        clearInterval(interval);
+        resolve(null);
+        return;
+      }
+      const lastLt = state.lastTransaction.lt;
+      const lastHash = state.lastTransaction.hash;
+      const lastTx = await client.getTransaction(
+        walletAddress,
+        lastLt,
+        lastHash
+      );
+
+      if (lastTx && lastTx.inMessage) {
+        const msgCell = beginCell()
+          .store(storeMessage(lastTx.inMessage))
+          .endCell();
+
+        const inMsgHash = msgCell.hash().toString("base64");
+        console.log("InMsgHash", inMsgHash);
+        if (inMsgHash === hash) {
+          clearInterval(interval);
+          resolve(lastTx);
+        }
+      }
+      if (refetchLimit && refetches >= refetchLimit) {
+        clearInterval(interval);
+        resolve(null);
+      }
+    }, refetchInterval);
+  });
+};
+
+
+
+
+
 const RaffleTab = () => {
 
+  const [tx, setTx] = useState(defaultTx);
+  const [finalizedTx, setFinalizedTx] = useState<Transaction | null>(null);
+  const [msgHash, setMsgHash] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const { client } = useTonClient();
   const [tonConnectUI,setOptions] = useTonConnectUI()
   const [tonAddress, setTonAddress] = useState<string | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const [value, setValue] = React.useState(0);
   const [mx, setMx] = React.useState(Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()));
   const [isLoading, setIsLoading] = useState(true);
-  const [istest, setTest] = useState("");
 
+
+  
 
   const handleWalletConnection = useCallback((address: string) => {
     setTonAddress(address);
@@ -244,7 +338,7 @@ const RaffleTab = () => {
         <Slider className="w-full"   size="medium"  color='warning' value={value}  onChange={handleSliderChange} min={0} defaultValue={0} max={ mx } aria-label="default" valueLabelDisplay="auto" />
 
         <div className="flex w-full justify-between">
-        <p className=" text-[#ff7700]/[0.9] font-bold text-base  truncate">{0} min {istest}</p>
+        <p className=" text-[#ff7700]/[0.9] font-bold text-base  truncate">{0} min</p>
         <p className=" text-[#ff7700]/[0.9] font-bold text-base  truncate">{mx} max</p>
 
         </div>
@@ -285,19 +379,43 @@ const RaffleTab = () => {
 
         </div>
         <button
-            onClick={async () => {
-              const { boc } = await tonConnectUI.sendTransaction(transaction)
-              if(boc){
-                setTest("pay")
-              }else if(!boc){
-                setTest("not pay")
-              }
-
-            }}
             className="bg-red-500 mt-4 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            onClick={async () => {
+              try {
+                const result = await tonConnectUI.sendTransaction(tx);
+                setLoading(true);
+                const hash = Cell.fromBase64(result.boc)
+                  .hash()
+                  .toString("base64");
+  
+                const message = loadMessage(
+                  Cell.fromBase64(result.boc).asSlice()
+                );
+                console.log("Message:", message.body.hash().toString("hex"));
+                setMsgHash(hash);
+  
+                if (client) {
+                  const txFinalized = await waitForTransaction(
+                    {
+                      address: tonConnectUI.account?.address ?? "",
+                      hash: hash,
+                    },
+                    client
+                  );
+                  setFinalizedTx(txFinalized);
+                }
+              } catch (e) {
+                console.error(e);
+              } finally {
+                setLoading(false);
+              }
+            }}
           >
-            Buy
+              {loading ? "Loading..." : "Send transaction"}
+            <div> Tx Message Hash: {msgHash}</div>
+            <div> Tx Hash: {finalizedTx?.hash().toString("hex")}</div>
           </button>
+          
         <div className="h-20 mt-5" />
 
          </div>
