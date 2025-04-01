@@ -28,7 +28,7 @@ export const useTonClient = () => {
 
     console.log("Network", network);
     const endpoint = await getHttpEndpoint({
-      network: network === CHAIN.MAINNET ? "mainnet" : "testnet",
+      network: network === CHAIN.MAINNET ? "mainnet" : "mainnet",
     });
 
     console.log("endpoint", endpoint);
