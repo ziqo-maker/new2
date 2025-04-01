@@ -23,6 +23,7 @@ import {
   Transaction,
 } from "@ton/core";
 import { TonClient } from "@ton/ton";
+import { getHttpEndpoint } from '@orbs-network/ton-access';
 
 // const transaction: SendTransactionRequest = {
 //   validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
@@ -131,6 +132,11 @@ const RaffleTab = () => {
 
   const [error, setError] = useState("");
 
+  interface CollectionMetadata {
+    name: string;
+    description: string;
+    image: string;
+}
   
   useEffect(() => {
 
@@ -231,8 +237,46 @@ const RaffleTab = () => {
   const handleSliderChange = (event: Event, newValue: number) => {
     setValue(newValue);
   };
+
+  function decodeCell(cell: any): string {
+    let slice = cell.beginParse();
+    slice.loadUint(8); // Skip the first byte
+    return slice.loadStringTail();
+}
   
-    
+  const [metadata, setMetadata] = useState<CollectionMetadata | null>(null);
+  const [mintPrice, setMintPrice] = useState<string>('0');
+
+  
+
+
+  const handleMint = async () => {
+
+    try {
+        setIsLoading(true);
+
+        const mintCost = 500000 // Adding gas fees
+
+        await tonConnectUI.sendTransaction({
+            validUntil: Math.floor(Date.now() / 1000) + 60,
+            messages: [
+                {
+                    address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
+                    amount: mintCost.toString(),
+                    payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
+                },
+            ],
+        });
+
+        alert('Minting transaction sent successfully!');
+    } catch (error) {
+        console.error('Error minting:', error);
+        alert('Error minting. Please try again.');
+    } finally {
+        setIsLoading(false);
+    }
+};
+
     return (
         <div className=" flex justify-center overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">
@@ -425,7 +469,7 @@ const RaffleTab = () => {
         <button
             className="bg-red-500 mt-4 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             onClick={
-               () => setError("done")
+              handleMint
             }
           >
               {loading ? "Loading..." : "Send transaction"}
