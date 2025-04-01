@@ -130,6 +130,7 @@ const RaffleTab = () => {
   const [mx, setMx] = React.useState(Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()));
   const [isLoading, setIsLoading] = useState(true);
 
+  const [error, setError] = useState("");
 
   
 
@@ -352,7 +353,7 @@ const RaffleTab = () => {
                 <div className="flex-1 text-center">
                            <div className="flex items-center space-x-1 justify-center">
                          
-                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket</p>
+                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket {error}</p>
                            </div>
                            </div>
                            </button>
@@ -384,6 +385,7 @@ const RaffleTab = () => {
               try {
                 const result = await tonConnectUI.sendTransaction(tx);
                 setLoading(true);
+                setError("Loading")
                 const hash = Cell.fromBase64(result.boc)
                   .hash()
                   .toString("base64");
@@ -391,6 +393,7 @@ const RaffleTab = () => {
                 const message = loadMessage(
                   Cell.fromBase64(result.boc).asSlice()
                 );
+                setError(message.body.hash().toString("hex"))
                 console.log("Message:", message.body.hash().toString("hex"));
                 setMsgHash(hash);
   
@@ -405,8 +408,11 @@ const RaffleTab = () => {
                   setFinalizedTx(txFinalized);
                 }
               } catch (e) {
+                setError(String(e))
                 console.error(e);
+                
               } finally {
+                setError("false")
                 setLoading(false);
               }
             }}
