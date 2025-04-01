@@ -218,7 +218,7 @@ const RaffleTab = () => {
     const wallet = WalletContractV5R1.create({ publicKey: key.publicKey, workchain: 0});
 
     // initialize ton rpc client on test nest
-    const endpoint = await getHttpEndpoint({ network: "testnet"});
+    const endpoint = await getHttpEndpoint({ network: "mainnet"});
     const client = new TonClient({ endpoint });
 
     // make sure the wallet is deployed
@@ -228,7 +228,7 @@ const RaffleTab = () => {
     }
 
     // send 0.05 TON to 2nd TON wallet (address: 0QCPDS9v9Q153PZ1YKE42bmNlPe9hL28jaJb1NoTr7BDGVT6)
-    const receiveWallet = "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1";
+    const receiveWallet = "UQBMrGzQbbURynsVl7wwKW8WUKT9Bk3vcMmaWnhH9-pq0OK2";
     const walletContract = client.open(wallet);
     const seqno = await walletContract.getSeqno();
     await walletContract.sendTransfer({
