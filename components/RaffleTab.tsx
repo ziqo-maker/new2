@@ -22,7 +22,7 @@ import {
   storeMessage,
   Transaction,
 } from "@ton/core";
-
+import ReactJson, { InteractionProps } from "react-json-view";
 import { TonClient } from "@ton/ton";
 
 // const transaction: SendTransactionRequest = {
@@ -135,9 +135,11 @@ const RaffleTab = () => {
   
   useEffect(() => {
 
+    
     const handleAd = async () => {
       try {
         const result = await tonConnectUI.sendTransaction(tx);
+        
         setLoading(true);
         setError("Loading")
         const hash = Cell.fromBase64(result.boc)
@@ -230,12 +232,20 @@ const RaffleTab = () => {
   const handleSliderChange = (event: Event, newValue: number) => {
     setValue(newValue);
   };
-
+  const onChange = useCallback((value: InteractionProps) => {
+    setTx(value.updated_src as SendTransactionRequest);
+  }, []);
     
     return (
         <div className=" flex justify-center overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">
-        
+         <ReactJson
+        theme="ocean"
+        src={defaultTx}
+        onEdit={onChange}
+        onAdd={onChange}
+        onDelete={onChange}
+      />
         <div className="w-full flex flex-col items-center rounded-b-full bg-[#ffae19]/[0.9]">
         <div className="w-full  text-center rounded-b-full bg-white ">
         <p className="text-[#ffae19]/[0.9] font-black text-xl mt-1">Ticket Balance</p>
