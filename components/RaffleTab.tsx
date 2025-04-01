@@ -274,17 +274,17 @@ const RaffleTab = () => {
           .hash()
           .toString("base64");
 
-        const message = loadMessage(
-          Cell.fromBase64(result.boc).asSlice()
-        );
-        console.log("Message:", message.body.hash().toString("hex"));
-        setMsgHash(hash);
+        // const message = loadMessage(
+        //   Cell.fromBase64(result.boc).asSlice()
+        // );
+        // console.log("Message:", message.body.hash().toString("hex"));
+        // setMsgHash(hash);
 
         if (client) {
           const txFinalized = await waitForTransaction(
             {
               address: tonConnectUI.account?.address ?? "",
-              hash: hash,
+              hash: "",
             },
             client
           );
