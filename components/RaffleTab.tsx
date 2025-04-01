@@ -135,10 +135,6 @@ const RaffleTab = () => {
   
   useEffect(() => {
 
-    setTimeout(() => {
-      setError("error")
-    }, 40000);
-
     const handleAd = async () => {
       try {
         const result = await tonConnectUI.sendTransaction(tx);
