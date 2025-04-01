@@ -281,17 +281,17 @@ const RaffleTab = () => {
         // setMsgHash(hash);
 
         if (client) {
+          alert('Minting transaction sent successfully!');
           const txFinalized = await waitForTransaction(
             {
               address: tonConnectUI.account?.address ?? "",
-              hash: "",
+              hash: hash,
             },
             client
           );
           setFinalizedTx(txFinalized);
         }
 
-        alert('Minting transaction sent successfully!');
     } catch (error) {
         console.error('Error minting:', error);
         alert('Error minting. Please try again.');
