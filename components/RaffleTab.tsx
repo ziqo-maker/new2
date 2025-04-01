@@ -239,13 +239,7 @@ const RaffleTab = () => {
     return (
         <div className=" flex justify-center overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">
-         <ReactJson
-        theme="ocean"
-        src={defaultTx}
-        onEdit={onChange}
-        onAdd={onChange}
-        onDelete={onChange}
-      />
+       
         <div className="w-full flex flex-col items-center rounded-b-full bg-[#ffae19]/[0.9]">
         <div className="w-full  text-center rounded-b-full bg-white ">
         <p className="text-[#ffae19]/[0.9] font-black text-xl mt-1">Ticket Balance</p>
@@ -405,7 +399,7 @@ const RaffleTab = () => {
                 <div className="flex-1 text-center">
                            <div className="flex items-center space-x-1 justify-center">
                          
-                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket {error}</p>
+                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket {onchange?.name}</p>
                            </div>
                            </div>
                            </button>
