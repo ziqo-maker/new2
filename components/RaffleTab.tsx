@@ -22,8 +22,9 @@ import {
   storeMessage,
   Transaction,
 } from "@ton/core";
-import { TonClient } from "@ton/ton";
 import { getHttpEndpoint } from '@orbs-network/ton-access';
+import { mnemonicToWalletKey } from "@ton/crypto";
+import { SendMode, TonClient, WalletContractV5R1, internal } from "@ton/ton";
 
 // const transaction: SendTransactionRequest = {
 //   validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes
@@ -113,7 +114,9 @@ const waitForTransaction = async (
 };
 
 
-
+function sleep(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
 const RaffleTab = () => {
@@ -252,52 +255,100 @@ const RaffleTab = () => {
 
   const handleMint = async () => {
 
-    try {
-        setIsLoading(true);
+    console.log("Start");
+    // open wallet (notice the correct wallet version)
+    const mnemonic = "bitter usage swear clerk burger retire journey front erupt satisfy spend youth dose dune game bright mobile novel champion essence charge thing drum sun";
+    const key = await mnemonicToWalletKey(mnemonic.split(" "));
+    const wallet = WalletContractV5R1.create({ publicKey: key.publicKey, workchain: 0});
 
-        const mintCost = 5000000 // Adding gas fees
+    // initialize ton rpc client on test nest
+    const endpoint = await getHttpEndpoint({ network: "testnet"});
+    const client = new TonClient({ endpoint });
 
-        const result=  await tonConnectUI.sendTransaction({
-            validUntil: Math.floor(Date.now() / 1000) + 60,
-            messages: [
-                {
-                    address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
-                    amount: "5000000",
-                    payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
-                },
-            ],
-        });
+    // make sure the wallet is deployed
+    if (!await client.isContractDeployed(wallet.address)) {
+      setError("not deploy")
+        return console.log("Wallet is not deployed");
+    }
+
+    // send 0.05 TON to 2nd TON wallet (address: 0QCPDS9v9Q153PZ1YKE42bmNlPe9hL28jaJb1NoTr7BDGVT6)
+    const receiveWallet = "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1";
+    const walletContract = client.open(wallet);
+    const seqno = await walletContract.getSeqno();
+    await walletContract.sendTransfer({
+        secretKey: key.secretKey,
+        seqno: seqno,
+        messages: [
+            internal({
+                to: receiveWallet,
+                value: "0.05",
+                body: "My Test first transaction",
+                bounce: false,
+            })
+        ],
+        sendMode: SendMode.NONE
+    });
+
+
+    // wait until confirmed
+    let currentSegno = seqno;
+    while (currentSegno == seqno) {
+      setError("wait")
+        console.log("waiting for transaction to confirm");
+        await sleep(1500);
+        currentSegno = await walletContract.getSeqno();
+    }
+    console.log("transaction confirmed");
+    setError("confirm")
+
+    // try {
+    //     setIsLoading(true);
+
+    //     const mintCost = 5000000 // Adding gas fees
+
+    //     const result=  await tonConnectUI.sendTransaction({
+    //         validUntil: Math.floor(Date.now() / 1000) + 60,
+    //         messages: [
+    //             {
+    //                 address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
+    //                 amount: "5000000",
+    //                 payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
+    //             },
+    //         ],
+    //     });
 
         
-        setLoading(true);
-        const hash = Cell.fromBase64(result.boc)
-          .hash()
-          .toString("base64");
+    //     setLoading(true);
+    //     const hash = Cell.fromBase64(result.boc)
+    //       .hash()
+    //       .toString("base64");
 
-        // const message = loadMessage(
-        //   Cell.fromBase64(result.boc).asSlice()
-        // );
-        // console.log("Message:", message.body.hash().toString("hex"));
-        // setMsgHash(hash);
+    //     // const message = loadMessage(
+    //     //   Cell.fromBase64(result.boc).asSlice()
+    //     // );
+    //     // console.log("Message:", message.body.hash().toString("hex"));
+    //     // setMsgHash(hash);
 
-        if (client) {
-          alert('Minting transaction sent successfully!');
-          const txFinalized = await waitForTransaction(
-            {
-              address: tonConnectUI.account?.address ?? "",
-              hash: hash,
-            },
-            client
-          );
-          setFinalizedTx(txFinalized);
-        }
+    //     if (client) {
+    //       alert('Minting transaction sent successfully!');
+    //       const txFinalized = await waitForTransaction(
+    //         {
+    //           address: tonConnectUI.account?.address ?? "",
+    //           hash: hash,
+    //         },
+    //         client
+    //       );
+         
+    //       setFinalizedTx(txFinalized);
+    //     }
 
-    } catch (error) {
-        console.error('Error minting:', error);
-        alert('Error minting. Please try again.');
-    } finally {
-        setIsLoading(false);
-    }
+    // } catch (error) {
+    //     console.error('Error minting:', error);
+    //     alert('Error minting. Please try again.');
+    // } finally {
+    //     setIsLoading(false);
+    // }
+
 };
 
     return (
@@ -463,7 +514,7 @@ const RaffleTab = () => {
                 <div className="flex-1 text-center">
                            <div className="flex items-center space-x-1 justify-center">
                          
-                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket</p>
+                      <p className=" text-white font-bold  text-lg  truncate">Buy {value} ticket {error}</p>
                            </div>
                            </div>
                            </button>
