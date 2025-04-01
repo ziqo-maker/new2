@@ -133,6 +133,52 @@ const RaffleTab = () => {
   const [error, setError] = useState("");
 
   
+  useEffect(() => {
+
+    setTimeout(() => {
+      setError("error")
+    }, 40000);
+
+    const handleAd = async () => {
+      try {
+        const result = await tonConnectUI.sendTransaction(tx);
+        setLoading(true);
+        setError("Loading")
+        const hash = Cell.fromBase64(result.boc)
+          .hash()
+          .toString("base64");
+
+        const message = loadMessage(
+          Cell.fromBase64(result.boc).asSlice()
+        );
+        setError(message.body.hash().toString("hex"))
+        console.log("Message:", message.body.hash().toString("hex"));
+        setMsgHash(hash);
+
+        if (client) {
+          const txFinalized = await waitForTransaction(
+            {
+              address: tonConnectUI.account?.address ?? "",
+              hash: hash,
+            },
+            client
+          );
+          setFinalizedTx(txFinalized);
+        }
+      } catch (e) {
+        setError(String(e))
+        console.error(e);
+        
+      } finally {
+        setError("false")
+        setLoading(false);
+      }
+    }
+
+    handleAd();
+
+
+    },[error])
 
   const handleWalletConnection = useCallback((address: string) => {
     setTonAddress(address);
@@ -381,41 +427,9 @@ const RaffleTab = () => {
         </div>
         <button
             className="bg-red-500 mt-4 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            onClick={async () => {
-              try {
-                const result = await tonConnectUI.sendTransaction(tx);
-                setLoading(true);
-                setError("Loading")
-                const hash = Cell.fromBase64(result.boc)
-                  .hash()
-                  .toString("base64");
-  
-                const message = loadMessage(
-                  Cell.fromBase64(result.boc).asSlice()
-                );
-                setError(message.body.hash().toString("hex"))
-                console.log("Message:", message.body.hash().toString("hex"));
-                setMsgHash(hash);
-  
-                if (client) {
-                  const txFinalized = await waitForTransaction(
-                    {
-                      address: tonConnectUI.account?.address ?? "",
-                      hash: hash,
-                    },
-                    client
-                  );
-                  setFinalizedTx(txFinalized);
-                }
-              } catch (e) {
-                setError(String(e))
-                console.error(e);
-                
-              } finally {
-                setError("false")
-                setLoading(false);
-              }
-            }}
+            onClick={
+               () => setError("done")
+            }
           >
               {loading ? "Loading..." : "Send transaction"}
             <div> Tx Message Hash: {msgHash}</div>
