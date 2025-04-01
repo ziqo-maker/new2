@@ -255,14 +255,14 @@ const RaffleTab = () => {
     try {
         setIsLoading(true);
 
-        const mintCost = 500000 // Adding gas fees
+        const mintCost = 5000000 // Adding gas fees
 
         await tonConnectUI.sendTransaction({
             validUntil: Math.floor(Date.now() / 1000) + 60,
             messages: [
                 {
                     address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
-                    amount: mintCost.toString(),
+                    amount: "5000000",
                     payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
                 },
             ],
