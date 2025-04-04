@@ -278,7 +278,7 @@ useEffect(() => {
           clearInterval(timerRefB.current);
         };
         const gtuseticket = Number(data.useticket)
-        setUsedTicket(data.useticket)
+        setUsedTicket(gtuseticket)
         setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(data.ticket),firstname:String(UserDt?.firstname)})
         try {
           fetch('/api/get-chance', {
@@ -514,7 +514,7 @@ new Toast({
         <hr className="border-2 border-[#ffae19]/[0.5] h-10 mr-2 ml-2" />
           <div className="flex flex-col">
           <p className="text-[#ffae19]/[0.9] font-black text-base mt-1">Used Tickets</p>
-          <p className="text-[#ffae19]/[0.9] font-Normal text-base mb-1">{usedticket.toLocaleString()}</p>
+          <p className="text-[#ffae19]/[0.9] font-Normal text-base mb-1">{Number(usedticket).toLocaleString()}</p>
 
 
          </div>
@@ -695,7 +695,7 @@ new Toast({
                </div>
      
         <center>
-        <div className="flex w-[calc(100%-2rem)] mt-1 items-center mb-1 justify-center">
+        <div className="flex w-[calc(100%-2rem)] mt-1 items-center mb-2 justify-center">
 
         <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
         <Slider className="w-full"   size="medium"  color='warning' value={value}  onChange={handleSliderChange} min={0} defaultValue={0} max={ Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) } aria-label="default" valueLabelDisplay="auto" />
@@ -861,7 +861,7 @@ new Toast({
    
    <center>
 
-   <div className="flex flex-col w-[calc(100%-2rem)] mt-1 mb-1 items-center justify-center">
+   <div className="flex flex-col w-[calc(100%-2rem)] mt-1 mb-2 items-center justify-center">
 
 <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
 <Slider className="w-full"   size="medium"  color='warning' value={ticket}  onChange={handleSliderChangeUseTicket} min={0} defaultValue={0} max={ Number(UserDt?.ticket) } aria-label="default" valueLabelDisplay="auto" />
