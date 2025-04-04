@@ -260,9 +260,7 @@ useEffect(() => {
      
 
   useEffect(() => {
-  
-     setTimeout(() => {
-      
+        
       try {
         fetch('/api/get-ticket', {
          method: 'POST',
@@ -280,6 +278,17 @@ useEffect(() => {
           };
           const gtuseticket = Number(data.useticket)
           setUsedTicket(gtuseticket)
+           new Toast({
+                                position: "top-center",
+                                                          toastMsg: `${Number(data.ticket)}`,
+                                                          autoCloseTime: 15500,
+                                                          canClose: true,
+                                                          showProgress: true,
+                                                          pauseOnHover: true,
+                                                          pauseOnFocusLoss: true,
+                                                          type: "default",
+                                                          theme: "light"
+                                                        });
           try {
             fetch('/api/get-chance', {
              method: 'POST',
@@ -388,13 +397,11 @@ useEffect(() => {
      } catch (err) {
      }
 
-     }, 3000);
-
          if(refresh == false) {
           timerRefB.current = setInterval(() =>{
            
           setRefreshB(!refreshB)
-          },6000);
+          },3000);
          }
 
         return () => {  if (timerRefB.current) {
@@ -409,18 +416,19 @@ useEffect(() => {
         setRfrshValue(true)
         const decrease = value * 50000
       const plus = Number(UserDt?.gtpoint) - Number(decrease)
+      const mx = Number(UserDt?.ticket)+value
       try {
         fetch('/api/update-walkcoin', {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
          },
-         body: JSON.stringify({ idd: String(UserDt?.idd),usetoken:decrease,ticket:String(Number(UserDt?.ticket)+value) }),
+         body: JSON.stringify({ idd: String(UserDt?.idd),usetoken:decrease,ticket:String(mx) }),
        })
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          const mx = Number(UserDt?.ticket)+value
+          
           setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(mx),firstname:String(UserDt?.firstname)})
 new Toast({
         position: "top-center",
