@@ -72,3 +72,40 @@ model price {
   idd String @db.VarChar(500)
   lvl String @db.VarChar(10)
 }
+
+model Raffle {
+  id Int @id @default(autoincrement())
+  date1 DateTime @default(now())
+  date2 String @db.VarChar(500)
+  priceton String @db.VarChar(100)
+}
+
+model ticket {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  ticket String @db.Text
+}
+
+model useticket {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  ticket String @db.Text
+  name String @db.VarChar(500)
+}
+
+model transaction {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  tickets String @db.VarChar(100)
+  status String @db.VarChar(50)
+}
+
+model winners {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  name String @db.VarChar(100)
+}
