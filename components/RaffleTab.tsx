@@ -381,7 +381,19 @@ useEffect(() => {
            } catch (err) {
             
            }
+
            const gtticket = Number(data.ticket)
+            new Toast({
+                                 position: "top-center",
+                                                           toastMsg: `${gtticket}`,
+                                                           autoCloseTime: 15500,
+                                                           canClose: true,
+                                                           showProgress: true,
+                                                           pauseOnHover: true,
+                                                           pauseOnFocusLoss: true,
+                                                           type: "default",
+                                                           theme: "light"
+                                                         });
            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtticket),firstname:String(UserDt?.firstname)})
 
            } else {
