@@ -11,6 +11,7 @@ import CreateTask from './CreateTask'
 import Withdraw from './requestwithdraw'
 import Rating from './RatingTab'
 import Adsgram from './AdsgramTab'
+import RaffleTab from './RaffleTab'
 
 import { NewUserContext } from '@/contexts/UserContextB';
 import React,{useEffect,useState,useRef} from 'react';
@@ -160,6 +161,9 @@ const TabContainer = () => {
             </div>
             <div className={`${activeTab === 'rank' ? 'is-show' : 'is-hide'}`}>
                 <Adsgram />
+            </div>
+         <div className={`${activeTab === 'raffle' ? 'is-show' : 'is-hide'}`}>
+                <RaffleTab />
             </div>
         </div>
     )
