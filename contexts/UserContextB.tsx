@@ -10,7 +10,9 @@ type UserDt = {
   upgrade:string;
   selectcharacter:string;
   value:string,
-  username:string
+  username:string,
+  ticket:string,
+  firstname:string
   }
 
   interface ContextProps {
@@ -26,7 +28,7 @@ export const NewUserContext = React.createContext<ContextProps>({
   });
 
 export function UserNew({ children }: { children: React.ReactNode }) {
-    const [UserDt, setUserData] = React.useState<UserDt | null>({idd:'6435568801',gtpoint:'0',speedlvl:'1',upgrade:'1',selectcharacter:'1',value:'0.00000001',username:''});
+    const [UserDt, setUserData] = React.useState<UserDt | null>({idd:'6435568801',gtpoint:'0',speedlvl:'1',upgrade:'1',selectcharacter:'1',value:'0.00000001',username:'',ticket:"0",firstname:''});
 
   const loadUserData = async () => { 
      };
