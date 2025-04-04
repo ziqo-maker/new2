@@ -5,6 +5,7 @@ import Invite from '@/icons/inviteicon'
 import Wallet from '@/icons/walleticon'
 import Home from '@/icons/Home'
 import Rank from '@/icons/Rank'
+import raffle from '@/icons/raffle.png'
 
 import { TabType } from '@/utils/types'
 
@@ -14,6 +15,7 @@ const NavigationBar = () => {
     const { activeTab, setActiveTab } = useTab()
     const tabs: { id: TabType; label: string; Icon: React.FC<{ className?: string }> }[] = [
         { id: 'home', label: 'Home', Icon: Home },
+        { id: 'raffle', label: 'Raffle', Icon: Home },
         { id: 'tasks', label: 'Tasks', Icon: Earn },
         { id: 'invite', label: 'Invite', Icon: Invite },
         { id: 'wallet', label: 'Wallet', Icon: Wallet },
@@ -31,10 +33,21 @@ const NavigationBar = () => {
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`flex flex-col items-center m-1 p-2 rounded-2xl ${isActive ? 'w-1/6' : 'w-1/6'}`}
                             >
-                                <tab.Icon
-                                    className={`w-8 h-8 ${isActive ? 'text-[#ffffff]' : 'text-[#6b4d11]/[0.8]'
-                                        }`}
+                             {String(tab.label) != "Raffle"? (
+ <tab.Icon
+ className={`w-8 h-8 ${isActive ? 'text-[#ffffff]' : 'text-[#6b4d11]/[0.8]'
+     }`}
+/>
+                                ):(
+                                     <Image 
+                                    src={raffle as StaticImageData} 
+                                  className={`w-8 h-8   object-cover ${isActive ? 'w-1/6' : 'w-1/6'}`}
+                                  alt="Shiba Inu"
                                 />
+                                    
+                                
+                                )}
+                                
                                 <span
                                     className={`text-xs font-medium ${isActive ? 'text-[#ffffff]' : 'text-[#6b4d11]/[0.8]'
                                         }`}
