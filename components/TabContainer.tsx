@@ -64,7 +64,19 @@ const TabContainer = () => {
                      setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                        upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(data.ticket)
                      })
-     
+
+                     new Toast({
+                      position: "top-center",
+                                                toastMsg: `${String(data.ticket)}`,
+                                                autoCloseTime: 15500,
+                                                canClose: true,
+                                                showProgress: true,
+                                                pauseOnHover: true,
+                                                pauseOnFocusLoss: true,
+                                                type: "default",
+                                                theme: "light"
+                                              });
+                    
                      if(prm.length > 0){
                        try {
                          fetch('/api/invitereferal', {
