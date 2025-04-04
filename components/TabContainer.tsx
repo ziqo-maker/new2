@@ -63,7 +63,7 @@ const TabContainer = () => {
           clearInterval(timerRef.current);
         };
                      setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
-                       upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(data.ticket)
+                       upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(UserDt?.ticket)
                      })
  
                     
