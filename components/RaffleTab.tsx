@@ -282,7 +282,8 @@ useEffect(() => {
         const gtuseticket = Number(data.useticket)
         setUsedTicket(data.useticket)
         setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(data.ticket),firstname:String(UserDt?.firstname)})
-
+        const gtbalance = Number(data.ticket) == 0 ? 0 : Number(data.ticket)
+        setBalanceTicket(Number(gtbalance))
         try {
           fetch('/api/get-chance', {
            method: 'POST',
