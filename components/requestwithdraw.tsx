@@ -68,7 +68,7 @@ const Withdraw = () => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(points),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(points),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
           new Toast({
             position: "top-center",
             toastMsg: "Your request has been registered.",
