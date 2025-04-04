@@ -280,7 +280,8 @@ useEffect(() => {
         const gtuseticket = Number(data.useticket)
         const gtbalanceticket = Number(data.ticket)
         setUsedTicket(gtuseticket)
-        // setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtbalanceticket),firstname:String(UserDt?.firstname)})
+        const point = Number(UserDt?.gtpoint)
+        setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(point),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtbalanceticket),firstname:String(UserDt?.firstname)})
         try {
           fetch('/api/get-chance', {
            method: 'POST',
@@ -404,10 +405,8 @@ useEffect(() => {
      },[refreshB])
 
      const buyticketwithwalkcoin = async (rfrshvalue:boolean) => {
-      setDays("click")
       if(rfrshvalue == false){
         setRfrshValue(true)
-        setSeconds("nan")
         const decrease = value * 50000
       const plus = Number(UserDt?.gtpoint) - Number(decrease)
       try {
@@ -421,8 +420,8 @@ useEffect(() => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          setValue(0)
-          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(Number(UserDt?.ticket)+value),firstname:String(UserDt?.firstname)})
+          const mx = Number(UserDt?.ticket)+value
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(mx),firstname:String(UserDt?.firstname)})
 new Toast({
         position: "top-center",
         toastMsg: `You're received ${value.toLocaleString()} ${value <= 1 ? 'ticket' : 'tickets'} for ${decrease.toLocaleString()} WalkCoin `,
@@ -434,6 +433,7 @@ new Toast({
         type: "default",
         theme: "light"
       });
+      setValue(0)
            setRfrshValue(false)
          } else {
           
