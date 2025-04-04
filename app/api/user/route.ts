@@ -36,15 +36,15 @@ export async function POST(req: NextRequest) {
             })
         }
 
-        let ticket = await prisma.ticket.findFirst({
+        let ticketuser = await prisma.ticket.findFirst({
                     where: { idd: String(userData.id) }
                 })
                       
-                if (!ticket) {
-                    ticket = await prisma.ticket.create({
+                if (!ticketuser) {
+                    ticketuser = await prisma.ticket.create({
                         data: {
                             idd: String(userData.id),
-                            ticket:"0"
+                            ticket: "0"
                         }
                     })
                   
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
 
         return NextResponse.json({idd:String(userData.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
-            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue),ticket:String(ticket)})
+            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue),ticket:String(ticketuser)})
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: error }, { status: 500 })
