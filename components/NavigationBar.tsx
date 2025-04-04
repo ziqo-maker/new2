@@ -6,6 +6,7 @@ import Wallet from '@/icons/walleticon'
 import Home from '@/icons/Home'
 import Rank from '@/icons/Rank'
 import raffle from '@/icons/raffle.png'
+import Image, {StaticImageData} from "next/image"
 
 import { TabType } from '@/utils/types'
 
