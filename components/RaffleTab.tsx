@@ -261,63 +261,95 @@ useEffect(() => {
 
   useEffect(() => {
   
+     setTimeout(() => {
+      
+      try {
+        fetch('/api/get-ticket', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ idd: String(UserDt?.idd),ticket:String(UserDt?.ticket),ticketb:String(usedticket) }),
+       })
+       .then((res) => res.json())
+       .then((data) => {
+         if (data.success) {
+          setRefresh(true)
+          if (timerRefB.current) {
+            clearInterval(timerRefB.current);
+          };
+          const gtuseticket = Number(data.useticket)
+          const gtbalanceticket = Number(data.ticket)
+          setUsedTicket(gtuseticket)
+          const point = Number(UserDt?.gtpoint)
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(point),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtbalanceticket),firstname:String(UserDt?.firstname)})
+          try {
+            fetch('/api/get-chance', {
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({}),
+           })
+           .then((res) => res.json())
+           .then((data) => {
+            if(data.success){
+             
+              var cnt = 0
+              var nmb = 0
+              data.all.forEach((t: any)=> {
+                nmb += Number(t.ticket)
+                cnt++
+                if(cnt <= 15){
+    
+                  let model = {
+                    id:String(cnt),
+                    name:t.name,
+                    ticket:t.ticket,
+                 }
+                 
+                 gtBoard.push(model)
+                
+                }
+              })
+              const gtchance = (gtuseticket / Number(nmb)) * Number(100)
+              setChance(gtchance)
+            }
+           })
   
-    try {
-      fetch('/api/get-ticket', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ idd: String(UserDt?.idd),ticket:String(UserDt?.ticket),ticketb:String(usedticket) }),
-     })
-     .then((res) => res.json())
-     .then((data) => {
-       if (data.success) {
-        setRefresh(true)
-        if (timerRefB.current) {
-          clearInterval(timerRefB.current);
-        };
-        const gtuseticket = Number(data.useticket)
-        const gtbalanceticket = Number(data.ticket)
-        setUsedTicket(gtuseticket)
-        const point = Number(UserDt?.gtpoint)
-        setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(point),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtbalanceticket),firstname:String(UserDt?.firstname)})
-        try {
-          fetch('/api/get-chance', {
-           method: 'POST',
-           headers: {
-             'Content-Type': 'application/json',
-           },
-           body: JSON.stringify({}),
-         })
-         .then((res) => res.json())
-         .then((data) => {
-          if(data.success){
-           
-            var cnt = 0
-            var nmb = 0
-            data.all.forEach((t: any)=> {
-              nmb += Number(t.ticket)
-              cnt++
-              if(cnt <= 15){
-  
+           try {
+            fetch('/api/get-winner', {
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({ idd: String(UserDt?.idd) }),
+           })
+           .then((res) => res.json())
+           .then((data) => {
+            if(data.success){
+             
+              var nmb = 1
+              data.all.forEach((t: any)=> {
                 let model = {
-                  id:String(cnt),
-                  name:t.name,
-                  ticket:t.ticket,
+                  id:String(nmb),
+                  date:t.date,
+                  amount:t.amount,
+                  name:t.name
                }
+               nmb++
+               gtWinner.push(model)
                
-               gtBoard.push(model)
-              
-              }
-            })
-            const gtchance = (gtuseticket / Number(nmb)) * Number(100)
-            setChance(gtchance)
-          }
-         })
-
+              })
+            
+            }
+           })
+         } catch (err) {
+          
+         }
+  
          try {
-          fetch('/api/get-winner', {
+          fetch('/api/get-transaction', {
            method: 'POST',
            headers: {
              'Content-Type': 'application/json',
@@ -334,10 +366,11 @@ useEffect(() => {
                 id:String(nmb),
                 date:t.date,
                 amount:t.amount,
-                name:t.name
+                tickets:t.tickets,
+                status:t.status
              }
              nmb++
-             gtWinner.push(model)
+             gtTransaction.push(model)
              
             })
           
@@ -346,55 +379,25 @@ useEffect(() => {
        } catch (err) {
         
        }
-
-       try {
-        fetch('/api/get-transaction', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ idd: String(UserDt?.idd) }),
-       })
-       .then((res) => res.json())
-       .then((data) => {
-        if(data.success){
-         
-          var nmb = 1
-          data.all.forEach((t: any)=> {
-            let model = {
-              id:String(nmb),
-              date:t.date,
-              amount:t.amount,
-              tickets:t.tickets,
-              status:t.status
-           }
-           nmb++
-           gtTransaction.push(model)
+  
+         } catch (err) {
+          
+         }
            
-          })
-        
-        }
+         } else {
+          
+         }
        })
      } catch (err) {
-      
      }
 
-       } catch (err) {
-        
-       }
-         
-       } else {
-        
-       }
-     })
-   } catch (err) {
-   }
+     }, 3000);
 
          if(refresh == false) {
           timerRefB.current = setInterval(() =>{
            
           setRefreshB(!refreshB)
-          },3000);
+          },6000);
          }
 
         return () => {  if (timerRefB.current) {
