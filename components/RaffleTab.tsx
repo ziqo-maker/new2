@@ -50,7 +50,6 @@ const RaffleTab = () => {
   const [tonAddress, setTonAddress] = useState<string | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const [value, setValue] = React.useState(0);
-  const [mx, setMx] = useState(0);
   const [buyTicket, setBuyTicket] = useState(0);
   const [ticket, setTicket] = useState(0);
   const [verifybuy, setVerifyBuy] = useState(false);
@@ -278,8 +277,6 @@ useEffect(() => {
         if (timerRefB.current) {
           clearInterval(timerRefB.current);
         };
-        setMx(Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()))
-        setTicket(Number(data.ticket))
         const gtuseticket = Number(data.useticket)
         setUsedTicket(data.useticket)
         setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(data.ticket),firstname:String(UserDt?.firstname)})
@@ -395,7 +392,7 @@ useEffect(() => {
           timerRefB.current = setInterval(() =>{
            
           setRefreshB(!refreshB)
-          },6000);
+          },3000);
          }
 
         return () => {  if (timerRefB.current) {
@@ -423,7 +420,6 @@ useEffect(() => {
        .then((data) => {
          if (data.success) {
           setValue(0)
-          setMx(Number(((plus - Number(50000)) /Number(50000)).toFixed()))
           setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(Number(UserDt?.ticket)+value),firstname:String(UserDt?.firstname)})
 new Toast({
         position: "top-center",
@@ -702,11 +698,11 @@ new Toast({
         <div className="flex w-[calc(100%-2rem)] mt-1 items-center mb-1 justify-center">
 
         <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
-        <Slider className="w-full"   size="medium"  color='warning' value={value}  onChange={handleSliderChange} min={0} defaultValue={0} max={ mx } aria-label="default" valueLabelDisplay="auto" />
+        <Slider className="w-full"   size="medium"  color='warning' value={value}  onChange={handleSliderChange} min={0} defaultValue={0} max={ Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) } aria-label="default" valueLabelDisplay="auto" />
 
-        <div className={`${mx <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full'}  justify-between`}>
-        <p className={`${mx <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
-        <p className={`${mx <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{mx} max</p>
+        <div className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full'}  justify-between`}>
+        <p className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
+        <p className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed())} max</p>
 
         </div>
            
@@ -852,6 +848,7 @@ new Toast({
               className="w-10 h-10 aspect-square object-cover"
               alt=""
             />
+
                       <div className="flex-grow text-center ">
                       <div className="flex flex-col items-center justify-center">
                       <p className=" text-white font-bold text-base mr-6 truncate">Remaining Tickets</p>
