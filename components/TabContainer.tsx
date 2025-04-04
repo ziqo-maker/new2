@@ -120,6 +120,26 @@ const TabContainer = () => {
                   } catch (err) {
                   }
 
+                    try {
+                      fetch('/api/updatedt', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({ idd: String(data.idd) }),
+                    })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.success) {
+                        const gtticket = Number(data.ticket)
+           setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtticket),firstname:String(UserDt?.firstname)})
+                      } else {
+                        
+                      }
+                    })
+                  } catch (err) {
+                  }
+
                    }
                  })
                  .catch((err) => {
