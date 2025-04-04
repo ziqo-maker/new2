@@ -566,24 +566,15 @@ new Toast({
           >
             Disconnect Wallet
           </button>
-          <p className="text-black/[0.9] mt-1">Connected: {formatAddress(tonAddress)}</p>
+          <p className="text-black/[0.9] mt-1 text-sm">Connected: {formatAddress(tonAddress)}</p>
         </div>
       ) : (
-<div className="flex flex-col mt-2  items-center">
-          <button
-            onClick={handleWalletAction}
-            className="bg-red-500 hover:bg-red-700 text-white text-[15px] font-bold py-2 px-4 rounded-full"
-          >
-            Disconnect Wallet
-          </button>
-          <p className="text-black/[0.9] mt-1 text-sm">Connected: 55888</p>
-        </div>
-        // <button
-        //   onClick={handleWalletAction}
-        //   className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-[15px] py-2 px-4 rounded-full"
-        // >
-        //   Connect TON Wallet
-        // </button>
+        <button
+          onClick={handleWalletAction}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold text-[15px] py-2 px-4 rounded-full"
+        >
+          Connect TON Wallet
+        </button>
       )}
                 </div>
 
@@ -631,9 +622,9 @@ new Toast({
           </div>
         </div>
 
-        <div className="flex relative overflow-x-auto mt-4 space-x-2 mr-4 ml-4">
+        <div className="flex relative overflow-x-auto mt-4 space-x-2">
           <div className="w-1"/>
-          <button onClick={() => setChsCtg(1)} className={`${chsCtg == 1 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px]`}>
+          <button onClick={() => setChsCtg(1)} className={`${chsCtg == 1 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-2 py-[8px]`}>
                            
           
                                  <div className="flex-1 text-center">
@@ -643,7 +634,7 @@ new Toast({
                                  </div>
                                  </div>
                                  </button>
-                                 <button onClick={() => setChsCtg(2)} className={`${chsCtg == 2 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px]`}>
+                                 <button onClick={() => setChsCtg(2)} className={`${chsCtg == 2 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-2 py-[8px]`}>
                            
           
                                  <div className="flex-1 text-center">
@@ -654,7 +645,7 @@ new Toast({
                                  </div>
                                  </button>
 
-                                 <button onClick={() => setChsCtg(3)} className={`${chsCtg == 3 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px]`}>
+                                 <button onClick={() => setChsCtg(3)} className={`${chsCtg == 3 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-2 py-[8px]`}>
                            
           
                                  <div className="flex-1 text-center">
@@ -665,7 +656,7 @@ new Toast({
                                  </div>
                                  </button>
 
-                                 <button onClick={() => setChsCtg(4)} className={`${chsCtg == 4 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px]`}>
+                                 <button onClick={() => setChsCtg(4)} className={`${chsCtg == 4 ? '' : 'opacity-70'} flex flex-grow  bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-2 py-[8px]`}>
                           
           
                                  <div className="flex-1 text-center">
@@ -746,7 +737,7 @@ new Toast({
 </div>
           </center>
         <center >
-        <button onClick={() => {handlePayment}} className={`  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
+        <button onClick={() => handlePayment} className={`  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
                            
           
                            <div className="flex-1 text-center">
@@ -772,7 +763,7 @@ new Toast({
                       <p className="text-black/[0.8] font-black text-sm ml-1 ">x 100</p>
              </div>
           
-             <Button onClick={() => setBuyTicket(1)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] rounded-full py-2 px-1">
+             <Button onClick={() => setBuyTicket(1)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
              <Image
                src={Ton as StaticImageData}
              className="w-6 h-6 "
@@ -797,7 +788,7 @@ new Toast({
                       <p className="text-black/[0.8] font-black text-sm ml-1 ">x 250</p>
              </div>
           
-             <Button onClick={() => setBuyTicket(2)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] rounded-full py-2 px-1">
+             <Button onClick={() => setBuyTicket(2)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
              <Image
                src={Ton as StaticImageData}
              className="w-6 h-6 "
@@ -822,7 +813,7 @@ new Toast({
                       <p className="text-black/[0.8] font-black text-sm ml-1 ">x 500</p>
              </div>
           
-             <Button onClick={() => setBuyTicket(3)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] rounded-full py-2 px-1">
+             <Button onClick={() => setBuyTicket(3)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
              <Image
                src={Ton as StaticImageData}
              className="w-6 h-6 "
