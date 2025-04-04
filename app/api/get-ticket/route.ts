@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
             user = await prisma.ticket.create({
                 data: {
                     idd,
-                    ticket
+                    ticket:"0"
                 }
             })
           
