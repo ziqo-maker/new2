@@ -66,7 +66,7 @@ const CharactersTab = () => {
            .then((res) => res.json())
            .then((data) => {
             if(data.success){
-                setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(id),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
+                setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(id),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(UserDt?.firstname),ticket:String(UserDt?.ticket)})
                new Toast({
                              position: "top-center",
                              toastMsg: "Close and reopen the mini app to see the changes",
