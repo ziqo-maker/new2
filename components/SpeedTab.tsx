@@ -46,7 +46,7 @@ const SpeedTab = () => {
              .then((res) => res.json())
              .then((data) => {
               if(data.success){
-                 setUserData({idd:String(UserDt?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
+                 setUserData({idd:String(UserDt?.idd),speedlvl:String(lvl),gtpoint:String(decreasepoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
                  new Toast({
                                position: "top-center",
                                toastMsg: "Done.",
