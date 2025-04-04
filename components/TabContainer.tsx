@@ -11,7 +11,6 @@ import CreateTask from './CreateTask'
 import Withdraw from './requestwithdraw'
 import Rating from './RatingTab'
 import Adsgram from './AdsgramTab'
-import RaffleTab from './RaffleTab'
 
 import { NewUserContext } from '@/contexts/UserContextB';
 import React,{useEffect,useState,useRef} from 'react';
@@ -136,7 +135,7 @@ const TabContainer = () => {
     return (
         <div className="flex-1 overflow-hidden max-w-xl mx-auto">
             <div className={`${activeTab === 'home' ? 'is-show' : 'is-hide'}`}>
-                 <RaffleTab />
+                 <HomeTab />
             </div>
             <div className={`${activeTab === 'tasks' ? 'is-show' : 'is-hide'}`}>
                 <TasksTab />
