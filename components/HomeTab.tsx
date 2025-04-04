@@ -175,7 +175,7 @@ useEffect(() => {
                         type: "default",
                         theme: "light"
                       });
-          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
           setClaim(false)
           setReady(true)
           setMiningPoint(0)
@@ -265,7 +265,7 @@ useEffect(() => {
                                    if(lvlup >= 6){
                             setBlnLvl(false)
                            }
-                                   setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username)})
+                                   setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
                                    new Toast({
                                     position: "top-center",
                                     toastMsg: "Done.",
