@@ -94,7 +94,7 @@ const TasksTab = () => {
          .then((data) => {
            if (data.success) {
             const plus = Number(UserDt?.gtpoint) + 2000
-            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
+            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
             const lcl = 2000
             new Toast({
               position: "top-center",
@@ -226,7 +226,7 @@ const TasksTab = () => {
               theme: "light"
             });
             const getpoint = Number(UserDt?.gtpoint) + cost
-            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
+            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
 
           }
          })
@@ -277,7 +277,7 @@ const TasksTab = () => {
               theme: "light"
             });
             const getpoint = Number(UserDt?.gtpoint) + cost
-            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
+            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
 
           }
          })
@@ -339,7 +339,7 @@ const TasksTab = () => {
               theme: "light"
             });
             const getpoint = Number(UserDt?.gtpoint) + cost
-            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username)})
+            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(getpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
 
           }
          })
