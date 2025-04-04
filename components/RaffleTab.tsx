@@ -56,7 +56,6 @@ const RaffleTab = () => {
   const [verifybuy, setVerifyBuy] = useState(false);
 
   const [usedticket, setUsedTicket] = useState(0);
-  const [ticketbalance, setBalanceTicket] = useState(0);
 
   const [chsCtg, setChsCtg] = useState(1);
 
@@ -270,7 +269,7 @@ useEffect(() => {
        headers: {
          'Content-Type': 'application/json',
        },
-       body: JSON.stringify({ idd: String(UserDt?.idd),ticket:String(ticketbalance),ticketb:String(usedticket) }),
+       body: JSON.stringify({ idd: String(UserDt?.idd),ticket:String(UserDt?.ticket),ticketb:String(usedticket) }),
      })
      .then((res) => res.json())
      .then((data) => {
@@ -282,8 +281,6 @@ useEffect(() => {
         const gtuseticket = Number(data.useticket)
         setUsedTicket(data.useticket)
         setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(data.ticket),firstname:String(UserDt?.firstname)})
-        const gtbalance = Number(data.ticket) == 0 ? 0 : Number(data.ticket)
-        setBalanceTicket(Number(gtbalance))
         try {
           fetch('/api/get-chance', {
            method: 'POST',
@@ -700,7 +697,7 @@ new Toast({
                </div>
      
         <center>
-        <div className="flex w-[calc(100%-2rem)] mt-1 items-center justify-center">
+        <div className="flex w-[calc(100%-2rem)] mt-1 items-center mb-1 justify-center">
 
         <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
         <Slider className="w-full"   size="medium"  color='warning' value={value}  onChange={handleSliderChange} min={0} defaultValue={0} max={ mx } aria-label="default" valueLabelDisplay="auto" />
@@ -865,7 +862,7 @@ new Toast({
    
    <center>
 
-   <div className="flex flex-col w-[calc(100%-2rem)] mt-1 items-center justify-center">
+   <div className="flex flex-col w-[calc(100%-2rem)] mt-1 mb-1 items-center justify-center">
 
 <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
 <Slider className="w-full"   size="medium"  color='warning' value={ticket}  onChange={handleSliderChangeUseTicket} min={0} defaultValue={0} max={ Number(UserDt?.ticket) } aria-label="default" valueLabelDisplay="auto" />
