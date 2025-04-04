@@ -50,7 +50,7 @@ const RaffleTab = () => {
   const [tonAddress, setTonAddress] = useState<string | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const [value, setValue] = React.useState(0);
-  const [mx, setMx] = React.useState(Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()));
+  const [mx, setMx] = useState(0);
   const [buyTicket, setBuyTicket] = useState(0);
   const [ticket, setTicket] = useState(0);
   const [verifybuy, setVerifyBuy] = useState(false);
@@ -278,6 +278,8 @@ useEffect(() => {
         if (timerRefB.current) {
           clearInterval(timerRefB.current);
         };
+        setMx(Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()))
+        setTicket(Number(data.ticket))
         const gtuseticket = Number(data.useticket)
         setUsedTicket(data.useticket)
         setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(data.ticket),firstname:String(UserDt?.firstname)})
