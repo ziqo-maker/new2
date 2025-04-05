@@ -7,11 +7,11 @@ import type { AdController, ShowPromiseResult } from '@/types/adsgram';
 
 export interface useAdsgramParams {
   blockId: string;
-  onReward?: () => void;
+  onRewardC?: () => void;
   onError?: (result: ShowPromiseResult) => void;
 }
 
-export function useAdsgram({ blockId, onReward, onError }: useAdsgramParams): () => Promise<void> {
+export function useAdsgramC({ blockId, onRewardC, onError }: useAdsgramParams): () => Promise<void> {
   const AdControllerRef = useRef<AdController | undefined>(undefined);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export function useAdsgram({ blockId, onReward, onError }: useAdsgramParams): ()
         .show()
         .then(() => {
           // user watch ad till the end or close it in interstitial format
-          onReward?.();
+          onRewardC?.();
         })
         .catch((result: ShowPromiseResult) => {
           // user get error during playing ad
@@ -38,5 +38,5 @@ export function useAdsgram({ blockId, onReward, onError }: useAdsgramParams): ()
         description: 'Adsgram script not loaded',
       });
     }
-  }, [onError, onReward]);
+  }, [onError, onRewardC]);
 }

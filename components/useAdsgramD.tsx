@@ -11,7 +11,7 @@ export interface useAdsgramParams {
   onError?: (result: ShowPromiseResult) => void;
 }
 
-export function useAdsgram({ blockId, onReward, onError }: useAdsgramParams): () => Promise<void> {
+export function useAdsgramD({ blockId, onReward, onError }: useAdsgramParams): () => Promise<void> {
   const AdControllerRef = useRef<AdController | undefined>(undefined);
 
   useEffect(() => {
@@ -28,15 +28,10 @@ export function useAdsgram({ blockId, onReward, onError }: useAdsgramParams): ()
         })
         .catch((result: ShowPromiseResult) => {
           // user get error during playing ad
-          onError?.(result);
+          
         });
     } else {
-      onError?.({
-        error: true,
-        done: false,
-        state: 'load',
-        description: 'Adsgram script not loaded',
-      });
+      
     }
   }, [onError, onReward]);
 }
