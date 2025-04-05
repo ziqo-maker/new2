@@ -953,7 +953,7 @@ new Toast({
 
       <div className="flex flex-col w-full">
         <center>
-        <div className=" w-[calc(100%-3rem)] flex flex-col mt-4 text-center font-bold text-wrap">
+        <div className=" w-[calc(100%-2rem)] flex flex-col mt-4 text-center font-bold text-wrap">
               <p className=" text-[#ffae19]/[0.9] font-Large text-base">Top 15 players who used the most tickets</p>
               <p className="text-[#ffae19]/[0.8] font-normal text-sm  ">Remember that the tickets you used to participate will be reset after the draw.</p>
 
@@ -1005,7 +1005,7 @@ new Toast({
                 {gtBoard.map((task,index) => {
                   return(
                    <tbody key={index}>
-                    <tr className=" text-black text-wrap">
+                    <tr className=" text-black text-wrap text-sm">
                     <th scope="row" className="pl-5 px-2 text-wrap text-start text-sm  font-medium  whitespace-nowrap ">
                         {task.id}
                     </th>
@@ -1045,7 +1045,7 @@ new Toast({
 
         <div className="flex flex-col w-full">
         <center>
-        <div className=" w-[calc(100%-3rem)] flex flex-col mt-4 text-center font-bold text-wrap">
+        <div className=" w-[calc(100%-2rem)] flex flex-col mt-4 text-center font-bold text-wrap">
               <p className=" text-[#ffae19]/[0.9] font-Large text-base">Previous winners</p>
               <p className=" text-[#ffae19]/[0.8] font-normal text-sm ">Here is the list of past raffle winners, proof that luck isn't entirely a myth.</p>
              
@@ -1080,7 +1080,7 @@ new Toast({
                 {gtWinner.map((task,index) => {
                   return(
                    <tbody key={index}>
-                    <tr className=" text-black text-wrap">
+                    <tr className=" text-black text-wrap text-sm">
                     <th scope="row" className="pl-5 px-2 text-sm text-black text-wrap  text-start font-normal  whitespace-nowrap ">
                     {task.name}
                     </th>
@@ -1124,7 +1124,7 @@ new Toast({
         <div className="flex flex-col w-full">
 
         <center>
-        <div className=" w-[calc(100%-3rem)] flex flex-col mt-4 text-center font-bold text-wrap">
+        <div className=" w-[calc(100%-2rem)] flex flex-col mt-4 text-center font-bold text-wrap">
               <p className=" text-[#ffae19]/[0.9] font-Large text-base">All your ton transactions</p>
               <p className=" text-[#ffae19]/[0.8] font-normal text-sm ">Here is a list of all transactions where you bought tickets with ton</p>
              
@@ -1159,7 +1159,7 @@ new Toast({
                 {gtTransaction.map((task,index) => {
                   return(
                    <tbody key={index}>
-                    <tr className=" text-black text-wrap">
+                    <tr className=" text-black text-wrap text-sm">
                     <th scope="row" className="pl-5 px-2 text-black text-wrap text-sm   text-start font-bold  whitespace-nowrap ">
                     {new Date(task.date).toDateString()}
                     </th>
