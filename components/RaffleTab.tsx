@@ -290,7 +290,7 @@ useEffect(() => {
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String(UserDt?.idd) }),
+           body: JSON.stringify({ idd: String(6124587322) }),
          })
          .then((res) => res.json())
          .then((data) => {
