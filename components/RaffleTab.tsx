@@ -321,7 +321,7 @@ useEffect(() => {
              .then((res) => res.json())
              .then((data) => {
               if(data.success){
-               
+               setBoard([])
                 var cnt = 0
                 var nmb = 0
                 data.all.forEach((t: any)=> {
