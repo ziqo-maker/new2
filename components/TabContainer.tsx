@@ -9,15 +9,13 @@ import SpeedTab from './SpeedTab'
 import CharactersTab from './CharactersTab'
 import CreateTask from './CreateTask'
 import Withdraw from './requestwithdraw'
-import Rating from './RatingTab'
-import Adsgram from './AdsgramTab'
 import Toast from 'typescript-toastify';
-
 import { NewUserContext } from '@/contexts/UserContextB';
 import React,{useEffect,useState,useRef} from 'react';
 import RaffleTab from './RaffleTab'
 
 import { WebApp } from '@twa-dev/types'
+import RatingTab from './RatingTab'
 
  declare global {
     interface Window {
@@ -29,7 +27,7 @@ import { WebApp } from '@twa-dev/types'
 
 const TabContainer = () => {
     const { activeTab } = useTab()
-          const { setUserData,UserDt } = React.useContext(NewUserContext);
+     const { setUserData,UserDt } = React.useContext(NewUserContext);
  const [refresh, setRefresh] = useState<boolean>(false);
       const timerRef = useRef<NodeJS.Timeout | null>(null);
        const [refreshB, setRefreshB] = useState<boolean>(false);
@@ -62,9 +60,17 @@ const TabContainer = () => {
         if (timerRef.current) {
           clearInterval(timerRef.current);
         };
-        const gtpnt = Number(data.gtpoint)
-                     setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
-                       upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(UserDt?.ticket)
+                    const gtpnt = Number(data.gtpoint)
+                    const gtticket = Number(data.ticket)
+        const selectchrctr = String(data.selectcharacter)
+        const gtidd = String(data.idd)
+        const gtspeedlvl = String(data.speedlvl)
+        const gtupgrade = String(data.upgrade)
+        const gtusername = String(data.username)
+        const gtvalue = String(data.username)
+        const gtfirstname = String(data.firstname)   
+     setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
+                       upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(gtticket)
                      })                      
                     
                      if(prm.length > 0){
@@ -79,7 +85,20 @@ const TabContainer = () => {
                        .then((res) => res.json())
                        .then((data) => {
                          if (data.success) {
-                           
+                           const gt = String(data.first)
+                           if(gt == "1"){
+                            new Toast({
+                              position: "top-center",
+                                                        toastMsg: `Hello, welcome to WalkCoin! The next time you open the app, you will receive your ${Number(50000).toLocaleString()} WalkCoin tokens.`,
+                                                        autoCloseTime: 15500,
+                                                        canClose: true,
+                                                        showProgress: true,
+                                                        pauseOnHover: true,
+                                                        pauseOnFocusLoss: true,
+                                                        type: "default",
+                                                        theme: "light"
+                                                      });
+                           }
                          } else {
                            
                          }
@@ -108,47 +127,26 @@ const TabContainer = () => {
                   } catch (err) {
                   }
 
-                    try {
-                      fetch('/api/get-ticketbalance', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({ idd: String(data.idd) }),
-                    })
-                    .then((res) => res.json())
-                    .then((data) => {
-                      if (data.success) {
-                        const gtticket = Number(data.ticket)
-                        new Toast({
-                          position: "top-center",
-                                                    toastMsg: `points: ${gtpnt}`,
-                                                    autoCloseTime: 15500,
-                                                    canClose: true,
-                                                    showProgress: true,
-                                                    pauseOnHover: true,
-                                                    pauseOnFocusLoss: true,
-                                                    type: "default",
-                                                    theme: "light"
-                                                  });
-                         new Toast({
-                      position: "top-center",
-                                                toastMsg: `ticket: ${gtticket}`,
-                                                autoCloseTime: 15500,
-                                                canClose: true,
-                                                showProgress: true,
-                                                pauseOnHover: true,
-                                                pauseOnFocusLoss: true,
-                                                type: "default",
-                                                theme: "light"
-                                              });
-           setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(gtpnt),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtticket),firstname:String(UserDt?.firstname)})
-                      } else {
+           //          try {
+           //            fetch('/api/get-ticketbalance', {
+           //            method: 'POST',
+           //            headers: {
+           //              'Content-Type': 'application/json',
+           //            },
+           //            body: JSON.stringify({ idd: String(data.idd) }),
+           //          })
+           //          .then((res) => res.json())
+           //          .then((data) => {
+           //            if (data.success) {
+           //              const gtticket = Number(data.ticket)
                         
-                      }
-                    })
-                  } catch (err) {
-                  }
+           // setUserData({idd:String(gtidd),speedlvl:String(gtspeedlvl),gtpoint:String(gtpnt),selectcharacter:String(selectchrctr),upgrade:String(gtupgrade),value:String(gtvalue),username:String(gtusername),ticket:String(gtticket),firstname:String(gtfirstname)})
+           //            } else {
+                        
+           //            }
+           //          })
+           //        } catch (err) {
+           //        }
 
                    }
                  })
@@ -179,7 +177,7 @@ const TabContainer = () => {
     return (
         <div className="flex-1 overflow-hidden max-w-xl mx-auto">
             <div className={`${activeTab === 'home' ? 'is-show' : 'is-hide'}`}>
-                 <HomeTab />
+                <HomeTab />
             </div>
             <div className={`${activeTab === 'tasks' ? 'is-show' : 'is-hide'}`}>
                 <TasksTab />
@@ -203,11 +201,12 @@ const TabContainer = () => {
                 <Withdraw />
             </div>
             <div className={`${activeTab === 'rank' ? 'is-show' : 'is-hide'}`}>
-                <Adsgram />
+                <RatingTab />
             </div>
          <div className={`${activeTab === 'raffle' ? 'is-show' : 'is-hide'}`}>
                 <RaffleTab />
             </div>
+           
         </div>
     )
 }
