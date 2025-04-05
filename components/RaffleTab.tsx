@@ -954,7 +954,7 @@ new Toast({
       <div className="flex flex-col w-full">
         <center>
         <div className=" w-[calc(100%-2rem)] flex flex-col mt-4 text-center font-bold text-wrap">
-              <p className=" text-[#ffae19]/[0.9] font-Large text-base">Top 15 players who used the most tickets</p>
+              <p className=" text-[#ffae19]/[0.9] ml-1 mr-1 font-Large text-base">Top 15 players who used the most tickets</p>
               <p className="text-[#ffae19]/[0.8] font-normal text-sm  ">Remember that the tickets you used to participate will be reset after the draw.</p>
 
               <div className="flex w-full   items-center  justify-center items-center">
