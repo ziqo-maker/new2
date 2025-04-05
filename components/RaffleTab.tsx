@@ -285,17 +285,6 @@ useEffect(() => {
   useEffect(() => {
         
         try {
-          new Toast({
-            position: "top-center",
-            toastMsg: `id : ${String(UserDt?.idd)}`,
-            autoCloseTime: 15500,
-            canClose: true,
-            showProgress: true,
-            pauseOnHover: true,
-            pauseOnFocusLoss: true,
-            type: "default",
-            theme: "light"
-          });
           fetch('/api/get-ticket', {
            method: 'POST',
            headers: {
@@ -306,7 +295,7 @@ useEffect(() => {
          .then((res) => res.json())
          .then((data) => {
            if (data.success) {
-            
+            setRefresh(true)
             const gtuseticket = Number(data.useticket)
             setUsedTicket(gtuseticket)
             new Toast({
@@ -320,9 +309,7 @@ useEffect(() => {
               type: "default",
               theme: "light"
             });
-            setRefresh(true)
             
-           
             try {
               fetch('/api/get-chance', {
                method: 'POST',
@@ -423,6 +410,10 @@ useEffect(() => {
          } catch (err) {
           
          }
+
+         if (timerRefB.current) {
+          clearInterval(timerRefB.current);
+        };
 
            } else {
             
