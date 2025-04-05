@@ -173,7 +173,7 @@ const RaffleTab = () => {
                 validUntil: Math.floor(Date.now() / 1000) + 60,
                 messages: [
                     {
-                        address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
+                        address: "UQD3X829OTABBFBWUASyK1h1zAYF7OjkEDWXtVss-DrL_dgy",
                         amount: amount,
                         payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
                     },
@@ -295,13 +295,26 @@ useEffect(() => {
          .then((res) => res.json())
          .then((data) => {
            if (data.success) {
-            setRefresh(true)
+            
+            const gtuseticket = Number(data.useticket)
+            setUsedTicket(gtuseticket)
+            new Toast({
+              position: "top-center",
+              toastMsg: `a: ${data.useticket} b:${gtuseticket}`,
+              autoCloseTime: 15500,
+              canClose: true,
+              showProgress: true,
+              pauseOnHover: true,
+              pauseOnFocusLoss: true,
+              type: "default",
+              theme: "light"
+            });
             if (timerRefB.current) {
               clearInterval(timerRefB.current);
             };
-            const gtuseticket = Number(data.useticket)
-            setUsedTicket(gtuseticket)
+            setRefresh(true)
             
+           
             try {
               fetch('/api/get-chance', {
                method: 'POST',
@@ -336,37 +349,41 @@ useEffect(() => {
               }
              })
     
-             try {
-              fetch('/api/get-winner', {
-               method: 'POST',
-               headers: {
-                 'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({ idd: String(UserDt?.idd) }),
-             })
-             .then((res) => res.json())
-             .then((data) => {
-              if(data.success){
-               
-                var nmb = 1
-                data.all.forEach((t: any)=> {
-                  let model = {
-                    id:String(nmb),
-                    date:t.date,
-                    amount:t.amount,
-                    name:t.name
-                 }
-                 nmb++
-                 gtWinner.push(model)
-                 
-                })
-              
-              }
-             })
            } catch (err) {
             
            }
-    
+
+           try {
+            fetch('/api/get-winner', {
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({ idd: String(UserDt?.idd) }),
+           })
+           .then((res) => res.json())
+           .then((data) => {
+            if(data.success){
+             
+              var nmb = 1
+              data.all.forEach((t: any)=> {
+                let model = {
+                  id:String(nmb),
+                  date:t.date,
+                  amount:t.amount,
+                  name:t.name
+               }
+               nmb++
+               gtWinner.push(model)
+               
+              })
+            
+            }
+           })
+         } catch (err) {
+          
+         }
+
            try {
             fetch('/api/get-transaction', {
              method: 'POST',
@@ -398,10 +415,6 @@ useEffect(() => {
          } catch (err) {
           
          }
-    
-           } catch (err) {
-            
-           }
 
            } else {
             
