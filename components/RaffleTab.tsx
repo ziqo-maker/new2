@@ -284,8 +284,6 @@ useEffect(() => {
 
   useEffect(() => {
         
-      if(refresh == false){
-
         try {
           fetch('/api/get-ticket', {
            method: 'POST',
@@ -412,11 +410,10 @@ useEffect(() => {
        } catch (err) {
        }
 
-      }
+      
 
          if(refresh == false) {
           timerRefB.current = setInterval(() =>{
-           
           setRefreshB(!refreshB)
           },3000);
          }
@@ -481,28 +478,6 @@ new Toast({
         const increase = Number(usedticket) + Number(ticket)
         const plus = Number(UserDt?.ticket) - ticket
         const name = String(UserDt?.firstname).length == 0 ?  String(UserDt?.username) : String(UserDt?.firstname)
-        new Toast({
-          position: "top-center",
-          toastMsg: `name : ${name}`,
-          autoCloseTime: 9500,
-          canClose: true,
-          showProgress: true,
-          pauseOnHover: true,
-          pauseOnFocusLoss: true,
-          type: "default",
-          theme: "light"
-        });
-        new Toast({
-          position: "top-center",
-          toastMsg: `username : ${String(UserDt?.username)}`,
-          autoCloseTime: 9500,
-          canClose: true,
-          showProgress: true,
-          pauseOnHover: true,
-          pauseOnFocusLoss: true,
-          type: "default",
-          theme: "light"
-        });
         try {
           fetch('/api/update-useticket', {
            method: 'POST',
