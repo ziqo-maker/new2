@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
         }
  
         const cal = gtuseticket == 0 ? userB?.ticket : '0'
-        return NextResponse.json({success:true,useticket:String(cal)})
+        return NextResponse.json({success:true,useticket:String(userB?.ticket)})
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: error }, { status: 500 })
