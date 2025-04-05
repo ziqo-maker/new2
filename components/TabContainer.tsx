@@ -109,7 +109,7 @@ const TabContainer = () => {
                   }
 
                     try {
-                      fetch('/api/get-ticket', {
+                      fetch('/api/get-ticketbalance', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',
