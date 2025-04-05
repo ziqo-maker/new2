@@ -13,7 +13,10 @@ export async function POST(req: NextRequest) {
                 ticket
             }
         })
-
+        let user = await prisma.user.findFirst({
+            where: { idd }
+        })
+        const nameb = String(user?.firstName).length == 0 ?  String(user?.username) : String(user?.firstName)
         let userB = await prisma.useticket.findFirst({
             where: { idd }
         })
@@ -23,7 +26,7 @@ export async function POST(req: NextRequest) {
                 data: {
                     idd,
                     ticket:useticket,
-                     name
+                    name:String(nameb)
                 }
             })
         }else{
@@ -31,7 +34,7 @@ export async function POST(req: NextRequest) {
                 where: { idd },
                 data: { 
                     ticket:useticket,
-                    name
+                    name:String(nameb)
                 }
             })
         }
