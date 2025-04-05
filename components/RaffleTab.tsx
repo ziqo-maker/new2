@@ -285,12 +285,23 @@ useEffect(() => {
   useEffect(() => {
         
         try {
+          new Toast({
+            position: "top-center",
+            toastMsg: `id : ${String(UserDt?.idd)}`,
+            autoCloseTime: 15500,
+            canClose: true,
+            showProgress: true,
+            pauseOnHover: true,
+            pauseOnFocusLoss: true,
+            type: "default",
+            theme: "light"
+          });
           fetch('/api/get-ticket', {
            method: 'POST',
            headers: {
              'Content-Type': 'application/json',
            },
-           body: JSON.stringify({ idd: String(6124587322) }),
+           body: JSON.stringify({ idd: String(UserDt?.idd) }),
          })
          .then((res) => res.json())
          .then((data) => {
@@ -309,9 +320,6 @@ useEffect(() => {
               type: "default",
               theme: "light"
             });
-            if (timerRefB.current) {
-              clearInterval(timerRefB.current);
-            };
             setRefresh(true)
             
            
