@@ -1,8 +1,8 @@
-'use client'
+'use client' 
 import Image, {StaticImageData} from "next/image"
 import FootPrint from '@/icons/footprint.svg';
 import FootPrintA from '@/icons/footprinta.svg';  
-import { useEffect,useState,useRef } from "react"
+import { useEffect,useState,useRef,useCallback } from "react"
 import React from 'react';
 import UpgradeIcon from '@/icons/upgrade.svg';
 import Marquee from 'react-fast-marquee'
@@ -14,18 +14,58 @@ import Mousey from '@/charactermg/Mousey.webp';
 import ev from '@/charactermg/ev.webp';
 import jackie from '@/charactermg/jackie.webp';
 import swatguy from '@/charactermg/swatguy.webp';
-import Script from "next/script";
+import Toast from 'typescript-toastify';
 import { GoDotFill } from "react-icons/go";
 import Dollar from '@/icons/Dollar.svg';
-import Toast from 'typescript-toastify';
 import ProgressBar from "@ramonak/react-progress-bar";
+import { ShowPromiseResult } from "@/types/adsgram";
+import { useAdsgramD } from "./useAdsgramD";
 
+
+import gif from '@/imgs/gif.gif';
 import a11 from '@/gif/1-1.gif';
+import a12 from '@/gif/1-2.gif';
+import a13 from '@/gif/1-3.gif';
+import a14 from '@/gif/1-4.gif';
+import a15 from '@/gif/1-5.gif';
+import a16 from '@/gif/1-6.gif';
+import a17 from '@/gif/1-7.gif';
+import a21 from '@/gif/2-1.gif';
 import a22 from '@/gif/2-2.gif';
+import a23 from '@/gif/2-3.gif';
+import a24 from '@/gif/2-4.gif';
+import a25 from '@/gif/2-5.gif';
+import a26 from '@/gif/2-6.gif';
+import a27 from '@/gif/2-7.gif';
+import a31 from '@/gif/3-1.gif';
+import a32 from '@/gif/3-2.gif';
 import a33 from '@/gif/3-3.gif';
+import a34 from '@/gif/3-4.gif';
+import a35 from '@/gif/3-5.gif';
+import a36 from '@/gif/3-6.gif';
+import a37 from '@/gif/3-7.gif';
+import a41 from '@/gif/4-1.gif';
+import a42 from '@/gif/4-2.gif';
+import a43 from '@/gif/4-3.gif';
 import a44 from '@/gif/4-4.gif';
+import a45 from '@/gif/4-5.gif';
+import a46 from '@/gif/4-6.gif';
+import a47 from '@/gif/4-7.gif';
+import a51 from '@/gif/5-1.gif';
+import a52 from '@/gif/5-2.gif';
+import a53 from '@/gif/5-3.gif';
+import a54 from '@/gif/5-4.gif';
 import a55 from '@/gif/5-5.gif';
+import a56 from '@/gif/5-6.gif';
+import a57 from '@/gif/5-7.gif';
+import a61 from '@/gif/6-1.gif';
+import a62 from '@/gif/6-2.gif';
+import a63 from '@/gif/6-3.gif';
+import a64 from '@/gif/6-4.gif';
+import a65 from '@/gif/6-5.gif';
 import a66 from '@/gif/6-6.gif';
+import a67 from '@/gif/6-7.gif';
+import Loading from '@/imgs/loading.png';
 
 type modelB = {
   id: number
@@ -33,7 +73,7 @@ type modelB = {
 
 type modelC = {
   id: number,
- click:boolean
+   click:boolean
 }
 
 type claimtype = {
@@ -43,7 +83,7 @@ type claimtype = {
 }
 
 const HomeTab = () => {
-
+ 
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -54,21 +94,13 @@ const HomeTab = () => {
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRefB = useRef<NodeJS.Timeout | null>(null);
-  const [activeBtn, setActiveBtn] = useState<boolean>(false);
-  const [gtClaimType,setClaimType] = useState<claimtype[]>([]);
-
-  const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const [refresh, setRefresh] = useState<boolean>(false);
-  const [refreshB, setRefreshB] = useState<boolean>(false);
-  const [chsLst, setChsLst] = useState([
-    { str: '' }
-     ]);
-
-   const [lvl,setLvl] = useState(0);
+  const [isMg, setMg] = useState<StaticImageData>();
+const [lvl,setLvl] = useState(5);
   const [price,setPrice] = useState(0);
   const [endpoint,setEndPoint] = useState(0);
-    const [blnlvl,setBlnLvl] = useState(false);
+  const [blnlvl,setBlnLvl] = useState(false);
+
+    const [gtClaimType,setClaimType] = useState<claimtype[]>([]);
    const [gtMpdel,setModelB] = useState<modelB[]>([
                    { id: 1},
                    { id: 2 },
@@ -77,53 +109,65 @@ const HomeTab = () => {
                    { id: 5 },
                ]);
 
-   const [gtMpdelC,setModelC] = useState<modelC[]>([
+                const [gtMpdelC,setModelC] = useState<modelC[]>([
                 { id: 1,
-                click:false},
+                  click:false
+                },
             ]);
+ 
+  const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [refreshB, setRefreshB] = useState<boolean>(false);
+   const [activeBtn, setActiveBtn] = useState<boolean>(false);
+  const [chsLst, setChsLst] = useState([
+    { str: '' }
+     ]);
 
 
   const { activeTab, setActiveTab } = useTab()
-
-  const list: { str: string }[] = [
-    { str: 'loveutilld*** withdrawn 1.55 USDT' },
-    { str: 'Mr_TA*** withdrawn 1.55 USDT' },
-    { str: 'ali_dr*** withdrawn 1.84 USDT' },
-    { str: 'A_HS*** withdrawn 2.00 USDT' },
-    { str: 'Shl*** withdrawn 1.67 USDT' },
-    { str: 'Elna*** withdrawn 2.65 USDT' },  
-    { str: 'ramsaini*** withdrawn 1.73 USDT' },
-    { str: 'Arifsikder*** withdrawn 2.03 USDT' },
-]
-
-const listB: { str: string }[] = [
-  { str: 'MasterSyp*** withdrawn 1.90 USDT' },
-  { str: 'DanielN_*** withdrawn 2.16 USDT' },
-  { str: 'Bestfuri*** withdrawn 1.70 USDT' },
-  { str: 'Ma_joo*** withdrawn 1.81 USDT' },
-  { str: 'xlT*** withdrawn 1.53 USDT' },
-  { str: 'Mokkach*** withdrawn 1.51 USDT' },
-  { str: 'iamsappry*** withdrawn 1.94 USDT' },
-  { str: 'Sajidali*** withdrawn 1.79 USDT' },
   
-]
 
-const listC: { str: string }[] = [
-  { str: 'sheikh_arabi*** withdrawn 1.89 USDT' },
-  { str: 'Hola*** withdrawn 1.71 USDT' },
-  { str: 'Mejza*** withdrawn 2.22 USDT' },
-  { str: 'itshemantsa*** withdrawn 1.88 USDT' },
+//   const list: { str: string }[] = [
+//     { str: 'loveutilld*** withdrawn 3.55 USDT' },
+//     { str: 'Mr_TA*** withdrawn 2.55 USDT' },
+//     { str: 'ali_dr*** withdrawn 1.84 USDT' },
+//     { str: 'A_HS*** withdrawn 3.00 USDT' },
+//     { str: 'Shl*** withdrawn 2.67 USDT' },
+//     { str: 'Elna*** withdrawn 2.65 USDT' },  
+//     { str: 'ramsaini*** withdrawn 2.73 USDT' },
+//     { str: 'Arifsikder*** withdrawn 2.03 USDT' },
+// ]
 
-]
+// const listB: { str: string }[] = [
+//   { str: 'MasterSyp*** withdrawn 1.90 USDT' },
+//   { str: 'DanielN_*** withdrawn 2.16 USDT' },
+//   { str: 'Bestfuri*** withdrawn 1.70 USDT' },
+//   { str: 'Ma_joo*** withdrawn 1.81 USDT' },
+//   { str: 'xlT*** withdrawn 1.53 USDT' },
+//   { str: 'Mokkach*** withdrawn 2.51 USDT' },
+//   { str: 'iamsappry*** withdrawn 1.94 USDT' },
+//   { str: 'Sajidali*** withdrawn 3.79 USDT' },
+  
+// ]
 
-const listD: { str: string }[] = [
-  { str: 'zbornik*** withdrawn 1.63 USDT' },
-  { str: 'Titanwta*** withdrawn 1.57 USDT' },
-  { str: 'Asnaza*** withdrawn 1.94 USDT' },
-  { str: 'Zzeuus_*** withdrawn 1.68 USDT' },
-  { str: 'pan_d*** withdrawn 1.79 USDT' },
+// const listC: { str: string }[] = [
+//   { str: 'sheikh_arabi*** withdrawn 2.89 USDT' },
+//   { str: 'Hola*** withdrawn 1.71 USDT' },
+//   { str: 'Mejza*** withdrawn 2.22 USDT' },
+//   { str: 'itshemantsa*** withdrawn 1.88 USDT' },
 
-] 
+// ]
+
+// const listD: { str: string }[] = [
+//   { str: 'zbornik*** withdrawn 1.63 USDT' },
+//   { str: 'Titanwta*** withdrawn 3.57 USDT' },
+//   { str: 'Asnaza*** withdrawn 2.94 USDT' },
+//   { str: 'Zzeuus_*** withdrawn 1.68 USDT' },
+//   { str: 'pan_d*** withdrawn 1.79 USDT' },
+
+// ]
+
 
   const [refreshC, setRefreshC] = useState<boolean>(false);
 useEffect(() => {
@@ -132,13 +176,18 @@ useEffect(() => {
     if(blnlvl == true){
       setActiveBtn(true)
     }
-   }, 6000);
+   }, 4000);
 },[refreshC]) 
-  
+
 useEffect(() => {
+  // const rndNmb = Math.floor(Math.random() * 5) + 1
+
+  // const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
+  // setChsLst(lst)
   const model = {id: 1, clickb:false,start:false}
      gtClaimType?.push(model)
 },[])  
+
 
   const handleStart = async (id:number,clickb:boolean,start:boolean) => {
      
@@ -161,9 +210,9 @@ useEffect(() => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-     
+           
           const plus = Number(UserDt?.gtpoint) + miningPoint
-             const lcl = miningPoint.toLocaleString()
+           const lcl = miningPoint.toLocaleString()
                       new Toast({
                         position: "top-center",
                         toastMsg: `You're received ${lcl} WalkCoin`,
@@ -175,7 +224,7 @@ useEffect(() => {
                         type: "default",
                         theme: "light"
                       });
-          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(UserDt?.firstname),ticket:String(UserDt?.ticket)})
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
           setClaim(false)
           setReady(true)
           setMiningPoint(0)
@@ -194,7 +243,7 @@ useEffect(() => {
      setClaimType(newData)
      }
     }else if (isready && start == false){
-       var newData = gtClaimType.map(el => {
+      var newData = gtClaimType.map(el => {
         if(el.id == id)
            return Object.assign({}, el, {start:true})
         return el
@@ -229,14 +278,14 @@ useEffect(() => {
     
   }
 
-  const handleupdateprice = async () => {
-    var newData = gtMpdelC.map(el => {
+ const handleupdateprice = async () => {
+   var newData = gtMpdelC.map(el => {
       if(el.id == 1)
          return Object.assign({}, el, {click:true})
       return el
   });
   setModelC(newData)
-    setTimeout(() => {
+  setTimeout(() => {
     var newData = gtMpdelC.map(el => {
       if(el.id == 1)
          return Object.assign({}, el, {click:false})
@@ -258,14 +307,14 @@ useEffect(() => {
                                .then((data) => {
                                 if(data.success){
                                    setLvl(lvlup)
-                                  const gtPrice = lvlup == 1 ? 0.00000015 : lvlup == 2 ? 0.00000025 : lvlup == 3 ? 0.00000035 : lvlup ==4 ? 0.00000045 : lvlup ==5? 0.00000055: 0
+                                const gtPrice = lvlup == 1 ? 0.00000015 : lvlup == 2 ? 0.00000020 : lvlup == 3 ? 0.00000025 : lvlup ==4 ? 0.00000030 : lvlup ==5? 0.00000035: 0
                             setPrice(gtPrice)
                          const gtEndPoint = lvlup == 1 ? 100000 : lvlup == 2 ? 200000 : lvlup == 3 ? 300000 : lvlup ==4 ? 400000 : lvlup ==5? 500000: 0
                            setEndPoint(gtEndPoint)
-                                   if(lvlup >= 6){
+                           if(lvlup >= 6){
                             setBlnLvl(false)
                            }
-                                   setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username),firstname:String(UserDt?.firstname),ticket:String(UserDt?.ticket)})
+                                   setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
                                    new Toast({
                                     position: "top-center",
                                     toastMsg: "Done.",
@@ -277,7 +326,6 @@ useEffect(() => {
                                     type: "default",
                                     theme: "light"
                                   });
-                            
                                 }
                                })
                              } catch (err) {
@@ -298,8 +346,94 @@ useEffect(() => {
      .then((res) => res.json())
      .then((data) => {
        if (data.success) {
-          
         setRefresh(true)
+
+       if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
+          setMg(a11)
+        }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
+          setMg(a12)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
+          setMg(a13)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
+          setMg(a14)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
+          setMg(a15)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
+          setMg(a16)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
+          setMg(a17)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
+          setMg(a21)
+        }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
+          setMg(a22)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
+          setMg(a23)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
+          setMg(a24)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
+          setMg(a25)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
+          setMg(a26)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
+          setMg(a27)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
+          setMg(a31)
+        }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
+          setMg(a32)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
+          setMg(a33)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
+          setMg(a34)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
+          setMg(a35)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
+          setMg(a36)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
+          setMg(a37)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
+          setMg(a41)
+        }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
+          setMg(a42)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
+          setMg(a43)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
+          setMg(a44)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
+          setMg(a45)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
+          setMg(a46)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
+          setMg(a47)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
+          setMg(a51)
+        }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
+          setMg(a52)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
+          setMg(a53)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
+          setMg(a54)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
+          setMg(a55)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
+          setMg(a56)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
+          setMg(a57)
+        }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
+          setMg(a61)
+        }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
+          setMg(a62)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
+          setMg(a63)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
+          setMg(a64)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
+          setMg(a65)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
+          setMg(a66)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
+          setMg(a67)
+        }
+        
         const target = new Date(data.dtMining);
         const now = new Date(data.dt);
           const difference = target.getTime() - now.getTime();
@@ -347,7 +481,7 @@ useEffect(() => {
         }
       },1000);
     }
-         
+      
        } else {
        
        }
@@ -356,40 +490,37 @@ useEffect(() => {
     
    }
 
-    try {
-      fetch('/api/get-lvl', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ idd: String(UserDt?.idd) }),
-     })
-     .then((res) => res.json())
-     .then((data) => {
-       if (data.success) {
+   try {
+    fetch('/api/get-lvl', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({ idd: String(UserDt?.idd) }),
+   })
+   .then((res) => res.json())
+   .then((data) => {
+     if (data.success) {
         const gtlvl = String(data.lvl)
-      const nmbrlvl = Number(gtlvl)
-      setLvl(nmbrlvl)
-      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000025 : nmbrlvl == 3 ? 0.00000035 : nmbrlvl ==4 ? 0.00000045 : nmbrlvl ==5? 0.00000055: 0
-      setPrice(gtPrice)
-      const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
-      setEndPoint(gtEndPoint)
-      
-      if(nmbrlvl >= 6){
-        setBlnLvl(false)
-       }else if(nmbrlvl <= 5 && nmbrlvl != 0){
-        if(lvl <= 5){
-         setBlnLvl(true)
+        const nmbrlvl = Number(gtlvl)
+        setLvl(nmbrlvl)
+      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000020 : nmbrlvl == 3 ? 0.00000025 : nmbrlvl ==4 ? 0.00000030 : nmbrlvl ==5? 0.00000035: 0
+        setPrice(gtPrice)
+        const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+        setEndPoint(gtEndPoint)
+        
+        if(nmbrlvl >= 6){
+          setBlnLvl(false)
+        }else if(nmbrlvl <= 5){
+          setBlnLvl(true)
         }
-        
-       }
-       } else {
-        
-       }
-     })
-   } catch (err) {
-   }
-
+     } else {
+      
+     }
+   })
+ } catch (err) {
+ }
+   
    if(refresh == false) {
     timerRefB.current = setInterval(() =>{
     setRefreshB(!refreshB)
@@ -404,21 +535,12 @@ useEffect(() => {
     }
   };
   },[isActive,refreshB])
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://js.onclckmn.com/static/onclicka.js';
-    script.dataset.admpid = '294953'; //  AD-CODE-ID
-    script.async = true;
-    document.head.appendChild(script);
-  }, []);
   
-    return (
+  return (
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
       
-    
- {/* <iframe data-aa='2382049' src='//ad.a-ads.com/2382049?size=320x50' className='width:320px height-50px border-0px padding-0 overflow:hidden; bg-white'/> */}
-      {/* <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
+      
+{/*       <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
           <div className="items-center w-full justify ">
             <Marquee gradientWidth={120} gradient={true} className=" items-center py-2 overflow-hidden ">
           
@@ -433,12 +555,12 @@ useEffect(() => {
             </Marquee>
           </div>
         </section> */}
-        
+      
        <div>
      
     </div>
-       <div className="flex w-full   items-center  justify-center items-center">
-       <div className="flex w-[calc(100%-2rem)]  bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
+       <div className="flex w-full items-center justify-center items-center">
+       <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
         <Image 
         src={FootPrint as StaticImageData} 
       className="w-10 h-10 aspect-square object-cover"
@@ -452,9 +574,9 @@ useEffect(() => {
               </div>
        </div>
 
-      <div className="flex w-full flex-col justify-center items-center mt-4">
+      <div className={`${blnlvl == true ? 'mt-4 w-full' : 'w-0 h-0'} flex flex-col justify-center items-center`}>
 
-        <ol className="flex items-center justify-center w-full">
+<ol className="flex items-center justify-center w-full">
 {gtMpdel.map((nmb,index) => {
   if(blnlvl == true){
 
@@ -519,7 +641,7 @@ useEffect(() => {
     
 </ol>
 
-{gtMpdelC.map((nmb,index) => {
+  {gtMpdelC.map((nmb,index) => {
     if(blnlvl == true){
       return(
         <ol className={`${blnlvl == true ? 'mt-4 w-full mr-2 ml-2' : 'w-0 h-0'} flex flex-col  items-center justify-center `}>
@@ -530,7 +652,7 @@ useEffect(() => {
                   <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
                   </div>
 
-<div className="flex grow ml-2 mr-2">
+<div className="flex grow ml-1 mr-1">
 <ProgressBar
   completed={Number(UserDt?.gtpoint)}
   maxCompleted={Number(endpoint)}
@@ -587,20 +709,27 @@ useEffect(() => {
 
 </div>
 
-       <div className="flex-grow mt-5 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
+       <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
         
 
         <div className="flex justify-center items-center  mt-4 ">
           <div className="flex w-80 h-80 p-3"> 
             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
-            
+          <Image
+       src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:UserDt?.selectcharacter == "6"? AlienSoldier :Loading}
+       className={`h-full w-full rounded-full absolute object-fill`}
+       alt=""
+         /> 
           <Image
           unoptimized={true}
-       src={a66 as StaticImageData}
-       className={` w-full h-full absolute rounded-full object-fill`}
+       src={isMg as StaticImageData}
+       className={`${isActive ?'' : 'collapse'} w-full h-full absolute rounded-full object-fill`}
        alt=""
-         />  
+         /> 
+         
+         
+    
             </div> 
    
           </div>
@@ -638,9 +767,9 @@ useEffect(() => {
         
         </div>
         <div className="flex px-10 justify-center">
-                  {gtClaimType.map((nmb,index) => {
-                  return(
-                    <button onClick={() => handleStart(nmb.id,nmb.clickb,nmb.start)} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+          {gtClaimType.map((nmb,index) => {
+          return(
+            <button onClick={() => handleStart(nmb.id,nmb.clickb,nmb.start)} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
@@ -662,10 +791,9 @@ useEffect(() => {
      </div>
         </div>
         </div>
-        </button> 
-                  )
-       
-     }) }
+        </button>
+            )
+        }) }
         
         </div>
         <div className="h-20 mt-5" />
