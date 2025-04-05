@@ -284,8 +284,6 @@ useEffect(() => {
 
   useEffect(() => {
 
-
-        setBoard([])
         try {
           fetch('/api/get-ticket', {
            method: 'POST',
@@ -317,21 +315,22 @@ useEffect(() => {
                  
                   var cnt = 0
                   var nmb = 0
+                  const gtBoar: board[] = []
                   data.all.forEach((t: any)=> {
                     nmb += Number(t.ticket)
                     cnt++
                     if(cnt <= 15){
-        
                       let model = {
                         id:String(cnt),
                         name:t.name,
                         ticket:t.ticket,
                      }
                      
-                     gtBoard.push(model)
+                     gtBoar.push(model)
                     
                     }
                   })
+                  setBoard(gtBoar)
                   const gtchance = (gtuseticket / Number(nmb)) * Number(100)
                   setChance(gtchance)
                 }
