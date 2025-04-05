@@ -411,9 +411,7 @@ useEffect(() => {
           
          }
 
-         if (timerRefB.current) {
-          clearInterval(timerRefB.current);
-        };
+        
 
            } else {
             
