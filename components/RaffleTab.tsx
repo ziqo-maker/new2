@@ -297,20 +297,9 @@ useEffect(() => {
            if (data.success) {
             setRefresh(true)
             const gtuseticket = Number(data.useticket)
-            setUsedTicket(gtuseticket)
+            const cal = gtuseticket >= 1? gtuseticket : 0
+            setUsedTicket(cal)
             if(gtuseticket >= 0){
-
-              new Toast({
-                position: "top-center",
-                toastMsg: `a: ${data.useticket} b:${gtuseticket}`,
-                autoCloseTime: 15500,
-                canClose: true,
-                showProgress: true,
-                pauseOnHover: true,
-                pauseOnFocusLoss: true,
-                type: "default",
-                theme: "light"
-              });
               
               try {
                 fetch('/api/get-chance', {
