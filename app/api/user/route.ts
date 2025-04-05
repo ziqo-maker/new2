@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import React,{useState} from 'react';
-
-
+  
+  
 export async function POST(req: NextRequest) {
     try {
         const userData = await req.json()
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
             user = await prisma.user.create({
                 data: {
                     idd: String(userData.id),
-                    username: userData.username,
+                    username: userData.username || '',
                     firstName: userData.first_name || '',
                     lastName: userData.last_name || '',
                     donetasks: '',
@@ -39,10 +39,23 @@ export async function POST(req: NextRequest) {
             cnt++
         }
 
-
-               const fs = userData.first_name || ''
+        
+const fs = userData.first_name || ''
+      let userB = await prisma.ticket.findFirst({
+            where: { idd:String(userData.id) }
+        })
+              
+        if (!userB) {
+            userB = await prisma.ticket.create({
+                data: {
+                    idd:String(userData.id),
+                    ticket:"0"
+                }
+            })
+          
+        }
         return NextResponse.json({idd:String(userData.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
-            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue),first:String(cnt),firstName: String(fs)})
+            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue),first:String(cnt),firstName: String(fs),ticket:String(userB.ticket)})
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: error }, { status: 500 })
