@@ -298,121 +298,123 @@ useEffect(() => {
             setRefresh(true)
             const gtuseticket = Number(data.useticket)
             setUsedTicket(gtuseticket)
-            new Toast({
-              position: "top-center",
-              toastMsg: `a: ${data.useticket} b:${gtuseticket}`,
-              autoCloseTime: 15500,
-              canClose: true,
-              showProgress: true,
-              pauseOnHover: true,
-              pauseOnFocusLoss: true,
-              type: "default",
-              theme: "light"
-            });
-            
-            try {
-              fetch('/api/get-chance', {
+            if(gtuseticket >= 0){
+
+              new Toast({
+                position: "top-center",
+                toastMsg: `a: ${data.useticket} b:${gtuseticket}`,
+                autoCloseTime: 15500,
+                canClose: true,
+                showProgress: true,
+                pauseOnHover: true,
+                pauseOnFocusLoss: true,
+                type: "default",
+                theme: "light"
+              });
+              
+              try {
+                fetch('/api/get-chance', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type': 'application/json',
+                 },
+                 body: JSON.stringify({}),
+               })
+               .then((res) => res.json())
+               .then((data) => {
+                if(data.success){
+                 
+                  var cnt = 0
+                  var nmb = 0
+                  data.all.forEach((t: any)=> {
+                    nmb += Number(t.ticket)
+                    cnt++
+                    if(cnt <= 15){
+        
+                      let model = {
+                        id:String(cnt),
+                        name:t.name,
+                        ticket:t.ticket,
+                     }
+                     
+                     gtBoard.push(model)
+                    
+                    }
+                  })
+                  const gtchance = (gtuseticket / Number(nmb)) * Number(100)
+                  setChance(gtchance)
+                }
+               })
+      
+             } catch (err) {
+              
+             }
+  
+             try {
+              fetch('/api/get-winner', {
                method: 'POST',
                headers: {
                  'Content-Type': 'application/json',
                },
-               body: JSON.stringify({}),
+               body: JSON.stringify({ idd: String(UserDt?.idd) }),
              })
              .then((res) => res.json())
              .then((data) => {
               if(data.success){
-               setBoard([])
-                var cnt = 0
-                var nmb = 0
+               
+                var nmb = 1
                 data.all.forEach((t: any)=> {
-                  nmb += Number(t.ticket)
-                  cnt++
-                  if(cnt <= 15){
-      
-                    let model = {
-                      id:String(cnt),
-                      name:t.name,
-                      ticket:t.ticket,
-                   }
-                   
-                   gtBoard.push(model)
-                  
-                  }
+                  let model = {
+                    id:String(nmb),
+                    date:t.date,
+                    amount:t.amount,
+                    name:t.name
+                 }
+                 nmb++
+                 gtWinner.push(model)
+                 
                 })
-                const gtchance = (gtuseticket / Number(nmb)) * Number(100)
-                setChance(gtchance)
+              
               }
              })
-    
+           } catch (err) {
+            
+           }
+  
+             try {
+              fetch('/api/get-transaction', {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ idd: String(UserDt?.idd) }),
+             })
+             .then((res) => res.json())
+             .then((data) => {
+              if(data.success){
+               
+                var nmb = 1
+                data.all.forEach((t: any)=> {
+                  let model = {
+                    id:String(nmb),
+                    date:t.date,
+                    amount:t.amount,
+                    tickets:t.tickets,
+                    status:t.status
+                 }
+                 nmb++
+                 gtTransaction.push(model)
+                 
+                })
+              
+              }
+             })
            } catch (err) {
             
            }
 
-           try {
-            fetch('/api/get-winner', {
-             method: 'POST',
-             headers: {
-               'Content-Type': 'application/json',
-             },
-             body: JSON.stringify({ idd: String(UserDt?.idd) }),
-           })
-           .then((res) => res.json())
-           .then((data) => {
-            if(data.success){
-             
-              var nmb = 1
-              data.all.forEach((t: any)=> {
-                let model = {
-                  id:String(nmb),
-                  date:t.date,
-                  amount:t.amount,
-                  name:t.name
-               }
-               nmb++
-               gtWinner.push(model)
-               
-              })
-            
             }
-           })
-         } catch (err) {
-          
-         }
-
-           try {
-            fetch('/api/get-transaction', {
-             method: 'POST',
-             headers: {
-               'Content-Type': 'application/json',
-             },
-             body: JSON.stringify({ idd: String(UserDt?.idd) }),
-           })
-           .then((res) => res.json())
-           .then((data) => {
-            if(data.success){
-             
-              var nmb = 1
-              data.all.forEach((t: any)=> {
-                let model = {
-                  id:String(nmb),
-                  date:t.date,
-                  amount:t.amount,
-                  tickets:t.tickets,
-                  status:t.status
-               }
-               nmb++
-               gtTransaction.push(model)
-               
-              })
-            
-            }
-           })
-         } catch (err) {
-          
-         }
-
-        
-
+      
            } else {
             
            }
