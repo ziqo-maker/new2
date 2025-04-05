@@ -70,6 +70,16 @@ const RaffleTab = () => {
   const [rfrshuse, setRfrshUse] = useState(false);
 
   const [chance, setChance] = useState(0);
+
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const timerRefB = useRef<NodeJS.Timeout | null>(null);
+     const [refreshB, setRefreshB] = useState<boolean>(false);
+
+    const [gtBoard,setBoard] = useState<board[]>([]);
+
+    const [gtWinner,setWinner] = useState<winnertype[]>([]);
+
+    const [gtTransaction,setTransaction] = useState<transactiontype[]>([]);
   
 
   const handleWalletConnection = useCallback((address: string) => {
@@ -161,8 +171,9 @@ const RaffleTab = () => {
                       .then((res) => res.json())
                       .then((data) => {
                         if (data.success) {
-                          setRefreshB(!refreshB)
+                          setTransaction([])
                           setVerifyBuy(true)
+                          setRefreshB(!refreshB)
                          new Toast({
                            position: "top-center",
                            toastMsg: "Your transaction was successful. Your tickets will be added automatically after 30 minutes of your transaction being confirmed.",
@@ -252,16 +263,6 @@ useEffect(() => {
   }
 
   }, []);
-
-  const [refresh, setRefresh] = useState<boolean>(false);
-  const timerRefB = useRef<NodeJS.Timeout | null>(null);
-     const [refreshB, setRefreshB] = useState<boolean>(false);
-
-    const [gtBoard,setBoard] = useState<board[]>([]);
-
-    const [gtWinner,setWinner] = useState<winnertype[]>([]);
-
-    const [gtTransaction,setTransaction] = useState<transactiontype[]>([]);
 
      
 
@@ -871,19 +872,19 @@ new Toast({
    
    <center>
 
-   <div className="flex flex-col w-[calc(100%-2rem)] mt-1 mb-2 items-center justify-center">
+   <div className="flex flex-col w-[calc(100%-2rem)] mt-1  items-center justify-center">
 
 <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
 <Slider className="w-full"   size="medium"  color='warning' value={ticket}  onChange={handleSliderChangeUseTicket} min={0} defaultValue={0} max={ Number(UserDt?.ticket) } aria-label="default" valueLabelDisplay="auto" />
 
-<div className={`${Number(UserDt?.ticket) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full'}  justify-between`}>
+<div className={`${Number(UserDt?.ticket) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full mb-2'} justify-between`}>
 <p className={`${Number(UserDt?.ticket) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
 <p className={`${Number(UserDt?.ticket) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{Number(UserDt?.ticket)} max</p>
 
 </div>
    
  </Box>
-
+ 
  <button onClick={() => {useticketbtn(rfrshuse)}} className={`${ticket == 0? 'opacity-60' :''}  flex flex-grow mt-1 px-5 bg-[#ff7700]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px]`}>
                            
           
