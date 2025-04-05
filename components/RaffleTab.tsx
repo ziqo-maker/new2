@@ -140,64 +140,80 @@ const RaffleTab = () => {
 
 
   const handlePayment = async () => {
-   
-          if(buyTicket != 0){
+
+
+    if (tonConnectUI.account?.address) {
+
+      if(buyTicket != 0){
           
-            const amount = buyTicket == 1 ? '250000000' : buyTicket == 2 ? '490000000' : '740000000'
-            try {
-        
-                 await tonConnectUI.sendTransaction({
-                    validUntil: Math.floor(Date.now() / 1000) + 60,
-                    messages: [
-                        {
-                            address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
-                            amount: amount,
-                            payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
-                        },
-                    ],
-                });
+        try {
+
+          const amount = buyTicket == 1 ? '250000000' : buyTicket == 2 ? '490000000' : '740000000'
+          const nmbtickets =  buyTicket == 1 ? '100' : buyTicket == 2 ? '250' : '500'
+             const amountB = buyTicket == 1 ? '0.25' : buyTicket == 2 ? '0.49' : '0.74'
+        try {
+          fetch('/api/transaction', {
+           method: 'POST',
+           headers: {
+             'Content-Type':'application/json',
+           },
+           body: JSON.stringify({idd:String(UserDt?.idd),amount:String(amountB),status:'pending',tickets: String(nmbtickets)}),
+         })
+         .then((res) => res.json())
+         .then((data) => {
+           if (data.success) {
          
-                 const nmbtickets =  buyTicket == 1 ? '100' : buyTicket == 2 ? '250' : '500'
-                 const amountB = buyTicket == 1 ? '0.25' : buyTicket == 2 ? '0.49' : '0.74'
+           } else {
+           }
+         })
+       } catch (err) {
+       }
+    
+             await tonConnectUI.sendTransaction({
+                validUntil: Math.floor(Date.now() / 1000) + 60,
+                messages: [
+                    {
+                        address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
+                        amount: amount,
+                        payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
+                    },
+                ],
+            });
 
-                try {
-                       fetch('/api/transaction', {
-                        method: 'POST',
-                        headers: {
-                          'Content-Type':'application/json',
-                        },
-                        body: JSON.stringify({idd:String(UserDt?.idd),amount:String(amountB),status:'pending',tickets: String(nmbtickets)}),
-                      })
-                      .then((res) => res.json())
-                      .then((data) => {
-                        if (data.success) {
-                          setTransaction([])
-                          setVerifyBuy(true)
-                          setRefreshB(!refreshB)
-                         new Toast({
-                           position: "top-center",
-                           toastMsg: "Your transaction was successful. Your tickets will be added automatically after 30 minutes of your transaction being confirmed.",
-                           autoCloseTime: 15500,
-                           canClose: true,
-                           showProgress: true,
-                           pauseOnHover: true,
-                           pauseOnFocusLoss: true,
-                           type: "default",
-                           theme: "light"
-                         });
-                      
-                        } else {
-                        }
-                      })
-                    } catch (err) {
-                    }
-        
-        
-            } catch (error) {
-              
-            } 
-          }
+                setTransaction([])
+                setVerifyBuy(true)
+                setRefreshB(!refreshB)
+               new Toast({
+                 position: "top-center",
+                 toastMsg: "Your transaction was successful. Your tickets will be added automatically after 30 minutes of your transaction being confirmed.",
+                 autoCloseTime: 15500,
+                 canClose: true,
+                 showProgress: true,
+                 pauseOnHover: true,
+                 pauseOnFocusLoss: true,
+                 type: "default",
+                 theme: "light"
+               });
+    
+    
+        } catch (error) {
+          
+        } 
+      }
 
+    } else {
+      new Toast({
+        position: "top-center",
+        toastMsg: "No TON wallet connected. Please connect your wallet.",
+        autoCloseTime: 15500,
+        canClose: true,
+        showProgress: true,
+        pauseOnHover: true,
+        pauseOnFocusLoss: true,
+        type: "default",
+        theme: "light"
+      });
+    }
       
 
 };
@@ -708,7 +724,7 @@ new Toast({
         <center>
         <div className="flex w-[calc(100%-2rem)] mt-1 items-center mb-2 justify-center">
 
-        <Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
+        <Box sx={{ width:'80%', justifyContent: 'center' ,alignContent: 'center' }} >
         <Slider className="w-full"   size="medium"  color='warning' value={value}  onChange={handleSliderChange} min={0} defaultValue={0} max={ Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) } aria-label="default" valueLabelDisplay="auto" />
 
         <div className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full'}  justify-between`}>
@@ -874,10 +890,10 @@ new Toast({
 
    <div className="flex flex-col w-[calc(100%-2rem)] mt-1  items-center justify-center">
 
-<Box sx={{ width:'60%', justifyContent: 'center' ,alignContent: 'center' }} >
+<Box sx={{ width:'80%', justifyContent: 'center' ,alignContent: 'center' }} >
 <Slider className="w-full"   size="medium"  color='warning' value={ticket}  onChange={handleSliderChangeUseTicket} min={0} defaultValue={0} max={ Number(UserDt?.ticket) } aria-label="default" valueLabelDisplay="auto" />
 
-<div className={`${Number(UserDt?.ticket) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full mb-2'} justify-between`}>
+<div className={`${Number(UserDt?.ticket) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full mb-1'} justify-between`}>
 <p className={`${Number(UserDt?.ticket) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
 <p className={`${Number(UserDt?.ticket) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{Number(UserDt?.ticket)} max</p>
 
