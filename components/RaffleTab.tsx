@@ -299,7 +299,7 @@ useEffect(() => {
             const gtuseticket = Number(data.useticket)
             const cal = gtuseticket >= 1? gtuseticket : 0
             setUsedTicket(cal)
-            if(gtuseticket >= 0){
+            if(cal >= 0){
               
               try {
                 fetch('/api/get-chance', {
