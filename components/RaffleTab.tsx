@@ -283,7 +283,9 @@ useEffect(() => {
      
 
   useEffect(() => {
-        
+
+
+        setBoard([])
         try {
           fetch('/api/get-ticket', {
            method: 'POST',
