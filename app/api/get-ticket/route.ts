@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
          var gtuseticket = 0
 
         if (!userB) {
-            gtuseticket=1
+            gtuseticket++
         }
 
         return NextResponse.json({success:true,useticket:String(gtuseticket == 0 ? userB?.ticket : '0')})
