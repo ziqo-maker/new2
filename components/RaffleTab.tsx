@@ -481,6 +481,28 @@ new Toast({
         const increase = Number(usedticket) + Number(ticket)
         const plus = Number(UserDt?.ticket) - ticket
         const name = String(UserDt?.firstname).length == 0 ?  String(UserDt?.username) : String(UserDt?.firstname)
+        new Toast({
+          position: "top-center",
+          toastMsg: `name : ${name}`,
+          autoCloseTime: 9500,
+          canClose: true,
+          showProgress: true,
+          pauseOnHover: true,
+          pauseOnFocusLoss: true,
+          type: "default",
+          theme: "light"
+        });
+        new Toast({
+          position: "top-center",
+          toastMsg: `username : ${String(UserDt?.username)}`,
+          autoCloseTime: 9500,
+          canClose: true,
+          showProgress: true,
+          pauseOnHover: true,
+          pauseOnFocusLoss: true,
+          type: "default",
+          theme: "light"
+        });
         try {
           fetch('/api/update-useticket', {
            method: 'POST',
@@ -931,12 +953,12 @@ new Toast({
 
       <div className="flex flex-col w-full">
         <center>
-        <div className=" w-[calc(90%-2rem)] flex flex-col mt-5 text-center font-bold text-wrap">
+        <div className=" w-[calc(100%-3rem)] flex flex-col mt-4 text-center font-bold text-wrap">
               <p className=" text-[#ffae19]/[0.9] font-Large text-base">Top 15 players who used the most tickets</p>
-              <p className=" text-[#ffae19]/[0.8] font-normal text-sm ">Remember that the tickets you used to participate will be reset after the draw.</p>
+              <p className="text-[#ffae19]/[0.8] font-normal text-sm  ">Remember that the tickets you used to participate will be reset after the draw.</p>
 
               <div className="flex w-full   items-center  justify-center items-center">
-               <div className="flex w-[calc(90%-2rem)] mt-2  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
+               <div className="flex w-[calc(100%-2rem)] mt-2  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
                 <Image 
                 src={Chance as StaticImageData} 
               className="w-10 h-10 aspect-square object-cover"
@@ -955,7 +977,7 @@ new Toast({
         </center>
  
        
-        <div className="relative overflow-x-auto mt-5 mr-4 ml-4  ">
+        <div className="relative overflow-x-auto mt-4 mr-1 ml-1  ">
             <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-white uppercase  bg-[#ffae19]/[0.9] border-white border-4  border-double ">
                     <tr>
@@ -984,10 +1006,10 @@ new Toast({
                   return(
                    <tbody key={index}>
                     <tr className=" text-black text-wrap">
-                    <th scope="row" className="pl-5 px-2 text-wrap text-start font-medium  whitespace-nowrap ">
+                    <th scope="row" className="pl-5 px-2 text-wrap text-start text-sm  font-medium  whitespace-nowrap ">
                         {task.id}
                     </th>
-                    <td className="text-wrap text-start">
+                    <td className="text-wrap text-start text-sm ">
                         {task.name}
                     </td>
                     <td className="px-6 py-4 text-[#ffae19]/[0.9] text-end text-wrap">
@@ -1000,7 +1022,7 @@ new Toast({
           className="w-6 h-6  glowbox rounded-full object-fit"
           alt="Shiba Inu"
         />
-                  <p className=" text-[#ffae19]/[0.9] font-bold glow text-base text-wrap">{Number(task.ticket).toLocaleString()} </p>
+                  <p className=" text-[#ffae19]/[0.9] font-bold glow text-sm  text-wrap">{Number(task.ticket).toLocaleString()} </p>
                   </div>
                   </div>
                   </div>
@@ -1023,14 +1045,14 @@ new Toast({
 
         <div className="flex flex-col w-full">
         <center>
-        <div className=" w-[calc(90%-2rem)] flex flex-col mt-5 text-center font-bold text-wrap">
+        <div className=" w-[calc(100%-3rem)] flex flex-col mt-4 text-center font-bold text-wrap">
               <p className=" text-[#ffae19]/[0.9] font-Large text-base">Previous winners</p>
               <p className=" text-[#ffae19]/[0.8] font-normal text-sm ">Here is the list of past raffle winners, proof that luck isn't entirely a myth.</p>
              
       </div>
         </center>
 
-        <div className="relative overflow-x-auto mt-5 mr-4 ml-4  ">
+        <div className="relative overflow-x-auto mt-4 mr-1 ml-1  ">
             <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-white uppercase  bg-[#ffae19]/[0.9] border-white border-4  border-double ">
                     <tr>
@@ -1059,11 +1081,11 @@ new Toast({
                   return(
                    <tbody key={index}>
                     <tr className=" text-black text-wrap">
-                    <th scope="row" className="pl-5 px-2 text-black text-wrap  text-start font-normal  whitespace-nowrap ">
+                    <th scope="row" className="pl-5 px-2 text-sm text-black text-wrap  text-start font-normal  whitespace-nowrap ">
                     {task.name}
                     </th>
 
-                    <td className="text-wrap text-black/[0.6] font-bold  text-start">
+                    <td className="text-wrap text-black/[0.6] text-sm  font-bold  text-start">
                         
                         {new Date(task.date).toDateString()}
                     </td>
@@ -1102,14 +1124,14 @@ new Toast({
         <div className="flex flex-col w-full">
 
         <center>
-        <div className=" w-[calc(90%-2rem)] flex flex-col mt-5 text-center font-bold text-wrap">
+        <div className=" w-[calc(100%-3rem)] flex flex-col mt-4 text-center font-bold text-wrap">
               <p className=" text-[#ffae19]/[0.9] font-Large text-base">All your ton transactions</p>
               <p className=" text-[#ffae19]/[0.8] font-normal text-sm ">Here is a list of all transactions where you bought tickets with ton</p>
              
       </div>
         </center>
 
-        <div className="relative overflow-x-auto mt-5 mr-4 ml-4  ">
+        <div className="relative overflow-x-auto mt-4 mr-1 ml-1  ">
             <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-white uppercase  bg-[#ffae19]/[0.9] border-white border-4  border-double ">
                     <tr>
@@ -1138,11 +1160,11 @@ new Toast({
                   return(
                    <tbody key={index}>
                     <tr className=" text-black text-wrap">
-                    <th scope="row" className="pl-5 px-2 text-black text-wrap  text-start font-bold  whitespace-nowrap ">
+                    <th scope="row" className="pl-5 px-2 text-black text-wrap text-sm   text-start font-bold  whitespace-nowrap ">
                     {new Date(task.date).toDateString()}
                     </th>
 
-                    <td className="text-wrap text-black/[0.6] font-bold  text-start">
+                    <td className="text-wrap text-black/[0.6] font-bold text-sm   text-start">
                         
                         {task.status}
                     </td>
@@ -1161,7 +1183,7 @@ new Toast({
     className="w-6 h-6  glowbx rounded-full object-fit"
     alt="Shiba Inu"
   />
-            <p className=" text-[#ffae19]/[0.9] font-bold glow text-base text-wrap">{Number(task.tickets).toLocaleString()} Tickets</p>
+            <p className=" text-[#ffae19]/[0.9] font-bold glow text-sm text-wrap">{Number(task.tickets).toLocaleString()} Tickets</p>
             </div>
             </div>
             </div>
