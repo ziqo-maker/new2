@@ -284,7 +284,7 @@ useEffect(() => {
 
   useEffect(() => {
         
-      if(String(UserDt?.idd).length != 0){
+      if(refresh == false){
 
         try {
           fetch('/api/get-ticket', {
