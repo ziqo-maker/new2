@@ -133,7 +133,7 @@ const RaffleTab = () => {
    
           if(buyTicket != 0){
           
-            const amount = buyTicket == 1 ? '25000000' : buyTicket == 2 ? '49000000' : '74000000'
+            const amount = buyTicket == 1 ? '250000000' : buyTicket == 2 ? '490000000' : '740000000'
             try {
         
                  await tonConnectUI.sendTransaction({
@@ -148,17 +148,20 @@ const RaffleTab = () => {
                 });
          
                  const nmbtickets =  buyTicket == 1 ? '100' : buyTicket == 2 ? '250' : '500'
+                 const amountB = buyTicket == 1 ? '0.25' : buyTicket == 2 ? '0.49' : '0.74'
+
                 try {
                        fetch('/api/transaction', {
                         method: 'POST',
                         headers: {
                           'Content-Type':'application/json',
                         },
-                        body: JSON.stringify({idd:String(UserDt?.idd),amount:String(amount),status:'pending',tickets: String(nmbtickets)}),
+                        body: JSON.stringify({idd:String(UserDt?.idd),amount:String(amountB),status:'pending',tickets: String(nmbtickets)}),
                       })
                       .then((res) => res.json())
                       .then((data) => {
                         if (data.success) {
+                          setRefreshB(!refreshB)
                           setVerifyBuy(true)
                          new Toast({
                            position: "top-center",
