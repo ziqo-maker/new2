@@ -131,57 +131,60 @@ const RaffleTab = () => {
 
   const handlePayment = async () => {
    
-        if(buyTicket != 0){
-          const amount = buyTicket == 1 ? '25000000' : buyTicket == 2 ? '49000000' : '74000000'
-          try {
+          if(buyTicket != 0){
+          
+            const amount = buyTicket == 1 ? '25000000' : buyTicket == 2 ? '49000000' : '74000000'
+            try {
+        
+                 await tonConnectUI.sendTransaction({
+                    validUntil: Math.floor(Date.now() / 1000) + 60,
+                    messages: [
+                        {
+                            address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
+                            amount: amount,
+                            payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
+                        },
+                    ],
+                });
+         
+                 const nmbtickets =  buyTicket == 1 ? '100' : buyTicket == 2 ? '250' : '500'
+                try {
+                       fetch('/api/transaction', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type':'application/json',
+                        },
+                        body: JSON.stringify({idd:String(UserDt?.idd),amount:String(amount),status:'pending',tickets: String(nmbtickets)}),
+                      })
+                      .then((res) => res.json())
+                      .then((data) => {
+                        if (data.success) {
+                          setVerifyBuy(true)
+                         new Toast({
+                           position: "top-center",
+                           toastMsg: "Your transaction was successful. Your tickets will be added automatically after 30 minutes of your transaction being confirmed.",
+                           autoCloseTime: 15500,
+                           canClose: true,
+                           showProgress: true,
+                           pauseOnHover: true,
+                           pauseOnFocusLoss: true,
+                           type: "default",
+                           theme: "light"
+                         });
+                      
+                        } else {
+                        }
+                      })
+                    } catch (err) {
+                    }
+        
+        
+            } catch (error) {
+              
+            } 
+          }
+
       
-               await tonConnectUI.sendTransaction({
-                  validUntil: Math.floor(Date.now() / 1000) + 60,
-                  messages: [
-                      {
-                          address: "0QA0VRQbT9KhtYIdLHi8pxNT0MaNVBef3U347s1vnrlaW_O1",
-                          amount: amount,
-                          payload: beginCell().storeUint(0, 32).storeStringTail("Mint").endCell().toBoc().toString('base64'),
-                      },
-                  ],
-              });
-       
-               const nmbtickets =  buyTicket == 1 ? '100' : buyTicket == 2 ? '250' : '500'
-              try {
-                     fetch('/api/transaction', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type':'application/json',
-                      },
-                      body: JSON.stringify({idd:String(UserDt?.idd),amount:String(amount),status:'pending',tickets: String(nmbtickets)}),
-                    })
-                    .then((res) => res.json())
-                    .then((data) => {
-                      if (data.success) {
-                        setVerifyBuy(true)
-                       new Toast({
-                         position: "top-center",
-                         toastMsg: "Your transaction was successful. Your tickets will be added automatically after 30 minutes of your transaction being confirmed.",
-                         autoCloseTime: 15500,
-                         canClose: true,
-                         showProgress: true,
-                         pauseOnHover: true,
-                         pauseOnFocusLoss: true,
-                         type: "default",
-                         theme: "light"
-                       });
-                    
-                      } else {
-                      }
-                    })
-                  } catch (err) {
-                  }
-      
-      
-          } catch (error) {
-            
-          } 
-        }
 
 };
 
@@ -381,9 +384,6 @@ useEffect(() => {
            } catch (err) {
             
            }
-
-          //  const gtticket = Number(data.ticket)
-          //  setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(gtticket),firstname:String(UserDt?.firstname)})
 
            } else {
             
@@ -739,7 +739,7 @@ new Toast({
 </div>
           </center>
         <center >
-        <button onClick={() => handlePayment} className={`  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
+        <button onClick={() => handlePayment()} className={`  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
                            
           
                            <div className="flex-1 text-center">
