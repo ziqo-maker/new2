@@ -36,7 +36,7 @@ const NavigationBar = () => {
                             >
                              {String(tab.label) != "Raffle"? (
  <tab.Icon
- className={`w-8 h-8 ${isActive ? 'text-[#ffffff]' : 'text-[#6b4d11]/[0.8]'
+ className={`w-7 h-7 ${isActive ? 'text-[#ffffff]' : 'text-[#6b4d11]/[0.8]'
      }`}
 />
                                 ):(
