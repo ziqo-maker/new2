@@ -10,21 +10,41 @@ import Gift from '@/icons/gift.svg';
 import { NewUserContext } from '@/contexts/UserContextB';
 import Person from '@/icons/person.svg';
 import Toast from 'typescript-toastify';
+import Dollar from '@/icons/DollarWhite.svg';
+import Etc from '@/icons/etc.svg';
 
 type Task = {
   username:string
 }
 
-const InviteTab = () => {
+type Show = {
+  id:number
+  done:boolean,
+  count:number,
+  price:number,
+  clickb:boolean
+}
 
+type modelB = {
+  id: number
+}
+
+const InviteTab = () => {
+ const [gtShow,setShow] = useState<Show[]>([]);
+   const [gtMpdel,setModelB] = useState<modelB[]>([
+                 { id: 1},
+                 { id: 2 },
+                 { id: 3 },
+             ]);
       const [gtTasks,setTask] = useState<Task[]>([]);
      const [Loading,setLoading] = useState<boolean> (true);
      const { UserDt,setUserData } = React.useContext(NewUserContext);
       const [refresh, setRefresh] = useState<boolean>(false);
         const timerRef = useRef<NodeJS.Timeout | null>(null);
            const [refreshB, setRefreshB] = useState<boolean>(false);
+ 
      
-     const inviteurl = ""
+     const inviteurl = "https://t.me/TheWalkCoinBot/WalkCoin"
 
      const handleinvite = () => {
       if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
@@ -53,9 +73,57 @@ const InviteTab = () => {
                   });
     }
 
+  const handle = async(id:number,price:number,clickb:boolean) => {
+      if(clickb == false){
+        var newData = gtShow.map(el => {
+          if(el.id == id)
+             return Object.assign({}, el, {clickb:true})
+          return el
+      });
+       setShow(newData)
+        const updatevalue = (Number(UserDt?.value)+price).toFixed(8)
+
+      try {
+                            fetch('/api/updateprice', {
+                             method: 'POST',
+                             headers: {
+                               'Content-Type': 'application/json',
+                             },
+                             body: JSON.stringify({ idd: String(UserDt?.idd),tokenvalue:String(updatevalue),task:String(id)}),
+                           })
+                           .then((res) => res.json())
+                           .then((data) => {
+                            if(data.success){
+                              var newData = gtShow.map(el => {
+                                  if(el.id == id)
+                                     return Object.assign({}, el, {done:true})
+                                  return el
+                              });
+                               setShow(newData)
+                               setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(updatevalue),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
+                               new Toast({
+                                position: "top-center",
+                                toastMsg: "Done.",
+                                autoCloseTime: 8500,
+                                canClose: true,
+                                showProgress: true,
+                                pauseOnHover: true,
+                                pauseOnFocusLoss: true,
+                                type: "default",
+                                theme: "light"
+                              });
+                            }
+                           })
+                         } catch (err) {
+                          
+                         }
+      }
+    }
+  
       useEffect(() => {
-            
-        try {
+
+           
+       try {
           fetch('/api/get-friends', {
            method: 'POST',
            headers: {
@@ -67,6 +135,72 @@ const InviteTab = () => {
          .then((data) => {
           if(data.success){
             setRefresh(true)
+            if (timerRef.current) {
+              clearInterval(timerRef.current);
+            };
+            try {
+              fetch('/api/get-invitetask', {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ idd: String(UserDt?.idd) }),
+             })
+             .then((res) => res.json())
+             .then((data) => {
+              if(data.success){
+                
+                if(data.all.length == 0){
+                  const model = {id: 1, done:false,count:2,price:0.00000015,clickb:false}
+                  gtShow?.push(model)
+                  const modelB = {id: 2, done:false,count:5,price:0.00000025,clickb:false}
+                  gtShow?.push(modelB)
+                  const modelC = {id: 3, done:false,count:15,price:0.00000035,clickb:false}
+                  gtShow?.push(modelC)
+                }else{
+                   var blnA = false
+                   var blnB = false
+                   var blnC = false
+        
+                  data.all.forEach((t: any)=> {
+                    const gttask = String(t.task)
+                    if(gttask == "1"){
+                      blnA = true
+                      const model = {id: 1, done:true,count:2,price:0.00000015,clickb:false}
+                       gtShow?.push(model)
+                    }else if(gttask == "2"){
+                      blnB = true
+                      const model = {id: 2, done:true,count:5,price:0.00000025,clickb:false}
+                      gtShow?.push(model)
+                    }else if(gttask == "3"){
+                      blnC = true
+                      const model = {id: 3, done:true,count:15,price:0.00000035,clickb:false}
+                      gtShow?.push(model)
+                    }
+        
+                  })
+        
+                  if(!blnA){
+                    const model = {id: 1, done:false,count:2,price:0.00000015,clickb:false}
+                    gtShow?.push(model)
+                  }
+                  if(!blnB){
+                    const model = {id: 2, done:false,count:5,price:0.00000025,clickb:false}
+                    gtShow?.push(model)
+                  } 
+                  if(!blnC){
+                    const model = {id: 3, done:false,count:15,price:0.00000035,clickb:false}
+                    gtShow?.push(model)
+                  }  
+        
+                }
+                
+              }
+             })
+           } catch (err) {
+            
+           }
+
             data.all.forEach((t: any)=> {
              
               let model = {
@@ -77,6 +211,7 @@ const InviteTab = () => {
              gtTasks.push(model)
 
             })
+
             setLoading(false)
           }
          })
@@ -96,12 +231,14 @@ const InviteTab = () => {
     };
 
       },[refreshB])
+
       
     return (
       <div className=" flex justify-center  overflow-auto">
          <div className="w-full h-screen bg-white flex-col ">
            
          <div className="flex-1 items-center   mt-5">
+         
               <div className="flex-1 mt-1 text-center font-bold ">
               <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-Large text-2xl glow">Invite Friends!</p>
               <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal glow text-lg text-wrap">You and your friend will receive WalkCoin</p>
@@ -156,7 +293,7 @@ const InviteTab = () => {
   className="w-6 h-6 "
   alt=""
 />     
-          <p className="text-white font-normal  text-base">{Number(50000).toLocaleString()} WalkCoin for you</p> 
+          <p className="text-white font-normal  text-base">{Number(100000).toLocaleString()} WalkCoin for you</p> 
                         </div>
                         <div className="grow flex items-center space-x-1">
                         <Image
@@ -164,7 +301,7 @@ const InviteTab = () => {
   className="w-6 h-6 "
   alt=""
 />     
-          <p className="text-white font-normal  text-base">{Number(30000).toLocaleString()} Walkcoin for your friend</p> 
+          <p className="text-white font-normal  text-base">{Number(50000).toLocaleString()} Walkcoin for your friend</p> 
                         </div>
           </div>
           
@@ -176,8 +313,60 @@ const InviteTab = () => {
                         </div>
 
                 </div>
-                 
+                <div className="h-1" />
                 <div className="flex-1 mt-1 text-center font-bold ">
+              <p className="mr-4 ml-4 text-black font-bold text-sm  ">Increase the price of your Walkcoin tokens by inviting friends</p>
+              </div>
+              <div className="h-1" />
+                {gtShow.map((task,index) => {
+                  if(Loading == false){
+                    return(
+                      <center key={index}>
+                              
+                               <div className="w-[calc(100%-2rem)] flex-1 mt-1 px-3  items-center bg-[#ffae19]/[0.9] border-white border-4 border-double rounded-full py-[5px] ">
+                               <div className="grow flex items-center">
+                               <Image
+          src={Etc}
+        className="w-11 h-11  aspect-square object-cover  "
+        alt="Shiba Inu"
+      />
+                             
+                <div className="px-2"/>
+                <div className="grow space-y-1">
+                <p className="text-white font-Large text-[17px] text-wrap text-start">{gtTasks.length}/{task.count} friends</p>
+                <div className="grow flex items-center space-x-1">
+                              <Image
+          src={Dollar as StaticImageData}
+        className="w-7 h-7 "
+        alt=""
+      />     
+                <p className="text-white font-normal  text-base">+{task.price.toFixed(8)}</p> 
+                              </div>
+                </div>
+                {/* <div className="px-1"/> */}
+                <div className="flex items-center">
+               
+                {/* <div className=" px-1"/> */}
+                <button onClick={() => {task.done == false && gtTasks.length >= task.count ? handle(task.id,task.price,task.clickb) : ''} } className={`${gtTasks.length >= task.count? '' : 'opacity-70'} glowwhite bg-white flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                <p className={` text-black font-Large`}>{task.done == true ? 'Done' : 'Claim'}</p>
+    
+     
+                </button> 
+                
+                </div>
+  
+                               </div>                          
+                              
+
+                              </div>
+                              <div className="h-3"/>
+                            </center>
+                    )
+                  }
+                  
+                  }) }
+                 
+                <div className="flex-1 text-center font-bold ">
               <p className="mr-4 ml-4 text-black font-normal text-sm  ">Note: The reward for the invitation is limited, you will only be rewarded for 10 invitations, but your friends get their reward the same as before.</p>
               </div>
                
