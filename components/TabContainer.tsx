@@ -60,27 +60,22 @@ const TabContainer = () => {
         if (timerRef.current) {
           clearInterval(timerRef.current);
         };
-                    const gtpnt = Number(data.gtpoint)
                     const gtticket = Number(data.ticket)
-        const selectchrctr = String(data.selectcharacter)
-        const gtidd = String(data.idd)
-        const gtspeedlvl = String(data.speedlvl)
-        const gtupgrade = String(data.upgrade)
-        const gtusername = String(data.username)
-        const gtvalue = String(data.username)
-        const gtfirstname = String(data.firstname)   
+       
      setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                        upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(gtticket)
                      })                      
-                    
+                     
+
                      if(prm.length > 0){
+                      const ticketplus = Number(gtticket) + Number(7)
                        try {
                          fetch('/api/invitereferal', {
                          method: 'POST',
                          headers: {
                            'Content-Type': 'application/json',
                          },
-                         body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
+                         body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm),ticket:String(ticketplus) }),
                        })
                        .then((res) => res.json())
                        .then((data) => {
