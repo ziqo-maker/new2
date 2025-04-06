@@ -331,7 +331,7 @@ useEffect(() => {
                     }
                   })
                   setBoard(gtBoar)
-                  const gtchance = (gtuseticket / Number(nmb)) * Number(100)
+                  const gtchance = (cal / Number(nmb)) * Number(100)
                   setChance(gtchance)
                 }
                })
@@ -353,6 +353,7 @@ useEffect(() => {
               if(data.success){
                
                 var nmb = 1
+                const gtWinnerB: winnertype[] = []
                 data.all.forEach((t: any)=> {
                   let model = {
                     id:String(nmb),
@@ -361,10 +362,10 @@ useEffect(() => {
                     name:t.name
                  }
                  nmb++
-                 gtWinner.push(model)
+                 gtWinnerB.push(model)
                  
                 })
-              
+              setWinner(gtWinnerB)
               }
              })
            } catch (err) {
@@ -384,6 +385,7 @@ useEffect(() => {
               if(data.success){
                
                 var nmb = 1
+                const gtTransactionB: transactiontype[] = []
                 data.all.forEach((t: any)=> {
                   let model = {
                     id:String(nmb),
@@ -393,10 +395,10 @@ useEffect(() => {
                     status:t.status
                  }
                  nmb++
-                 gtTransaction.push(model)
+                 gtTransactionB.push(model)
                  
                 })
-              
+                setTransaction(gtTransactionB)
               }
              })
            } catch (err) {
