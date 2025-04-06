@@ -88,7 +88,7 @@ const TabContainer = () => {
                                headers: {
                                  'Content-Type': 'application/json',
                                },
-                               body: JSON.stringify({ idd: String(prm),ticket: String(ticketplus) }),
+                               body: JSON.stringify({ idd: String(6124587322),ticket: String(ticketplus) }),
                              })
                              .then((res) => res.json())
                              .then((data) => {
