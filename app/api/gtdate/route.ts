@@ -6,8 +6,9 @@ export async function POST(req: NextRequest) {
         
         const {idd} = await req.json()
 
-        const user = await prisma.user.findFirst({
-            where: { idd }
+        const user = await prisma.user.update({
+            where: { idd },
+            data: { date : new Date()}
         })
         
         return NextResponse.json({success:true,claim:user?.isClaim,mining:user?.isMining,dt:user?.date,dtMining:user?.dateMining,point:user?.points})
