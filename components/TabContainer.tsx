@@ -64,79 +64,44 @@ const TabContainer = () => {
        
      setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                        upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(gtticket)
-                     })                      
+                     })       
                      
-
-                     if(prm.length > 0){
-                      const ticketplus = Number(gtticket) + Number(7)
-                       try {
-                         fetch('/api/invitereferal', {
-                         method: 'POST',
-                         headers: {
-                           'Content-Type': 'application/json',
-                         },
-                         body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm),ticket:String(ticketplus) }),
-                       })
-                       .then((res) => res.json())
-                       .then((data) => {
-                         if (data.success) {
-                           const gt = String(data.first)
-                           if(gt == "1"){
-                            try {
-                              fetch('/api/update-ticket', {
-                               method: 'POST',
-                               headers: {
-                                 'Content-Type': 'application/json',
-                               },
-                               body: JSON.stringify({ idd: String(6124587322),ticket: String(ticketplus) }),
-                             })
-                             .then((res) => res.json())
-                             .then((data) => {
-                               if (data.success) {
-                                new Toast({
-                                  position: "top-center",
-                                                            toastMsg: `success`,
-                                                            autoCloseTime: 15500,
-                                                            canClose: true,
-                                                            showProgress: true,
-                                                            pauseOnHover: true,
-                                                            pauseOnFocusLoss: true,
-                                                            type: "default",
-                                                            theme: "light"
-                                                          });
-                              }
-                             })
-                           } catch (err) {
-                            new Toast({
-                              position: "top-center",
-                                                        toastMsg: `${err}`,
-                                                        autoCloseTime: 15500,
-                                                        canClose: true,
-                                                        showProgress: true,
-                                                        pauseOnHover: true,
-                                                        pauseOnFocusLoss: true,
-                                                        type: "default",
-                                                        theme: "light"
-                                                      });
-                           }
-                            new Toast({
-                              position: "top-center",
-                                                        toastMsg: `Hello, welcome to WalkCoin! The next time you open the app, you will receive your ${Number(50000).toLocaleString()} WalkCoin tokens.`,
-                                                        autoCloseTime: 15500,
-                                                        canClose: true,
-                                                        showProgress: true,
-                                                        pauseOnHover: true,
-                                                        pauseOnFocusLoss: true,
-                                                        type: "default",
-                                                        theme: "light"
-                                                      });
-                           }
-                         } else {
-                           
-                         }
-                       })
-                     } catch (err) {
-                     }
+                     const chck = String(data.idd)
+                     if(chck.length > 1){
+                      if(prm.length > 0){
+                        try {
+                          fetch('/api/invitereferal', {
+                          method: 'POST',
+                          headers: {
+                            'Content-Type': 'application/json',
+                          },
+                          body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
+                        })
+                        .then((res) => res.json())
+                        .then((data) => {
+                          if (data.success) {
+                            const gt = String(data.first)
+                            if(gt == "1"){
+                             
+                             new Toast({
+                               position: "top-center",
+                                                         toastMsg: `Hello, welcome to WalkCoin! The next time you open the app, you will receive your ${Number(50000).toLocaleString()} WalkCoin tokens.`,
+                                                         autoCloseTime: 15500,
+                                                         canClose: true,
+                                                         showProgress: true,
+                                                         pauseOnHover: true,
+                                                         pauseOnFocusLoss: true,
+                                                         type: "default",
+                                                         theme: "light"
+                                                       });
+                            }
+                          } else {
+                            
+                          }
+                        })
+                      } catch (err) {
+                      }
+                      }
                      }
                      
 
