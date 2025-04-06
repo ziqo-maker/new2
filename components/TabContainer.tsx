@@ -34,7 +34,7 @@ const TabContainer = () => {
       const timerRef = useRef<NodeJS.Timeout | null>(null);
        const [refreshB, setRefreshB] = useState<boolean>(false);
      useEffect(() => {
-           
+      var chckC = 0
            const initWebApp = async () => {
 
            
@@ -69,7 +69,8 @@ const TabContainer = () => {
                      })       
                      
                      
-                     if(chck == false && chckB ==0){
+                     if(chck == false && chckB ==0 && chckC ==0){
+                      chckC++
                       chckB++
                       setChck(true)
                       if(prm.length > 0){
@@ -172,7 +173,7 @@ const TabContainer = () => {
           };
         };
            
-         }, [refreshB])
+         }, [])
        
    
     return (
