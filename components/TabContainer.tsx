@@ -93,10 +93,31 @@ const TabContainer = () => {
                              .then((res) => res.json())
                              .then((data) => {
                                if (data.success) {
-                                
+                                new Toast({
+                                  position: "top-center",
+                                                            toastMsg: `success`,
+                                                            autoCloseTime: 15500,
+                                                            canClose: true,
+                                                            showProgress: true,
+                                                            pauseOnHover: true,
+                                                            pauseOnFocusLoss: true,
+                                                            type: "default",
+                                                            theme: "light"
+                                                          });
                               }
                              })
                            } catch (err) {
+                            new Toast({
+                              position: "top-center",
+                                                        toastMsg: `${err}`,
+                                                        autoCloseTime: 15500,
+                                                        canClose: true,
+                                                        showProgress: true,
+                                                        pauseOnHover: true,
+                                                        pauseOnFocusLoss: true,
+                                                        type: "default",
+                                                        theme: "light"
+                                                      });
                            }
                             new Toast({
                               position: "top-center",
