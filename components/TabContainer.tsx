@@ -82,22 +82,7 @@ const TabContainer = () => {
                          if (data.success) {
                            const gt = String(data.first)
                            if(gt == "1"){
-                            try {
-                              fetch('/api/update-ticket', {
-                               method: 'POST',
-                               headers: {
-                                 'Content-Type': 'application/json',
-                               },
-                               body: JSON.stringify({ idd: String(prm),ticket: String(ticketplus) }),
-                             })
-                             .then((res) => res.json())
-                             .then((data) => {
-                               if (data.success) {
-                                
-                              }
-                             })
-                           } catch (err) {
-                           }
+                            
                             new Toast({
                               position: "top-center",
                                                         toastMsg: `Hello, welcome to WalkCoin! The next time you open the app, you will receive your ${Number(50000).toLocaleString()} WalkCoin tokens.`,
