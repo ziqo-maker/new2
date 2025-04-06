@@ -110,24 +110,7 @@ const TabContainer = () => {
                      }
                      
 
-                     try {
-                      fetch('/api/updatedt', {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json',
-                      },
-                      body: JSON.stringify({ idd: String(data.idd) }),
-                    })
-                    .then((res) => res.json())
-                    .then((data) => {
-                      if (data.success) {
-                        
-                      } else {
-                        
-                      }
-                    })
-                  } catch (err) {
-                  }
+              
 
            //          try {
            //            fetch('/api/get-ticketbalance', {
