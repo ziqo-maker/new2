@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
                 await prisma.ticket.updateMany({
                     where: { idd },
                     data: { 
-                        ticket
+                        ticket:"5"
                     }
                 })
 
