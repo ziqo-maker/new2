@@ -326,11 +326,11 @@ useEffect(() => {
                         ticket:t.ticket,
                      }
                      
-                     gtBoar.push(model)
+                     gtBoard.push(model)
                     
                     }
                   })
-                  setBoard(gtBoar)
+                  // setBoard(gtBoard)
                   const gtchance = (cal / Number(nmb)) * Number(100)
                   setChance(gtchance)
                 }
