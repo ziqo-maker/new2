@@ -33,12 +33,12 @@ export async function POST(req: NextRequest) {
                     }
                 })
 
-                await prisma.ticket.updateMany({
-                    where: { idd },
-                    data: { 
-                        ticket
-                    }
-                })
+                // await prisma.ticket.updateMany({
+                //     where: { idd },
+                //     data: { 
+                //         ticket
+                //     }
+                // })
 
                 await prisma.user.update({
                     where: { idd:idb },
