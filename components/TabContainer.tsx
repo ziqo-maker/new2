@@ -29,6 +29,8 @@ const TabContainer = () => {
     const { activeTab } = useTab()
      const { setUserData,UserDt } = React.useContext(NewUserContext);
  const [refresh, setRefresh] = useState<boolean>(false);
+ const [chck, setChck] = useState<boolean>(false);
+ var chckB = 0
       const timerRef = useRef<NodeJS.Timeout | null>(null);
        const [refreshB, setRefreshB] = useState<boolean>(false);
      useEffect(() => {
@@ -66,8 +68,10 @@ const TabContainer = () => {
                        upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(gtticket)
                      })       
                      
-                     const chck = String(data.idd)
-                     if(chck.length > 1){
+                     
+                     if(chck == false && chckB ==0){
+                      chckB++
+                      setChck(true)
                       if(prm.length > 0){
                         try {
                           fetch('/api/invitereferal', {
