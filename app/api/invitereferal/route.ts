@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 export async function POST(req: NextRequest) {
     try {
         
-        const {idd,idb,referal,ticket} = await req.json()
+        const {idd,idb,referal} = await req.json()
 
           
         let userA = await prisma.user.findFirst({
@@ -33,12 +33,19 @@ export async function POST(req: NextRequest) {
                     }
                 })
 
-                await prisma.ticket.updateMany({
-                    where: { idd },
-                    data: { 
-                        ticket:"6"
-                    }
+                let gtticket = await prisma.ticket.findFirst({
+                    where: { idd }
                 })
+                if(gtticket){
+                    const plus = Number(gtticket.ticket) +Number(7)
+                    await prisma.ticket.updateMany({
+                        where: { idd },
+                        data: { 
+                            ticket:String(plus)
+                        }
+                    })
+                }
+                
 
                 await prisma.user.update({
                     where: { idd:idb },
