@@ -138,7 +138,6 @@ const RaffleTab = () => {
     setTicket(newValue);
   };
 
-
   const handlePayment = async () => {
 
 
@@ -326,11 +325,12 @@ useEffect(() => {
                         ticket:t.ticket,
                      }
                      
-                     gtBoard.push(model)
+                     gtBoar.push(model)
                     
                     }
                   })
-                  // setBoard(gtBoard)
+                  var sortedArray: board[] = gtBoar.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
+                  setBoard(sortedArray.reverse())
                   const gtchance = (cal / Number(nmb)) * Number(100)
                   setChance(gtchance)
                 }
@@ -525,7 +525,7 @@ new Toast({
 
      }
 
-
+    var cntup = 0
 
     return (
         <div className=" flex justify-center overflow-y-auto">
@@ -989,7 +989,7 @@ new Toast({
                    <tbody key={index}>
                     <tr className=" text-black text-wrap text-sm">
                     <th scope="row" className="pl-5 px-2 text-wrap text-start text-sm  font-medium  whitespace-nowrap ">
-                        {task.id}
+                        {cntup++}
                     </th>
                     <td className="text-wrap text-start text-sm ">
                         {task.name}
