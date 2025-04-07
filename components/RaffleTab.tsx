@@ -330,7 +330,7 @@ useEffect(() => {
                   })
                   
                   var sortedArray: board[] = gtBoar.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
-                  const slc = sortedArray.slice(0,14)
+                  const slc = sortedArray.reverse().slice(0,15)
                   setBoard(slc)
                   const gtchance = (cal / Number(nmb)) * Number(100)
                   setChance(gtchance)
