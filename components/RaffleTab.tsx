@@ -325,7 +325,7 @@ useEffect(() => {
                         ticket:t.ticket,
                      }
                      
-                     gtBoar.push(model)
+                     gtBoard.push(model)
                     
                     }
                   })
