@@ -325,11 +325,11 @@ useEffect(() => {
                         ticket:t.ticket,
                      }
                      
-                     gtBoard.push(model)
+                     gtBoar.push(model)
                     
                   })
                   
-                  var sortedArray: board[] = gtBoard.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
+                  var sortedArray: board[] = gtBoar.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
                   const slc = sortedArray.slice(0,14)
                   setBoard(slc)
                   const gtchance = (cal / Number(nmb)) * Number(100)
