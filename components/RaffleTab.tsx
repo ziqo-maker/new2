@@ -318,7 +318,7 @@ useEffect(() => {
                   data.all.forEach((t: any)=> {
                     nmb += Number(t.ticket)
                     cnt++
-                    if(cnt <= 15 && gtBoard.length <= 14){
+                   
                       let model = {
                         id:String(cnt),
                         name:t.name,
@@ -327,11 +327,11 @@ useEffect(() => {
                      
                      gtBoard.push(model)
                     
-                    }
                   })
                   
-                  var sortedArray: board[] = gtBoar.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
-                  // setBoard(gtBoar)
+                  var sortedArray: board[] = gtBoard.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
+                  const slc = sortedArray.slice(0,14)
+                  setBoard(slc)
                   const gtchance = (cal / Number(nmb)) * Number(100)
                   setChance(gtchance)
                 }
