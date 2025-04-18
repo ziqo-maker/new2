@@ -20,7 +20,7 @@ import Dollar from '@/icons/Dollar.svg';
 import ProgressBar from "@ramonak/react-progress-bar";
 import { ShowPromiseResult } from "@/types/adsgram";
 import { useAdsgramD } from "./useAdsgramD";
-
+import circleticket from '@/icons/ticketcircle.svg';
 
 import Loading from '@/imgs/loading.png';
 
@@ -168,11 +168,24 @@ useEffect(() => {
        .then((data) => {
          if (data.success) {
            
-          const plus = Number(UserDt?.gtpoint) + miningPoint
-           const lcl = miningPoint.toLocaleString()
+         const plus = Number(UserDt?.gtpoint) + miningPoint
+          const counticket = (Number(miningPoint)/3600).toFixed()
+          const plusticket = Number(UserDt?.ticket) + Number(counticket)
+          try {
+            fetch('/api/update-ticket', {
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({ idd: String(UserDt?.idd),ticket: plusticket }),
+           })
+           .then((res) => res.json())
+           .then((data) => {
+             if (data.success) {
+              const lcl = miningPoint.toLocaleString()
                       new Toast({
                         position: "top-center",
-                        toastMsg: `You're received ${lcl} WalkCoin`,
+                        toastMsg: `You're received ${lcl} WalkCoin and ${counticket} tickets`,
                         autoCloseTime: 4500,
                         canClose: true,
                         showProgress: true,
@@ -181,13 +194,18 @@ useEffect(() => {
                         type: "default",
                         theme: "light"
                       });
-          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
+          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(plus),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(plusticket),firstname:String(UserDt?.firstname)})
           setClaim(false)
           setReady(true)
           setMiningPoint(0)
           if (timerRef.current) {
             clearInterval(timerRef.current);
           }
+            }
+           })
+         } catch (err) {
+         }
+           
          } else {
          }
        })
@@ -633,6 +651,19 @@ useEffect(() => {
           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
           <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
           </div>
+
+          <div className="flex grow mt-1  justify-center items-center space-x-1">
+        <Image
+        src={circleticket as StaticImageData} 
+      className="w-7.5 h-7.5"
+      alt=""
+       />
+          <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] font-Large rounded-full px-3 py-[3px]">
+          <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
+          </div>
+          
+        
+        </div>
           
         
         </div>
