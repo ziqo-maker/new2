@@ -645,8 +645,8 @@ useEffect(() => {
         </button>
   </div>
 
-        <div className="flex flex-col grow items-center justify-center">
-        <div className="flex grow px-50 mt-3 justify-center items-center space-x-1">
+        <div className="flex flex-col grow mb-2 mt-2 items-center justify-center">
+        <div className="flex grow px-50 justify-center items-center space-x-1">
         <Image
         src={FootPrint as StaticImageData} 
       className="w-10 h-10"
