@@ -177,7 +177,7 @@ useEffect(() => {
              headers: {
                'Content-Type': 'application/json',
              },
-             body: JSON.stringify({ idd: String(UserDt?.idd),ticket: plusticket }),
+             body: JSON.stringify({ idd: String(UserDt?.idd),ticket: String(plusticket) }),
            })
            .then((res) => res.json())
            .then((data) => {
