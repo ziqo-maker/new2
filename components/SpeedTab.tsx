@@ -19,13 +19,13 @@ const SpeedTab = () => {
 
     const { UserDt,setUserData } = React.useContext(NewUserContext);
     const tasks: { id: number; label: string; Icon: StaticImageData,cost:string }[] = [
-        { id: 1, label: 'x1 tokens every 2 hours', Icon: Speed1,cost : '0' },
-        { id: 2, label: 'x2 tokens every 2 hours', Icon: Speed2,cost : '250000' },
-        { id: 3, label: 'x3 tokens every 2 hours', Icon: Speed3,cost : '500000' },
-        { id: 4, label: 'x4 tokens every 2 hours', Icon: Speed4,cost : '1000000' },
-        { id: 5, label: 'x5 tokens every 2 hours', Icon: Speed5,cost : '2000000' },
-        { id: 6, label: 'x6 tokens every 2 hours', Icon: Speed6,cost : '3000000' },
-        { id: 7, label: 'x7 tokens every 2 hours', Icon: Speed7,cost : '5000000' },
+         { id: 1, label: 'x1 tokens and 2 tickets every 2 hours', Icon: Speed1,cost : '0' },
+        { id: 2, label: 'x2 tokens and 4 tickets every 2 hours', Icon: Speed2,cost : '100000' },
+        { id: 3, label: 'x3 tokens and 6 tickets every 2 hours', Icon: Speed3,cost : '150000' },
+        { id: 4, label: 'x4 tokens and 8 tickets every 2 hours', Icon: Speed4,cost : '200000' },
+        { id: 5, label: 'x5 tokens and 10 tickets every 2 hours', Icon: Speed5,cost : '250000' },
+        { id: 6, label: 'x6 tokens and 12 tickets every 2 hours', Icon: Speed6,cost : '350000' },
+        { id: 7, label: 'x7 tokens and 14 tickets every 2 hours', Icon: Speed7,cost : '500000' },
     ]
 
 
