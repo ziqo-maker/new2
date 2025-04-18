@@ -19,13 +19,13 @@ const SpeedTab = () => {
 
     const { UserDt,setUserData } = React.useContext(NewUserContext);
     const tasks: { id: number; label: string; Icon: StaticImageData,cost:string }[] = [
-         { id: 1, label: 'x1 tokens and 2 tickets every 2 hours', Icon: Speed1,cost : '0' },
-        { id: 2, label: 'x2 tokens and 4 tickets every 2 hours', Icon: Speed2,cost : '100000' },
-        { id: 3, label: 'x3 tokens and 6 tickets every 2 hours', Icon: Speed3,cost : '150000' },
-        { id: 4, label: 'x4 tokens and 8 tickets every 2 hours', Icon: Speed4,cost : '200000' },
-        { id: 5, label: 'x5 tokens and 10 tickets every 2 hours', Icon: Speed5,cost : '250000' },
-        { id: 6, label: 'x6 tokens and 12 tickets every 2 hours', Icon: Speed6,cost : '350000' },
-        { id: 7, label: 'x7 tokens and 14 tickets every 2 hours', Icon: Speed7,cost : '500000' },
+          { id: 1, label: 'x1 tokens and 2 tickets', Icon: Speed1,cost : '0' },
+        { id: 2, label: 'x2 tokens and 4 tickets', Icon: Speed2,cost : '100000' },
+        { id: 3, label: 'x3 tokens and 6 tickets', Icon: Speed3,cost : '150000' },
+        { id: 4, label: 'x4 tokens and 8 tickets', Icon: Speed4,cost : '200000' },
+        { id: 5, label: 'x5 tokens and 10 tickets', Icon: Speed5,cost : '250000' },
+        { id: 6, label: 'x6 tokens and 12 tickets', Icon: Speed6,cost : '350000' },
+        { id: 7, label: 'x7 tokens and 14 tickets', Icon: Speed7,cost : '500000' },
     ]
 
 
@@ -95,6 +95,8 @@ const SpeedTab = () => {
       alt="Shiba Inu"
        />
                 <p className="text-base mt-1 text-black/[0.9] font-Large">{tab.label}</p>
+                  <p className="text-base mt-1 text-black/[0.9] font-Large"> every 2 hours </p>
+
                  <div className="flex w-1/3 items-center justify-start">
                  <Image
         src={FootPrint as StaticImageData} 
