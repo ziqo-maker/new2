@@ -144,12 +144,7 @@ const TabContainer = () => {
      
            initWebApp();
 
-           if(refresh == false) {
-            timerRef.current = setInterval(() =>{
-             
-            setRefreshB(!refreshB)
-            },3000);
-           }
+         
     
           return () => {  if (timerRef.current) {
             clearInterval(timerRef.current);
