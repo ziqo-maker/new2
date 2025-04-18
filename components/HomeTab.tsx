@@ -641,6 +641,7 @@ useEffect(() => {
         </button>
   </div>
 
+        <div className="flex flex-col grow items-center justify-center">
         <div className="flex grow px-50 mt-3 justify-center items-center space-x-1">
         <Image
         src={FootPrint as StaticImageData} 
@@ -651,8 +652,11 @@ useEffect(() => {
           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
           <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
           </div>
+          
+        
+        </div>
 
-          <div className="flex grow mt-1  justify-center items-center space-x-1">
+        <div className="flex grow mt-1  justify-center items-center space-x-1">
         <Image
         src={circleticket as StaticImageData} 
       className="w-7.5 h-7.5"
@@ -661,6 +665,8 @@ useEffect(() => {
           <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] font-Large rounded-full px-3 py-[3px]">
           <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
           </div>
+        </div>
+        
           
         
         </div>
