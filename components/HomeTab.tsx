@@ -635,7 +635,7 @@ useEffect(() => {
         </button>
 
         <button onClick={ () => setActiveTab('speed')
-          } className="flex grow-0 bg-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 border-white rounded-full px-3 py-[7px] ">
+          } className="flex grow-0 bg-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 border-white rounded-full px-3 py-[8px] ">
         <Image
         src={UpgradeIcon as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"
