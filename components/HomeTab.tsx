@@ -172,18 +172,7 @@ useEffect(() => {
           const plus = Number(UserDt?.gtpoint) + miningPoint
           const counticket = (Number(miningPoint)/3600).toFixed()
           const plusticket = Number(UserDt?.ticket) + Number(counticket)
-          try {
-            fetch('/api/update-ticket', {
-             method: 'POST',
-             headers: {
-               'Content-Type': 'application/json',
-             },
-             body: JSON.stringify({ idd: String(UserDt?.idd),ticket: plusticket }),
-           })
-           .then((res) => res.json())
-           .then((data) => {
-             if (data.success) {
-              const lcl = miningPoint.toLocaleString()
+             const lcl = miningPoint.toLocaleString()
                       new Toast({
                         position: "top-center",
                         toastMsg: `You're received ${lcl} WalkCoin and ${counticket} tickets`,
@@ -202,10 +191,22 @@ useEffect(() => {
           if (timerRef.current) {
             clearInterval(timerRef.current);
           }
-            }
-           })
-         } catch (err) {
-         }
+         //  try {
+         //    fetch('/api/update-ticket', {
+         //     method: 'POST',
+         //     headers: {
+         //       'Content-Type': 'application/json',
+         //     },
+         //     body: JSON.stringify({ idd: String(UserDt?.idd),ticket: plusticket }),
+         //   })
+         //   .then((res) => res.json())
+         //   .then((data) => {
+         //     if (data.success) {
+            
+         //    }
+         //   })
+         // } catch (err) {
+         // }
           
            
          } else {
