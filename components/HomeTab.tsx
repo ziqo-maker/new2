@@ -22,7 +22,49 @@ import { ShowPromiseResult } from "@/types/adsgram";
 import { useAdsgramD } from "./useAdsgramD";
 import circleticket from '@/icons/ticketcircle.svg';
 
-
+import gif from '@/imgs/gif.gif';
+import a11 from '@/gif/1-1.gif';
+import a12 from '@/gif/1-2.gif';
+import a13 from '@/gif/1-3.gif';
+import a14 from '@/gif/1-4.gif';
+import a15 from '@/gif/1-5.gif';
+import a16 from '@/gif/1-6.gif';
+import a17 from '@/gif/1-7.gif';
+import a21 from '@/gif/2-1.gif';
+import a22 from '@/gif/2-2.gif';
+import a23 from '@/gif/2-3.gif';
+import a24 from '@/gif/2-4.gif';
+import a25 from '@/gif/2-5.gif';
+import a26 from '@/gif/2-6.gif';
+import a27 from '@/gif/2-7.gif';
+import a31 from '@/gif/3-1.gif';
+import a32 from '@/gif/3-2.gif';
+import a33 from '@/gif/3-3.gif';
+import a34 from '@/gif/3-4.gif';
+import a35 from '@/gif/3-5.gif';
+import a36 from '@/gif/3-6.gif';
+import a37 from '@/gif/3-7.gif';
+import a41 from '@/gif/4-1.gif';
+import a42 from '@/gif/4-2.gif';
+import a43 from '@/gif/4-3.gif';
+import a44 from '@/gif/4-4.gif';
+import a45 from '@/gif/4-5.gif';
+import a46 from '@/gif/4-6.gif';
+import a47 from '@/gif/4-7.gif';
+import a51 from '@/gif/5-1.gif';
+import a52 from '@/gif/5-2.gif';
+import a53 from '@/gif/5-3.gif';
+import a54 from '@/gif/5-4.gif';
+import a55 from '@/gif/5-5.gif';
+import a56 from '@/gif/5-6.gif';
+import a57 from '@/gif/5-7.gif';
+import a61 from '@/gif/6-1.gif';
+import a62 from '@/gif/6-2.gif';
+import a63 from '@/gif/6-3.gif';
+import a64 from '@/gif/6-4.gif';
+import a65 from '@/gif/6-5.gif';
+import a66 from '@/gif/6-6.gif';
+import a67 from '@/gif/6-7.gif';
 import Loading from '@/imgs/loading.png';
 
 type modelB = {
@@ -57,6 +99,53 @@ const [lvl,setLvl] = useState(5);
   const [price,setPrice] = useState(0);
   const [endpoint,setEndPoint] = useState(0);
   const [blnlvl,setBlnLvl] = useState(false);
+  const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
+
+  const handlePurchase = async () => {
+    try {
+      // Create invoice link through our API
+      const response = await fetch('/api/create-invoice', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId:String(UserDt?.idd)
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create invoice');
+      }
+
+      const { invoiceLink } = await response.json();
+
+      // Import TWA SDK
+      const WebApp = (await import('@twa-dev/sdk')).default;
+      
+      // Open the invoice using Telegram's WebApp SDK
+      WebApp.openInvoice(invoiceLink, async (status) => {
+        if (status === 'paid') {
+          // Payment was successful
+          // Generate a mock transaction ID since we don't have access to the real one from Telegram
+          // In a production app, this would be retrieved from your backend after the bot
+          // receives the pre_checkout_query and successful_payment updates
+          const transactionId = `txn_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+          
+          
+        } else if (status === 'failed') {
+          alert('Payment failed. Please try again.');
+        } else if (status === 'cancelled') {
+          // User cancelled the payment, no action needed
+          console.log('Payment was cancelled by user');
+        }
+      });
+    } catch (e) {
+      console.error('Error during purchase:', e);
+      alert(`Failed to process purchase: ${e instanceof Error ? e.message : 'Unknown error'}`);
+    }
+  };
 
     const [gtClaimType,setClaimType] = useState<claimtype[]>([]);
    const [gtMpdel,setModelB] = useState<modelB[]>([
@@ -73,7 +162,6 @@ const [lvl,setLvl] = useState(5);
                 },
             ]);
  
-  const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [refreshB, setRefreshB] = useState<boolean>(false);
@@ -185,7 +273,7 @@ useEffect(() => {
               const lcl = miningPoint.toLocaleString()
                       new Toast({
                         position: "top-center",
-                        toastMsg: `You're received ${lcl} WalkCoin and ${counticket} tickets`,
+                        toastMsg: `You're received ${lcl} WalkCoin and ${counticket} Tickets`,
                         autoCloseTime: 4500,
                         canClose: true,
                         showProgress: true,
@@ -324,7 +412,91 @@ useEffect(() => {
        if (data.success) {
         setRefresh(true)
 
-      
+       if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
+          setMg(a11)
+        }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
+          setMg(a12)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
+          setMg(a13)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
+          setMg(a14)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
+          setMg(a15)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
+          setMg(a16)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
+          setMg(a17)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
+          setMg(a21)
+        }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
+          setMg(a22)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
+          setMg(a23)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
+          setMg(a24)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
+          setMg(a25)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
+          setMg(a26)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
+          setMg(a27)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
+          setMg(a31)
+        }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
+          setMg(a32)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
+          setMg(a33)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
+          setMg(a34)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
+          setMg(a35)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
+          setMg(a36)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
+          setMg(a37)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
+          setMg(a41)
+        }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
+          setMg(a42)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
+          setMg(a43)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
+          setMg(a44)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
+          setMg(a45)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
+          setMg(a46)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
+          setMg(a47)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
+          setMg(a51)
+        }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
+          setMg(a52)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
+          setMg(a53)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
+          setMg(a54)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
+          setMg(a55)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
+          setMg(a56)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
+          setMg(a57)
+        }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
+          setMg(a61)
+        }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
+          setMg(a62)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
+          setMg(a63)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
+          setMg(a64)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
+          setMg(a65)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
+          setMg(a66)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
+          setMg(a67)
+        }
         
         const target = new Date(data.dtMining);
         const now = new Date(data.dt);
@@ -645,8 +817,8 @@ useEffect(() => {
         </button>
   </div>
 
-        <div className="flex flex-col grow mt-2 items-center justify-center">
-        <div className="flex grow px-50 justify-center items-center space-x-1">
+        <div className="flex flex-col grow mb-2 mt-2 items-center justify-center">
+        <div className="flex grow px-50  justify-center items-center space-x-1">
         <Image
         src={FootPrint as StaticImageData} 
       className="w-10 h-10"
@@ -678,7 +850,7 @@ useEffect(() => {
         <div className="flex px-10 justify-center">
           {gtClaimType.map((nmb,index) => {
           return(
-            <button onClick={() => handleStart(nmb.id,nmb.clickb,nmb.start)} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+            <button onClick={handlePurchase} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
