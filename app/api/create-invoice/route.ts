@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
    
     
     // Get the BOT_TOKEN from environment variables
-    const BOT_TOKEN = process.env.BOT_TOKEN;
+    const BOT_TOKEN = 7778372967:AAE62_2VWulVJ65ENcLs0QXCLnX0kd0K2IY;
     
     if (!BOT_TOKEN) {
       return NextResponse.json({ error: 'Bot token not configured' }, { status: 500 });
