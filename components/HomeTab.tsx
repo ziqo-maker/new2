@@ -21,6 +21,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { ShowPromiseResult } from "@/types/adsgram";
 import { useAdsgramD } from "./useAdsgramD";
 import circleticket from '@/icons/ticketcircle.svg';
+import Loading from '@/imgs/loading.png';
 
 type modelB = {
   id: number
