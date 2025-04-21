@@ -25,10 +25,10 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         title:title,
         description:`Buy ${title}`,
-        payload: payload, // In production, use a JSON string with a unique request ID
+        payload: 4, // In production, use a JSON string with a unique request ID
         provider_token: '', // Empty for Telegram Stars payments
         currency: 'XTR',    // Telegram Stars currency code
-        prices: [{ label: title, amount: Number(amount) }],
+        prices: [{ label: "dsadsa", amount: Number(amount) }],
         start_parameter: "start_parameter" // Required for some clients
       })
     });
@@ -39,9 +39,10 @@ export async function POST(req: NextRequest) {
       console.error('Telegram API error:', data);
       return NextResponse.json({ error: data.description || 'Failed to create invoice' }, { status: 500 });
     }
+    data.error
     
     const invoiceLink = data.result;
-
+ 
     return NextResponse.json({ invoiceLink });
   } catch (error) {
     console.error('Error creating invoice:', error);
