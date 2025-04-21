@@ -1,57 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
+  require('dotenv').config()
   try {
     const body = await req.json();
-    const { userId } = body;
+    const { userId,amount,title } = body;
 
     if (!userId) {
       return NextResponse.json({ error: 'Missing required fields: userId and itemId' }, { status: 400 });
     }
-
-   
     
-    // Get the BOT_TOKEN from environment variables
-    const BOT_TOKEN = '7778372967:AAE62_2VWulVJ65ENcLs0QXCLnX0kd0K2IY';
+    const BOT_TOKEN = "7778372967:AAE62_2VWulVJ65ENcLs0QXCLnX0kd0K2IY"
+    // process.env.BOT_TOKEN;
     
     if (!BOT_TOKEN) {
       return NextResponse.json({ error: 'Bot token not configured' }, { status: 500 });
     }
 
-    // PRODUCTION IMPLEMENTATION:
-    // In a real production app:
-    // 1. Generate a unique ID for this payment request
-    // const requestId = generateUniqueId();
-    // 
-    // 2. Store it in your database with the pending status
-    // await db.paymentRequests.create({
-    //   requestId,
-    //   userId,
-    //   itemId,
-    //   status: 'pending',
-    //   createdAt: Date.now()
-    // });
-    // 
-    // 3. Include this ID in the invoice payload
-    // const payload = JSON.stringify({ requestId });
-    //
-    // 4. Configure your bot's webhook to handle payment_successful updates
-    // and update the database with the real telegram_payment_charge_id when payment is complete
-    // 
-    // 5. After the WebApp.openInvoice callback indicates 'paid', query your database 
-    // using the requestId to get the real transaction ID for successful payments
-
-    // Create an actual invoice link by calling the Telegram Bot API
+    const payload = randomUUID();
     const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/createInvoiceLink`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title:"ti",
-        description:"dis",
-        payload: 4, // In production, use a JSON string with a unique request ID
+        title:title,
+        description:"",
+        payload: payload, // In production, use a JSON string with a unique request ID
         provider_token: '', // Empty for Telegram Stars payments
         currency: 'XTR',    // Telegram Stars currency code
-        prices: [{ label: "Diamond", amount: 1 }],
+        prices: [{ label: "", amount: Number(amount) }],
         start_parameter: "start_parameter" // Required for some clients
       })
     });
@@ -65,8 +42,6 @@ export async function POST(req: NextRequest) {
     
     const invoiceLink = data.result;
 
-    // We don't store the purchase yet - that will happen after successful payment
-    // We'll return the invoice link to the frontend
     return NextResponse.json({ invoiceLink });
   } catch (error) {
     console.error('Error creating invoice:', error);
