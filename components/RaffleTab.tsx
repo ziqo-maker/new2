@@ -628,9 +628,10 @@ new Toast({
             
             
           } else if (status === 'failed') {
+               
             new Toast({
               position: "top-center",
-              toastMsg: `Payment failed. Please try again.`,
+              toastMsg: `Payment failed. Please try again.${invoiceLink.error}`,
               autoCloseTime: 4500,
               canClose: true,
               showProgress: true,
