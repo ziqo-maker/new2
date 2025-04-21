@@ -39,11 +39,11 @@ export async function POST(req: NextRequest) {
       console.error('Telegram API error:', data);
       return NextResponse.json({ error: data.description || 'Failed to create invoice' }, { status: 500 });
     }
-    data.error
+    
     
     const invoiceLink = data.result;
  
-    return NextResponse.json({ invoiceLink });
+    return NextResponse.json({ invoiceLink,gterror:data.error });
   } catch (error) {
     console.error('Error creating invoice:', error);
     return NextResponse.json({ error: 'Failed to create invoice' }, { status: 500 });
