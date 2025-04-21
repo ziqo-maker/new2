@@ -551,7 +551,7 @@ new Toast({
           body: JSON.stringify({
             userId:String(UserDt?.idd),
             amount:String(setamount),
-            title : String(title)
+            title : String(cntgtticket)
           })
         });
   
@@ -907,7 +907,7 @@ new Toast({
           </center>
 
           <center >
-        <button onClick={() => {valuestar == 0 && buyStar == 0 ? '' : handlePurchase()}} className={`${valuestar == 0? 'opacity-60' :''}  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
+        <button onClick={() => {valuestar == 0 && buyStar == 0 ? '' : handlePurchase()}} className={`${valuestar == 0 && buyStar == 0? 'opacity-60' :''}  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
                            
           
                            <div className="flex-1 text-center">
