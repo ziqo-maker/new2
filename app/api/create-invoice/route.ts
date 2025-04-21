@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
-  require('dotenv').config()
   try {
     const body = await req.json();
     const { userId,amount,title } = body;
