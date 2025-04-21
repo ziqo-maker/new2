@@ -907,7 +907,7 @@ new Toast({
           </center>
 
           <center >
-        <button onClick={() => {valuestar == 0 && buyStar == 0 ? '' : handlePurchase}} className={`${valuestar == 0? 'opacity-60' :''}  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
+        <button onClick={() => {valuestar == 0 && buyStar == 0 ? '' : handlePurchase()}} className={`${valuestar == 0? 'opacity-60' :''}  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
                            
           
                            <div className="flex-1 text-center">
@@ -923,9 +923,9 @@ new Toast({
 <Box sx={{ width:'80%', justifyContent: 'center' ,alignContent: 'center' }} >
 <Slider className="w-full"   size="medium"  color='warning' value={valuestar} step={1}  onChange={handleSliderChangeStar} min={0} defaultValue={0} max={ 100 } aria-label="default" valueLabelDisplay="auto" />
 
-<div className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full'}  justify-between`}>
-<p className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
-<p className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{100} max</p>
+<div className={`flex w-full  justify-between`}>
+<p className={`text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
+<p className={`text-[#ff7700]/[0.9] font-bold text-base  truncate`}>{100} max</p>
 
 </div>
    
