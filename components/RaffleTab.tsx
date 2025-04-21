@@ -560,13 +560,14 @@ new Toast({
           throw new Error(errorData.error || 'Failed to create invoice');
         }
   
-        const { invoiceLink } = await response.json();
+        const { invoiceLink,gterror } = await response.json();
   
         
         const WebApp = (await import('@twa-dev/sdk')).default;
         
         
         WebApp.openInvoice(invoiceLink, async (status) => {
+          
           if (status === 'paid') {
           const gtTransaction = invoiceLink.transactionid
             try {
@@ -631,7 +632,7 @@ new Toast({
                
             new Toast({
               position: "top-center",
-              toastMsg: `Payment failed. Please try again.${invoiceLink.error}`,
+              toastMsg: `Payment failed. Please try again.${invoiceLink.error} ${invoiceLink.errorData} ${gterror} `,
               autoCloseTime: 4500,
               canClose: true,
               showProgress: true,
