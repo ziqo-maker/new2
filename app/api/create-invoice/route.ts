@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from "crypto";
 
 export async function POST(req: NextRequest) {
+  
   try {
     const body = await req.json();
     const { userId,amount,title } = body;
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         title:title,
-        description:"",
+        description:title,
         payload: payload, // In production, use a JSON string with a unique request ID
         provider_token: '', // Empty for Telegram Stars payments
         currency: 'XTR',    // Telegram Stars currency code
