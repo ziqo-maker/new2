@@ -19,7 +19,7 @@ import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
 import { Address, beginCell,} from "@ton/core";
 import { Button } from "@headlessui/react";
 import Toast from 'typescript-toastify';
-
+import Star from '@/icons/star.svg';
 
 type board = {
   id:string
@@ -50,7 +50,10 @@ const RaffleTab = () => {
   const [tonAddress, setTonAddress] = useState<string | null>(null);
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
   const [value, setValue] = React.useState(0);
+  const [valuestar, setValueStar] = React.useState(0);
+
   const [buyTicket, setBuyTicket] = useState(0);
+  const [buyStar, setBuyStar] = useState(0);
   const [ticket, setTicket] = useState(0);
   const [verifybuy, setVerifyBuy] = useState(false);
 
@@ -132,6 +135,11 @@ const RaffleTab = () => {
 
   const handleSliderChange = (event: Event, newValue: number) => {
     setValue(newValue);
+  };
+
+  const handleSliderChangeStar = (event: Event, newValue: number) => {
+    setValueStar(newValue);
+    setBuyStar(0)
   };
 
   const handleSliderChangeUseTicket = (event: Event, newValue: number) => {
@@ -219,216 +227,216 @@ const RaffleTab = () => {
 
 
 
-useEffect(() => {
+// useEffect(() => {
 
-  try {
-    fetch('/api/get-raffle', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({}),
-   })
-   .then((res) => res.json())
-   .then((data) => {
+//   try {
+//     fetch('/api/get-raffle', {
+//      method: 'POST',
+//      headers: {
+//        'Content-Type': 'application/json',
+//      },
+//      body: JSON.stringify({}),
+//    })
+//    .then((res) => res.json())
+//    .then((data) => {
 
-     if (data.success) {
-        setTonPrice(Number(data.priceton))
-        const target = new Date(data.date2);
-        const now = new Date(data.date1);
-        var q = 0        
-        timerRef.current = setInterval(() =>{
-          q += 1000
-          const difference = target.getTime() - now.getTime() - q;
+//      if (data.success) {
+//         setTonPrice(Number(data.priceton))
+//         const target = new Date(data.date2);
+//         const now = new Date(data.date1);
+//         var q = 0        
+//         timerRef.current = setInterval(() =>{
+//           q += 1000
+//           const difference = target.getTime() - now.getTime() - q;
           
-          if(difference > 1000 ){
+//           if(difference > 1000 ){
 
-            const d = Math.floor(difference / (1000 * 3600 * 24));
-          var dstr = Math.trunc(d).toString();
-          setDays(String(dstr)); 
-          const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-          var hstr = Math.trunc(h).toString();
-          setHours(String(hstr).padStart(2, "0")); 
-          const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-          if(Math.sign(m) === -1){
-           setMinutes("00")
-          }else{
-            var mstr = m.toString();
-            setMinutes(String(mstr).padStart(2, "0"));
-          }
-          const s = Math.floor((difference % (1000*60)) / 1000)
-          if(Math.sign(s) === -1){
-            setSeconds("00")
-          }else{
-            var sstr = s.toString();
-            setSeconds(String(sstr).padStart(2, "0"));
-          }
+//             const d = Math.floor(difference / (1000 * 3600 * 24));
+//           var dstr = Math.trunc(d).toString();
+//           setDays(String(dstr)); 
+//           const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+//           var hstr = Math.trunc(h).toString();
+//           setHours(String(hstr).padStart(2, "0")); 
+//           const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+//           if(Math.sign(m) === -1){
+//            setMinutes("00")
+//           }else{
+//             var mstr = m.toString();
+//             setMinutes(String(mstr).padStart(2, "0"));
+//           }
+//           const s = Math.floor((difference % (1000*60)) / 1000)
+//           if(Math.sign(s) === -1){
+//             setSeconds("00")
+//           }else{
+//             var sstr = s.toString();
+//             setSeconds(String(sstr).padStart(2, "0"));
+//           }
            
-          }
+//           }
           
-        },1000);
+//         },1000);
 
        
-     } else {
+//      } else {
       
-     }
-   })
-  } catch (err) {
+//      }
+//    })
+//   } catch (err) {
    
-  }
+//   }
 
-  }, []);
+//   }, []);
 
      
 
-  useEffect(() => {
+  // useEffect(() => {
 
-        try {
-          fetch('/api/get-ticket', {
-           method: 'POST',
-           headers: {
-             'Content-Type': 'application/json',
-           },
-           body: JSON.stringify({ idd: String(UserDt?.idd) }),
-         })
-         .then((res) => res.json())
-         .then((data) => {
-           if (data.success) {
-            setRefresh(true)
-            const gtuseticket = Number(data.useticket)
-            const cal = gtuseticket >= 1? gtuseticket : 0
-            setUsedTicket(cal)
-            if(cal >= 0){
+  //       try {
+  //         fetch('/api/get-ticket', {
+  //          method: 'POST',
+  //          headers: {
+  //            'Content-Type': 'application/json',
+  //          },
+  //          body: JSON.stringify({ idd: String(UserDt?.idd) }),
+  //        })
+  //        .then((res) => res.json())
+  //        .then((data) => {
+  //          if (data.success) {
+  //           setRefresh(true)
+  //           const gtuseticket = Number(data.useticket)
+  //           const cal = gtuseticket >= 1? gtuseticket : 0
+  //           setUsedTicket(cal)
+  //           if(cal >= 0){
               
-              try {
-                fetch('/api/get-chance', {
-                 method: 'POST',
-                 headers: {
-                   'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify({}),
-               })
-               .then((res) => res.json())
-               .then((data) => {
-                if(data.success){
+  //             try {
+  //               fetch('/api/get-chance', {
+  //                method: 'POST',
+  //                headers: {
+  //                  'Content-Type': 'application/json',
+  //                },
+  //                body: JSON.stringify({}),
+  //              })
+  //              .then((res) => res.json())
+  //              .then((data) => {
+  //               if(data.success){
                  
-                  var cnt = 0
-                  var nmb = 0
-                  const gtBoar: board[] = []
-                  data.all.forEach((t: any)=> {
-                    nmb += Number(t.ticket)
-                    cnt++
+  //                 var cnt = 0
+  //                 var nmb = 0
+  //                 const gtBoar: board[] = []
+  //                 data.all.forEach((t: any)=> {
+  //                   nmb += Number(t.ticket)
+  //                   cnt++
                    
-                      let model = {
-                        id:String(cnt),
-                        name:t.name,
-                        ticket:t.ticket,
-                     }
+  //                     let model = {
+  //                       id:String(cnt),
+  //                       name:t.name,
+  //                       ticket:t.ticket,
+  //                    }
                      
-                     gtBoar.push(model)
+  //                    gtBoar.push(model)
                     
-                  })
+  //                 })
                   
-                  var sortedArray: board[] = gtBoar.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
-                  const slc = sortedArray.reverse().slice(0,15)
-                  setBoard(slc)
-                  const gtchance = (cal / Number(nmb)) * Number(100)
-                  setChance(gtchance)
-                }
-               })
+  //                 var sortedArray: board[] = gtBoar.sort((n1,n2) => Number(n1.ticket) - Number(n2.ticket));
+  //                 const slc = sortedArray.reverse().slice(0,15)
+  //                 setBoard(slc)
+  //                 const gtchance = (cal / Number(nmb)) * Number(100)
+  //                 setChance(gtchance)
+  //               }
+  //              })
       
-             } catch (err) {
+  //            } catch (err) {
               
-             }
+  //            }
   
-             try {
-              fetch('/api/get-winner', {
-               method: 'POST',
-               headers: {
-                 'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({ idd: String(UserDt?.idd) }),
-             })
-             .then((res) => res.json())
-             .then((data) => {
-              if(data.success){
+  //            try {
+  //             fetch('/api/get-winner', {
+  //              method: 'POST',
+  //              headers: {
+  //                'Content-Type': 'application/json',
+  //              },
+  //              body: JSON.stringify({ idd: String(UserDt?.idd) }),
+  //            })
+  //            .then((res) => res.json())
+  //            .then((data) => {
+  //             if(data.success){
                
-                var nmb = 1
-                const gtWinnerB: winnertype[] = []
-                data.all.forEach((t: any)=> {
-                  let model = {
-                    id:String(nmb),
-                    date:t.date,
-                    amount:t.amount,
-                    name:t.name
-                 }
-                 nmb++
-                 gtWinnerB.push(model)
+  //               var nmb = 1
+  //               const gtWinnerB: winnertype[] = []
+  //               data.all.forEach((t: any)=> {
+  //                 let model = {
+  //                   id:String(nmb),
+  //                   date:t.date,
+  //                   amount:t.amount,
+  //                   name:t.name
+  //                }
+  //                nmb++
+  //                gtWinnerB.push(model)
                  
-                })
-              setWinner(gtWinnerB)
-              }
-             })
-           } catch (err) {
+  //               })
+  //             setWinner(gtWinnerB)
+  //             }
+  //            })
+  //          } catch (err) {
             
-           }
+  //          }
   
-             try {
-              fetch('/api/get-transaction', {
-               method: 'POST',
-               headers: {
-                 'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({ idd: String(UserDt?.idd) }),
-             })
-             .then((res) => res.json())
-             .then((data) => {
-              if(data.success){
+  //            try {
+  //             fetch('/api/get-transaction', {
+  //              method: 'POST',
+  //              headers: {
+  //                'Content-Type': 'application/json',
+  //              },
+  //              body: JSON.stringify({ idd: String(UserDt?.idd) }),
+  //            })
+  //            .then((res) => res.json())
+  //            .then((data) => {
+  //             if(data.success){
                
-                var nmb = 1
-                const gtTransactionB: transactiontype[] = []
-                data.all.forEach((t: any)=> {
-                  let model = {
-                    id:String(nmb),
-                    date:t.date,
-                    amount:t.amount,
-                    tickets:t.tickets,
-                    status:t.status
-                 }
-                 nmb++
-                 gtTransactionB.push(model)
+  //               var nmb = 1
+  //               const gtTransactionB: transactiontype[] = []
+  //               data.all.forEach((t: any)=> {
+  //                 let model = {
+  //                   id:String(nmb),
+  //                   date:t.date,
+  //                   amount:t.amount,
+  //                   tickets:t.tickets,
+  //                   status:t.status
+  //                }
+  //                nmb++
+  //                gtTransactionB.push(model)
                  
-                })
-                setTransaction(gtTransactionB)
-              }
-             })
-           } catch (err) {
+  //               })
+  //               setTransaction(gtTransactionB)
+  //             }
+  //            })
+  //          } catch (err) {
             
-           }
+  //          }
 
-            }
+  //           }
       
-           } else {
+  //          } else {
             
-           }
-         })
-       } catch (err) {
-       }
+  //          }
+  //        })
+  //      } catch (err) {
+  //      }
 
       
 
-         if(refresh == false) {
-          timerRefB.current = setInterval(() =>{
-          setRefreshB(!refreshB)
-          },3000);
-         }
+  //        if(refresh == false) {
+  //         timerRefB.current = setInterval(() =>{
+  //         setRefreshB(!refreshB)
+  //         },3000);
+  //        }
 
-        return () => {  if (timerRefB.current) {
-          clearInterval(timerRefB.current);
-        };
-      };
+  //       return () => {  if (timerRefB.current) {
+  //         clearInterval(timerRefB.current);
+  //       };
+  //     };
   
-     },[refreshB])
+  //    },[refreshB])
 
      const buyticketwithwalkcoin = async (rfrshvalue:boolean) => {
       if(rfrshvalue == false){
@@ -525,6 +533,143 @@ new Toast({
       }
 
      }
+
+
+     const handlePurchase = async () => {
+      var cntgtticket = buyStar == 3 ? '900 tickets' : buyStar == 1 ? '250 tickets' : buyStar == 2 ? '600 tickets' : `${Number(valuestar) * 5} tickets`
+      var title = buyStar == 3 ? 'Buy 900 tickets | 150 Stars' : buyStar == 1 ? 'Buy 250 tickets | 50 Stars' : buyStar == 2 ? 'Buy 600 tickets | 100 Stars' : `Buy ${Number(valuestar) * 5} tickets | ${valuestar} ${valuestar == 0 || valuestar == 1? 'Star' : 'Stars'}`
+      var cntticket = buyStar == 3 ? Number(900) : buyStar == 1 ? Number(250) : buyStar == 2 ? Number(600) : Number(Number(valuestar) * 5)
+      var setamount = buyStar == 3 ? Number(150) : buyStar == 1 ? Number(50) : buyStar == 2 ? Number(100) : Number(valuestar)
+      const plusticket = Number(UserDt?.ticket) + Number(cntticket)
+      try {
+        
+        const response = await fetch('/api/create-invoice', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userId:String(UserDt?.idd),
+            amount:String(setamount),
+            title : String(title)
+          })
+        });
+  
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to create invoice');
+        }
+  
+        const { invoiceLink } = await response.json();
+  
+        
+        const WebApp = (await import('@twa-dev/sdk')).default;
+        
+        
+        WebApp.openInvoice(invoiceLink, async (status) => {
+          if (status === 'paid') {
+          const gtTransaction = invoiceLink.transactionid
+            try {
+                        fetch('/api/create-buystar', {
+                         method: 'POST',
+                         headers: {
+                           'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ idd: String(UserDt?.idd),amount:String(setamount),transactionid:String(gtTransaction),forwhat: 'BuyTicket' }),
+                       })
+                       .then((res) => res.json())
+                       .then((data) => {
+                         if (data.success) {
+
+                          try {
+                                      fetch('/api/update-ticket', {
+                                       method: 'POST',
+                                       headers: {
+                                         'Content-Type': 'application/json',
+                                       },
+                                       body: JSON.stringify({ idd: String(UserDt?.idd),ticket: String(plusticket) }),
+                                     })
+                                     .then((res) => res.json())
+                                     .then((data) => {
+                                       if (data.success) {
+                                        new Toast({
+                                          position: "top-center",
+                                          toastMsg: `You're received ${cntgtticket}`,
+                                          autoCloseTime: 4500,
+                                          canClose: true,
+                                          showProgress: true,
+                                          pauseOnHover: true,
+                                          pauseOnFocusLoss: true,
+                                          type: "default",
+                                          theme: "light"
+                                        });
+                                    setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(plusticket),firstname:String(UserDt?.firstname)})
+                                    
+                                      }
+                                     })
+                                   } catch (err) {
+                                   }
+                        
+                        }
+                       })
+                     } catch (err) {
+                      new Toast({
+                        position: "top-center",
+                        toastMsg: "An unexpected error occurred, please contact support team",
+                        autoCloseTime: 4500,
+                        canClose: true,
+                        showProgress: true,
+                        pauseOnHover: true,
+                        pauseOnFocusLoss: true,
+                        type: "default",
+                        theme: "light"
+                      });
+                    }
+            
+            
+          } else if (status === 'failed') {
+            new Toast({
+              position: "top-center",
+              toastMsg: `Payment failed. Please try again.`,
+              autoCloseTime: 4500,
+              canClose: true,
+              showProgress: true,
+              pauseOnHover: true,
+              pauseOnFocusLoss: true,
+              type: "default",
+              theme: "light"
+            });
+          } else if (status === 'cancelled') {
+
+            new Toast({
+              position: "top-center",
+              toastMsg: `Payment was cancelled by user`,
+              autoCloseTime: 4500,
+              canClose: true,
+              showProgress: true,
+              pauseOnHover: true,
+              pauseOnFocusLoss: true,
+              type: "default",
+              theme: "light"
+            });
+
+          }
+        });
+      } catch (e) {
+        
+        new Toast({
+          position: "top-center",
+          toastMsg: `Failed to process purchase: ${e instanceof Error ? e.message : 'Unknown error'}`,
+          autoCloseTime: 4500,
+          canClose: true,
+          showProgress: true,
+          pauseOnHover: true,
+          pauseOnFocusLoss: true,
+          type: "default",
+          theme: "light"
+        });
+      }
+    };
 
     var cntup = 1
 
@@ -752,6 +897,127 @@ new Toast({
 
 
         <div className="w-full  text-center  rounded-b-full items-center justify-center bg-white ">
+        <center>
+          <div className="w-[calc(100%-2rem)] flex items-center justify-center">
+    <hr className="flex grow  my-8 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
+    <p className="text-black/[0.9] font-black text-base mr-3 ml-3 text-nowrap">Buy tickets with Star</p>
+    <hr className="flex grow  my-8 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
+
+</div>
+          </center>
+
+          <center >
+        <button onClick={handlePurchase} className={`  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
+                           
+          
+                           <div className="flex-1 text-center">
+                                      <div className="flex items-center space-x-1 justify-center">
+                                    
+                                 <p className=" text-white font-black text-base truncate">{buyStar == 3 ? 'Buy 900 tickets | 150 Stars' : buyStar == 1 ? 'Buy 250 tickets | 50 Stars' : buyStar == 2 ? 'Buy 600 tickets | 100 Stars' : `Buy ${Number(valuestar) * 5} tickets | ${valuestar} ${valuestar == 0 || valuestar == 1? 'Star' : 'Stars'}`}</p>
+                                      </div>
+                                      </div>
+                                      </button>
+
+                                      <div className="flex w-[calc(100%-2rem)] mt-3 items-center justify-center">
+
+<Box sx={{ width:'80%', justifyContent: 'center' ,alignContent: 'center' }} >
+<Slider className="w-full"   size="medium"  color='warning' value={valuestar} step={1}  onChange={handleSliderChangeStar} min={0} defaultValue={0} max={ 100 } aria-label="default" valueLabelDisplay="auto" />
+
+<div className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <= 0 ? 'w-0 h-0 text-[0px]' : 'flex w-full'}  justify-between`}>
+<p className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
+<p className={`${Number(((Number(UserDt?.gtpoint) - Number(50000)) /Number(50000)).toFixed()) <=0 ? 'w-0 h-0 text-[0px]' : 'text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{100} max</p>
+
+</div>
+   
+ </Box>
+
+</div>
+        </center> 
+
+     
+
+        <div className="flex w-full space-x-2 items-center justify-center mt-3">
+           
+           <div className={`${buyStar == 1 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
+             
+             <div className="flex items-center ">
+             <Image
+               src={Ticket as StaticImageData}
+             className="w-8 h-8 "
+             alt=""
+           />   
+
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 250</p>
+             </div>
+          
+             <Button onClick={() => setBuyStar(1)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
+             <Image
+               src={Star as StaticImageData}
+             className="w-6 h-6 "
+             alt=""
+           />   
+
+             <p className="text-white font-black text-[12px]  ">50 Stars</p>
+
+             </Button>
+
+           </div>
+   
+           <div className={`${buyStar == 2 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
+             
+             <div className="flex items-center ">
+             <Image
+               src={Ticket as StaticImageData}
+             className="w-8 h-8 "
+             alt=""
+           />   
+
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 600</p>
+             </div>
+          
+             <Button onClick={() => setBuyStar(2)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
+             <Image
+               src={Star as StaticImageData}
+             className="w-6 h-6 "
+             alt=""
+           />   
+
+             <p className="text-white font-black  text-[12px]  ">100 Stars</p>
+
+             </Button>
+
+           </div>
+   
+           <div className={`${buyStar == 3 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
+             
+             <div className="flex items-center ">
+             <Image
+               src={Ticket as StaticImageData}
+             className="w-8 h-8 "
+             alt=""
+           />   
+
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 900</p>
+             </div>
+          
+             <Button onClick={() => setBuyStar(3)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
+             <Image
+               src={Star as StaticImageData}
+             className="w-6 h-6 "
+             alt=""
+           />   
+
+             <p className="text-white font-black  text-[12px] ">150 Stars</p>
+
+             </Button>
+
+           </div>
+   
+           
+           </div>
+
+
+
         <center>
           <div className="w-[calc(100%-2rem)] flex items-center justify-center">
     <hr className="flex grow  my-8 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
