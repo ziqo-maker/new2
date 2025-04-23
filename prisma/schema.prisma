@@ -118,3 +118,11 @@ model buywithstar {
   transactionid String @db.Text
   forwhat String @db.VarChar(200)
 }
+
+model watchads {
+  id Int @id @default(autoincrement())
+  cnt Int @default(0)
+  idd String @db.VarChar(500)
+  date DateTime @default(now())
+  dateMining DateTime @default(now())
+}
