@@ -4,25 +4,12 @@ import { prisma } from '@/lib/prisma'
 export async function POST(req: NextRequest) {
     try {
         
-        const {idd,tokenvalue,lvl} = await req.json()
+        const {idd,tokenvalue} = await req.json()
 
          await prisma.user.update({
             where: { idd },
             data: { tokenvalue }
         })
-          
-        let user = await prisma.price.findFirst({
-            where: { idd }
-        })
-        if(user){
-            await prisma.price.updateMany({
-                where: { idd },
-                data: { 
-                    lvl
-                }
-            })
-        }
-        
         
         return NextResponse.json({success :true})
     } catch (error) {

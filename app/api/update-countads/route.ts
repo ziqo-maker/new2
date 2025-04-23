@@ -6,12 +6,12 @@ export async function POST(req: NextRequest) {
         
         const {idd} = await req.json()
 
-        const user = await prisma.user.update({
+         await prisma.watchads.updateMany({
             where: { idd },
-            data: { date : new Date()}
-        })
+            data: {  cnt : {increment : 1} }
+        })   
         
-        return NextResponse.json({success:true,claim:user?.isClaim,mining:user?.isMining,dt:user?.date,dtMining:user?.dateMining,point:user?.points})
+        return NextResponse.json({success :true})
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: 'server error' }, { status: 500 })
