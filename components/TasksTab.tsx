@@ -37,6 +37,7 @@ import whitedogs from '@/imgs/whitedogs.png';
 import layer from '@/imgs/layer.png';
 // import net from '@/imgs/net.png';
 import boori from '@/imgs/boori.png';
+import adswatchicon from '@/icons/adswatchicon.svg';
 
 //15000
 
@@ -984,10 +985,11 @@ setAd(true)
      </div>
     
      <div className="flex flex-col w-full   items-center text-center justify-center items-center">
-               <div className="flex w-[calc(100%-4rem)] mt-4  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
+               <div className="flex w-[calc(100%-3rem)] mt-4  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
+               <div className="w-1"/>
                 <Image 
-                src={bees as StaticImageData} 
-              className="w-10 h-10 aspect-square object-cover"
+                src={adswatchicon as StaticImageData} 
+              className="w-11 h-11 aspect-square object-cover"
               alt=""
             />
                       <div className="flex-grow text-center ">
@@ -1019,7 +1021,7 @@ setAd(true)
                 if(Loading == false && hideVisit == false){
                   return(
                     <center key={index}>
-                            <div className="h-2"/>
+                            <div className="h-1"/>
                              <div className="w-[calc(100%-2rem)] flex-1 mt-1 px-3  items-center bg-[#ffae19]/[0.9] border-white border-4 border-double rounded-full py-[5px] ">
                              <div className="grow flex items-center">
                              <Image
