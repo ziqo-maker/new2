@@ -983,8 +983,8 @@ setAd(true)
             
      </div>
     
-     <div className="flex flex-col w-full   items-center  justify-center items-center">
-               <div className="flex w-[calc(100%-2rem)] mt-4  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
+     <div className="flex flex-col w-full   items-center text-center justify-center items-center">
+               <div className="flex w-[calc(100%-4rem)] mt-4  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
                 <Image 
                 src={bees as StaticImageData} 
               className="w-10 h-10 aspect-square object-cover"
@@ -993,7 +993,7 @@ setAd(true)
                       <div className="flex-grow text-center ">
                       <div className="flex flex-col items-center justify-center">
                       
-        <p className="text-white font-black text-base">Number of videos played</p>
+        <p className="text-white font-black mr-6 text-base">Number of videos played</p>
 
                       <p className=" text-white glow font-Large  text-sm mr-6 truncate">{watchAd} / 54 </p>
                       <p className="text-white font-Normal text-sm mr-6 glow">{hours}h {minutes}m {seconds}s</p>
@@ -1001,8 +1001,10 @@ setAd(true)
                       </div>
                       </div>
                       </div>
-                         <p className={`text-base mr-5 ml-5 text-black font-normal`}>You can only watch 54 videos every 24 hours.</p>
- 
+                      <div className="flex-grow text-center ">
+                      <p className={`text-base  mr-6 ml-6 text-black font-normal`}>You can only watch 54 videos every 24 hours.</p>
+
+                      </div>
                </div>
 
             <div className="h-2" />
