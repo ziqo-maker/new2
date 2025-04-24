@@ -36,7 +36,7 @@ import sticker from '@/imgs/sticker.png';
 import snow from '@/imgs/snow.png';
 import whitedogs from '@/imgs/whitedogs.png';
 import layer from '@/imgs/layer.png';
-import net from '@/imgs/net.png';
+import net from '@/imgs/layer.png';
 import adswatchicon from '@/icons/adswatchicon.svg';
 
 
