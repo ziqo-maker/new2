@@ -535,7 +535,7 @@ const [watchAd,setWatchad] = useState<number> (0);
             const now = new Date(data.dt);
             const difference = target.getTime() - now.getTime();
              setWatchad(Number(data.cnt))
-             setStart(false)
+             
             if(difference < 0){
                 
               try {
