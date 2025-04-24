@@ -518,8 +518,7 @@ const [watchAd,setWatchad] = useState<number> (0);
        }
       }
 
-       if(refresh == true){
-
+       
         try {
           fetch('/api/get-adsdate', {
            method: 'POST',
@@ -606,7 +605,7 @@ const [watchAd,setWatchad] = useState<number> (0);
         
        }
 
-      }
+      
 
        if(refresh == false) {
         timerRef.current = setInterval(() =>{
@@ -617,6 +616,9 @@ const [watchAd,setWatchad] = useState<number> (0);
       return () => {  if (timerRef.current) {
         clearInterval(timerRef.current);
       };
+ if (timerRefB.current) {
+      clearInterval(timerRefB.current);
+    }
     };
 
     },[refreshB,refreshAds])
