@@ -562,17 +562,6 @@ const TasksTab = () => {
            .then((res) => res.json())
            .then((data) => {
              if (data.success) {
-              new Toast({
-                position: "top-center",
-                toastMsg: `ds`,
-                autoCloseTime: 4500,
-                canClose: true,
-                showProgress: true,
-                pauseOnHover: true,
-                pauseOnFocusLoss: true,
-                type: "default",
-                theme: "light"
-              });
               const target = new Date(data.dtMining);
               const now = new Date(data.dt);
               const difference = target.getTime() - now.getTime();
@@ -660,6 +649,20 @@ const TasksTab = () => {
     };
 
     },[refreshB,refreshAds])
+
+    const errorwatch = async() => {
+      new Toast({
+        position: "top-center",
+        toastMsg: "You can't watch the video right now.",
+        autoCloseTime: 4500,
+        canClose: true,
+        showProgress: true,
+        pauseOnHover: true,
+        pauseOnFocusLoss: true,
+        type: "default",
+        theme: "light"
+      });
+    }
 
     const test = async() => {
       
@@ -1056,7 +1059,7 @@ setAd(true)
               <div className="flex items-center">
              
               {/* <div className=" px-1"/> */}
-              <button onClick={() => {task.click ? '' : watchAd < 54 ? showAd() : '' } } className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+              <button onClick={() => {task.click ? '' : watchAd < 54 ? showAd() : errorwatch() } } className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
               <p className={`text-white font-Large ${task.click? 'text-[0px]' : ''}`}>Start</p>
                 <div className="flex">
                 <svg aria-hidden="true" className={`${task.click? 'w-6 h-6' : 'w-0 h-0'} flex text-gray-200 animate-spin dark:text-gray-600 fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1122,7 +1125,7 @@ setAd(true)
               <div className="flex items-center">
              
               {/* <div className=" px-1"/> */}
-              <button onClick={() => {task.click ? '' :  watchAd < 54 ? showAdB() : '' }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+              <button onClick={() => {task.click ? '' :  watchAd < 54 ? showAdB() : errorwatch() }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
               <p className={`text-white font-Large ${task.click? 'text-[0px]' : ''}`}>Start</p>
                 <div className="flex">
                 <svg aria-hidden="true" className={`${task.click? 'w-6 h-6' : 'w-0 h-0'} flex text-gray-200 animate-spin dark:text-gray-600 fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1196,7 +1199,7 @@ completedClassName=""
               <div className="flex items-center">
              
               {/* <div className=" px-1"/> */}
-              <button onClick={() => {task.click ? '' :  watchAd < 54 ? showAdC() : '' }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+              <button onClick={() => {task.click ? '' :  watchAd < 54 ? showAdC() : errorwatch() }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
               <p className={`text-white font-Large ${task.click? 'text-[0px]' : ''}`}>Start</p>
                 <div className="flex">
                 <svg aria-hidden="true" className={`${task.click? 'w-6 h-6' : 'w-0 h-0'} flex text-gray-200 animate-spin dark:text-gray-600 fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
