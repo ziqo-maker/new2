@@ -465,111 +465,190 @@ const [watchAd,setWatchad] = useState<number> (0);
             })
 
              try {
-          fetch('/api/get-adsdate', {
-           method: 'POST',
-           headers: {
-             'Content-Type': 'application/json',
-           },
-           body: JSON.stringify({ idd: String(UserDt?.idd) }),
-         })
-         .then((res) => res.json())
-         .then((data) => {
-           if (data.success) {
-            const target = new Date(data.dtMining);
-            const now = new Date(data.dt);
-            const difference = target.getTime() - now.getTime();
-             setWatchad(Number(data.cnt))
-             
-            if(difference < 0){
-                
-              try {
-                fetch('/api/update-dateads', {
-                 method: 'POST',
-                 headers: {
-                   'Content-Type':'application/json',
-                 },
-                 body: JSON.stringify({idd:String(UserDt?.idd)}),
-               })
-               .then((res) => res.json())
-               .then((data) => {
-                 if (data.success) {
-                  setRefreshAds(!refreshAds)
-                  setWatchad(0)
-                 } else {
-                 }
-               })
-             } catch (err) {
-             }
-
-            }else{
-              var q = 0    
-              timerRefB.current = setInterval(() =>{
-                q += 1000
-                const difference = target.getTime() - now.getTime() - q;
-
-                if(difference > 1000 ){
-
-                   
-                const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-                var hstr = Math.trunc(h).toString();
-                setHours(String(hstr).padStart(2, "0")); 
-                const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-                if(Math.sign(m) === -1){
-                 setMinutes("00")
-                }else{
-                  var mstr = m.toString();
-                  setMinutes(String(mstr).padStart(2, "0"));
-                }
-                const s = Math.floor((difference % (1000*60)) / 1000)
-                if(Math.sign(s) === -1){
-                  setSeconds("00")
-                }else{
-                  var sstr = s.toString();
-                  setSeconds(String(sstr).padStart(2, "0"));
-                }
-                 
-                }else if(end == false){
+              fetch('/api/get-adsdate', {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ idd: String(UserDt?.idd) }),
+             })
+             .then((res) => res.json())
+             .then((data) => {
+               if (data.success) {
               
-                 try {
-                fetch('/api/update-dateads', {
-                 method: 'POST',
-                 headers: {
-                   'Content-Type':'application/json',
-                 },
-                 body: JSON.stringify({idd:String(UserDt?.idd)}),
-               })
-               .then((res) => res.json())
-               .then((data) => {
-                 if (data.success) {
-                        setEnd(true)
-                       setMinutes("00")
-                  setSeconds("00")
-                  setHours("00")
-                  setRefreshAds(!refreshAds)
-                  setWatchad(0)
-                 } else {
+              
+                const target = new Date(data.dtMining);
+                const now = new Date(data.dt);
+                const difference = target.getTime() - now.getTime();
+                 setWatchad(Number(data.cnt))
+                     
+                 if (timerRefB.current) {
+            clearInterval(timerRefB.current);
+          }
+                if(difference < 0){
+                    
+                  try {
+                    fetch('/api/update-dateads', {
+                     method: 'POST',
+                     headers: {
+                       'Content-Type':'application/json',
+                     },
+                     body: JSON.stringify({idd:String(UserDt?.idd)}),
+                   })
+                   .then((res) => res.json())
+                   .then((data) => {
+                     if (data.success) {
+                      setMinutes("00")
+                      setSeconds("00")
+                      setHours("00")
+                      const target = new Date(data.dtMining);
+                const now = new Date(data.dt);
+                 setWatchad(Number(data.cnt))
+
+                 var q = 0    
+                 timerRefB.current = setInterval(() =>{
+                   q += 1000
+                   const difference = target.getTime() - now.getTime() - q;
+   
+                   if(difference > 1000 ){
+   
+                      
+                   const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+                   var hstr = Math.trunc(h).toString();
+                   setHours(String(hstr).padStart(2, "0")); 
+                   const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+                   if(Math.sign(m) === -1){
+                    setMinutes("00")
+                   }else{
+                     var mstr = m.toString();
+                     setMinutes(String(mstr).padStart(2, "0"));
+                   }
+                   const s = Math.floor((difference % (1000*60)) / 1000)
+                   if(Math.sign(s) === -1){
+                     setSeconds("00")
+                   }else{
+                     var sstr = s.toString();
+                     setSeconds(String(sstr).padStart(2, "0"));
+                   }
+                    
+                   }else{
+                     setMinutes("00")
+                     setSeconds("00")
+                     setHours("00")
+                   }
+          
+   
+                 },1000);
+
+                     } else {
+                     }
+                   })
+                 } catch (err) {
                  }
-               })
-             } catch (err) {
-             }
-                  
-                }
+    
+                }else {
+                 
+                  var q = 0    
+                  timerRefB.current = setInterval(() =>{
+                    q += 1000
+                    const difference = target.getTime() - now.getTime() - q;
+    
+                    if(difference > 1000 ){
+    
+                       
+                    const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+                    var hstr = Math.trunc(h).toString();
+                    setHours(String(hstr).padStart(2, "0")); 
+                    const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+                    if(Math.sign(m) === -1){
+                     setMinutes("00")
+                    }else{
+                      var mstr = m.toString();
+                      setMinutes(String(mstr).padStart(2, "0"));
+                    }
+                    const s = Math.floor((difference % (1000*60)) / 1000)
+                    if(Math.sign(s) === -1){
+                      setSeconds("00")
+                    }else{
+                      var sstr = s.toString();
+                      setSeconds(String(sstr).padStart(2, "0"));
+                    }
+                     
+                    }else if(end == false){
+                     
+                      try {
+                        fetch('/api/update-dateads', {
+                         method: 'POST',
+                         headers: {
+                           'Content-Type':'application/json',
+                         },
+                         body: JSON.stringify({idd:String(UserDt?.idd)}),
+                       })
+                       .then((res) => res.json())
+                       .then((data) => {
+                         if (data.success) {
+                            setEnd(true)
+                          setMinutes("00")
+                          setSeconds("00")
+                          setHours("00")
+                          const target = new Date(data.dtMining);
+                    const now = new Date(data.dt);
+                     setWatchad(Number(data.cnt))
+    
+                     var q = 0    
+                     timerRefB.current = setInterval(() =>{
+                       q += 1000
+                       const difference = target.getTime() - now.getTime() - q;
        
+                       if(difference > 1000 ){
+       
+                          
+                       const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+                       var hstr = Math.trunc(h).toString();
+                       setHours(String(hstr).padStart(2, "0")); 
+                       const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+                       if(Math.sign(m) === -1){
+                        setMinutes("00")
+                       }else{
+                         var mstr = m.toString();
+                         setMinutes(String(mstr).padStart(2, "0"));
+                       }
+                       const s = Math.floor((difference % (1000*60)) / 1000)
+                       if(Math.sign(s) === -1){
+                         setSeconds("00")
+                       }else{
+                         var sstr = s.toString();
+                         setSeconds(String(sstr).padStart(2, "0"));
+                       }
+                        
+                       }else{
+                         setMinutes("00")
+                         setSeconds("00")
+                         setHours("00")
+                       }
+              
+       
+                     },1000);
+    
+                         } else {
+                         }
+                       })
+                     } catch (err) {
+                     }
 
-              },1000);
-
-            }
-
-          
-        
-          
-           } else {
+                    }
            
-           }
-         })
-       } catch (err) {
-        
-       }     
+    
+                  },1000);
+    
+                }          
+               } else {
+               
+               }
+             })
+           } catch (err) {
+            
+           } 
           
           }
          })
