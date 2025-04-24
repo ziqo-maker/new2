@@ -1083,9 +1083,9 @@ setAd(true)
                       </div>
                       </div>
                       </div>
-                      <div className="flex-grow text-center ">
-                      <p className={`text-base  mr-6 ml-6 text-black font-normal`}>You can only watch 54 videos every 24 hours.</p>
-
+                      <div className="flex-grow flex-col mr-6 ml-6 text-center ">
+                      <p className={`text-base text-black font-normal`}>You can only watch 54 videos</p>
+                     <p className={`text-base text-black font-normal`}>every 24 hours</p>
                       </div>
                </div>
             
