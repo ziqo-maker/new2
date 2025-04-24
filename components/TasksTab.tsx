@@ -580,7 +580,7 @@ const TasksTab = () => {
                  .then((res) => res.json())
                  .then((data) => {
                    if (data.success) {
-                          
+                    setWatchad(0)
                    } else {
                    }
                  })
@@ -1021,7 +1021,6 @@ setAd(true)
                 if(Loading == false && hideVisit == false){
                   return(
                     <center key={index}>
-                            <div className="h-1"/>
                              <div className="w-[calc(100%-2rem)] flex-1 mt-1 px-3  items-center bg-[#ffae19]/[0.9] border-white border-4 border-double rounded-full py-[5px] ">
                              <div className="grow flex items-center">
                              <Image
