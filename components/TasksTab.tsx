@@ -562,7 +562,17 @@ const TasksTab = () => {
            .then((res) => res.json())
            .then((data) => {
              if (data.success) {
-              
+              new Toast({
+                position: "top-center",
+                toastMsg: `ds`,
+                autoCloseTime: 4500,
+                canClose: true,
+                showProgress: true,
+                pauseOnHover: true,
+                pauseOnFocusLoss: true,
+                type: "default",
+                theme: "light"
+              });
               const target = new Date(data.dtMining);
               const now = new Date(data.dt);
               const difference = target.getTime() - now.getTime();
