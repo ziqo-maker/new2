@@ -459,67 +459,8 @@ const [watchAd,setWatchad] = useState<number> (0);
              gtTasks.push(model)
              setLoading(false)
             })
-          
-          }
-         })
-       } catch (err) {
-        
-       }
-      }
 
-      if(gtTasksCreated.length == 0){
-        try {
-          fetch('/api/get-createtask', {
-           method: 'POST',
-           headers: {
-             'Content-Type': 'application/json',
-           },
-           body: JSON.stringify({ idd: String(UserDt?.idd) }),
-         })
-         .then((res) => res.json())
-         .then((data) => {
-          if(data.success){
-            setRefresh(true)
-              if (timerRef.current) {
-        clearInterval(timerRef.current);
-      };
-            const findpending: number[] = data.pendingtasks
-            data.all.forEach((t: any)=> {
-              const found = findpending.find(item => item === t.id);
-              const contain = found !== undefined
-              const strkeyword = String(t.keyword)
-              const iskeyword = strkeyword.length != 0
-              const gticon = t.platform == "Telegram" ? Telegram : t.platform == 'Youtube' ? Youtube :  t.platform == 'Instagram' ? Instagram :  t.platform == 'Google Play Store' ? GooglePlay :  t.platform == 'Apple App Store' ? AppleStore : Etc
-              let model = {
-                id:t.id,
-                icon:gticon,
-                describe :t.describe,
-                isDoing:contain,
-                url:t.url,
-                keyword:strkeyword,
-                havekeyword:iskeyword,
-                keyworddescribe:t.keyworddescribe,
-                text:'',
-               clickb:false
-             }
-             setPendingCreatedTasks(findpending.toString())
-             const doneTasks: number[] = data.donetasks
-             setDoneCreatedTasks(doneTasks.toString())
-             gtTasksCreated.push(model)
-             if(NoteKeyword == false && iskeyword){
-              setNoteKeyword(true)
-             }
-            })
-          
-          }
-         })
-       } catch (err) {
-        
-       }
-      }
-
-       
-        try {
+             try {
           fetch('/api/get-adsdate', {
            method: 'POST',
            headers: {
@@ -603,9 +544,65 @@ const [watchAd,setWatchad] = useState<number> (0);
          })
        } catch (err) {
         
+       }     
+          
+          }
+         })
+       } catch (err) {
+        
        }
+      }
 
-      
+      if(gtTasksCreated.length == 0){
+        try {
+          fetch('/api/get-createtask', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({ idd: String(UserDt?.idd) }),
+         })
+         .then((res) => res.json())
+         .then((data) => {
+          if(data.success){
+            setRefresh(true)
+              if (timerRef.current) {
+        clearInterval(timerRef.current);
+      };
+            const findpending: number[] = data.pendingtasks
+            data.all.forEach((t: any)=> {
+              const found = findpending.find(item => item === t.id);
+              const contain = found !== undefined
+              const strkeyword = String(t.keyword)
+              const iskeyword = strkeyword.length != 0
+              const gticon = t.platform == "Telegram" ? Telegram : t.platform == 'Youtube' ? Youtube :  t.platform == 'Instagram' ? Instagram :  t.platform == 'Google Play Store' ? GooglePlay :  t.platform == 'Apple App Store' ? AppleStore : Etc
+              let model = {
+                id:t.id,
+                icon:gticon,
+                describe :t.describe,
+                isDoing:contain,
+                url:t.url,
+                keyword:strkeyword,
+                havekeyword:iskeyword,
+                keyworddescribe:t.keyworddescribe,
+                text:'',
+               clickb:false
+             }
+             setPendingCreatedTasks(findpending.toString())
+             const doneTasks: number[] = data.donetasks
+             setDoneCreatedTasks(doneTasks.toString())
+             gtTasksCreated.push(model)
+             if(NoteKeyword == false && iskeyword){
+              setNoteKeyword(true)
+             }
+            })
+          
+          }
+         })
+       } catch (err) {
+        
+       }
+      }
 
        if(refresh == false) {
         timerRef.current = setInterval(() =>{
