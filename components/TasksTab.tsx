@@ -112,7 +112,7 @@ const [watchAd,setWatchad] = useState<number> (0);
    const [refreshAds,setRefreshAds] = useState<boolean> (true);
 
         const [end,setEnd] = useState<boolean> (false);
-        const [start,setStart] = useState<boolean> (true);
+        const [start,setStart] = useState<boolean> (false);
 
 
     const handlePendingB = async(id:string,pendingcreatedtasks:string | undefined,click:boolean | undefined,isDoing:boolean | undefined,url:string) => {
@@ -504,7 +504,7 @@ const [watchAd,setWatchad] = useState<number> (0);
                       const target = new Date(data.dtMining);
                 const now = new Date(data.dt);
                  setWatchad(Number(data.cnt))
-
+                 setStart(true)
                  var q = 0    
                  timerRefB.current = setInterval(() =>{
                    q += 1000
@@ -575,9 +575,10 @@ const [watchAd,setWatchad] = useState<number> (0);
                     }
                      
                     }else if(end == false){
+                           setStart(false)
                        if (timerRefB.current) {
             clearInterval(timerRefB.current);
-          }
+          }       
                       try {
                         fetch('/api/update-dateads', {
                          method: 'POST',
@@ -589,7 +590,9 @@ const [watchAd,setWatchad] = useState<number> (0);
                        .then((res) => res.json())
                        .then((data) => {
                          if (data.success) {
+                                
                             setEnd(true)
+                                setStart(true)
                           setMinutes("00")
                           setSeconds("00")
                           setHours("00")
@@ -1005,7 +1008,8 @@ setAd(true)
     const showAdC = useAdsgramC({ blockId: "int-8537", onRewardC, onError });
 
    const errorwatch = async() => {
-      new Toast({
+       if(start == true){
+                new Toast({
         position: "top-center",
         toastMsg: "You can't watch the video right now.",
         autoCloseTime: 4500,
@@ -1016,6 +1020,8 @@ setAd(true)
         type: "default",
         theme: "light"
       });
+       }
+    
     }
     
     return (
@@ -1120,7 +1126,7 @@ setAd(true)
                 <div className="flex items-center">
                
                 {/* <div className=" px-1"/> */}
-                <button onClick={() => {task.click ? '' : watchAd < 54 ? showAd() : errorwatch() } } className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                <button onClick={() => {task.click ? '' : watchAd < 54 && start == true ? showAd() : errorwatch() } } className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                 <p className={`text-white font-Large ${task.click? 'text-[0px]' : ''}`}>Start</p>
                   <div className="flex">
                   <svg aria-hidden="true" className={`${task.click? 'w-6 h-6' : 'w-0 h-0'} flex text-gray-200 animate-spin dark:text-gray-600 fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
