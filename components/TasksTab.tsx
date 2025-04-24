@@ -575,7 +575,9 @@ const [watchAd,setWatchad] = useState<number> (0);
                     }
                      
                     }else if(end == false){
-                     
+                       if (timerRefB.current) {
+            clearInterval(timerRefB.current);
+          }
                       try {
                         fetch('/api/update-dateads', {
                          method: 'POST',
