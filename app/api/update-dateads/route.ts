@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
        await prisma.watchads.updateMany({
             where: { idd },
             data: { 
+                date:newdate,
                 dateMining:new Date(increase),
                 cnt:0
              }
