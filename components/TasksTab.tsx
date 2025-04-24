@@ -590,6 +590,7 @@ const TasksTab = () => {
                  .then((res) => res.json())
                  .then((data) => {
                    if (data.success) {
+                    setRefreshAds(!refreshAds)
                     setWatchad(0)
                    } else {
                    }
