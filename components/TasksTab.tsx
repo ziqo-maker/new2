@@ -529,17 +529,7 @@ const [watchAd,setWatchad] = useState<number> (0);
            .then((res) => res.json())
            .then((data) => {
              if (data.success) {
-                   new Toast({
-          position: "top-center",
-          toastMsg: `a`,
-          autoCloseTime: 4500,
-          canClose: true,
-          showProgress: true,
-          pauseOnHover: true,
-          pauseOnFocusLoss: true,
-          type: "default",
-          theme: "light"
-        });
+                 
               const target = new Date(data.dtMining);
               const now = new Date(data.dt);
               const difference = target.getTime() - now.getTime();
@@ -566,17 +556,7 @@ const [watchAd,setWatchad] = useState<number> (0);
                }
 
               }else{
-                       new Toast({
-          position: "top-center",
-          toastMsg: `b`,
-          autoCloseTime: 4500,
-          canClose: true,
-          showProgress: true,
-          pauseOnHover: true,
-          pauseOnFocusLoss: true,
-          type: "default",
-          theme: "light"
-        });
+                     
                 var q = 0    
                 timerRefB.current = setInterval(() =>{
                   q += 1000
@@ -948,7 +928,7 @@ setAd(true)
       </center>
               <div className="flex-1 mt-1 text-center font-bold ">
               <p className="mr-3 ml-3 text-[#ffae19]/[0.9] font-Large text-2xl glow">Earn More WalkCoin</p>
-              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal glow text-sm text-wrap">Receive rewards by completing any task</p>
+              <p className="mr-2 ml-2 text-[#ffae19]/[0.9] font-normal glow text-base text-wrap">Receive rewards by completing any task</p>
               </div>
               </div>
               <div className="flex w-full  items-center justify-center items-center">
