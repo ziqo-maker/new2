@@ -111,6 +111,10 @@ const [watchAd,setWatchad] = useState<number> (0);
         const [days,setDays] = useState("00");
    const [refreshAds,setRefreshAds] = useState<boolean> (true);
 
+        const [end,setEnd] = useState<boolean> (false);
+        const [start,setStart] = useState<boolean> (true);
+
+
     const handlePendingB = async(id:string,pendingcreatedtasks:string | undefined,click:boolean | undefined,isDoing:boolean | undefined,url:string) => {
       const rndNmb = Math.floor(Math.random() * 2) + 1
       if(!click && !isDoing){
@@ -524,10 +528,31 @@ const [watchAd,setWatchad] = useState<number> (0);
                   setSeconds(String(sstr).padStart(2, "0"));
                 }
                  
-                }else{
-                  setMinutes("00")
+                }else if(end == false){
+              
+                 try {
+                fetch('/api/update-dateads', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type':'application/json',
+                 },
+                 body: JSON.stringify({idd:String(UserDt?.idd)}),
+               })
+               .then((res) => res.json())
+               .then((data) => {
+                 if (data.success) {
+                        setEnd(true)
+                       setMinutes("00")
                   setSeconds("00")
                   setHours("00")
+                  setRefreshAds(!refreshAds)
+                  setWatchad(0)
+                 } else {
+                 }
+               })
+             } catch (err) {
+             }
+                  
                 }
        
 
