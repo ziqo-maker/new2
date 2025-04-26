@@ -938,7 +938,7 @@ new Toast({
           <button onClick={() => handleCopyLink()} className="flex mt-2 flex-grow bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
                            <Image 
                            src={copy as StaticImageData} 
-                         className="w-8 h-8 aspect-square object-cover"
+                         className="w-7 h-7 aspect-square object-cover"
                          alt="Shiba Inu"
                        />
                                <p className="text-white font-bold text-[15px] truncate mr-2 ml-2">Copy the command</p>
