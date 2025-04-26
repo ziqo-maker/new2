@@ -916,18 +916,18 @@ new Toast({
         </center>
 
 
-        <div className="w-full mt-3  text-center  rounded-b-full items-center justify-center bg-white ">
+        <div className="w-full mt-6  text-center  rounded-b-full items-center justify-center bg-white ">
         <center>
           <div className="w-[calc(100%-2rem)] flex items-center justify-center">
-    <hr className="flex grow  my-5 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
+    <hr className="flex grow  my-1 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
     <p className="text-black/[0.9] font-black text-base mr-3 ml-3 text-nowrap">Buy tickets with Star</p>
-    <hr className="flex grow  my-5 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
+    <hr className="flex grow  my-1 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
 
 </div>
           </center>
           <center >
-          <p className="text-black/[0.9] font-normal text-sm mr-3 ml-3">You can buy tickets with Telegram stars in the WalkCoin bot by running the command /buytickets</p>
-          <button onClick={() => handleCopyLink()} className="flex mt-1 flex-grow bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
+          <p className="text-black/[0.9] font-normal mt-1 text-sm mr-4 ml-4">You can buy tickets with Telegram stars in the WalkCoin bot by running the command /buytickets</p>
+          <button onClick={() => handleCopyLink()} className="flex mt-2 flex-grow bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
                            <Image 
                            src={copy as StaticImageData} 
                          className="w-8 h-8 aspect-square object-cover"
