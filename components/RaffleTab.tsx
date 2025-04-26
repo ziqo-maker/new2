@@ -693,6 +693,14 @@ new Toast({
                       });
         }
 
+        const handleOpenLink = () => {
+          if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+            const tg = window.Telegram.WebApp
+          tg.ready()
+             tg.openTelegramLink("https://t.me/TheWalkCoinBot")     
+          }
+         }
+
     return (
         <div className=" flex justify-center overflow-y-auto">
          <div className="w-full h-screen bg-white flex-col ">
@@ -936,7 +944,7 @@ new Toast({
                                <p className="text-white font-bold text-[15px] truncate mr-2 ml-2">Copy the command</p>
                                  </button>
           <p className="text-black/[0.9] font-bold text-sm mr-3 ml-3 mt-1">then click the button</p>
-        <button onClick={() => {buyStar == 0 ? '' : handlePurchase()}} className={`${buyStar == 0? 'opacity-60' :''} mt-1 flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
+        <button onClick={() => {buyStar == 0 ? '' : handleOpenLink()}} className={`${buyStar == 0? 'opacity-60' :''} mt-1 flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
                            
           
                            <div className="flex-1 text-center">
