@@ -20,6 +20,7 @@ import { Address, beginCell,} from "@ton/core";
 import { Button } from "@headlessui/react";
 import Toast from 'typescript-toastify';
 import Star from '@/icons/star.svg';
+import copy from '@/icons/copy.svg'
 
 type board = {
   id:string
@@ -227,65 +228,66 @@ const RaffleTab = () => {
 
 
 
-// useEffect(() => {
+useEffect(() => {
 
-//   try {
-//     fetch('/api/get-raffle', {
-//      method: 'POST',
-//      headers: {
-//        'Content-Type': 'application/json',
-//      },
-//      body: JSON.stringify({}),
-//    })
-//    .then((res) => res.json())
-//    .then((data) => {
+  try {
+    fetch('/api/get-raffle', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({}),
+   })
+   .then((res) => res.json())
+   .then((data) => {
 
-//      if (data.success) {
-//         setTonPrice(Number(data.priceton))
-//         const target = new Date(data.date2);
-//         const now = new Date(data.date1);
-//         var q = 0        
-//         timerRef.current = setInterval(() =>{
-//           q += 1000
-//           const difference = target.getTime() - now.getTime() - q;
+     if (data.success) {
+        setTonPrice(Number(data.priceton))
+        const target = new Date(data.date2);
+        const now = new Date(data.date1);
+        var q = 0        
+        timerRef.current = setInterval(() =>{
+          q += 1000
+          const difference = target.getTime() - now.getTime() - q;
           
-//           if(difference > 1000 ){
+          if(difference > 1000 ){
 
-//             const d = Math.floor(difference / (1000 * 3600 * 24));
-//           var dstr = Math.trunc(d).toString();
-//           setDays(String(dstr)); 
-//           const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-//           var hstr = Math.trunc(h).toString();
-//           setHours(String(hstr).padStart(2, "0")); 
-//           const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-//           if(Math.sign(m) === -1){
-//            setMinutes("00")
-//           }else{
-//             var mstr = m.toString();
-//             setMinutes(String(mstr).padStart(2, "0"));
-//           }
-//           const s = Math.floor((difference % (1000*60)) / 1000)
-//           if(Math.sign(s) === -1){
-//             setSeconds("00")
-//           }else{
-//             var sstr = s.toString();
-//             setSeconds(String(sstr).padStart(2, "0"));
-//           }
+            const d = Math.floor(difference / (1000 * 3600 * 24));
+          var dstr = Math.trunc(d).toString();
+          setDays(String(dstr)); 
+          const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+          var hstr = Math.trunc(h).toString();
+          setHours(String(hstr).padStart(2, "0")); 
+          const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+          if(Math.sign(m) === -1){
+           setMinutes("00")
+          }else{
+            var mstr = m.toString();
+            setMinutes(String(mstr).padStart(2, "0"));
+          }
+          const s = Math.floor((difference % (1000*60)) / 1000)
+          if(Math.sign(s) === -1){
+            setSeconds("00")
+          }else{
+            var sstr = s.toString();
+            setSeconds(String(sstr).padStart(2, "0"));
+          }
            
-//           }
+          }
           
-//         },1000);
+        },1000);
 
        
-//      } else {
+     } else {
       
-//      }
-//    })
-//   } catch (err) {
+     }
+     
+   })
+  } catch (err) {
    
-//   }
+  }
 
-//   }, []);
+  }, []);
 
      
 
@@ -675,6 +677,22 @@ new Toast({
 
     var cntup = 1
 
+    const handleCopyLink = () => {
+          const inviteLink = `/buytickets`
+          navigator.clipboard.writeText(inviteLink)
+            new Toast({
+                        position: "top-center",
+                        toastMsg: 'The command is copied',
+                        autoCloseTime: 4500,
+                        canClose: true,
+                        showProgress: true,
+                        pauseOnHover: true,
+                        pauseOnFocusLoss: true,
+                        type: "default",
+                        theme: "light"
+                      });
+        }
+
     return (
         <div className=" flex justify-center overflow-y-auto">
          <div className="w-full h-screen bg-white flex-col ">
@@ -898,45 +916,120 @@ new Toast({
         </center>
 
 
-        <div className="w-full  text-center  rounded-b-full items-center justify-center bg-white ">
+        <div className="w-full mt-3  text-center  rounded-b-full items-center justify-center bg-white ">
         <center>
           <div className="w-[calc(100%-2rem)] flex items-center justify-center">
-    <hr className="flex grow  my-8 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
+    <hr className="flex grow  my-5 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
     <p className="text-black/[0.9] font-black text-base mr-3 ml-3 text-nowrap">Buy tickets with Star</p>
-    <hr className="flex grow  my-8 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
+    <hr className="flex grow  my-5 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
 
 </div>
           </center>
-
           <center >
-        <button onClick={() => {valuestar == 0 && buyStar == 0 ? '' : handlePurchase()}} className={`${valuestar == 0 && buyStar == 0? 'opacity-60' :''}  flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
+          <p className="text-black/[0.9] font-normal text-sm mr-3 ml-3">You can buy tickets with Telegram stars in the WalkCoin bot by running the command /buytickets</p>
+          <button onClick={() => handleCopyLink()} className="flex mt-1 flex-grow bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
+                           <Image 
+                           src={copy as StaticImageData} 
+                         className="w-8 h-8 aspect-square object-cover"
+                         alt="Shiba Inu"
+                       />
+                               <p className="text-white font-bold text-[15px] truncate mr-2 ml-2">Copy the command</p>
+                                 </button>
+          <p className="text-black/[0.9] font-bold text-sm mr-3 ml-3 mt-1">then click the button</p>
+        <button onClick={() => {buyStar == 0 ? '' : handlePurchase()}} className={`${buyStar == 0? 'opacity-60' :''} mt-1 flex flex-grow  px-8 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl  px-2 py-[8px]`}>
                            
           
                            <div className="flex-1 text-center">
                                       <div className="flex items-center space-x-1 justify-center">
                                     
-                                 <p className=" text-white font-black text-base truncate">{buyStar == 3 ? 'Buy 900 tickets | 150 Stars' : buyStar == 1 ? 'Buy 250 tickets | 50 Stars' : buyStar == 2 ? 'Buy 600 tickets | 100 Stars' : `Buy ${Number(valuestar) * 5} tickets | ${valuestar} ${valuestar == 0 || valuestar == 1? 'Star' : 'Stars'}`}</p>
+                                 <p className=" text-white font-black text-base truncate">{buyStar == 3 ? 'Buy 950 tickets | 150 Stars' : buyStar == 1 ? 'Buy 300 tickets | 50 Stars' : buyStar == 2 ? 'Buy 650 tickets | 100 Stars' : buyStar == 4 ? 'Buy 5 tickets | 1 Star' : buyStar == 5 ? 'Buy 50 tickets | 9 Stars' : buyStar == 6 ? 'Buy 100 tickets | 17 Stars' : 'Buy 0 tickets | 0 Stars'}</p>
                                       </div>
                                       </div>
                                       </button>
-
-                                      <div className="flex w-[calc(100%-2rem)] mt-3 items-center justify-center">
-
-<Box sx={{ width:'80%', justifyContent: 'center' ,alignContent: 'center' }} >
-<Slider className="w-full"   size="medium"  color='warning' value={valuestar} step={1}  onChange={handleSliderChangeStar} min={0} defaultValue={0} max={ 100 } aria-label="default" valueLabelDisplay="auto" />
-
-<div className={`flex w-full  justify-between`}>
-<p className={`text-[#ff7700]/[0.9] font-bold text-base  truncate'}`}>{0} min</p>
-<p className={`text-[#ff7700]/[0.9] font-bold text-base  truncate`}>{100} max</p>
-
-</div>
-   
- </Box>
-
-</div>
         </center> 
 
+
+
      
+        <div className="flex w-full space-x-2 items-center justify-center mt-3">
+           
+           <div className={`${buyStar == 4 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
+             
+             <div className="flex items-center ">
+             <Image
+               src={Ticket as StaticImageData}
+             className="w-8 h-8 "
+             alt=""
+           />   
+
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 5</p>
+             </div>
+          
+             <Button onClick={() => setBuyStar(4)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
+             <Image
+               src={Star as StaticImageData}
+             className="w-6 h-6 "
+             alt=""
+           />   
+
+             <p className="text-white font-black text-[12px]  ">1 Star</p>
+
+             </Button>
+
+           </div>
+   
+           <div className={`${buyStar == 5 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
+             
+             <div className="flex items-center ">
+             <Image
+               src={Ticket as StaticImageData}
+             className="w-8 h-8 "
+             alt=""
+           />   
+
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 50</p>
+             </div>
+          
+             <Button onClick={() => setBuyStar(5)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
+             <Image
+               src={Star as StaticImageData}
+             className="w-6 h-6 "
+             alt=""
+           />   
+
+             <p className="text-white font-black  text-[12px]  ">9 Stars</p>
+
+             </Button>
+
+           </div>
+   
+           <div className={`${buyStar == 6 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
+             
+             <div className="flex items-center ">
+             <Image
+               src={Ticket as StaticImageData}
+             className="w-8 h-8 "
+             alt=""
+           />   
+
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 100</p>
+             </div>
+          
+             <Button onClick={() => setBuyStar(6)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
+             <Image
+               src={Star as StaticImageData}
+             className="w-6 h-6 "
+             alt=""
+           />   
+
+             <p className="text-white font-black  text-[12px] ">17 Stars</p>
+
+             </Button>
+
+           </div>
+   
+           
+           </div>
 
         <div className="flex w-full space-x-2 items-center justify-center mt-3">
            
@@ -949,7 +1042,7 @@ new Toast({
              alt=""
            />   
 
-                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 250</p>
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 300</p>
              </div>
           
              <Button onClick={() => setBuyStar(1)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
@@ -974,7 +1067,7 @@ new Toast({
              alt=""
            />   
 
-                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 600</p>
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 650</p>
              </div>
           
              <Button onClick={() => setBuyStar(2)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
@@ -999,7 +1092,7 @@ new Toast({
              alt=""
            />   
 
-                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 900</p>
+                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 950</p>
              </div>
           
              <Button onClick={() => setBuyStar(3)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
