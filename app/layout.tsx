@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>    
-
+<Script data-cfasync="false" src="//d2hdyssxn6lpj2.cloudfront.net/?sydhd=1174681" strategy="beforeInteractive" />
       <Script src="https://sad.adsgram.ai/js/sad.min.js" strategy="beforeInteractive"/>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         {children}
