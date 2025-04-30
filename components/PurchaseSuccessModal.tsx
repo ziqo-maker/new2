@@ -16,31 +16,29 @@ export default function PurchaseSuccessModal() {
 
   return (
     <div className="fixed inset-0 bg-[#808080] bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-sm w-full">
-        <div className="text-center mb-4">
-          <div className="text-4xl mb-2"></div>
-          <h3 className="text-xl font-bold">dsaooo</h3>
-          <p className="text-sm tg-hint">Purchase successful!</p>
-        </div>
+      <div className="bg-white  border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-hidden rounded-3xl bg-white shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+       
+                             <div className="sm:flex sm:items-start">
+                              
+                               <div className=" w-full text-center  sm:ml-4 sm:text-left">
+                                 
+                                 <center>
+                                 <p  className="text-base font-semibold text-gray-900">
+                                 Need Extra WalkCoin ?
+                                 </p>
+                                 <div className="">
+                                   <p className="text-sm text-gray-500">
+                                   You can get additional WalkCoin tokens and raffle tickets every 2 hours 
+                                   </p>
+                                 </div>
+                              </center>
+                                 
+                               </div>
+                             </div>
+                           
+                           <div className="h-2" />
 
-        
-          <div className="my-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg text-center">
-            <p className="text-sm font-semibold mb-1">Your Secret Code:</p>
-            <p className="font-mono text-lg font-bold">secret</p>
-          </div>
-        
 
-        <div className="mt-4 text-sm tg-hint">
-          <p className="mb-2">Need a refund?</p>
-          <p>Please open our Telegram bot and use the appropriate <code>/refund</code> command to request a refund.</p>
-        </div>
-
-        <button
-          onClick={() => {}}
-          className="mt-4 w-full tg-button cursor-pointer"
-        >
-          Close
-        </button>
       </div>
     </div>
   );
