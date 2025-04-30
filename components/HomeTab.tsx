@@ -604,16 +604,15 @@ const HomeTab = () => {
   
   return (
 
-     <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
-      
-      
-          
-      
-      {
+    
+
+     <div className="">
+
+{
         <Dialog open={open} onClose={setOpen} className="relative z-10 ">
         <DialogBackdrop
           transition
-          className="fixed  inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+          className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
         />
   
         <div className="fixed inset-0 z-10 w-screen  overflow-y-auto">
@@ -718,6 +717,8 @@ const HomeTab = () => {
              
               </div>
 
+              <div className="h-3" />
+
               <div className="flex justify-center space-x-2  items-center  rounded-full ">
               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
@@ -790,12 +791,14 @@ const HomeTab = () => {
     />
               </div>
               </button>
+
+              
              
               </div>
+              <div className="h-3" />
+              <div className="flex flex-col justify-center space-x-2  items-center ">
 
-              <div className="flex flex-col mt-2 ">
-
-<button onClick={() => {}} className={`bg-[#ffae19]/[0.9]  flex px-4 rounded-full border-white border-4  border-double  py-[10px] items-center justify-center text-center`}>
+<button onClick={() => {}} className={`bg-[#ffae19]/[0.9]  flex px-4 rounded-xl border-white border-4  border-double  py-[10px] items-center justify-center text-center`}>
  
  <p className="text-base text-white font-bold">Unlock |  Stars</p>
 <div className="w-1" />
@@ -815,6 +818,7 @@ alt="Shiba Inu"
                                <p className="text-white font-normal text-[15px]  mr-2 ml-2">Copy command</p>
                                  </button>
 </div>
+         
               
               {/* <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
@@ -838,6 +842,7 @@ alt="Shiba Inu"
         </div>
       </Dialog>
       }
+      
        <div className="flex w-full items-center justify-center items-center">
        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
         <Image 
