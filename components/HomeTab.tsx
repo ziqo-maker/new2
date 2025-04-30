@@ -111,21 +111,12 @@ const HomeTab = () => {
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
 
    const [Itm, setItm] = useState<number>(0);
-  
+   const [isCopy,setIsCopy] = useState(false);
+
        const handleCopyLink = () => {
                     const inviteLink = `/extra`
                     navigator.clipboard.writeText(inviteLink)
-                      new Toast({
-                                  position: "top-center",
-                                  toastMsg: 'The command is copied',
-                                  autoCloseTime: 4500,
-                                  canClose: true,
-                                  showProgress: true,
-                                  pauseOnHover: true,
-                                  pauseOnFocusLoss: true,
-                                  type: "default",
-                                  theme: "light"
-                                });
+                     setIsCopy(true)
                   }
   
                   const handleOpenLink = () => {
@@ -845,7 +836,7 @@ const HomeTab = () => {
                                                                                                   <div className="h-3" />
                                                                                                   <div className="flex flex-col  justify-center space-x-2  items-center ">
                                                                                                   <p className="text-sm  text-[#ffae19]/[0.8]">
-                                                                                                  Purchase each item only once
+                                                                                                  *Purchase each item only once
                                                                   </p>
                                                                   <div className="h-2" />
                                                                                     <button onClick={() => {Itm == 0 ? '' : handleOpenLink()}} className={`${Itm ==0?'opacity-70':''} bg-[#ffae19]/[0.9] glowbox  flex px-3 rounded-xl border-white border-4  border-double  py-[8px] items-center justify-center text-center`}>
@@ -854,15 +845,17 @@ const HomeTab = () => {
                                                                                     
                                                                                     
                                                                                       </button>
-                                                                                    
-                                                                                      <button onClick={() => handleCopyLink()} className="flex mt-2 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
+                                                                                       <div className="w-full flex items-center justify-center">
+                                                                                       <button onClick={() => {isCopy == false ? handleCopyLink() : ''}} className="flex ml-0.5 mt-2 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
                                                                                                                  <Image 
                                                                                                                  src={copy as StaticImageData} 
                                                                                                                className="w-6 h-6 aspect-square object-cover"
                                                                                                                alt="Shiba Inu"
                                                                                                              />
-                                                                                                                     <p className="text-white font-normal text-[15px]  mr-1 ml-1">Copy command</p>
+                                                                                                                     <p className="text-white font-normal text-[15px]  mr-1 ml-1">{isCopy == false ? 'Copy command' : 'The command is copied'}</p>
                                                                                                                        </button>
+                                                                                       </div>
+                                                                                     
                                                                                     </div>
                                
                                                        <div className="flex flex-col text-center mt-2 space-x-1 items-center justify-start">
