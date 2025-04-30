@@ -7,6 +7,11 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Telegram Mini App',
   description: 'A simple Telegram mini app using Next.js and Prisma',
+  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 }
 
 export default function RootLayout({
