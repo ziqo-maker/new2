@@ -27,6 +27,7 @@ import Extra from '@/imgs/extra.png';
 import TicketCircle from '@/icons/whiteticket.svg';
 import Star from '@/icons/star.svg';
 import copy from '@/icons/copy.svg'
+import PurchaseSuccessModal from './PurchaseSuccessModal';
 
 import gif from '@/imgs/gif.gif';
 import a11 from '@/gif/1-1.gif';
@@ -604,507 +605,507 @@ const HomeTab = () => {
   
   return (
 
-    
-
-//      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
+      // <Dialog  open={open} onClose={setOpen} className="relative z-10 w-screen h-screen justify-center items-center  ">
+      //         <DialogBackdrop
       
-//        <div className="flex w-full items-center justify-center items-center">
+      //           transition
+      //           className="fixed w-screen h-screen justify-center items-center inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+      //         />
         
-//        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
-//         <Image 
-//         src={FootPrint as StaticImageData} 
-//       className="w-10 h-10 aspect-square object-cover"
-//       alt="Shiba Inu"
-//     />
-//               <div className="flex-grow text-center ">
-//               <div className="flex items-center justify-center">
-//               <p className=" text-white font-Large glow text-base mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
-//               </div>
-//               </div>
-//               </div>
-//        </div>
-
-//       <div className={`${blnlvl == true ? 'mt-4 w-full' : 'w-0 h-0'} flex flex-col justify-center items-center`}>
-
-// <ol className="flex items-center justify-center w-full">
-// {gtMpdel.map((nmb,index) => {
-//   if(blnlvl == true){
-
-//     if(nmb.id < 5 ){
-//     return(
-//       <li key={index} className={`${nmb.id == lvl ? 'dark:after:border-[#ffae19]/[0.9]' : nmb.id < lvl ? 'dark:after:border-[#ffae19]/[0.9]' : 'dark:after:border-[#ffae19]/[0.5]'}  flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block `}>
-//               <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
-//                   <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-//                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '2' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
-//                   </svg>
-                  
-//               </span>
-//               <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? '' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
-//               <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
-//                </span>
-//           </li>
-//         )
-//   }else if(lvl == 5){
+      //         <div className="fixed inset-0 z-10 w-screen h-screen justify-center items-center overflow-y-auto">
+      //           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      //             <DialogPanel
+      //               transition
+      //               className="relative border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+      //             >
+      //               <div className="bg-white mt-2">
+      //                 <div className="sm:flex sm:items-start">
+                       
+      //                   <div className=" w-full text-center  sm:ml-4 sm:text-left">
+                          
+      //                     <center>
+      //                     <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
+      //                     Need Extra WalkCoin ?
+      //                     </DialogTitle>
+      //                     <div className="">
+      //                       <p className="text-sm text-gray-500">
+      //                       You can get additional WalkCoin tokens and raffle tickets every 2 hours 
+      //                       </p>
+      //                     </div>
+      //                  </center>
+                          
+      //                   </div>
+      //                 </div>
+      //               </div>
+      //               <div className="h-2" />
+                   
+      //               <div  className="flex justify-center space-x-2  items-center  rounded-full ">
+      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+      //               <Image 
+      //         src={FootPrint as StaticImageData} 
+      //       className="w-6 h-6 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               <p className="text-white   font-bold glow text-sm ">+{Number(10000).toLocaleString()}</p>
+      //               <Image 
+      //         src={Extra as StaticImageData} 
+      //       className="w-7 h-7 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+      //               <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
+      //               <Image 
+      //         src={Star as StaticImageData} 
+      //       className="w-5 h-5 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               </button>
+      
+      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+      //               <Image 
+      //         src={FootPrint as StaticImageData} 
+      //       className="w-6 h-6 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               <p className="text-white   font-bold glow text-sm ">+{Number(20000).toLocaleString()}</p>
+      //               <Image 
+      //         src={Extra as StaticImageData} 
+      //       className="w-7 h-7 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+      //               <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
+      //               <Image 
+      //         src={Star as StaticImageData} 
+      //       className="w-5 h-5 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               </button>
+      
+      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+      //               <Image 
+      //         src={FootPrint as StaticImageData} 
+      //       className="w-6 h-6 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               <p className="text-white   font-bold glow text-sm ">+{Number(30000).toLocaleString()}</p>
+      //               <Image 
+      //         src={Extra as StaticImageData} 
+      //       className="w-7 h-7 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+      //               <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
+      //               <Image 
+      //         src={Star as StaticImageData} 
+      //       className="w-5 h-5 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               </button>
+                   
+      //               </div>
+      
+      //               <div className="h-3" />
+      
+      //               <div className="flex justify-center space-x-2  items-center  rounded-full ">
+      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+      //               <Image 
+      //         src={TicketCircle as StaticImageData} 
+      //       className="w-6 h-6 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               <p className="text-white   font-bold glow text-sm ">+7</p>
+      //               <Image 
+      //         src={Extra as StaticImageData} 
+      //       className="w-7 h-7 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+      //               <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
+      //               <Image 
+      //         src={Star as StaticImageData} 
+      //       className="w-5 h-5 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               </button>
+      
+      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+      //               <Image 
+      //         src={TicketCircle as StaticImageData} 
+      //       className="w-6 h-6 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               <p className="text-white   font-bold glow text-sm ">+15</p>
+      //               <Image 
+      //         src={Extra as StaticImageData} 
+      //       className="w-7 h-7 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+      //               <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
+      //               <Image 
+      //         src={Star as StaticImageData} 
+      //       className="w-5 h-5 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               </button>
+      
+      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+      //               <Image 
+      //         src={FootPrint as StaticImageData} 
+      //       className="w-6 h-6 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               <p className="text-white   font-bold glow text-sm ">+25</p>
+      //               <Image 
+      //         src={Extra as StaticImageData} 
+      //       className="w-7 h-7 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+      //               <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
+      //               <Image 
+      //         src={Star as StaticImageData} 
+      //       className="w-5 h-5 aspect-square object-cover"
+      //       alt="Shiba Inu"
+      //     />
+      //               </div>
+      //               </button>
+      
+                    
+                   
+      //               </div>
+      //               <div className="h-3" />
+      //               <div className="flex flex-col justify-center space-x-2  items-center ">
+      
+      // <button onClick={() => {}} className={`bg-[#ffae19]/[0.9]  flex px-4 rounded-xl border-white border-4  border-double  py-[10px] items-center justify-center text-center`}>
+       
+      //  <p className="text-base text-white font-bold">Unlock |  Stars</p>
+      // <div className="w-1" />
+      //  <Image
+      // src={Star as StaticImageData} 
+      // className={`w-5 h-5`}
+      // alt="Shiba Inu"
+      // />
+      //   </button>
+      
+      //   <button onClick={() => {}} className="flex mt-1 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
+      //                            <Image 
+      //                            src={copy as StaticImageData} 
+      //                          className="w-6 h-6 aspect-square object-cover"
+      //                          alt="Shiba Inu"
+      //                        />
+      //                                <p className="text-white font-normal text-[15px]  mr-2 ml-2">Copy command</p>
+      //                                  </button>
+      // </div>
+               
+                    
+      //               {/* <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+      //                 <button
+      //                   type="button"
+      //                   onClick={() => setOpen(false)}
+      //                   className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+      //                 >
+      //                   Deactivate
+      //                 </button>
+      //                 <button
+      //                   type="button"
+      //                   data-autofocus
+      //                   onClick={() => setOpen(false)}
+      //                   className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+      //                 >
+      //                   Cancel
+      //                 </button>
+      //               </div> */}
+      //             </DialogPanel>
+      //           </div>
+      //         </div>
+      //       </Dialog>
+              
+            
     
-//     return(
-//       <li key={index} className="flex items-center  ">
-//         <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? '' : 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7'} flex items-center justify-center  rounded-full shrink-0`}>
-//         <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? '' : 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-//                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '0' : '2'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
-//           </svg>
-//         </span>
-//         <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
-//              <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'w-0 h-0'}`} size={25} color="#ffae19" />
-//               </span>
-//     </li>
-//     )
-//   }else if (lvl ==6){
-//     return(
-//       <li key={index} className="flex items-center  ">
-//         <span className={`bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7 flex items-center justify-center  rounded-full shrink-0`}>
-//         <svg className={`w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-//                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`2`} d="M1 5.917 5.724 10.5 15 1.5"/>
-//           </svg>
-//         </span>
-        
-//     </li>
-//     )
-//   }else{
-//     return(
-//       <li key={index} className={`${nmb.id == lvl ? 'dark:after:border-[#ffae19]/[0.9]' : nmb.id < lvl ? 'dark:after:border-[#ffae19]/[0.9]' : 'dark:after:border-[#ffae19]/[0.5]'}  flex  items-center  after:content-['']  after:inline-block `}>
-//               <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
-//                   <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-//                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '2' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
-//                   </svg>
-                  
-//               </span>
-//               <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? '' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
-//               <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
-//                </span>
-//           </li>
-//         )
-//   }
 
-//   }
+     <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
+      
+      <PurchaseSuccessModal
+         />
+      
+
+       <div className="flex w-full items-center justify-center items-center">
+       <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
+        <Image 
+        src={FootPrint as StaticImageData} 
+      className="w-10 h-10 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              <div className="flex-grow text-center ">
+              <div className="flex items-center justify-center">
+              <p className=" text-white font-Large glow text-base mr-6 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
+              </div>
+              </div>
+              </div>
+       </div>
+
+      <div className={`${blnlvl == true ? 'mt-4 w-full' : 'w-0 h-0'} flex flex-col justify-center items-center`}>
+
+<ol className="flex items-center justify-center w-full">
+{gtMpdel.map((nmb,index) => {
+  if(blnlvl == true){
+
+    if(nmb.id < 5 ){
+    return(
+      <li key={index} className={`${nmb.id == lvl ? 'dark:after:border-[#ffae19]/[0.9]' : nmb.id < lvl ? 'dark:after:border-[#ffae19]/[0.9]' : 'dark:after:border-[#ffae19]/[0.5]'}  flex  items-center  after:content-[''] after:w-5 after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block `}>
+              <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
+                  <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '2' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
+                  </svg>
+                  
+              </span>
+              <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? '' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
+              <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
+               </span>
+          </li>
+        )
+  }else if(lvl == 5){
+    
+    return(
+      <li key={index} className="flex items-center  ">
+        <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? '' : 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7'} flex items-center justify-center  rounded-full shrink-0`}>
+        <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? '' : 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white'}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '0' : '2'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
+          </svg>
+        </span>
+        <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
+             <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'w-0 h-0'}`} size={25} color="#ffae19" />
+              </span>
+    </li>
+    )
+  }else if (lvl ==6){
+    return(
+      <li key={index} className="flex items-center  ">
+        <span className={`bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7 flex items-center justify-center  rounded-full shrink-0`}>
+        <svg className={`w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`2`} d="M1 5.917 5.724 10.5 15 1.5"/>
+          </svg>
+        </span>
+        
+    </li>
+    )
+  }else{
+    return(
+      <li key={index} className={`${nmb.id == lvl ? 'dark:after:border-[#ffae19]/[0.9]' : nmb.id < lvl ? 'dark:after:border-[#ffae19]/[0.9]' : 'dark:after:border-[#ffae19]/[0.5]'}  flex  items-center  after:content-['']  after:inline-block `}>
+              <span className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'bg-[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9] w-5 h-5 lg:h-7 lg:w-7' : ''}  flex items-center justify-center  rounded-full   shrink-0`}>
+                  <svg className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-3.5 h-3.5 text-white lg:w-4 lg:h-4 dark:text-white' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width={`${nmb.id == lvl ? '0' : nmb.id < lvl ? '2' : '0'}`} d="M1 5.917 5.724 10.5 15 1.5"/>
+                  </svg>
+                  
+              </span>
+              <span className={`${nmb.id == lvl ? 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2' : nmb.id < lvl ? '' : 'w-5 h-5 lg:h-7 lg:w-7 dark:border-[#ffae19]/[0.9] border-2'}  flex items-center justify-center  rounded-full   shrink-0`}>
+              <GoDotFill className={`${nmb.id == lvl ? '' : nmb.id < lvl ? 'w-0 h-0' : 'opacity-50'}`} size={25} color="#ffae19" />
+               </span>
+          </li>
+        )
+  }
+
+  }
   
-//   }) }
+  }) }
     
-// </ol>
+</ol>
 
-//   {gtMpdelC.map((nmb,index) => {
-//     if(blnlvl == true){
-//       return(
-//         <ol className={`${blnlvl == true ? 'mt-4 w-full mr-2 ml-2' : 'w-0 h-0'} flex flex-col  items-center justify-center `}>
+  {gtMpdelC.map((nmb,index) => {
+    if(blnlvl == true){
+      return(
+        <ol className={`${blnlvl == true ? 'mt-4 w-full mr-2 ml-2' : 'w-0 h-0'} flex flex-col  items-center justify-center `}>
 
-//           <div className="flex w-full justify-center items-center  ">
-//            <div className="w-2"/>
-//           <div className="flex items-center justify-center">
-//                   <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
-//                   </div>
+          <div className="flex w-full justify-center items-center  ">
+           <div className="w-2"/>
+          <div className="flex items-center justify-center">
+                  <p className=" text-black font-Large glow text-base mr-1 truncate">{Number(UserDt?.gtpoint).toLocaleString()}</p>
+                  </div>
 
-// <div className="flex grow ml-1 mr-1">
-// <ProgressBar
-//   completed={Number(UserDt?.gtpoint)}
-//   maxCompleted={Number(endpoint)}
-//   className="grow  rounded-full "
-//   customLabel=" "
-//     barContainerClassName=" bg-[#6b4d11d1]/[0.2] rounded-full"
-//   completedClassName=""
-//     bgColor="#ffae19"
-// />
-// </div>
+<div className="flex grow ml-1 mr-1">
+<ProgressBar
+  completed={Number(UserDt?.gtpoint)}
+  maxCompleted={Number(endpoint)}
+  className="grow  rounded-full "
+  customLabel=" "
+    barContainerClassName=" bg-[#6b4d11d1]/[0.2] rounded-full"
+  completedClassName=""
+    bgColor="#ffae19"
+/>
+</div>
     
-// <div className="flex items-center  justify-center">
-//                   </div>
+<div className="flex items-center  justify-center">
+                  </div>
 
-//                   <div className="flex items-center justify-center">
-//                   <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(endpoint).toLocaleString()}</p>
-//                   </div>
-//                   <div className="w-2"/>
-//           </div>
+                  <div className="flex items-center justify-center">
+                  <p className=" text-black font-Large glow text-base ml-1 truncate">{Number(endpoint).toLocaleString()}</p>
+                  </div>
+                  <div className="w-2"/>
+          </div>
           
       
         
      
         
-//         <div className="flex mt-2 space-x-2  items-center  justify-center items-center">
-//         <div className="flex">
-//       <Image 
-//             src={Dollar as StaticImageData} 
-//           className="w-8 h-8 aspect-square object-cover"
-//           alt=""
-//         />
-//         <div className="flex text-center ">
-//         <div className="flex items-center justify-center">
-//         <p className=" text-black font-medium  text-[15px]   truncate">+{Number(price).toFixed(8)}</p>
-//         </div>
-//         </div>
-//       </div>
-//           <div className={`${activeBtn == false ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
+        <div className="flex mt-2 space-x-2  items-center  justify-center items-center">
+        <div className="flex">
+      <Image 
+            src={Dollar as StaticImageData} 
+          className="w-8 h-8 aspect-square object-cover"
+          alt=""
+        />
+        <div className="flex text-center ">
+        <div className="flex items-center justify-center">
+        <p className=" text-black font-medium  text-[15px]   truncate">+{Number(price).toFixed(8)}</p>
+        </div>
+        </div>
+      </div>
+          <div className={`${activeBtn == false ? 'opacity-75' : Number(UserDt?.gtpoint) >= Number(endpoint) ? '' : 'opacity-75'} flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[7px]`}>
           
         
-//         <button onClick={() => {nmb.click == true ? '' : activeBtn == false ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
-//                     <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
+        <button onClick={() => {nmb.click == true ? '' : activeBtn == false ? '' : Number(UserDt?.gtpoint) >= Number(endpoint) ? handleupdateprice() : '' } } className={`  flex w-16 h-5 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                    <p className={` text-white glow text-[15px] font-medium `}>Claim</p>
         
-//                     </button> 
-//                   </div>
+                    </button> 
+                  </div>
       
               
-//           </div>
-          
-//     </ol>
-//       )
-//     }
-//   }) }
-
-// </div>
-
-//        <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
-//         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
-        
-
-//         <div className="flex justify-center items-center  mt-4 ">
-//           <div className="flex w-80 h-80 p-3"> 
-//             <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
-//           <Image
-//        src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:UserDt?.selectcharacter == "6"? AlienSoldier :Loading}
-//        className={`h-full w-full rounded-full absolute object-fill`}
-//        alt=""
-//          /> 
-//           <Image
-//           unoptimized={true}
-//        src={isMg as StaticImageData}
-//        className={`${isActive ?'' : 'collapse'} w-full h-full absolute rounded-full object-fill`}
-//        alt=""
-//          /> 
-         
-         
-    
-//             </div> 
-   
-//           </div>
-          
-//         </div>
-
-//         <div className="flex grow mr-4 ml-4 justify-between items-between">
- 
-//         <button onClick={() => setActiveTab('character')} className="flex border-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 rounded-full px-3 py-[6px] ">
-//          <p className="text-lg text-[#ffae19]/[0.9] font-Large">Characters</p>
-//         </button>
-
-//         <button onClick={ () => setActiveTab('speed')
-//           } className="flex grow-0 bg-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 border-white rounded-full px-3 py-[7px] ">
-//         <Image
-//         src={UpgradeIcon as StaticImageData} 
-//       className="w-7 h-7 aspect-square object-cover"
-//       alt=""
-//        />
-//          <p className="text-lg text-white font-Large">Speed Up</p>
-//         </button>
-//   </div>
-
-//         <div className="flex flex-col grow mb-2 mt-2 items-center justify-center">
-//         <div className="flex grow px-50  justify-center items-center space-x-1">
-//         <Image
-//         src={FootPrint as StaticImageData} 
-//       className="w-10 h-10"
-//       alt=""
-//        />
-//           <div className="flex space-x-2 items-center text-wrap">
-//           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
-//           <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
-//           </div>
-          
-        
-//         </div>
-
-//         <div className="flex grow mt-1  justify-center items-center space-x-1">
-//         <Image
-//         src={circleticket as StaticImageData} 
-//       className="w-8 h-8"
-//       alt=""
-//        />
-//           <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] font-Large rounded-full px-3 py-[3px]">
-//           <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
-//           </div>
-//         </div>
-        
-          
-        
-//         </div>
-
-//         <div className="flex px-10 justify-center">
-//           {gtClaimType.map((nmb,index) => {
-//           return(
-//             <button onClick={handlePurchase} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
-        
-//     <div className="flex items-center justify-center space-x-1">
-//     </div>
-//     <div className="flex-1 text-center">
-//         <div className="flex items-center justify-center space-x-2">
-//         <Image
-//         src={FootPrintA as StaticImageData}
-//       className={`${isready? 'w-7 h-7' : 'w-0 h-0' } aspect-square object-cover`}
-//       alt="Shiba Inu"
-//     />
-//      <div className="flex items-center justify-center">
-//     <svg aria-hidden="true" className={`${isSpin? 'w-6 h-6' : 'w-0 h-0'} text-gray-200 animate-spin dark:text-gray-600 fill-white `} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-//         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-//         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-//     </svg>
-//     <p className={`${isClaim? '' : 'text-[0px] w-0 h-0'} text-white font-Large glowsmall animate-pulse`}>Claim</p>
-//      <p className={`${isready? '' : 'text-[0px] w-0 h-0'} text-white font-Large glowsmall`}>Start</p>
-//      <p className={`${isActive? '' : 'text-[0px] w-0 h-0'} text-white font-Large glowsmall `}>({hours}:{minutes}:{seconds})</p>
-//      </div>
-//         </div>
-//         </div>
-//         </button>
-//             )
-//         }) }
-        
-//         </div>
-//         <div className="h-20 mt-5" />
-//        </div> 
-//        </div>
-//      </div>
-
-
-
-  <Dialog  open={open} onClose={setOpen} className="relative z-10 w-screen h-screen justify-center items-center  ">
-          <DialogBackdrop
-  
-            transition
-            className="fixed w-screen h-screen justify-center items-center inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-          />
-    
-          <div className="fixed inset-0 z-10 w-screen h-screen justify-center items-center overflow-y-auto">
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-              <DialogPanel
-                transition
-                className="relative border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-              >
-                <div className="bg-white mt-2">
-                  <div className="sm:flex sm:items-start">
-                   
-                    <div className=" w-full text-center  sm:ml-4 sm:text-left">
-                      
-                      <center>
-                      <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
-                      Need Extra WalkCoin ?
-                      </DialogTitle>
-                      <div className="">
-                        <p className="text-sm text-gray-500">
-                        You can get additional WalkCoin tokens and raffle tickets every 2 hours 
-                        </p>
-                      </div>
-                   </center>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div className="h-2" />
-               
-                <div  className="flex justify-center space-x-2  items-center  rounded-full ">
-                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-                <Image 
-          src={FootPrint as StaticImageData} 
-        className="w-6 h-6 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                <p className="text-white   font-bold glow text-sm ">+{Number(10000).toLocaleString()}</p>
-                <Image 
-          src={Extra as StaticImageData} 
-        className="w-7 h-7 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
-                <Image 
-          src={Star as StaticImageData} 
-        className="w-5 h-5 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                </button>
-  
-                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-                <Image 
-          src={FootPrint as StaticImageData} 
-        className="w-6 h-6 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                <p className="text-white   font-bold glow text-sm ">+{Number(20000).toLocaleString()}</p>
-                <Image 
-          src={Extra as StaticImageData} 
-        className="w-7 h-7 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
-                <Image 
-          src={Star as StaticImageData} 
-        className="w-5 h-5 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                </button>
-  
-                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-                <Image 
-          src={FootPrint as StaticImageData} 
-        className="w-6 h-6 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                <p className="text-white   font-bold glow text-sm ">+{Number(30000).toLocaleString()}</p>
-                <Image 
-          src={Extra as StaticImageData} 
-        className="w-7 h-7 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
-                <Image 
-          src={Star as StaticImageData} 
-        className="w-5 h-5 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                </button>
-               
-                </div>
-  
-                <div className="h-3" />
-  
-                <div className="flex justify-center space-x-2  items-center  rounded-full ">
-                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-                <Image 
-          src={TicketCircle as StaticImageData} 
-        className="w-6 h-6 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                <p className="text-white   font-bold glow text-sm ">+7</p>
-                <Image 
-          src={Extra as StaticImageData} 
-        className="w-7 h-7 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
-                <Image 
-          src={Star as StaticImageData} 
-        className="w-5 h-5 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                </button>
-  
-                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-                <Image 
-          src={TicketCircle as StaticImageData} 
-        className="w-6 h-6 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                <p className="text-white   font-bold glow text-sm ">+15</p>
-                <Image 
-          src={Extra as StaticImageData} 
-        className="w-7 h-7 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
-                <Image 
-          src={Star as StaticImageData} 
-        className="w-5 h-5 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                </button>
-  
-                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-                <Image 
-          src={FootPrint as StaticImageData} 
-        className="w-6 h-6 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                <p className="text-white   font-bold glow text-sm ">+25</p>
-                <Image 
-          src={Extra as StaticImageData} 
-        className="w-7 h-7 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
-                <Image 
-          src={Star as StaticImageData} 
-        className="w-5 h-5 aspect-square object-cover"
-        alt="Shiba Inu"
-      />
-                </div>
-                </button>
-  
-                
-               
-                </div>
-                <div className="h-3" />
-                <div className="flex flex-col justify-center space-x-2  items-center ">
-  
-  <button onClick={() => {}} className={`bg-[#ffae19]/[0.9]  flex px-4 rounded-xl border-white border-4  border-double  py-[10px] items-center justify-center text-center`}>
-   
-   <p className="text-base text-white font-bold">Unlock |  Stars</p>
-  <div className="w-1" />
-   <Image
-  src={Star as StaticImageData} 
-  className={`w-5 h-5`}
-  alt="Shiba Inu"
-  />
-    </button>
-  
-    <button onClick={() => {}} className="flex mt-1 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
-                             <Image 
-                             src={copy as StaticImageData} 
-                           className="w-6 h-6 aspect-square object-cover"
-                           alt="Shiba Inu"
-                         />
-                                 <p className="text-white font-normal text-[15px]  mr-2 ml-2">Copy command</p>
-                                   </button>
-  </div>
-           
-                
-                {/* <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    type="button"
-                    onClick={() => setOpen(false)}
-                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                  >
-                    Deactivate
-                  </button>
-                  <button
-                    type="button"
-                    data-autofocus
-                    onClick={() => setOpen(false)}
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                  >
-                    Cancel
-                  </button>
-                </div> */}
-              </DialogPanel>
-            </div>
           </div>
-        </Dialog>
+          
+    </ol>
+      )
+    }
+  }) }
+
+</div>
+
+       <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
+        <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
+        
+
+        <div className="flex justify-center items-center  mt-4 ">
+          <div className="flex w-80 h-80 p-3"> 
+            <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
+          <Image
+       src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:UserDt?.selectcharacter == "6"? AlienSoldier :Loading}
+       className={`h-full w-full rounded-full absolute object-fill`}
+       alt=""
+         /> 
+          <Image
+          unoptimized={true}
+       src={isMg as StaticImageData}
+       className={`${isActive ?'' : 'collapse'} w-full h-full absolute rounded-full object-fill`}
+       alt=""
+         /> 
+         
+         
+    
+            </div> 
+   
+          </div>
+          
+        </div>
+
+        <div className="flex grow mr-4 ml-4 justify-between items-between">
+ 
+        <button onClick={() => setActiveTab('character')} className="flex border-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 rounded-full px-3 py-[6px] ">
+         <p className="text-lg text-[#ffae19]/[0.9] font-Large">Characters</p>
+        </button>
+
+        <button onClick={ () => setActiveTab('speed')
+          } className="flex grow-0 bg-[#ffae19]/[0.9] space-x-1 items-center text-wrap border-2 border-white rounded-full px-3 py-[7px] ">
+        <Image
+        src={UpgradeIcon as StaticImageData} 
+      className="w-7 h-7 aspect-square object-cover"
+      alt=""
+       />
+         <p className="text-lg text-white font-Large">Speed Up</p>
+        </button>
+  </div>
+
+        <div className="flex flex-col grow mb-2 mt-2 items-center justify-center">
+        <div className="flex grow px-50  justify-center items-center space-x-1">
+        <Image
+        src={FootPrint as StaticImageData} 
+      className="w-10 h-10"
+      alt=""
+       />
+          <div className="flex space-x-2 items-center text-wrap">
+          <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
+          <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
+          </div>
           
         
+        </div>
+
+        <div className="flex grow mt-1  justify-center items-center space-x-1">
+        <Image
+        src={circleticket as StaticImageData} 
+      className="w-8 h-8"
+      alt=""
+       />
+          <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] font-Large rounded-full px-3 py-[3px]">
+          <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
+          </div>
+        </div>
+        
+          
+        
+        </div>
+
+        <div className="flex px-10 justify-center">
+          {gtClaimType.map((nmb,index) => {
+          return(
+            <button onClick={handlePurchase} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+        
+    <div className="flex items-center justify-center space-x-1">
+    </div>
+    <div className="flex-1 text-center">
+        <div className="flex items-center justify-center space-x-2">
+        <Image
+        src={FootPrintA as StaticImageData}
+      className={`${isready? 'w-7 h-7' : 'w-0 h-0' } aspect-square object-cover`}
+      alt="Shiba Inu"
+    />
+     <div className="flex items-center justify-center">
+    <svg aria-hidden="true" className={`${isSpin? 'w-6 h-6' : 'w-0 h-0'} text-gray-200 animate-spin dark:text-gray-600 fill-white `} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+    </svg>
+    <p className={`${isClaim? '' : 'text-[0px] w-0 h-0'} text-white font-Large glowsmall animate-pulse`}>Claim</p>
+     <p className={`${isready? '' : 'text-[0px] w-0 h-0'} text-white font-Large glowsmall`}>Start</p>
+     <p className={`${isActive? '' : 'text-[0px] w-0 h-0'} text-white font-Large glowsmall `}>({hours}:{minutes}:{seconds})</p>
+     </div>
+        </div>
+        </div>
+        </button>
+            )
+        }) }
+        
+        </div>
+        <div className="h-20 mt-5" />
+       </div> 
+       </div>
+     </div>
 
     )
 }
