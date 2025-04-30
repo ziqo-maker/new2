@@ -21,7 +21,9 @@ interface PurchaseSuccessModalProps {
 export default function PurchaseSuccessModal() {
 
   return (
-    <div className="fixed inset-0 bg-[#808080] bg-opacity-50 flex items-top z-40 justify-center px-4">
+    <center>
+
+<div className="fixed inset-0 bg-[#808080] bg-opacity-50 h-screen  items-center z-40 justify-center p-2">
       <div className="bg-white  border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-y-auto rounded-3xl bg-white shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
                                
       <div className="h-2" />
@@ -240,5 +242,8 @@ export default function PurchaseSuccessModal() {
                                   <div className="h-3" />
       </div>
     </div>
+
+    </center>
+    
   );
 } 
