@@ -21,7 +21,58 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { ShowPromiseResult } from "@/types/adsgram";
 import { useAdsgramD } from "./useAdsgramD";
 import circleticket from '@/icons/ticketcircle.svg';
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import Extra from '@/imgs/extra.png';
+import TicketCircle from '@/icons/whiteticket.svg';
+import Star from '@/icons/star.svg';
+import copy from '@/icons/copy.svg'
+
+import gif from '@/imgs/gif.gif';
+import a11 from '@/gif/1-1.gif';
+import a12 from '@/gif/1-2.gif';
+import a13 from '@/gif/1-3.gif';
+import a14 from '@/gif/1-4.gif';
+import a15 from '@/gif/1-5.gif';
+import a16 from '@/gif/1-6.gif';
+import a17 from '@/gif/1-7.gif';
+import a21 from '@/gif/2-1.gif';
+import a22 from '@/gif/2-2.gif';
+import a23 from '@/gif/2-3.gif';
+import a24 from '@/gif/2-4.gif';
+import a25 from '@/gif/2-5.gif';
+import a26 from '@/gif/2-6.gif';
+import a27 from '@/gif/2-7.gif';
+import a31 from '@/gif/3-1.gif';
+import a32 from '@/gif/3-2.gif';
+import a33 from '@/gif/3-3.gif';
+import a34 from '@/gif/3-4.gif';
+import a35 from '@/gif/3-5.gif';
+import a36 from '@/gif/3-6.gif';
+import a37 from '@/gif/3-7.gif';
+import a41 from '@/gif/4-1.gif';
+import a42 from '@/gif/4-2.gif';
+import a43 from '@/gif/4-3.gif';
+import a44 from '@/gif/4-4.gif';
+import a45 from '@/gif/4-5.gif';
+import a46 from '@/gif/4-6.gif';
+import a47 from '@/gif/4-7.gif';
+import a51 from '@/gif/5-1.gif';
+import a52 from '@/gif/5-2.gif';
+import a53 from '@/gif/5-3.gif';
+import a54 from '@/gif/5-4.gif';
+import a55 from '@/gif/5-5.gif';
+import a56 from '@/gif/5-6.gif';
+import a57 from '@/gif/5-7.gif';
+import a61 from '@/gif/6-1.gif';
+import a62 from '@/gif/6-2.gif';
+import a63 from '@/gif/6-3.gif';
+import a64 from '@/gif/6-4.gif';
+import a65 from '@/gif/6-5.gif';
+import a66 from '@/gif/6-6.gif';
+import a67 from '@/gif/6-7.gif';
 import Loading from '@/imgs/loading.png';
+import { DialogHeader } from "@material-tailwind/react";
 
 type modelB = {
   id: number
@@ -40,6 +91,7 @@ type claimtype = {
 
 const HomeTab = () => {
  
+  const [open, setOpen] = useState(true)
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -51,7 +103,7 @@ const HomeTab = () => {
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRefB = useRef<NodeJS.Timeout | null>(null);
   const [isMg, setMg] = useState<StaticImageData>();
-const [lvl,setLvl] = useState(5);
+  const [lvl,setLvl] = useState(5);
   const [price,setPrice] = useState(0);
   const [endpoint,setEndPoint] = useState(0);
   const [blnlvl,setBlnLvl] = useState(false);
@@ -59,48 +111,42 @@ const [lvl,setLvl] = useState(5);
 
   const handlePurchase = async () => {
     try {
-      // Create invoice link through our API
-      const response = await fetch('/api/create-invoice', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          userId:String(UserDt?.idd)
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to create invoice');
-      }
-
-      const { invoiceLink } = await response.json();
-
-      // Import TWA SDK
-      const WebApp = (await import('@twa-dev/sdk')).default;
-      
-      // Open the invoice using Telegram's WebApp SDK
-      WebApp.openInvoice(invoiceLink, async (status) => {
-        if (status === 'paid') {
-          // Payment was successful
-          // Generate a mock transaction ID since we don't have access to the real one from Telegram
-          // In a production app, this would be retrieved from your backend after the bot
-          // receives the pre_checkout_query and successful_payment updates
-          const transactionId = `txn_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
-          
-          
-        } else if (status === 'failed') {
-          alert('Payment failed. Please try again.');
-        } else if (status === 'cancelled') {
-          // User cancelled the payment, no action needed
-          console.log('Payment was cancelled by user');
-        }
-      });
-    } catch (e) {
-      console.error('Error during purchase:', e);
-      alert(`Failed to process purchase: ${e instanceof Error ? e.message : 'Unknown error'}`);
-    }
+            fetch('/api/create-buystar', {
+             method: 'POST',
+             headers: {
+               'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({ idd: String(5640150352),amount:'1',transactionid:'s',forwhat: '' }),
+           })
+           .then((res) => res.json())
+           .then((data) => {
+             if (data.success) {
+              new Toast({
+                position: "top-center",
+                toastMsg: `You're rece`,
+                autoCloseTime: 4500,
+                canClose: true,
+                showProgress: true,
+                pauseOnHover: true,
+                pauseOnFocusLoss: true,
+                type: "default",
+                theme: "light"
+              });
+            }
+           })
+         } catch (err) {
+         new Toast({
+            position: "top-center",
+            toastMsg: `You're received${err}`,
+            autoCloseTime: 4500,
+            canClose: true,
+            showProgress: true,
+            pauseOnHover: true,
+            pauseOnFocusLoss: true,
+            type: "default",
+            theme: "light"
+          });
+         }
   };
 
     const [gtClaimType,setClaimType] = useState<claimtype[]>([]);
@@ -172,23 +218,23 @@ const [lvl,setLvl] = useState(5);
 
 
   const [refreshC, setRefreshC] = useState<boolean>(false);
-useEffect(() => {
-  setTimeout(() => {
-    setRefreshC(!refreshC)
-    if(blnlvl == true){
-      setActiveBtn(true)
-    }
-   }, 4000);
-},[refreshC]) 
+// useEffect(() => {
+//   setTimeout(() => {
+//     setRefreshC(!refreshC)
+//     if(blnlvl == true){
+//       setActiveBtn(true)
+//     }
+//    }, 4000);
+// },[refreshC]) 
 
-useEffect(() => {
-  // const rndNmb = Math.floor(Math.random() * 5) + 1
+// useEffect(() => {
+//   // const rndNmb = Math.floor(Math.random() * 5) + 1
 
-  // const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
-  // setChsLst(lst)
-  const model = {id: 1, clickb:false,start:false}
-     gtClaimType?.push(model)
-},[])  
+//   // const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
+//   // setChsLst(lst)
+//   const model = {id: 1, clickb:false,start:false}
+//      gtClaimType?.push(model)
+// },[])  
 
 
   const handleStart = async (id:number,clickb:boolean,start:boolean) => {
@@ -353,148 +399,445 @@ useEffect(() => {
                              }
   }
 
-  useEffect(() => {
+//   useEffect(() => {
 
-    try {
-      fetch('/api/gtdate', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ idd: String(UserDt?.idd) }),
-     })
-     .then((res) => res.json())
-     .then((data) => {
-       if (data.success) {
-        setRefresh(true)
+//     try {
+//       fetch('/api/gtdate', {
+//        method: 'POST',
+//        headers: {
+//          'Content-Type': 'application/json',
+//        },
+//        body: JSON.stringify({ idd: String(UserDt?.idd) }),
+//      })
+//      .then((res) => res.json())
+//      .then((data) => {
+//        if (data.success) {
+//         setRefresh(true)
 
-
+//        if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
+//           setMg(a11)
+//         }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
+//           setMg(a12)
+//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
+//           setMg(a13)
+//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
+//           setMg(a14)
+//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
+//           setMg(a15)
+//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
+//           setMg(a16)
+//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
+//           setMg(a17)
+//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
+//           setMg(a21)
+//         }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
+//           setMg(a22)
+//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
+//           setMg(a23)
+//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
+//           setMg(a24)
+//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
+//           setMg(a25)
+//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
+//           setMg(a26)
+//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
+//           setMg(a27)
+//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
+//           setMg(a31)
+//         }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
+//           setMg(a32)
+//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
+//           setMg(a33)
+//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
+//           setMg(a34)
+//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
+//           setMg(a35)
+//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
+//           setMg(a36)
+//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
+//           setMg(a37)
+//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
+//           setMg(a41)
+//         }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
+//           setMg(a42)
+//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
+//           setMg(a43)
+//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
+//           setMg(a44)
+//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
+//           setMg(a45)
+//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
+//           setMg(a46)
+//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
+//           setMg(a47)
+//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
+//           setMg(a51)
+//         }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
+//           setMg(a52)
+//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
+//           setMg(a53)
+//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
+//           setMg(a54)
+//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
+//           setMg(a55)
+//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
+//           setMg(a56)
+//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
+//           setMg(a57)
+//         }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
+//           setMg(a61)
+//         }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
+//           setMg(a62)
+//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
+//           setMg(a63)
+//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
+//           setMg(a64)
+//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
+//           setMg(a65)
+//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
+//           setMg(a66)
+//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
+//           setMg(a67)
+//         }
         
-        const target = new Date(data.dtMining);
-        const now = new Date(data.dt);
-          const difference = target.getTime() - now.getTime();
-          if(data.mining == 1 && difference < 0 && data.claim == 0){
-            setMiningPoint(7200*Number(UserDt?.speedlvl))
-            setIsActive(false);
-            setReady(false);
-            setClaim(true);
-            setSpin(false);
-          }else if(data.mining == 0){
-            setReady(true);
-            setSpin(false);
-          }else if(data.mining == 1 && !isClaim && difference > 0){
-            setIsActive(true)
-            setSpin(false)
-            setDateA(data.dt)
-            var q = 0
-            var totaldiff = 7200000
-      timerRef.current = setInterval(() =>{
-        q += 1000
-        const difference = target.getTime() - now.getTime() - q;
-        const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-        var hstr = Math.trunc(h).toString();
-        setHours(String(hstr).padStart(2, "0")); 
-        const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-        if(Math.sign(m) === -1){
-         setMinutes("00")
-        }else{
-          var mstr = m.toString();
-          setMinutes(String(mstr).padStart(2, "0"));
-        }
-        const s = Math.floor((difference % (1000*60)) / 1000)
-        if(Math.sign(s) === -1){
-          setSeconds("00")
-        }else{
-          var sstr = s.toString();
-          setSeconds(String(sstr).padStart(2, "0"));
-        }
-        if(difference <0){
-          setClaim(true);
-          setIsActive(false);
-        }else{
-           var t = totaldiff - difference 
-          setMiningPoint(Math.trunc(t/1000)*Number(UserDt?.speedlvl))
-        }
-      },1000);
-    }
+//         const target = new Date(data.dtMining);
+//         const now = new Date(data.dt);
+//           const difference = target.getTime() - now.getTime();
+//           if(data.mining == 1 && difference < 0 && data.claim == 0){
+//             setMiningPoint(7200*Number(UserDt?.speedlvl))
+//             setIsActive(false);
+//             setReady(false);
+//             setClaim(true);
+//             setSpin(false);
+//           }else if(data.mining == 0){
+//             setReady(true);
+//             setSpin(false);
+//           }else if(data.mining == 1 && !isClaim && difference > 0){
+//             setIsActive(true)
+//             setSpin(false)
+//             setDateA(data.dt)
+//             var q = 0
+//             var totaldiff = 7200000
+//       timerRef.current = setInterval(() =>{
+//         q += 1000
+//         const difference = target.getTime() - now.getTime() - q;
+//         const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+//         var hstr = Math.trunc(h).toString();
+//         setHours(String(hstr).padStart(2, "0")); 
+//         const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+//         if(Math.sign(m) === -1){
+//          setMinutes("00")
+//         }else{
+//           var mstr = m.toString();
+//           setMinutes(String(mstr).padStart(2, "0"));
+//         }
+//         const s = Math.floor((difference % (1000*60)) / 1000)
+//         if(Math.sign(s) === -1){
+//           setSeconds("00")
+//         }else{
+//           var sstr = s.toString();
+//           setSeconds(String(sstr).padStart(2, "0"));
+//         }
+//         if(difference <0){
+//           setClaim(true);
+//           setIsActive(false);
+//         }else{
+//            var t = totaldiff - difference 
+//           setMiningPoint(Math.trunc(t/1000)*Number(UserDt?.speedlvl))
+//         }
+//       },1000);
+//     }
       
-       } else {
+//        } else {
        
-       }
-     })
-   } catch (err) {
+//        }
+//      })
+//    } catch (err) {
     
-   }
+//    }
 
-   try {
-    fetch('/api/get-lvl', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({ idd: String(UserDt?.idd) }),
-   })
-   .then((res) => res.json())
-   .then((data) => {
-     if (data.success) {
-        const gtlvl = String(data.lvl)
-        const nmbrlvl = Number(gtlvl)
-        setLvl(nmbrlvl)
-      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000020 : nmbrlvl == 3 ? 0.00000025 : nmbrlvl ==4 ? 0.00000030 : nmbrlvl ==5? 0.00000035: 0
-        setPrice(gtPrice)
-        const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
-        setEndPoint(gtEndPoint)
+//    try {
+//     fetch('/api/get-lvl', {
+//      method: 'POST',
+//      headers: {
+//        'Content-Type': 'application/json',
+//      },
+//      body: JSON.stringify({ idd: String(UserDt?.idd) }),
+//    })
+//    .then((res) => res.json())
+//    .then((data) => {
+//      if (data.success) {
+//         const gtlvl = String(data.lvl)
+//         const nmbrlvl = Number(gtlvl)
+//         setLvl(nmbrlvl)
+//       const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000020 : nmbrlvl == 3 ? 0.00000025 : nmbrlvl ==4 ? 0.00000030 : nmbrlvl ==5? 0.00000035: 0
+//         setPrice(gtPrice)
+//         const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+//         setEndPoint(gtEndPoint)
         
-        if(nmbrlvl >= 6){
-          setBlnLvl(false)
-        }else if(nmbrlvl <= 5){
-          setBlnLvl(true)
-        }
-     } else {
+//         if(nmbrlvl >= 6){
+//           setBlnLvl(false)
+//         }else if(nmbrlvl <= 5){
+//           setBlnLvl(true)
+//         }
+//      } else {
       
-     }
-   })
- } catch (err) {
- }
+//      }
+//    })
+//  } catch (err) {
+//  }
    
-   if(refresh == false) {
-    timerRefB.current = setInterval(() =>{
-    setRefreshB(!refreshB)
-    },3000);
-   }
+//    if(refresh == false) {
+//     timerRefB.current = setInterval(() =>{
+//     setRefreshB(!refreshB)
+//     },3000);
+//    }
   
-    return () => {  if (timerRef.current) {
-      clearInterval(timerRef.current);
-    };
-    if (timerRefB.current) {
-      clearInterval(timerRefB.current);
-    }
-  };
-  },[isActive,refreshB])
+//     return () => {  if (timerRef.current) {
+//       clearInterval(timerRef.current);
+//     };
+//     if (timerRefB.current) {
+//       clearInterval(timerRefB.current);
+//     }
+//   };
+//   },[isActive,refreshB])
   
   return (
+
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
       
       
-{/*       <section className="flex bg-[#ffae19]/[0.9] justify-center items-center w-full">
-          <div className="items-center w-full justify ">
-            <Marquee gradientWidth={120} gradient={true} className=" items-center py-2 overflow-hidden ">
           
-            {chsLst.map((str,index) => {
-              return (
-                <div key={index} className=" flex pr-10 flex-col justify-center items-center  mx-5 ">
-                <p className="text-white font-Large">{str.str}</p>
-                </div>
-              )
-            })}
-          
-            </Marquee>
-          </div>
-        </section> */}
       
-       <div>
-     
-    </div>
+      {
+        <Dialog open={open} onClose={setOpen} className="relative z-10 ">
+        <DialogBackdrop
+          transition
+          className="fixed  inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+        />
+  
+        <div className="fixed inset-0 z-10 w-screen  overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <DialogPanel
+              transition
+              className="relative border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+            >
+              <div className="bg-white mt-2">
+                <div className="sm:flex sm:items-start">
+                 
+                  <div className=" w-full text-center  sm:ml-4 sm:text-left">
+                    
+                    <center>
+                    <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
+                    Need Extra WalkCoin ?
+                    </DialogTitle>
+                    <div className="">
+                      <p className="text-sm text-gray-500">
+                      You can get additional WalkCoin tokens and raffle tickets every 2 hours 
+                      </p>
+                    </div>
+                 </center>
+                    
+                  </div>
+                </div>
+              </div>
+              <div className="h-2" />
+             
+              <div  className="flex justify-center space-x-2  items-center  rounded-full ">
+              <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+              <Image 
+        src={FootPrint as StaticImageData} 
+      className="w-6 h-6 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              <p className="text-white   font-bold glow text-sm ">+{Number(10000).toLocaleString()}</p>
+              <Image 
+        src={Extra as StaticImageData} 
+      className="w-7 h-7 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+              <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
+              <Image 
+        src={Star as StaticImageData} 
+      className="w-5 h-5 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              </button>
+
+              <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+              <Image 
+        src={FootPrint as StaticImageData} 
+      className="w-6 h-6 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              <p className="text-white   font-bold glow text-sm ">+{Number(20000).toLocaleString()}</p>
+              <Image 
+        src={Extra as StaticImageData} 
+      className="w-7 h-7 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+              <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
+              <Image 
+        src={Star as StaticImageData} 
+      className="w-5 h-5 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              </button>
+
+              <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+              <Image 
+        src={FootPrint as StaticImageData} 
+      className="w-6 h-6 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              <p className="text-white   font-bold glow text-sm ">+{Number(30000).toLocaleString()}</p>
+              <Image 
+        src={Extra as StaticImageData} 
+      className="w-7 h-7 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+              <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
+              <Image 
+        src={Star as StaticImageData} 
+      className="w-5 h-5 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              </button>
+             
+              </div>
+
+              <div className="flex justify-center space-x-2  items-center  rounded-full ">
+              <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+              <Image 
+        src={TicketCircle as StaticImageData} 
+      className="w-6 h-6 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              <p className="text-white   font-bold glow text-sm ">+7</p>
+              <Image 
+        src={Extra as StaticImageData} 
+      className="w-7 h-7 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+              <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
+              <Image 
+        src={Star as StaticImageData} 
+      className="w-5 h-5 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              </button>
+
+              <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+              <Image 
+        src={TicketCircle as StaticImageData} 
+      className="w-6 h-6 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              <p className="text-white   font-bold glow text-sm ">+15</p>
+              <Image 
+        src={Extra as StaticImageData} 
+      className="w-7 h-7 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+              <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
+              <Image 
+        src={Star as StaticImageData} 
+      className="w-5 h-5 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              </button>
+
+              <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+              <Image 
+        src={FootPrint as StaticImageData} 
+      className="w-6 h-6 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              <p className="text-white   font-bold glow text-sm ">+25</p>
+              <Image 
+        src={Extra as StaticImageData} 
+      className="w-7 h-7 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+              <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
+              <Image 
+        src={Star as StaticImageData} 
+      className="w-5 h-5 aspect-square object-cover"
+      alt="Shiba Inu"
+    />
+              </div>
+              </button>
+             
+              </div>
+
+              <div className="flex flex-col mt-2 ">
+
+<button onClick={() => {}} className={`bg-[#ffae19]/[0.9]  flex px-4 rounded-full border-white border-4  border-double  py-[10px] items-center justify-center text-center`}>
+ 
+ <p className="text-base text-white font-bold">Unlock |  Stars</p>
+<div className="w-1" />
+ <Image
+src={Star as StaticImageData} 
+className={`w-5 h-5`}
+alt="Shiba Inu"
+/>
+  </button>
+
+  <button onClick={() => {}} className="flex mt-1 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
+                           <Image 
+                           src={copy as StaticImageData} 
+                         className="w-6 h-6 aspect-square object-cover"
+                         alt="Shiba Inu"
+                       />
+                               <p className="text-white font-normal text-[15px]  mr-2 ml-2">Copy command</p>
+                                 </button>
+</div>
+              
+              {/* <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                >
+                  Deactivate
+                </button>
+                <button
+                  type="button"
+                  data-autofocus
+                  onClick={() => setOpen(false)}
+                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                >
+                  Cancel
+                </button>
+              </div> */}
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
+      }
        <div className="flex w-full items-center justify-center items-center">
        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
         <Image 
