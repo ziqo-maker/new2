@@ -21,7 +21,7 @@ interface PurchaseSuccessModalProps {
 export default function PurchaseSuccessModal() {
 
   return (
-    <div className="fixed inset-0 bg-[#808080] bg-opacity-50 flex items-center justify-center z-20 p-4">
+    <div className="fixed inset-0 bg-[#808080] bg-opacity-50 flex items-center justify-center z-10 p-4">
       <div className="bg-white  border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-y-auto rounded-3xl bg-white shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
                                
       <div className="h-2" />
@@ -97,7 +97,8 @@ export default function PurchaseSuccessModal() {
                                                </div>
                                                </button>
                                                </div>
-                                 
+                                               <div className="h-3" />
+                                               <div className="flex space-x-2">
                                                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
                                                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                <Image 
@@ -121,15 +122,8 @@ export default function PurchaseSuccessModal() {
                                      />
                                                </div>
                                                </button>
-                                              
-                                               </div>
 
-                                                <div className="h-3" />
-                                                     
-                                                                   <div className="flex flex-col justify-center space-x-2  items-center  rounded-full ">
-                                                                   
-                                                                   <div className="flex">
-                                                                   <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
+                                               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
                                                                    <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                    <Image 
                                                              src={TicketCircle as StaticImageData} 
@@ -152,6 +146,16 @@ export default function PurchaseSuccessModal() {
                                                          />
                                                                    </div>
                                                                    </button>
+                                               </div>
+                                              
+                                               </div>
+
+                                                <div className="h-3" />
+                                                     
+                                                                   <div className="flex  justify-center space-x-2  items-center  rounded-full ">
+                                                                   
+                                                                   <div className="flex">
+                                                                  
                                                      
                                                                    <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
                                                                    <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
@@ -206,7 +210,7 @@ export default function PurchaseSuccessModal() {
                                                                   
                                                                    </div>
                                                                    <div className="h-3" />
-                                                                   <div className="flex flex-col justify-center space-x-2  items-center ">
+                                                                   <div className="flex  justify-center space-x-2  items-center ">
                                                      
                                                      <button onClick={() => {}} className={`bg-[#ffae19]/[0.9]  flex px-4 rounded-xl border-white border-4  border-double  py-[10px] items-center justify-center text-center`}>
                                                       
@@ -219,18 +223,21 @@ export default function PurchaseSuccessModal() {
                                                      />
                                                        </button>
                                                      
-                                                       <button onClick={() => {}} className="flex mt-1 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
+                                                       <button onClick={() => {}} className="flex mt-1 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-3 py-[8px] ">
                                                                                 <Image 
                                                                                 src={copy as StaticImageData} 
                                                                               className="w-6 h-6 aspect-square object-cover"
                                                                               alt="Shiba Inu"
                                                                             />
-                                                                                    <p className="text-white font-normal text-[15px]  mr-2 ml-2">Copy command</p>
                                                                                       </button>
                                                      </div>
 
-
-
+                        <div className="flex flex-col text-center mt-2 space-x-1 items-center justify-start">
+                                 
+                                  <p className="text-black/[0.7] font-normal w-[calc(100%-2rem)] text-sm">You can unlock characters with Telegram stars in the WalkCoin bot by running the command /characters</p>
+                        
+                                  </div>
+                                  <div className="h-3" />
       </div>
     </div>
   );
