@@ -1,6 +1,5 @@
 'use client' 
 import Image, {StaticImageData} from "next/image"
-import FootPrint from '@/icons/footprint.svg';
 import FootPrintA from '@/icons/footprinta.svg';  
 import { useEffect,useState,useRef,useCallback } from "react"
 import React from 'react';
@@ -27,6 +26,7 @@ import Extra from '@/imgs/extra.png';
 import TicketCircle from '@/icons/whiteticket.svg';
 import Star from '@/icons/star.svg';
 import copy from '@/icons/copy.svg'
+import FootPrint from '@/icons/footprint.svg';
 import PurchaseSuccessModal from './PurchaseSuccessModal';
 
 import gif from '@/imgs/gif.gif';
@@ -605,247 +605,15 @@ const HomeTab = () => {
   
   return (
 
-      // <Dialog  open={open} onClose={setOpen} className="relative z-10 w-screen h-screen justify-center items-center  ">
-      //         <DialogBackdrop
       
-      //           transition
-      //           className="fixed w-screen h-screen justify-center items-center inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-      //         />
-        
-      //         <div className="fixed inset-0 z-10 w-screen h-screen justify-center items-center overflow-y-auto">
-      //           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-      //             <DialogPanel
-      //               transition
-      //               className="relative border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-hidden rounded-3xl bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-      //             >
-      //               <div className="bg-white mt-2">
-      //                 <div className="sm:flex sm:items-start">
-                       
-      //                   <div className=" w-full text-center  sm:ml-4 sm:text-left">
-                          
-      //                     <center>
-      //                     <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
-      //                     Need Extra WalkCoin ?
-      //                     </DialogTitle>
-      //                     <div className="">
-      //                       <p className="text-sm text-gray-500">
-      //                       You can get additional WalkCoin tokens and raffle tickets every 2 hours 
-      //                       </p>
-      //                     </div>
-      //                  </center>
-                          
-      //                   </div>
-      //                 </div>
-      //               </div>
-      //               <div className="h-2" />
-                   
-      //               <div  className="flex justify-center space-x-2  items-center  rounded-full ">
-      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-      //               <Image 
-      //         src={FootPrint as StaticImageData} 
-      //       className="w-6 h-6 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               <p className="text-white   font-bold glow text-sm ">+{Number(10000).toLocaleString()}</p>
-      //               <Image 
-      //         src={Extra as StaticImageData} 
-      //       className="w-7 h-7 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-      //               <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
-      //               <Image 
-      //         src={Star as StaticImageData} 
-      //       className="w-5 h-5 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               </button>
-      
-      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-      //               <Image 
-      //         src={FootPrint as StaticImageData} 
-      //       className="w-6 h-6 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               <p className="text-white   font-bold glow text-sm ">+{Number(20000).toLocaleString()}</p>
-      //               <Image 
-      //         src={Extra as StaticImageData} 
-      //       className="w-7 h-7 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-      //               <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
-      //               <Image 
-      //         src={Star as StaticImageData} 
-      //       className="w-5 h-5 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               </button>
-      
-      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-      //               <Image 
-      //         src={FootPrint as StaticImageData} 
-      //       className="w-6 h-6 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               <p className="text-white   font-bold glow text-sm ">+{Number(30000).toLocaleString()}</p>
-      //               <Image 
-      //         src={Extra as StaticImageData} 
-      //       className="w-7 h-7 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-      //               <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
-      //               <Image 
-      //         src={Star as StaticImageData} 
-      //       className="w-5 h-5 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               </button>
-                   
-      //               </div>
-      
-      //               <div className="h-3" />
-      
-      //               <div className="flex justify-center space-x-2  items-center  rounded-full ">
-      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-      //               <Image 
-      //         src={TicketCircle as StaticImageData} 
-      //       className="w-6 h-6 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               <p className="text-white   font-bold glow text-sm ">+7</p>
-      //               <Image 
-      //         src={Extra as StaticImageData} 
-      //       className="w-7 h-7 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-      //               <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
-      //               <Image 
-      //         src={Star as StaticImageData} 
-      //       className="w-5 h-5 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               </button>
-      
-      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-      //               <Image 
-      //         src={TicketCircle as StaticImageData} 
-      //       className="w-6 h-6 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               <p className="text-white   font-bold glow text-sm ">+15</p>
-      //               <Image 
-      //         src={Extra as StaticImageData} 
-      //       className="w-7 h-7 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-      //               <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
-      //               <Image 
-      //         src={Star as StaticImageData} 
-      //       className="w-5 h-5 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               </button>
-      
-      //               <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
-      //               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
-      //               <Image 
-      //         src={FootPrint as StaticImageData} 
-      //       className="w-6 h-6 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               <p className="text-white   font-bold glow text-sm ">+25</p>
-      //               <Image 
-      //         src={Extra as StaticImageData} 
-      //       className="w-7 h-7 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-      //               <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
-      //               <Image 
-      //         src={Star as StaticImageData} 
-      //       className="w-5 h-5 aspect-square object-cover"
-      //       alt="Shiba Inu"
-      //     />
-      //               </div>
-      //               </button>
-      
-                    
-                   
-      //               </div>
-      //               <div className="h-3" />
-      //               <div className="flex flex-col justify-center space-x-2  items-center ">
-      
-      // <button onClick={() => {}} className={`bg-[#ffae19]/[0.9]  flex px-4 rounded-xl border-white border-4  border-double  py-[10px] items-center justify-center text-center`}>
-       
-      //  <p className="text-base text-white font-bold">Unlock |  Stars</p>
-      // <div className="w-1" />
-      //  <Image
-      // src={Star as StaticImageData} 
-      // className={`w-5 h-5`}
-      // alt="Shiba Inu"
-      // />
-      //   </button>
-      
-      //   <button onClick={() => {}} className="flex mt-1 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
-      //                            <Image 
-      //                            src={copy as StaticImageData} 
-      //                          className="w-6 h-6 aspect-square object-cover"
-      //                          alt="Shiba Inu"
-      //                        />
-      //                                <p className="text-white font-normal text-[15px]  mr-2 ml-2">Copy command</p>
-      //                                  </button>
-      // </div>
-               
-                    
-      //               {/* <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-      //                 <button
-      //                   type="button"
-      //                   onClick={() => setOpen(false)}
-      //                   className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-      //                 >
-      //                   Deactivate
-      //                 </button>
-      //                 <button
-      //                   type="button"
-      //                   data-autofocus
-      //                   onClick={() => setOpen(false)}
-      //                   className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
-      //                 >
-      //                   Cancel
-      //                 </button>
-      //               </div> */}
-      //             </DialogPanel>
-      //           </div>
-      //         </div>
-      //       </Dialog>
               
             
     
 
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
       
-      <PurchaseSuccessModal
-         />
+      {/* <PurchaseSuccessModal
+         /> */}
       
 
        <div className="flex w-full items-center justify-center items-center">
