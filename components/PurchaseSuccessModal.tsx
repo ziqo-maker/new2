@@ -21,9 +21,11 @@ interface PurchaseSuccessModalProps {
 export default function PurchaseSuccessModal() {
 
   return (
-    <div className="fixed inset-0 bg-[#808080] bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-[#808080] bg-opacity-50 flex items-center justify-center z-20 p-4">
       <div className="bg-white  border-4 border-double border-[#ffae19]/[0.9] glowbox transform overflow-y-auto rounded-3xl bg-white shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
-       
+                               
+      <div className="h-2" />
+
                              <div className="sm:flex sm:items-start">
                               
                                <div className=" w-full text-center  sm:ml-4 sm:text-left">
@@ -44,7 +46,9 @@ export default function PurchaseSuccessModal() {
                            
                            <div className="h-2" />
 
-                            <div  className="flex justify-center space-x-2  items-center  rounded-full ">
+                            <div  className="flex flex-col justify-center space-x-2  items-center  rounded-full ">
+                                             
+                                               <div className="flex">
                                                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
                                                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                <Image 
@@ -92,6 +96,7 @@ export default function PurchaseSuccessModal() {
                                      />
                                                </div>
                                                </button>
+                                               </div>
                                  
                                                <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
                                                <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
@@ -121,7 +126,9 @@ export default function PurchaseSuccessModal() {
 
                                                 <div className="h-3" />
                                                      
-                                                                   <div className="flex justify-center space-x-2  items-center  rounded-full ">
+                                                                   <div className="flex flex-col justify-center space-x-2  items-center  rounded-full ">
+                                                                   
+                                                                   <div className="flex">
                                                                    <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
                                                                    <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                    <Image 
@@ -169,6 +176,7 @@ export default function PurchaseSuccessModal() {
                                                          />
                                                                    </div>
                                                                    </button>
+                                                                   </div>
                                                      
                                                                    <button onClick={() => {}} className="flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double  ">
                                                                    <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
