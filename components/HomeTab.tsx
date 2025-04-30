@@ -612,8 +612,8 @@ const HomeTab = () => {
 
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
       
-      {/* <PurchaseSuccessModal
-         /> */}
+      <PurchaseSuccessModal
+         />
       
 
        <div className="flex w-full items-center justify-center items-center">
