@@ -846,7 +846,27 @@ const HomeTab = () => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          
+          if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+            const tg = window.Telegram.WebApp
+            tg.ready()
+            const initDataUnsafe = tg.initDataUnsafe || {}
+           
+          let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
+        if(index < 0){
+        
+        let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+        
+        if(indexB < 0){
+        setActiveVip(false)
+        }else{
+          setActiveVip(true)
+        startvip()
+        }
+        }else{
+          setActiveVip(true)
+         startvip()
+          }
+        }
           const items = String(data.items)
       const mapstr = items.split(',').map(Number);
       var plusextra = 0
@@ -890,26 +910,6 @@ const HomeTab = () => {
           setBlnLvl(true)
         }
 
-        if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-          const tg = window.Telegram.WebApp
-          tg.ready()
-          const initDataUnsafe = tg.initDataUnsafe || {}
-         
-        let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
-      if(index < 0){
-      
-      let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
-      
-      if(indexB < 0){
-      setActiveVip(false)
-      }else{
-      startvip()
-      }
-      }else{
-       startvip()
-        }
-      }
-      
         }
        })
      } catch (err) {
