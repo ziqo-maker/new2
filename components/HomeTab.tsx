@@ -109,6 +109,8 @@ type claimtype = {
 
 const HomeTab = () => {
  
+  const [end,setEnd] = useState<boolean> (false);
+          const [start,setStart] = useState<boolean> (false);
   const [activevip,setActiveVip] = useState(false);
   const [vipTicket,setvipTicket] = useState<number> (0);
          const [hoursvip,setHoursvip] = useState("00");
@@ -135,6 +137,8 @@ const HomeTab = () => {
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRefB = useRef<NodeJS.Timeout | null>(null);
+  const timerRefC = useRef<NodeJS.Timeout | null>(null);
+
   const [isMg, setMg] = useState<StaticImageData>();
   const [lvl,setLvl] = useState(5);
   const [price,setPrice] = useState(0);
@@ -623,36 +627,202 @@ const HomeTab = () => {
    } catch (err) {
     
    }
-   if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-    const tg = window.Telegram.WebApp
-    tg.ready()
-    const initDataUnsafe = tg.initDataUnsafe || {}
-   
-  let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
-if(index < 0){
 
-let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+   const startvip = async () => {
 
-if(indexB < 0){
-setActiveVip(false)
-}else{
-setActiveVip(true)
-}
-}else{
-  setActiveVip(true)
-  new Toast({
-    position: "top-center",
-    toastMsg: `active: ${activevip}`,
-    autoCloseTime: 4500,
-    canClose: true,
-    showProgress: true,
-    pauseOnHover: true,
-    pauseOnFocusLoss: true,
-    type: "default",
-    theme: "light"
-  });
+
+    try {
+      fetch('/api/get-vip', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ idd: String(UserDt?.idd) }),
+     })
+     .then((res) => res.json())
+     .then((data) => {
+       if (data.success) {
+      
+      
+        const target = new Date(data.dtMining);
+        const now = new Date(data.dt);
+        const difference = target.getTime() - now.getTime();
+         setvipTicket(Number(data.ticket))
+          setStart(true)
+         if (timerRefC.current) {
+    clearInterval(timerRefC.current);
   }
-}
+        if(difference < 0){
+            
+          try {
+            fetch('/api/update-vip', {
+             method: 'POST',
+             headers: {
+               'Content-Type':'application/json',
+             },
+             body: JSON.stringify({idd:String(UserDt?.idd)}),
+           })
+           .then((res) => res.json())
+           .then((data) => {
+             if (data.success) {
+              setMinutesvip("00")
+              setSecondsvip("00")
+              setHoursvip("00")
+              const target = new Date(data.dtMining);
+        const now = new Date(data.dt);
+         setvipTicket(Number(data.ticket))
+         setStart(true)
+         var q = 0    
+         timerRefC.current = setInterval(() =>{
+           q += 1000
+           const difference = target.getTime() - now.getTime() - q;
+
+           if(difference > 1000 ){
+
+              
+           const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+           var hstr = Math.trunc(h).toString();
+           setHoursvip(String(hstr).padStart(2, "0")); 
+           const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+           if(Math.sign(m) === -1){
+            setMinutesvip("00")
+           }else{
+             var mstr = m.toString();
+             setMinutesvip(String(mstr).padStart(2, "0"));
+           }
+           const s = Math.floor((difference % (1000*60)) / 1000)
+           if(Math.sign(s) === -1){
+             setSecondsvip("00")
+           }else{
+             var sstr = s.toString();
+             setSecondsvip(String(sstr).padStart(2, "0"));
+           }
+            
+           }else{
+             setMinutesvip("00")
+             setSecondsvip("00")
+             setHoursvip("00")
+           }
+  
+
+         },1000);
+
+             } else {
+             }
+           })
+         } catch (err) {
+         }
+
+        }else {
+         
+          var q = 0    
+          timerRefC.current = setInterval(() =>{
+            q += 1000
+            const difference = target.getTime() - now.getTime() - q;
+
+            if(difference > 1000 ){
+
+               
+            const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+            var hstr = Math.trunc(h).toString();
+            setHoursvip(String(hstr).padStart(2, "0")); 
+            const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+            if(Math.sign(m) === -1){
+             setMinutesvip("00")
+            }else{
+              var mstr = m.toString();
+              setMinutesvip(String(mstr).padStart(2, "0"));
+            }
+            const s = Math.floor((difference % (1000*60)) / 1000)
+            if(Math.sign(s) === -1){
+              setSecondsvip("00")
+            }else{
+              var sstr = s.toString();
+              setSecondsvip(String(sstr).padStart(2, "0"));
+            }
+             
+            }else if(end == false){
+                   setStart(false)
+               if (timerRefC.current) {
+    clearInterval(timerRefC.current);
+  }       
+              try {
+                fetch('/api/update-vip', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type':'application/json',
+                 },
+                 body: JSON.stringify({idd:String(UserDt?.idd)}),
+               })
+               .then((res) => res.json())
+               .then((data) => {
+                 if (data.success) {
+                        
+                    setEnd(true)
+                        setStart(true)
+                  setMinutesvip("00")
+                  setSecondsvip("00")
+                  setHoursvip("00")
+                  const target = new Date(data.dtMining);
+            const now = new Date(data.dt);
+             setvipTicket(Number(data.ticket))
+
+             var q = 0    
+             timerRefC.current = setInterval(() =>{
+               q += 1000
+               const difference = target.getTime() - now.getTime() - q;
+
+               if(difference > 1000 ){
+
+                  
+               const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+               var hstr = Math.trunc(h).toString();
+               setHoursvip(String(hstr).padStart(2, "0")); 
+               const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+               if(Math.sign(m) === -1){
+                setMinutesvip("00")
+               }else{
+                 var mstr = m.toString();
+                 setMinutesvip(String(mstr).padStart(2, "0"));
+               }
+               const s = Math.floor((difference % (1000*60)) / 1000)
+               if(Math.sign(s) === -1){
+                 setSecondsvip("00")
+               }else{
+                 var sstr = s.toString();
+                 setSecondsvip(String(sstr).padStart(2, "0"));
+               }
+                
+               }else{
+                 setMinutesvip("00")
+                 setSecondsvip("00")
+                 setHoursvip("00")
+               }
+      
+
+             },1000);
+
+                 } else {
+                 }
+               })
+             } catch (err) {
+             }
+
+            }
+   
+
+          },1000);
+
+        }          
+       } else {
+       
+       }
+     })
+   } catch (err) {
+    
+   } 
+
+   }
 
    try {
     fetch('/api/get-lvl', {
@@ -719,6 +889,27 @@ setActiveVip(true)
         }else if(nmbrlvl <= 5){
           setBlnLvl(true)
         }
+
+        if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+          const tg = window.Telegram.WebApp
+          tg.ready()
+          const initDataUnsafe = tg.initDataUnsafe || {}
+         
+        let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
+      if(index < 0){
+      
+      let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+      
+      if(indexB < 0){
+      setActiveVip(false)
+      }else{
+      startvip()
+      }
+      }else{
+       startvip()
+        }
+      }
+      
         }
        })
      } catch (err) {
@@ -1112,7 +1303,7 @@ setActiveVip(true)
                                                                       className="w-7 h-7 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(50000).toLocaleString()}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(25000).toLocaleString()}</p>
                                                                                   </div>
                                                                                  
                                                                                   <div className="flex items-center">
@@ -1150,7 +1341,7 @@ setActiveVip(true)
                                                                       className="w-7 h-7 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(100000).toLocaleString()}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(50000).toLocaleString()}</p>
                                                                                   </div>
                                                                                  
                                                                                   <div className="flex items-center">
@@ -1163,7 +1354,7 @@ setActiveVip(true)
                                                                     />
                                                                                                                                                       <div className="w-1"/>
 
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{10}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{7}</p>
                                                                                   </div>
                                                                                 </div>
                                                                               <Image 
@@ -1191,7 +1382,7 @@ setActiveVip(true)
                                                                       className="w-7 h-7 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(150000).toLocaleString()}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(100000).toLocaleString()}</p>
                                                                                   </div>
                                                                                  
                                                                                   <div className="flex items-center">
@@ -1204,7 +1395,7 @@ setActiveVip(true)
                                                                     />
                                                                                                                                                       <div className="w-1"/>
 
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{15}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{10}</p>
                                                                                   </div>
                                                                                 </div>
                                                                               <Image 
