@@ -109,6 +109,9 @@ type claimtype = {
 
 const HomeTab = () => {
  
+  const [vipticketplus,setvipticketplus] = useState(0);
+  const [vipwalkcoinplus,setvipwalkcoinplus] = useState(0);
+
   const [end,setEnd] = useState<boolean> (false);
           const [start,setStart] = useState<boolean> (false);
   const [activevip,setActiveVip] = useState(false);
@@ -628,201 +631,6 @@ const HomeTab = () => {
     
    }
 
-   const startvip = async () => {
-
-
-    try {
-      fetch('/api/get-vip', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ idd: String(UserDt?.idd) }),
-     })
-     .then((res) => res.json())
-     .then((data) => {
-       if (data.success) {
-      
-      
-        const target = new Date(data.dtMining);
-        const now = new Date(data.dt);
-        const difference = target.getTime() - now.getTime();
-         setvipTicket(Number(data.ticket))
-          setStart(true)
-         if (timerRefC.current) {
-    clearInterval(timerRefC.current);
-  }
-        if(difference < 0){
-            
-          try {
-            fetch('/api/update-vip', {
-             method: 'POST',
-             headers: {
-               'Content-Type':'application/json',
-             },
-             body: JSON.stringify({idd:String(UserDt?.idd)}),
-           })
-           .then((res) => res.json())
-           .then((data) => {
-             if (data.success) {
-              setMinutesvip("00")
-              setSecondsvip("00")
-              setHoursvip("00")
-              const target = new Date(data.dtMining);
-        const now = new Date(data.dt);
-         setvipTicket(Number(data.ticket))
-         setStart(true)
-         var q = 0    
-         timerRefC.current = setInterval(() =>{
-           q += 1000
-           const difference = target.getTime() - now.getTime() - q;
-
-           if(difference > 1000 ){
-
-              
-           const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-           var hstr = Math.trunc(h).toString();
-           setHoursvip(String(hstr).padStart(2, "0")); 
-           const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-           if(Math.sign(m) === -1){
-            setMinutesvip("00")
-           }else{
-             var mstr = m.toString();
-             setMinutesvip(String(mstr).padStart(2, "0"));
-           }
-           const s = Math.floor((difference % (1000*60)) / 1000)
-           if(Math.sign(s) === -1){
-             setSecondsvip("00")
-           }else{
-             var sstr = s.toString();
-             setSecondsvip(String(sstr).padStart(2, "0"));
-           }
-            
-           }else{
-             setMinutesvip("00")
-             setSecondsvip("00")
-             setHoursvip("00")
-           }
-  
-
-         },1000);
-
-             } else {
-             }
-           })
-         } catch (err) {
-         }
-
-        }else {
-         
-          var q = 0    
-          timerRefC.current = setInterval(() =>{
-            q += 1000
-            const difference = target.getTime() - now.getTime() - q;
-
-            if(difference > 1000 ){
-
-               
-            const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-            var hstr = Math.trunc(h).toString();
-            setHoursvip(String(hstr).padStart(2, "0")); 
-            const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-            if(Math.sign(m) === -1){
-             setMinutesvip("00")
-            }else{
-              var mstr = m.toString();
-              setMinutesvip(String(mstr).padStart(2, "0"));
-            }
-            const s = Math.floor((difference % (1000*60)) / 1000)
-            if(Math.sign(s) === -1){
-              setSecondsvip("00")
-            }else{
-              var sstr = s.toString();
-              setSecondsvip(String(sstr).padStart(2, "0"));
-            }
-             
-            }else if(end == false){
-                   setStart(false)
-               if (timerRefC.current) {
-    clearInterval(timerRefC.current);
-  }       
-              try {
-                fetch('/api/update-vip', {
-                 method: 'POST',
-                 headers: {
-                   'Content-Type':'application/json',
-                 },
-                 body: JSON.stringify({idd:String(UserDt?.idd)}),
-               })
-               .then((res) => res.json())
-               .then((data) => {
-                 if (data.success) {
-                        
-                    setEnd(true)
-                        setStart(true)
-                  setMinutesvip("00")
-                  setSecondsvip("00")
-                  setHoursvip("00")
-                  const target = new Date(data.dtMining);
-            const now = new Date(data.dt);
-             setvipTicket(Number(data.ticket))
-
-             var q = 0    
-             timerRefC.current = setInterval(() =>{
-               q += 1000
-               const difference = target.getTime() - now.getTime() - q;
-
-               if(difference > 1000 ){
-
-                  
-               const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-               var hstr = Math.trunc(h).toString();
-               setHoursvip(String(hstr).padStart(2, "0")); 
-               const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-               if(Math.sign(m) === -1){
-                setMinutesvip("00")
-               }else{
-                 var mstr = m.toString();
-                 setMinutesvip(String(mstr).padStart(2, "0"));
-               }
-               const s = Math.floor((difference % (1000*60)) / 1000)
-               if(Math.sign(s) === -1){
-                 setSecondsvip("00")
-               }else{
-                 var sstr = s.toString();
-                 setSecondsvip(String(sstr).padStart(2, "0"));
-               }
-                
-               }else{
-                 setMinutesvip("00")
-                 setSecondsvip("00")
-                 setHoursvip("00")
-               }
-      
-
-             },1000);
-
-                 } else {
-                 }
-               })
-             } catch (err) {
-             }
-
-            }
-   
-
-          },1000);
-
-        }          
-       } else {
-       
-       }
-     })
-   } catch (err) {
-    
-   } 
-
-   }
 
    try {
     fetch('/api/get-lvl', {
@@ -846,27 +654,7 @@ const HomeTab = () => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-            const tg = window.Telegram.WebApp
-            tg.ready()
-            const initDataUnsafe = tg.initDataUnsafe || {}
-           
-          let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
-        if(index < 0){
-        
-        let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
-        
-        if(indexB < 0){
-        setActiveVip(false)
-        }else{
-          setActiveVip(true)
-        startvip()
-        }
-        }else{
-          setActiveVip(true)
-         startvip()
-          }
-        }
+         
           const items = String(data.items)
       const mapstr = items.split(',').map(Number);
       var plusextra = 0
@@ -909,6 +697,492 @@ const HomeTab = () => {
         }else if(nmbrlvl <= 5){
           setBlnLvl(true)
         }
+
+        if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+          const tg = window.Telegram.WebApp
+          tg.ready()
+          const initDataUnsafe = tg.initDataUnsafe || {}
+         
+        let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
+      if(index < 0){
+      
+      let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+      
+      if(indexB < 0){
+      setActiveVip(false)
+      }else{
+        setActiveVip(true)
+        try {
+          fetch('/api/get-vip', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({ idd: String(UserDt?.idd) }),
+         })
+         .then((res) => res.json())
+         .then((data) => {
+           if (data.success) {
+          
+            var gtticket = Number(data.ticket)
+            if(gtticket <= Number(30)){
+              setvipwalkcoinplus(25000)
+              setvipticketplus(5)
+            }else if(gtticket <= 60){
+             setvipwalkcoinplus(50000)
+              setvipticketplus(7)
+            }else {
+             setvipwalkcoinplus(100000)
+              setvipticketplus(10)
+            }
+    
+            const target = new Date(data.dtMining);
+            const now = new Date(data.dt);
+            const difference = target.getTime() - now.getTime();
+             setvipTicket(Number(data.ticket))
+              setStart(true)
+             if (timerRefC.current) {
+        clearInterval(timerRefC.current);
+      }
+            if(difference < 0){
+                
+              try {
+                fetch('/api/update-vip', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type':'application/json',
+                 },
+                 body: JSON.stringify({idd:String(UserDt?.idd)}),
+               })
+               .then((res) => res.json())
+               .then((data) => {
+                 if (data.success) {
+                  var gtticket = Number(data.ticket)
+                  if(gtticket <= Number(30)){
+                    setvipwalkcoinplus(25000)
+                    setvipticketplus(5)
+                  }else if(gtticket <= 60){
+                   setvipwalkcoinplus(50000)
+                    setvipticketplus(7)
+                  }else {
+                   setvipwalkcoinplus(100000)
+                    setvipticketplus(10)
+                  }
+                  setMinutesvip("00")
+                  setSecondsvip("00")
+                  setHoursvip("00")
+                  const target = new Date(data.dtMining);
+            const now = new Date(data.dt);
+             setvipTicket(Number(data.ticket))
+             var gtticket = Number(data.ticket)
+             if(gtticket < Number(30)){
+               setvipwalkcoinplus(25000)
+               setvipticketplus(5)
+             }else if(gtticket < 60){
+              setvipwalkcoinplus(50000)
+               setvipticketplus(7)
+             }else {
+              setvipwalkcoinplus(100000)
+               setvipticketplus(10)
+             }
+             setStart(true)
+             var q = 0    
+             timerRefC.current = setInterval(() =>{
+               q += 1000
+               const difference = target.getTime() - now.getTime() - q;
+    
+               if(difference > 1000 ){
+    
+                  
+               const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+               var hstr = Math.trunc(h).toString();
+               setHoursvip(String(hstr).padStart(2, "0")); 
+               const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+               if(Math.sign(m) === -1){
+                setMinutesvip("00")
+               }else{
+                 var mstr = m.toString();
+                 setMinutesvip(String(mstr).padStart(2, "0"));
+               }
+               const s = Math.floor((difference % (1000*60)) / 1000)
+               if(Math.sign(s) === -1){
+                 setSecondsvip("00")
+               }else{
+                 var sstr = s.toString();
+                 setSecondsvip(String(sstr).padStart(2, "0"));
+               }
+                
+               }else{
+                 setMinutesvip("00")
+                 setSecondsvip("00")
+                 setHoursvip("00")
+               }
+      
+    
+             },1000);
+    
+                 } else {
+                 }
+               })
+             } catch (err) {
+             }
+    
+            }else {
+             
+              var q = 0    
+              timerRefC.current = setInterval(() =>{
+                q += 1000
+                const difference = target.getTime() - now.getTime() - q;
+    
+                if(difference > 1000 ){
+    
+                   
+                const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+                var hstr = Math.trunc(h).toString();
+                setHoursvip(String(hstr).padStart(2, "0")); 
+                const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+                if(Math.sign(m) === -1){
+                 setMinutesvip("00")
+                }else{
+                  var mstr = m.toString();
+                  setMinutesvip(String(mstr).padStart(2, "0"));
+                }
+                const s = Math.floor((difference % (1000*60)) / 1000)
+                if(Math.sign(s) === -1){
+                  setSecondsvip("00")
+                }else{
+                  var sstr = s.toString();
+                  setSecondsvip(String(sstr).padStart(2, "0"));
+                }
+                 
+                }else if(end == false){
+                       setStart(false)
+                   if (timerRefC.current) {
+        clearInterval(timerRefC.current);
+      }       
+                  try {
+                    fetch('/api/update-vip', {
+                     method: 'POST',
+                     headers: {
+                       'Content-Type':'application/json',
+                     },
+                     body: JSON.stringify({idd:String(UserDt?.idd)}),
+                   })
+                   .then((res) => res.json())
+                   .then((data) => {
+                     if (data.success) {
+                      var gtticket = Number(data.ticket)
+                      if(gtticket <= Number(30)){
+                        setvipwalkcoinplus(25000)
+                        setvipticketplus(5)
+                      }else if(gtticket <= 60){
+                       setvipwalkcoinplus(50000)
+                        setvipticketplus(7)
+                      }else {
+                       setvipwalkcoinplus(100000)
+                        setvipticketplus(10)
+                      }
+                        setEnd(true)
+                            setStart(true)
+                      setMinutesvip("00")
+                      setSecondsvip("00")
+                      setHoursvip("00")
+                      const target = new Date(data.dtMining);
+                const now = new Date(data.dt);
+                 setvipTicket(Number(data.ticket))
+    
+                 var q = 0    
+                 timerRefC.current = setInterval(() =>{
+                   q += 1000
+                   const difference = target.getTime() - now.getTime() - q;
+    
+                   if(difference > 1000 ){
+    
+                      
+                   const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+                   var hstr = Math.trunc(h).toString();
+                   setHoursvip(String(hstr).padStart(2, "0")); 
+                   const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+                   if(Math.sign(m) === -1){
+                    setMinutesvip("00")
+                   }else{
+                     var mstr = m.toString();
+                     setMinutesvip(String(mstr).padStart(2, "0"));
+                   }
+                   const s = Math.floor((difference % (1000*60)) / 1000)
+                   if(Math.sign(s) === -1){
+                     setSecondsvip("00")
+                   }else{
+                     var sstr = s.toString();
+                     setSecondsvip(String(sstr).padStart(2, "0"));
+                   }
+                    
+                   }else{
+                     setMinutesvip("00")
+                     setSecondsvip("00")
+                     setHoursvip("00")
+                   }
+          
+    
+                 },1000);
+    
+                     } else {
+                     }
+                   })
+                 } catch (err) {
+                 }
+    
+                }
+       
+    
+              },1000);
+    
+            }          
+           } else {
+           
+           }
+         })
+       } catch (err) {
+        
+       } 
+      }
+      }else{
+        setActiveVip(true)
+        try {
+          fetch('/api/get-vip', {
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+           body: JSON.stringify({ idd: String(UserDt?.idd) }),
+         })
+         .then((res) => res.json())
+         .then((data) => {
+           if (data.success) {
+          
+            var gtticket = Number(data.ticket)
+            if(gtticket <= Number(30)){
+              setvipwalkcoinplus(25000)
+              setvipticketplus(5)
+            }else if(gtticket <= 60){
+             setvipwalkcoinplus(50000)
+              setvipticketplus(7)
+            }else {
+             setvipwalkcoinplus(100000)
+              setvipticketplus(10)
+            }
+    
+            const target = new Date(data.dtMining);
+            const now = new Date(data.dt);
+            const difference = target.getTime() - now.getTime();
+             setvipTicket(Number(data.ticket))
+              setStart(true)
+             if (timerRefC.current) {
+        clearInterval(timerRefC.current);
+      }
+            if(difference < 0){
+                
+              try {
+                fetch('/api/update-vip', {
+                 method: 'POST',
+                 headers: {
+                   'Content-Type':'application/json',
+                 },
+                 body: JSON.stringify({idd:String(UserDt?.idd)}),
+               })
+               .then((res) => res.json())
+               .then((data) => {
+                 if (data.success) {
+                  var gtticket = Number(data.ticket)
+                  if(gtticket <= Number(30)){
+                    setvipwalkcoinplus(25000)
+                    setvipticketplus(5)
+                  }else if(gtticket <= 60){
+                   setvipwalkcoinplus(50000)
+                    setvipticketplus(7)
+                  }else {
+                   setvipwalkcoinplus(100000)
+                    setvipticketplus(10)
+                  }
+                  setMinutesvip("00")
+                  setSecondsvip("00")
+                  setHoursvip("00")
+                  const target = new Date(data.dtMining);
+            const now = new Date(data.dt);
+             setvipTicket(Number(data.ticket))
+             var gtticket = Number(data.ticket)
+             if(gtticket < Number(30)){
+               setvipwalkcoinplus(25000)
+               setvipticketplus(5)
+             }else if(gtticket < 60){
+              setvipwalkcoinplus(50000)
+               setvipticketplus(7)
+             }else {
+              setvipwalkcoinplus(100000)
+               setvipticketplus(10)
+             }
+             setStart(true)
+             var q = 0    
+             timerRefC.current = setInterval(() =>{
+               q += 1000
+               const difference = target.getTime() - now.getTime() - q;
+    
+               if(difference > 1000 ){
+    
+                  
+               const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+               var hstr = Math.trunc(h).toString();
+               setHoursvip(String(hstr).padStart(2, "0")); 
+               const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+               if(Math.sign(m) === -1){
+                setMinutesvip("00")
+               }else{
+                 var mstr = m.toString();
+                 setMinutesvip(String(mstr).padStart(2, "0"));
+               }
+               const s = Math.floor((difference % (1000*60)) / 1000)
+               if(Math.sign(s) === -1){
+                 setSecondsvip("00")
+               }else{
+                 var sstr = s.toString();
+                 setSecondsvip(String(sstr).padStart(2, "0"));
+               }
+                
+               }else{
+                 setMinutesvip("00")
+                 setSecondsvip("00")
+                 setHoursvip("00")
+               }
+      
+    
+             },1000);
+    
+                 } else {
+                 }
+               })
+             } catch (err) {
+             }
+    
+            }else {
+             
+              var q = 0    
+              timerRefC.current = setInterval(() =>{
+                q += 1000
+                const difference = target.getTime() - now.getTime() - q;
+    
+                if(difference > 1000 ){
+    
+                   
+                const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+                var hstr = Math.trunc(h).toString();
+                setHoursvip(String(hstr).padStart(2, "0")); 
+                const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+                if(Math.sign(m) === -1){
+                 setMinutesvip("00")
+                }else{
+                  var mstr = m.toString();
+                  setMinutesvip(String(mstr).padStart(2, "0"));
+                }
+                const s = Math.floor((difference % (1000*60)) / 1000)
+                if(Math.sign(s) === -1){
+                  setSecondsvip("00")
+                }else{
+                  var sstr = s.toString();
+                  setSecondsvip(String(sstr).padStart(2, "0"));
+                }
+                 
+                }else if(end == false){
+                       setStart(false)
+                   if (timerRefC.current) {
+        clearInterval(timerRefC.current);
+      }       
+                  try {
+                    fetch('/api/update-vip', {
+                     method: 'POST',
+                     headers: {
+                       'Content-Type':'application/json',
+                     },
+                     body: JSON.stringify({idd:String(UserDt?.idd)}),
+                   })
+                   .then((res) => res.json())
+                   .then((data) => {
+                     if (data.success) {
+                      var gtticket = Number(data.ticket)
+                      if(gtticket <= Number(30)){
+                        setvipwalkcoinplus(25000)
+                        setvipticketplus(5)
+                      }else if(gtticket <= 60){
+                       setvipwalkcoinplus(50000)
+                        setvipticketplus(7)
+                      }else {
+                       setvipwalkcoinplus(100000)
+                        setvipticketplus(10)
+                      }
+                        setEnd(true)
+                            setStart(true)
+                      setMinutesvip("00")
+                      setSecondsvip("00")
+                      setHoursvip("00")
+                      const target = new Date(data.dtMining);
+                const now = new Date(data.dt);
+                 setvipTicket(Number(data.ticket))
+    
+                 var q = 0    
+                 timerRefC.current = setInterval(() =>{
+                   q += 1000
+                   const difference = target.getTime() - now.getTime() - q;
+    
+                   if(difference > 1000 ){
+    
+                      
+                   const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+                   var hstr = Math.trunc(h).toString();
+                   setHoursvip(String(hstr).padStart(2, "0")); 
+                   const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+                   if(Math.sign(m) === -1){
+                    setMinutesvip("00")
+                   }else{
+                     var mstr = m.toString();
+                     setMinutesvip(String(mstr).padStart(2, "0"));
+                   }
+                   const s = Math.floor((difference % (1000*60)) / 1000)
+                   if(Math.sign(s) === -1){
+                     setSecondsvip("00")
+                   }else{
+                     var sstr = s.toString();
+                     setSecondsvip(String(sstr).padStart(2, "0"));
+                   }
+                    
+                   }else{
+                     setMinutesvip("00")
+                     setSecondsvip("00")
+                     setHoursvip("00")
+                   }
+          
+    
+                 },1000);
+    
+                     } else {
+                     }
+                   })
+                 } catch (err) {
+                 }
+    
+                }
+       
+    
+              },1000);
+    
+            }          
+           } else {
+           
+           }
+         })
+       } catch (err) {
+        
+       } 
+        }
+      }
 
         }
        })
@@ -1673,7 +1947,7 @@ const HomeTab = () => {
           <div className="flex space-x-1 items-center text-wrap">
             
           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
-          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{Number(extraWalkCoin).toLocaleString()}</h1>
+          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{(Number(extraWalkCoin) + Number(vipwalkcoinplus)).toLocaleString()}</h1>
           <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
           </div>
           
@@ -1688,7 +1962,7 @@ const HomeTab = () => {
        />
           <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] space-x-1 font-Large rounded-full px-3 py-[3px]">
           <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
-          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{extraTicket}</h1>
+          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{Number(extraTicket) + Number(vipticketplus) }</h1>
 
           </div>
         </div>
