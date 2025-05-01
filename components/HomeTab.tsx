@@ -630,17 +630,17 @@ const HomeTab = () => {
     
     let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
 if(index < 0){
-setActiveVip(false)
-}else{
-setActiveVip(true)
-}
-let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+  let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
 if(indexB < 0){
 setActiveVip(false)
 }else{
 setActiveVip(true)
 }
 }
+}else{
+setActiveVip(true)
+}
+
    try {
     fetch('/api/get-lvl', {
      method: 'POST',
