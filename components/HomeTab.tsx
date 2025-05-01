@@ -124,7 +124,7 @@ const HomeTab = () => {
   const [extra5, setExtra5] = useState(false)
   const [extra6, setExtra6] = useState(false)
 
-  const [vip, setVip] = useState(true)
+  const [vip, setVip] = useState(false)
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
