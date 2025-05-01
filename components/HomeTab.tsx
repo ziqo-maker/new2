@@ -124,7 +124,7 @@ const HomeTab = () => {
   const [extra5, setExtra5] = useState(false)
   const [extra6, setExtra6] = useState(false)
 
-  const [vip, setVip] = useState(true)
+  const [vip, setVip] = useState(false)
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -627,7 +627,17 @@ const HomeTab = () => {
     const tg = window.Telegram.WebApp
     tg.ready()
     const initDataUnsafe = tg.initDataUnsafe || {}
-    
+    new Toast({
+      position: "top-center",
+      toastMsg: `${String(initDataUnsafe.user?.first_name)} : ${String(initDataUnsafe.user?.last_name)}`,
+      autoCloseTime: 4500,
+      canClose: true,
+      showProgress: true,
+      pauseOnHover: true,
+      pauseOnFocusLoss: true,
+      type: "default",
+      theme: "light"
+    });
     let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
 if(index < 0){
   let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
