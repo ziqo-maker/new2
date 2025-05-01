@@ -124,7 +124,7 @@ const HomeTab = () => {
   const [extra5, setExtra5] = useState(false)
   const [extra6, setExtra6] = useState(false)
 
-  const [vip, setVip] = useState(false)
+  const [vip, setVip] = useState(true)
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -628,50 +628,30 @@ const HomeTab = () => {
     tg.ready()
     const initDataUnsafe = tg.initDataUnsafe || {}
    
-    let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
+  let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
 if(index < 0){
-  new Toast({
-    position: "top-center",
-    toastMsg: `first: ${index} : ${String(initDataUnsafe.user?.last_name)}`,
-    autoCloseTime: 4500,
-    canClose: true,
-    showProgress: true,
-    pauseOnHover: true,
-    pauseOnFocusLoss: true,
-    type: "default",
-    theme: "light"
-  });
-  let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
-  new Toast({
-    position: "top-center",
-    toastMsg: `second: ${indexB} : ${String(initDataUnsafe.user?.last_name)}`,
-    autoCloseTime: 4500,
-    canClose: true,
-    showProgress: true,
-    pauseOnHover: true,
-    pauseOnFocusLoss: true,
-    type: "default",
-    theme: "light"
-  });
+
+let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+
 if(indexB < 0){
 setActiveVip(false)
 }else{
 setActiveVip(true)
 }
-}
 }else{
-setActiveVip(true)
-new Toast({
-  position: "top-center",
-  toastMsg: `active: ${activevip}`,
-  autoCloseTime: 4500,
-  canClose: true,
-  showProgress: true,
-  pauseOnHover: true,
-  pauseOnFocusLoss: true,
-  type: "default",
-  theme: "light"
-});
+  setActiveVip(true)
+  new Toast({
+    position: "top-center",
+    toastMsg: `active: ${activevip}`,
+    autoCloseTime: 4500,
+    canClose: true,
+    showProgress: true,
+    pauseOnHover: true,
+    pauseOnFocusLoss: true,
+    type: "default",
+    theme: "light"
+  });
+  }
 }
 
    try {
