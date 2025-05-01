@@ -1040,7 +1040,7 @@ setActiveVip(true)
                                                                  
                                                                   </div>
                                                                
-                                                                <div className="flex flex-col">
+                                                                <div className="flex flex-col mr-3 ml-3">
                                                                   <p className="text-sm text-[#ffae19]/[0.8]">
                                                                   Join the VIP club and earn more WalkCoin tokens and Raffle tickets every 2 hours
                                                                   </p>
@@ -1076,9 +1076,13 @@ setActiveVip(true)
                       </div>
                       </div>
                </div>
-               <div className="flex mr-2 ml-2 items-center space-x-1 justify-center">
+               <div className="flex flex-col mr-3 ml-3 mt-1 items-center space-x-1 justify-center">
                <p className="text-[13px] text-gray-500">
-               When you join the VIP Club, you will receive a VIP ticket every 24 hours. Please note that you must log in every 24 hours to receive your VIP ticket.
+               When you join the VIP Club, you will receive a VIP ticket every 24 hours. 
+                                                                  </p>
+                                                                  
+                                                                  <p className="text-[13px] text-gray-500">
+                                                                  Please note that you must log in every 24 hours to receive your VIP ticket.
                                                                   </p>
                       </div>
                                                              </center>
@@ -1090,8 +1094,10 @@ setActiveVip(true)
                                
                                                            <div  className="flex  justify-center   items-center ">
                                                                             
-                                                                              <div className="flex items-center justify-center space-x-3">
+                                                                              <div className="flex flex-col items-center justify-center space-y-3">
                                                                               
+                                                                              <div className="flex w-full space-x-3">
+
                                                                               <div className={` flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                              
@@ -1168,6 +1174,9 @@ setActiveVip(true)
                                                                               </div>
                                                                               </div>
 
+                                                                              </div>
+                                                                              
+
                                                                               <div className={` flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                              
@@ -1217,7 +1226,7 @@ setActiveVip(true)
                
                       </div>
                       <div className="flex mr-3 ml-3 items-center space-x-1 mt-4 justify-center">
-               <p className="text-[13px] text-[#ffae19]/[0.8]">
+               <p className="text-[12px] text-[#ffae19]/[0.8]">
                Add the following VIP code to your name in Telegram:
                                                                   </p>
                       </div>
@@ -1250,7 +1259,7 @@ setActiveVip(true)
                 
                 <div className="flex mr-3 ml-3 items-center space-x-1 justify-center">
                 
-               <p className="text-[13px] text-[#ffae19]/[0.9]">
+               <p className="text-[12px] text-[#ffae19]/[0.9]">
                Once you have updated your name you will need to reload the app for the changes to take effect.
                                                                   </p>
                       </div>
