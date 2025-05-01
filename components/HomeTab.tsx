@@ -28,6 +28,11 @@ import Star from '@/icons/star.svg';
 import copy from '@/icons/copy.svg'
 import FootPrint from '@/icons/footprint.svg';
 import Close from '@/icons/close.svg';
+import VipIcon from '@/imgs/vip.png';
+import Vipticket from '@/imgs/vipticket.png';
+import CloseB from '@/imgs/closeb.png';
+import giftvip from '@/imgs/giftvip.png';
+
 
 import gif from '@/imgs/gif.gif';
 import a11 from '@/gif/1-1.gif';
@@ -90,9 +95,36 @@ type claimtype = {
   start:boolean
 }
 
+//  type modelExtra = {
+//       id: number
+//   }
+  //   const [gtModelExtra,setModelExtra] = useState<modelB[]>([
+  //     { id: 1},
+  //     { id: 2 },
+  //     { id: 3 },
+  //     { id: 4 },
+  //     { id: 5},
+  //     { id: 6 },
+  // ]);
+
 const HomeTab = () => {
  
-  const [open, setOpen] = useState(true)
+  const [activevip,setActiveVip] = useState(false);
+  const [vipTicket,setvipTicket] = useState<number> (0);
+         const [hoursvip,setHoursvip] = useState("00");
+            const [minutesvip,setMinutesvip] = useState("00");
+          const [secondsvip,setSecondsvip] = useState("00");
+  const [extraTicket,setExtraTicket] = useState(0);
+  const [extraWalkCoin,setExtraWalkCoin] = useState(0);
+  const [open, setOpen] = useState(false)
+  const [extra1, setExtra1] = useState(false)
+  const [extra2, setExtra2] = useState(false)
+  const [extra3, setExtra3] = useState(false)
+  const [extra4, setExtra4] = useState(false)
+  const [extra5, setExtra5] = useState(false)
+  const [extra6, setExtra6] = useState(false)
+
+  const [vip, setVip] = useState(true)
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -112,11 +144,18 @@ const HomeTab = () => {
 
    const [Itm, setItm] = useState<number>(0);
    const [isCopy,setIsCopy] = useState(false);
+   const [isCopyVip,setIsCopyVip] = useState(false);
 
        const handleCopyLink = () => {
                     const inviteLink = `/extra`
                     navigator.clipboard.writeText(inviteLink)
                      setIsCopy(true)
+                  }
+
+                  const handleCopyLinkVIP = () => {
+                    const inviteLink = `WalkCoin👣`
+                    navigator.clipboard.writeText(inviteLink)
+                    setIsCopyVip(true)
                   }
   
                   const handleOpenLink = () => {
@@ -175,6 +214,15 @@ const HomeTab = () => {
                    { id: 4 },
                    { id: 5 },
                ]);
+
+               const [gtModelExtra,setModelExtra] = useState<modelB[]>([
+                { id: 1},
+                { id: 2 },
+                { id: 3 },
+                { id: 4 },
+                { id: 5 },
+                { id: 6 },
+            ]);
 
                 const [gtMpdelC,setModelC] = useState<modelC[]>([
                 { id: 1,
@@ -265,20 +313,22 @@ const HomeTab = () => {
         return el
     });
      setClaimType(newData)
+     var pluspoint = Number(miningPoint) + Number(extraWalkCoin)
       try {
         fetch('/api/claim', {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json',
          },
-         body: JSON.stringify({ idd: String(UserDt?.idd),miningPoint: miningPoint }),
+         body: JSON.stringify({ idd: String(UserDt?.idd),miningPoint: pluspoint }),
        })
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          const plus = Number(UserDt?.gtpoint) + miningPoint
-          const counticket = (Number(miningPoint)/3600).toFixed()
-          const plusticket = Number(UserDt?.ticket) + Number(counticket)
+          const plus = Number(UserDt?.gtpoint) + pluspoint
+          const counticket = (Number(pluspoint)/3600).toFixed()
+          const plusticket = Number(UserDt?.ticket) + Number(counticket) + Number(extraTicket)
+          var plusticketextra = Number(counticket) + Number(extraTicket)
           try {
             fetch('/api/update-ticket', {
              method: 'POST',
@@ -290,10 +340,10 @@ const HomeTab = () => {
            .then((res) => res.json())
            .then((data) => {
              if (data.success) {
-              const lcl = miningPoint.toLocaleString()
+              const lcl = pluspoint.toLocaleString()
                       new Toast({
                         position: "top-center",
-                        toastMsg: `You're received ${lcl} WalkCoin and ${counticket} Tickets`,
+                        toastMsg: `You're received ${lcl} WalkCoin and ${plusticketextra} Tickets`,
                         autoCloseTime: 4500,
                         canClose: true,
                         showProgress: true,
@@ -417,208 +467,272 @@ const HomeTab = () => {
                              }
   }
 
-//   useEffect(() => {
+  useEffect(() => {
 
-//     try {
-//       fetch('/api/gtdate', {
-//        method: 'POST',
-//        headers: {
-//          'Content-Type': 'application/json',
-//        },
-//        body: JSON.stringify({ idd: String(UserDt?.idd) }),
-//      })
-//      .then((res) => res.json())
-//      .then((data) => {
-//        if (data.success) {
-//         setRefresh(true)
+    try {
+      fetch('/api/gtdate', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({ idd: String(UserDt?.idd) }),
+     })
+     .then((res) => res.json())
+     .then((data) => {
+       if (data.success) {
+        setRefresh(true)
 
-//        if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
-//           setMg(a11)
-//         }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
-//           setMg(a12)
-//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
-//           setMg(a13)
-//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
-//           setMg(a14)
-//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
-//           setMg(a15)
-//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
-//           setMg(a16)
-//         } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
-//           setMg(a17)
-//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
-//           setMg(a21)
-//         }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
-//           setMg(a22)
-//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
-//           setMg(a23)
-//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
-//           setMg(a24)
-//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
-//           setMg(a25)
-//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
-//           setMg(a26)
-//         } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
-//           setMg(a27)
-//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
-//           setMg(a31)
-//         }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
-//           setMg(a32)
-//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
-//           setMg(a33)
-//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
-//           setMg(a34)
-//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
-//           setMg(a35)
-//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
-//           setMg(a36)
-//         } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
-//           setMg(a37)
-//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
-//           setMg(a41)
-//         }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
-//           setMg(a42)
-//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
-//           setMg(a43)
-//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
-//           setMg(a44)
-//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
-//           setMg(a45)
-//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
-//           setMg(a46)
-//         } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
-//           setMg(a47)
-//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
-//           setMg(a51)
-//         }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
-//           setMg(a52)
-//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
-//           setMg(a53)
-//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
-//           setMg(a54)
-//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
-//           setMg(a55)
-//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
-//           setMg(a56)
-//         } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
-//           setMg(a57)
-//         }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
-//           setMg(a61)
-//         }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
-//           setMg(a62)
-//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
-//           setMg(a63)
-//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
-//           setMg(a64)
-//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
-//           setMg(a65)
-//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
-//           setMg(a66)
-//         } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
-//           setMg(a67)
-//         }
+       if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
+          setMg(a11)
+        }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
+          setMg(a12)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
+          setMg(a13)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
+          setMg(a14)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
+          setMg(a15)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
+          setMg(a16)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
+          setMg(a17)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
+          setMg(a21)
+        }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
+          setMg(a22)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
+          setMg(a23)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
+          setMg(a24)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
+          setMg(a25)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
+          setMg(a26)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
+          setMg(a27)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
+          setMg(a31)
+        }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
+          setMg(a32)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
+          setMg(a33)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
+          setMg(a34)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
+          setMg(a35)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
+          setMg(a36)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
+          setMg(a37)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
+          setMg(a41)
+        }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
+          setMg(a42)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
+          setMg(a43)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
+          setMg(a44)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
+          setMg(a45)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
+          setMg(a46)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
+          setMg(a47)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
+          setMg(a51)
+        }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
+          setMg(a52)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
+          setMg(a53)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
+          setMg(a54)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
+          setMg(a55)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
+          setMg(a56)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
+          setMg(a57)
+        }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
+          setMg(a61)
+        }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
+          setMg(a62)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
+          setMg(a63)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
+          setMg(a64)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
+          setMg(a65)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
+          setMg(a66)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
+          setMg(a67)
+        }
         
-//         const target = new Date(data.dtMining);
-//         const now = new Date(data.dt);
-//           const difference = target.getTime() - now.getTime();
-//           if(data.mining == 1 && difference < 0 && data.claim == 0){
-//             setMiningPoint(7200*Number(UserDt?.speedlvl))
-//             setIsActive(false);
-//             setReady(false);
-//             setClaim(true);
-//             setSpin(false);
-//           }else if(data.mining == 0){
-//             setReady(true);
-//             setSpin(false);
-//           }else if(data.mining == 1 && !isClaim && difference > 0){
-//             setIsActive(true)
-//             setSpin(false)
-//             setDateA(data.dt)
-//             var q = 0
-//             var totaldiff = 7200000
-//       timerRef.current = setInterval(() =>{
-//         q += 1000
-//         const difference = target.getTime() - now.getTime() - q;
-//         const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-//         var hstr = Math.trunc(h).toString();
-//         setHours(String(hstr).padStart(2, "0")); 
-//         const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-//         if(Math.sign(m) === -1){
-//          setMinutes("00")
-//         }else{
-//           var mstr = m.toString();
-//           setMinutes(String(mstr).padStart(2, "0"));
-//         }
-//         const s = Math.floor((difference % (1000*60)) / 1000)
-//         if(Math.sign(s) === -1){
-//           setSeconds("00")
-//         }else{
-//           var sstr = s.toString();
-//           setSeconds(String(sstr).padStart(2, "0"));
-//         }
-//         if(difference <0){
-//           setClaim(true);
-//           setIsActive(false);
-//         }else{
-//            var t = totaldiff - difference 
-//           setMiningPoint(Math.trunc(t/1000)*Number(UserDt?.speedlvl))
-//         }
-//       },1000);
-//     }
+        const target = new Date(data.dtMining);
+        const now = new Date(data.dt);
+          const difference = target.getTime() - now.getTime();
+          if(data.mining == 1 && difference < 0 && data.claim == 0){
+            setMiningPoint(7200*Number(UserDt?.speedlvl))
+            setIsActive(false);
+            setReady(false);
+            setClaim(true);
+            setSpin(false);
+          }else if(data.mining == 0){
+            setReady(true);
+            setSpin(false);
+          }else if(data.mining == 1 && !isClaim && difference > 0){
+            setIsActive(true)
+            setSpin(false)
+            setDateA(data.dt)
+            var q = 0
+            var totaldiff = 7200000
+      timerRef.current = setInterval(() =>{
+        q += 1000
+        const difference = target.getTime() - now.getTime() - q;
+        const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+        var hstr = Math.trunc(h).toString();
+        setHours(String(hstr).padStart(2, "0")); 
+        const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+        if(Math.sign(m) === -1){
+         setMinutes("00")
+        }else{
+          var mstr = m.toString();
+          setMinutes(String(mstr).padStart(2, "0"));
+        }
+        const s = Math.floor((difference % (1000*60)) / 1000)
+        if(Math.sign(s) === -1){
+          setSeconds("00")
+        }else{
+          var sstr = s.toString();
+          setSeconds(String(sstr).padStart(2, "0"));
+        }
+        if(difference <0){
+          setClaim(true);
+          setIsActive(false);
+        }else{
+           var t = totaldiff - difference 
+          setMiningPoint(Math.trunc(t/1000)*Number(UserDt?.speedlvl))
+        }
+      },1000);
+    }
       
-//        } else {
+       } else {
        
-//        }
-//      })
-//    } catch (err) {
+       }
+     })
+   } catch (err) {
     
-//    }
-
-//    try {
-//     fetch('/api/get-lvl', {
-//      method: 'POST',
-//      headers: {
-//        'Content-Type': 'application/json',
-//      },
-//      body: JSON.stringify({ idd: String(UserDt?.idd) }),
-//    })
-//    .then((res) => res.json())
-//    .then((data) => {
-//      if (data.success) {
-//         const gtlvl = String(data.lvl)
-//         const nmbrlvl = Number(gtlvl)
-//         setLvl(nmbrlvl)
-//       const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000020 : nmbrlvl == 3 ? 0.00000025 : nmbrlvl ==4 ? 0.00000030 : nmbrlvl ==5? 0.00000035: 0
-//         setPrice(gtPrice)
-//         const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
-//         setEndPoint(gtEndPoint)
+   }
+   if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+    const tg = window.Telegram.WebApp
+    tg.ready()
+    const initDataUnsafe = tg.initDataUnsafe || {}
+    
+    let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
+if(index < 0){
+setActiveVip(false)
+}else{
+setActiveVip(true)
+}
+let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+if(indexB < 0){
+setActiveVip(false)
+}else{
+setActiveVip(true)
+}
+}
+   try {
+    fetch('/api/get-lvl', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify({ idd: String(UserDt?.idd) }),
+   })
+   .then((res) => res.json())
+   .then((data) => {
+     if (data.success) {
+      try {
+        fetch('/api/get-extra', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({ idd: String(UserDt?.idd)}),
+       })
+       .then((res) => res.json())
+       .then((data) => {
+         if (data.success) {
+          
+          const items = String(data.items)
+      const mapstr = items.split(',').map(Number);
+      var plusextra = 0
+      var plusextraticket = 0
+      gtModelExtra.forEach((t: any)=> {
+        const found = mapstr?.find(item => item === t.id);
+        const contain = found !== undefined
+                   if(t.id == 1 && contain == true){
+                    setExtra1(true)
+                    plusextra += 10000 
+                  }else if (t.id == 2 && contain == true){
+                    setExtra2(true)
+                    plusextra += 20000                    
+                  }else if (t.id == 3 && contain == true){
+                    setExtra3(true)
+                    plusextra += 30000
+                  }else if(t.id == 4 && contain == true){
+                    setExtra4(true)
+                    plusextraticket += 7
+                  }else if(t.id == 5 && contain == true){
+                    setExtra5(true)
+                    plusextraticket += 15
+                  }else if(t.id == 6 && contain == true){
+                    setExtra6(true)
+                    plusextraticket += 25
+                  }
+              })
+              setExtraWalkCoin(plusextra)
+              setExtraTicket(plusextraticket)
+             const gtlvl = String(data.lvl)
+        const nmbrlvl = Number(gtlvl)
+        setLvl(nmbrlvl)
+      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000020 : nmbrlvl == 3 ? 0.00000025 : nmbrlvl ==4 ? 0.00000030 : nmbrlvl ==5? 0.00000035: 0
+        setPrice(gtPrice)
+        const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+        setEndPoint(gtEndPoint)
         
-//         if(nmbrlvl >= 6){
-//           setBlnLvl(false)
-//         }else if(nmbrlvl <= 5){
-//           setBlnLvl(true)
-//         }
-//      } else {
+        if(nmbrlvl >= 6){
+          setBlnLvl(false)
+        }else if(nmbrlvl <= 5){
+          setBlnLvl(true)
+        }
+        }
+       })
+     } catch (err) {
+     
+     }
+
+     } else {
       
-//      }
-//    })
-//  } catch (err) {
-//  }
+     }
+   })
+ } catch (err) {
+ }
    
-//    if(refresh == false) {
-//     timerRefB.current = setInterval(() =>{
-//     setRefreshB(!refreshB)
-//     },3000);
-//    }
+   if(refresh == false) {
+    timerRefB.current = setInterval(() =>{
+    setRefreshB(!refreshB)
+    },3000);
+   }
   
-//     return () => {  if (timerRef.current) {
-//       clearInterval(timerRef.current);
-//     };
-//     if (timerRefB.current) {
-//       clearInterval(timerRefB.current);
-//     }
-//   };
-//   },[isActive,refreshB])
+    return () => {  if (timerRef.current) {
+      clearInterval(timerRef.current);
+    };
+    if (timerRefB.current) {
+      clearInterval(timerRefB.current);
+    }
+  };
+  },[isActive,refreshB])
   
   return (
 
@@ -650,9 +764,9 @@ const HomeTab = () => {
                                                                          </button>
                                                                          
                                                                               </div>
-                                                            <div className="sm:flex mt-2 sm:items-start">
+                                                            <div className="sm:flex mt-2 sm:items-center">
                                                              
-                                                              <div className=" w-full text-center  sm:ml-4 sm:text-left">
+                                                              <div className=" w-full text-center  ">
                                                                 
                                                                 <center>
                                                                 <p  className="text-base font-semibold text-gray-900">
@@ -673,7 +787,7 @@ const HomeTab = () => {
                                                            <div  className="flex flex-col justify-center   items-center ">
                                                                             
                                                                               <div className="flex items-center justify-center space-x-3">
-                                                                              <button onClick={() => {setItm(1)}} className={`${Itm == 1 ? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                              <button onClick={() => {extra1 == true ? '':setItm(1)}} className={`${Itm == 1 || extra1 == true? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                               <Image 
                                                                         src={FootPrint as StaticImageData} 
@@ -697,7 +811,7 @@ const HomeTab = () => {
                                                                               </div>
                                                                               </button>
                                                                 
-                                                                              <button onClick={() => {setItm(2)}} className={`${Itm == 2 ? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                              <button onClick={() => {extra2 == true ? '':setItm(2)}} className={`${Itm == 2 || extra2 == true? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                               <Image 
                                                                         src={FootPrint as StaticImageData} 
@@ -723,7 +837,7 @@ const HomeTab = () => {
                                                                               </div>
                                                                               <div className="h-3" />
                                                                               <div className="flex items-center justify-center  space-x-3">
-                                                                              <button onClick={() => {setItm(3)}} className={`${Itm == 3 ? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                              <button onClick={() => {extra3 == true ? '':setItm(3)}} className={`${Itm == 3 || extra3 == true? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                               <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                               <Image 
                                                                         src={FootPrint as StaticImageData} 
@@ -747,7 +861,7 @@ const HomeTab = () => {
                                                                               </div>
                                                                               </button>
       
-                                                                              <button onClick={() => {setItm(4)}} className={`${Itm == 4 ? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                              <button onClick={() => {extra4 == true ? '':setItm(4)}} className={`${Itm == 4 || extra4 == true ? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                                                   <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                                                   <Image 
                                                                                             src={TicketCircle as StaticImageData} 
@@ -781,7 +895,7 @@ const HomeTab = () => {
                                                                                                   
                                                                                                  
                                   
-                                                                                                  <button onClick={() => {setItm(5)}} className={`${Itm == 5 ? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                                                  <button onClick={() => {extra5 == true ? '':setItm(5)}} className={`${Itm == 5 || extra5 == true? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                                                   <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                                                   <Image 
                                                                                             src={TicketCircle as StaticImageData} 
@@ -806,7 +920,7 @@ const HomeTab = () => {
                                                                                                   </button>
                                                                                                   
                                                                                     
-                                                                                                  <button onClick={() => {setItm(6)}} className={`${Itm == 6 ? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                                                  <button onClick={() => {extra6 == true ? '':setItm(6)}} className={`${Itm == 6 || extra6 == true? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                                                   <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                                                   <Image 
                                                                                             src={FootPrint as StaticImageData} 
@@ -863,6 +977,272 @@ const HomeTab = () => {
                                                                  <p className="text-black/[0.7] font-normal w-[calc(100%-2rem)] text-sm">You can purchase the above items with Telegram stars in the WalkCoin bot by running the /extra command</p>
                                                        
                                                                  </div>
+                                                                 <div className="h-20" /> 
+          
+                               
+                                     </div>
+          </center>
+            
+          </div>
+      
+          </center>
+
+      :''}
+
+{vip == true ? 
+      
+      <center>
+
+      <div className="fixed max-w-xl mx-auto inset-0 bg-[#808080] overflow-x-auto bg-opacity-50 h-screen   items-center z-40 justify-center p-2 ">
+          <center>
+          <div className="bg-white max-w-xl mx-auto   border-4 border-double  border-[#ffae19]/[0.9] glowbox transform  rounded-3xl bg-white shadow-xl  data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in  data-closed:sm:translate-y-0 data-closed:sm:scale-95">
+                                     
+                                     <div className="h-2" />
+                               
+                                     <div className="flex flex-col  items-center justify-center  mt-1 ">
+                                                                         
+                                                                         <button onClick={() => {setVip(false)}}>
+                                                                         <Image 
+                                                                        src={CloseB as StaticImageData} 
+                                                                      className="w-12 h-10 aspect-square object-cover"
+                                                                      alt=""
+                                                                    />
+                                                                         </button>
+                                                                       
+                                                                              </div>
+                                                           
+                                                             
+                                                              <div className=" w-full text-center justify-center ">
+                                                                
+                                                                <center>
+                                                                  <div className="flex mt-2 flex-col items-center justify-center">
+                                                                  <Image 
+                                                                        src={VipIcon as StaticImageData} 
+                                                                      className="w-16 h-12 aspect-square object-cover"
+                                                                      alt=""
+                                                                    />
+                                                                  <p  className="text-[18px] font-black mt-0.5 text-[#ffae19]/[0.9]">
+                                                                VIP Club
+                                                                </p>
+                                                                 
+                                                                  </div>
+                                                               
+                                                                <div className="flex flex-col">
+                                                                  <p className="text-sm text-[#ffae19]/[0.8]">
+                                                                  Join the VIP club and earn more WalkCoin tokens and Raffle tickets every 2 hours
+                                                                  </p>
+                                                                  
+                                                                </div>
+                                                                <div className="flex w-full   items-center  justify-center items-center">
+               <div className="flex w-[calc(100%-2rem)] mt-2  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
+                <Image 
+                src={Vipticket as StaticImageData} 
+              className="w-11 h-11   aspect-square object-cover"
+              alt=""
+            />
+                      <div className="flex-grow text-center ">
+                      <div className="flex flex-col items-center justify-center">
+                      <p className=" text-white font-black text-base mr-6 truncate">Number of VIP Tickets</p>
+                      <h1 className="text-base font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] mr-6 from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">{vipTicket}</h1>
+                      <p className="text-white font-Normal text-sm mr-6 glow">{hoursvip}h {minutesvip}m {secondsvip}s</p>
+
+                      </div>
+                      </div>
+                      </div>
+               </div>
+                      
+               <div className="flex    items-center  justify-center items-center">
+               <div className="flex  mt-1  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-3 py-[5px] ">
+              
+                      <div className="flex-grow text-center ">
+                      <div className="flex items-center space-x-1 justify-center">
+                      <p className=" text-white font-bold text-base truncate">VIP club status:</p>
+                      <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? 'Active' : 'Inactive'}</h1>
+
+                      </div>
+                      </div>
+                      </div>
+               </div>
+               <div className="flex mr-2 ml-2 items-center space-x-1 justify-center">
+               <p className="text-[13px] text-gray-500">
+               When you join the VIP Club, you will receive a VIP ticket every 24 hours. Please note that you must log in every 24 hours to receive your VIP ticket.
+                                                                  </p>
+                      </div>
+                                                             </center>
+                                                                
+                                                              </div>
+                                                       
+                                                          
+                                                          <div className="h-2" />
+                               
+                                                           <div  className="flex  justify-center   items-center ">
+                                                                            
+                                                                              <div className="flex items-center justify-center space-x-3">
+                                                                              
+                                                                              <div className={` flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+                                                                             
+                                                                              <p className="text-white   font-bold glow text-sm ">1-30 Tickets</p>
+                                                                           
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+                                                                                <div className="flex flex-col items-center justify-center space-y-2">
+                                                                                  <div className="flex items-center">
+                                                                                  <Image 
+                                                                        src={FootPrint as StaticImageData} 
+                                                                      className="w-7 h-7 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(50000).toLocaleString()}</p>
+                                                                                  </div>
+                                                                                 
+                                                                                  <div className="flex items-center">
+                                                                                  <div className="w-1"/>
+
+                                                                                  <Image 
+                                                                        src={circleticket as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                                                                                                      <div className="w-1"/>
+
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{5}</p>
+                                                                                  </div>
+                                                                                </div>
+                                                                              <Image 
+                                                                        src={giftvip as StaticImageData} 
+                                                                      className="w-7 h-7 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
+
+                                                                              <div className={` flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+                                                                             
+                                                                              <p className="text-white   font-bold glow text-sm ">31-60 Tickets</p>
+                                                                           
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+                                                                                <div className="flex flex-col items-center justify-center space-y-2">
+                                                                                  <div className="flex items-center">
+                                                                                  <Image 
+                                                                        src={FootPrint as StaticImageData} 
+                                                                      className="w-7 h-7 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(100000).toLocaleString()}</p>
+                                                                                  </div>
+                                                                                 
+                                                                                  <div className="flex items-center">
+                                                                                  <div className="w-1"/>
+
+                                                                                  <Image 
+                                                                        src={circleticket as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                                                                                                      <div className="w-1"/>
+
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{10}</p>
+                                                                                  </div>
+                                                                                </div>
+                                                                              <Image 
+                                                                        src={giftvip as StaticImageData} 
+                                                                      className="w-7 h-7 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
+
+                                                                              <div className={` flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                              <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
+                                                                             
+                                                                              <p className="text-white   font-bold glow text-sm ">*61 Tickets</p>
+                                                                           
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+                                                                                <div className="flex flex-col items-center justify-center space-y-2">
+                                                                                  <div className="flex items-center">
+                                                                                  <Image 
+                                                                        src={FootPrint as StaticImageData} 
+                                                                      className="w-7 h-7 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(150000).toLocaleString()}</p>
+                                                                                  </div>
+                                                                                 
+                                                                                  <div className="flex items-center">
+                                                                                  <div className="w-1"/>
+
+                                                                                  <Image 
+                                                                        src={circleticket as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                                                                                                      <div className="w-1"/>
+
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{15}</p>
+                                                                                  </div>
+                                                                                </div>
+                                                                              <Image 
+                                                                        src={giftvip as StaticImageData} 
+                                                                      className="w-7 h-7 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
+                                                                
+                                                                             
+                                                                              </div>
+                                                                              
+                                                                              
+                                                                             
+                                                                              </div>
+                                                                              <div className="flex mr-3 ml-3 mt-4 items-center space-x-1 justify-center">
+               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? 'You currently receive 0 extra WalkCoin tokens and 0 extra Raffle tickets from the vip club every two hours. ' : "You aren't currently receiving anything from the VIP club"}</p>
+               
+                      </div>
+                      <div className="flex mr-3 ml-3 items-center space-x-1 mt-4 justify-center">
+               <p className="text-[13px] text-[#ffae19]/[0.8]">
+               Add the following VIP code to your name in Telegram:
+                                                                  </p>
+                      </div>
+                                                                              <div className="flex w-full mt-1  items-center justify-center items-center space-x-1">
+                
+     
+     
+                <div className="flex bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-4 py-[10px] ">
+                 
+
+                       <div className="flex-1 text-center">
+                       <div className="flex items-center space-x-1 justify-center">
+                       
+                  <p className=" text-white font-bold text-base truncate">{isCopyVip == true? 'The code is copied' : 'WalkCoin👣'}</p>
+                       </div>
+                       </div>
+                       </div>
+               
+                       <button onClick={() => {isCopyVip == true ? '' : handleCopyLinkVIP()}} className="flex bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-1 py-[4px] ">
+                 <Image 
+                 src={copy as StaticImageData} 
+               className="w-7 h-7 aspect-square object-cover"
+               alt="Shiba Inu"
+             />
+                     
+                       </button>
+                       
+                       
+                </div>
+                
+                <div className="flex mr-3 ml-3 items-center space-x-1 justify-center">
+                
+               <p className="text-[13px] text-[#ffae19]/[0.9]">
+               Once you have updated your name you will need to reload the app for the changes to take effect.
+                                                                  </p>
+                      </div>
+                               
+                                                     
                                                                  <div className="h-20" /> 
           
                                
@@ -1077,8 +1457,10 @@ const HomeTab = () => {
       className="w-10 h-10"
       alt=""
        />
-          <div className="flex space-x-2 items-center text-wrap">
+          <div className="flex space-x-1 items-center text-wrap">
+            
           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
+          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{Number(extraWalkCoin).toLocaleString()}</h1>
           <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
           </div>
           
@@ -1091,8 +1473,10 @@ const HomeTab = () => {
       className="w-8 h-8"
       alt=""
        />
-          <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] font-Large rounded-full px-3 py-[3px]">
+          <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] space-x-1 font-Large rounded-full px-3 py-[3px]">
           <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
+          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{extraTicket}</h1>
+
           </div>
         </div>
         
