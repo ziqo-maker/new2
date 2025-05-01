@@ -132,3 +132,11 @@ model extra {
   idd String @db.VarChar(500)
   items String @db.VarChar(100)
 }
+
+model vipclub {
+  id Int @id @default(autoincrement())
+  ticket Int @default(0)
+  idd String @db.VarChar(500)
+  date DateTime @default(now())
+  dateMining DateTime @default(now())
+}
