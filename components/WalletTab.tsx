@@ -29,9 +29,6 @@ type Task = {
   status:string
 }
 
-type model = {
-       unlock:boolean
-    }
 
     type modelB = {
       id: number
@@ -84,7 +81,6 @@ const WalletTab = () => {
           // },[refresh])
 
 
-          const [gtCharacter,setCharacter] = useState<model[]>([]);
               const [gtMpdel,setModelB] = useState<modelB[]>([
                 { id: 1},
                 { id: 2 },
@@ -114,17 +110,7 @@ const WalletTab = () => {
                     
                         const found = mapstr?.find(item => item === t.id);
                         const contain = found !== undefined
-                        new Toast({
-                                    position: "top-center",
-                                    toastMsg: `${contain}`,
-                                    autoCloseTime: 4500,
-                                    canClose: true,
-                                    showProgress: true,
-                                    pauseOnHover: true,
-                                    pauseOnFocusLoss: true,
-                                    type: "default",
-                                    theme: "light"
-                                  });
+                        
                          if(t.id == 1){
                           
                         }else if (t.id == 2){
@@ -485,15 +471,18 @@ const WalletTab = () => {
 
     </div>
   </div>
-  <div className="flex justify-between mt-32">
-   
-  </div>
+ 
 </div>
+<div className="h-12 " />
+<div className="h-12 " />
 
-           <div className="flex w-full  items-center justify-center text-center space-x-2">
+ 
+
+<div className="flex w-full  items-center justify-center text-center space-x-2">
                 
+               
      
-                <button onClick={() => {}} className="flex flex-grow opacity-60 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px] ">
+                <button onClick={() => {}} className="flex w-[calc(95%-2rem)]  opacity-60 bg-[#ffae19]/[0.9] border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-2xl px-1 py-[8px] ">
                  
 
                        <div className="flex-1 text-center">
@@ -508,26 +497,24 @@ const WalletTab = () => {
                        </div>
                        </button>
               
-                       <div className="flex invisible bg-[#ffae19]/[0.9] items-center text-wrap   rounded-full px-3   py-[10px] ">
-                 <Image 
-                 src={Support as StaticImageData} 
-               className="w-8 h-8 aspect-square object-cover"
-               alt="Shiba Inu"
-             />
-                     
-                       </div>
+                    
                        
-                </div>
+                </div>  
+                  
+    
 
-               <p className="text-black ml-1 text-base text-wrap font-bold text-start">Listing Date is set for May 29, 2025</p>
-               <p className="text-black ml-1 text-sm text-wrap">Note: We decided to appreciate user activity and help the project grow. From now on, you can exchange your WalkCoin to USDT before listing.</p>
-                
-           </div>
            
-           <div className='flex flex-col mt-2  justify-start items-start  mr-4 ml-4'>
-      <p className={`font-bold text-base  text-black text-wrap`}>Details</p> 
-      </div>
-<div className="relative overflow-x-auto mt-2 mr-4 ml-4  ">
+             <div className="h-2" />
+               <p className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">We decided to appreciate user activity and help the project grow. From now on, you can burn your WalkCoin before listing.</p>
+               <center>
+            <p className={`font-bold text-sm mt-4 mr-3 ml-3  text-gray-700 text-wrap`}>WalkCoin Burning Reward Details</p> 
+            
+               </center>
+             
+
+           </div>
+    
+    <div className="relative overflow-x-auto mt-4 mr-4 ml-4  ">
     <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase   bg-[#6b4d11]/[0.2] ">
             <tr>
