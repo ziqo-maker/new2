@@ -126,3 +126,9 @@ model watchads {
   date DateTime @default(now())
   dateMining DateTime @default(now())
 }
+
+model extra {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  items String @db.VarChar(100)
+}
