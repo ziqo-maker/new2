@@ -627,20 +627,32 @@ const HomeTab = () => {
     const tg = window.Telegram.WebApp
     tg.ready()
     const initDataUnsafe = tg.initDataUnsafe || {}
-    new Toast({
-      position: "top-center",
-      toastMsg: `${String(initDataUnsafe.user?.first_name)} : ${String(initDataUnsafe.user?.last_name)}`,
-      autoCloseTime: 4500,
-      canClose: true,
-      showProgress: true,
-      pauseOnHover: true,
-      pauseOnFocusLoss: true,
-      type: "default",
-      theme: "light"
-    });
+   
     let index = String(initDataUnsafe.user?.first_name).indexOf("WalkCoin");
 if(index < 0){
+  new Toast({
+    position: "top-center",
+    toastMsg: `first: ${index} : ${String(initDataUnsafe.user?.last_name)}`,
+    autoCloseTime: 4500,
+    canClose: true,
+    showProgress: true,
+    pauseOnHover: true,
+    pauseOnFocusLoss: true,
+    type: "default",
+    theme: "light"
+  });
   let indexB = String(initDataUnsafe.user?.last_name).indexOf("WalkCoin");
+  new Toast({
+    position: "top-center",
+    toastMsg: `second: ${indexB} : ${String(initDataUnsafe.user?.last_name)}`,
+    autoCloseTime: 4500,
+    canClose: true,
+    showProgress: true,
+    pauseOnHover: true,
+    pauseOnFocusLoss: true,
+    type: "default",
+    theme: "light"
+  });
 if(indexB < 0){
 setActiveVip(false)
 }else{
@@ -649,6 +661,17 @@ setActiveVip(true)
 }
 }else{
 setActiveVip(true)
+new Toast({
+  position: "top-center",
+  toastMsg: `${activevip}`,
+  autoCloseTime: 4500,
+  canClose: true,
+  showProgress: true,
+  pauseOnHover: true,
+  pauseOnFocusLoss: true,
+  type: "default",
+  theme: "light"
+});
 }
 
    try {
