@@ -129,7 +129,7 @@ const HomeTab = () => {
   const [extra5, setExtra5] = useState(false)
   const [extra6, setExtra6] = useState(false)
 
-  const [vip, setVip] = useState(true)
+  const [vip, setVip] = useState(false)
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -320,7 +320,7 @@ const HomeTab = () => {
         return el
     });
      setClaimType(newData)
-     var pluspoint = Number(miningPoint) + Number(extraWalkCoin)
+     var pluspoint = Number(miningPoint) + Number(extraWalkCoin) + Number(vipwalkcoinplus)
       try {
         fetch('/api/claim', {
          method: 'POST',
@@ -334,7 +334,7 @@ const HomeTab = () => {
          if (data.success) {
           const plus = Number(UserDt?.gtpoint) + pluspoint
           const counticket = (Number(pluspoint)/3600).toFixed()
-          const plusticket = Number(UserDt?.ticket) + Number(counticket) + Number(extraTicket)
+          const plusticket = Number(UserDt?.ticket) + Number(counticket) + Number(extraTicket) + Number(vipticketplus)
           var plusticketextra = Number(counticket) + Number(extraTicket)
           try {
             fetch('/api/update-ticket', {
@@ -667,19 +667,19 @@ const HomeTab = () => {
                     plusextra += 10000 
                   }else if (t.id == 2 && contain == true){
                     setExtra2(true)
-                    plusextra += 20000                    
+                    plusextra += 15000                    
                   }else if (t.id == 3 && contain == true){
                     setExtra3(true)
-                    plusextra += 30000
+                    plusextra += 20000
                   }else if(t.id == 4 && contain == true){
                     setExtra4(true)
-                    plusextraticket += 7
+                    plusextraticket += 5
                   }else if(t.id == 5 && contain == true){
                     setExtra5(true)
-                    plusextraticket += 15
+                    plusextraticket += 10
                   }else if(t.id == 6 && contain == true){
                     setExtra6(true)
-                    plusextraticket += 25
+                    plusextraticket += 15
                   }
               })
               setExtraWalkCoin(plusextra)
@@ -726,13 +726,13 @@ const HomeTab = () => {
           
             var gtticket = Number(data.ticket)
             if(gtticket <= Number(30)){
-              setvipwalkcoinplus(25000)
+              setvipwalkcoinplus(10000)
               setvipticketplus(5)
             }else if(gtticket <= 60){
-             setvipwalkcoinplus(50000)
+             setvipwalkcoinplus(15000)
               setvipticketplus(7)
             }else {
-             setvipwalkcoinplus(100000)
+             setvipwalkcoinplus(20000)
               setvipticketplus(10)
             }
     
@@ -759,13 +759,13 @@ const HomeTab = () => {
                  if (data.success) {
                   var gtticket = Number(data.ticket)
                   if(gtticket <= Number(30)){
-                    setvipwalkcoinplus(25000)
+                    setvipwalkcoinplus(10000)
                     setvipticketplus(5)
                   }else if(gtticket <= 60){
-                   setvipwalkcoinplus(50000)
+                   setvipwalkcoinplus(15000)
                     setvipticketplus(7)
                   }else {
-                   setvipwalkcoinplus(100000)
+                   setvipwalkcoinplus(20000)
                     setvipticketplus(10)
                   }
                   setMinutesvip("00")
@@ -774,17 +774,7 @@ const HomeTab = () => {
                   const target = new Date(data.dtMining);
             const now = new Date(data.dt);
              setvipTicket(Number(data.ticket))
-             var gtticket = Number(data.ticket)
-             if(gtticket < Number(30)){
-               setvipwalkcoinplus(25000)
-               setvipticketplus(5)
-             }else if(gtticket < 60){
-              setvipwalkcoinplus(50000)
-               setvipticketplus(7)
-             }else {
-              setvipwalkcoinplus(100000)
-               setvipticketplus(10)
-             }
+             
              setStart(true)
              var q = 0    
              timerRefC.current = setInterval(() =>{
@@ -873,13 +863,13 @@ const HomeTab = () => {
                      if (data.success) {
                       var gtticket = Number(data.ticket)
                       if(gtticket <= Number(30)){
-                        setvipwalkcoinplus(25000)
+                        setvipwalkcoinplus(10000)
                         setvipticketplus(5)
                       }else if(gtticket <= 60){
-                       setvipwalkcoinplus(50000)
+                       setvipwalkcoinplus(15000)
                         setvipticketplus(7)
                       }else {
-                       setvipwalkcoinplus(100000)
+                       setvipwalkcoinplus(20000)
                         setvipticketplus(10)
                       }
                         setEnd(true)
@@ -962,13 +952,13 @@ const HomeTab = () => {
           
             var gtticket = Number(data.ticket)
             if(gtticket <= Number(30)){
-              setvipwalkcoinplus(25000)
+              setvipwalkcoinplus(10000)
               setvipticketplus(5)
             }else if(gtticket <= 60){
-             setvipwalkcoinplus(50000)
+             setvipwalkcoinplus(15000)
               setvipticketplus(7)
             }else {
-             setvipwalkcoinplus(100000)
+             setvipwalkcoinplus(20000)
               setvipticketplus(10)
             }
     
@@ -995,13 +985,13 @@ const HomeTab = () => {
                  if (data.success) {
                   var gtticket = Number(data.ticket)
                   if(gtticket <= Number(30)){
-                    setvipwalkcoinplus(25000)
+                    setvipwalkcoinplus(10000)
                     setvipticketplus(5)
                   }else if(gtticket <= 60){
-                   setvipwalkcoinplus(50000)
+                   setvipwalkcoinplus(15000)
                     setvipticketplus(7)
                   }else {
-                   setvipwalkcoinplus(100000)
+                   setvipwalkcoinplus(20000)
                     setvipticketplus(10)
                   }
                   setMinutesvip("00")
@@ -1010,17 +1000,7 @@ const HomeTab = () => {
                   const target = new Date(data.dtMining);
             const now = new Date(data.dt);
              setvipTicket(Number(data.ticket))
-             var gtticket = Number(data.ticket)
-             if(gtticket < Number(30)){
-               setvipwalkcoinplus(25000)
-               setvipticketplus(5)
-             }else if(gtticket < 60){
-              setvipwalkcoinplus(50000)
-               setvipticketplus(7)
-             }else {
-              setvipwalkcoinplus(100000)
-               setvipticketplus(10)
-             }
+             
              setStart(true)
              var q = 0    
              timerRefC.current = setInterval(() =>{
@@ -1109,13 +1089,13 @@ const HomeTab = () => {
                      if (data.success) {
                       var gtticket = Number(data.ticket)
                       if(gtticket <= Number(30)){
-                        setvipwalkcoinplus(25000)
+                        setvipwalkcoinplus(10000)
                         setvipticketplus(5)
                       }else if(gtticket <= 60){
-                       setvipwalkcoinplus(50000)
+                       setvipwalkcoinplus(15000)
                         setvipticketplus(7)
                       }else {
-                       setvipwalkcoinplus(100000)
+                       setvipwalkcoinplus(20000)
                         setvipticketplus(10)
                       }
                         setEnd(true)
@@ -1280,7 +1260,7 @@ const HomeTab = () => {
                                                                     />
                                                                               </div>
                                                                               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">15 Stars</p>
                                                                               <Image 
                                                                         src={Star as StaticImageData} 
                                                                       className="w-5 h-5 aspect-square object-cover"
@@ -1296,7 +1276,7 @@ const HomeTab = () => {
                                                                       className="w-6 h-6 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                              <p className="text-white   font-bold glow text-sm ">+{Number(20000).toLocaleString()}</p>
+                                                                              <p className="text-white   font-bold glow text-sm ">+{Number(15000).toLocaleString()}</p>
                                                                               <Image 
                                                                         src={Extra as StaticImageData} 
                                                                       className="w-7 h-7 aspect-square object-cover"
@@ -1322,7 +1302,7 @@ const HomeTab = () => {
                                                                       className="w-6 h-6 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                              <p className="text-white   font-bold glow text-sm ">+{Number(30000).toLocaleString()}</p>
+                                                                              <p className="text-white   font-bold glow text-sm ">+{Number(20000).toLocaleString()}</p>
                                                                               <Image 
                                                                         src={Extra as StaticImageData} 
                                                                       className="w-7 h-7 aspect-square object-cover"
@@ -1330,7 +1310,7 @@ const HomeTab = () => {
                                                                     />
                                                                               </div>
                                                                               <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">55 Stars</p>
                                                                               <Image 
                                                                         src={Star as StaticImageData} 
                                                                       className="w-5 h-5 aspect-square object-cover"
@@ -1346,7 +1326,7 @@ const HomeTab = () => {
                                                                                           className="w-6 h-6 aspect-square object-cover"
                                                                                           alt="Shiba Inu"
                                                                                         />
-                                                                                                  <p className="text-white   font-bold glow text-sm px-5 ">+7</p>
+                                                                                                  <p className="text-white   font-bold glow text-sm px-5 ">+5</p>
                                                                                                   <Image 
                                                                                             src={Extra as StaticImageData} 
                                                                                           className="w-7 h-7 aspect-square object-cover"
@@ -1354,7 +1334,7 @@ const HomeTab = () => {
                                                                                         />
                                                                                                   </div>
                                                                                                   <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">10 Stars</p>
+                                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">15 Stars</p>
                                                                                                   <Image 
                                                                                             src={Star as StaticImageData} 
                                                                                           className="w-5 h-5 aspect-square object-cover"
@@ -1380,7 +1360,7 @@ const HomeTab = () => {
                                                                                           className="w-6 h-6 aspect-square object-cover"
                                                                                           alt="Shiba Inu"
                                                                                         />
-                                                                                                  <p className="text-white   font-bold glow text-sm px-4 ">+15</p>
+                                                                                                  <p className="text-white   font-bold glow text-sm px-4 ">+10</p>
                                                                                                   <Image 
                                                                                             src={Extra as StaticImageData} 
                                                                                           className="w-7 h-7 aspect-square object-cover"
@@ -1405,7 +1385,7 @@ const HomeTab = () => {
                                                                                           className="w-6 h-6 aspect-square object-cover"
                                                                                           alt="Shiba Inu"
                                                                                         />
-                                                                                                  <p className="text-white   font-bold glow text-sm px-4  ">+25</p>
+                                                                                                  <p className="text-white   font-bold glow text-sm px-4  ">+15</p>
                                                                                                   <Image 
                                                                                             src={Extra as StaticImageData} 
                                                                                           className="w-7 h-7 aspect-square object-cover"
@@ -1413,7 +1393,7 @@ const HomeTab = () => {
                                                                                         />
                                                                                                   </div>
                                                                                                   <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">50 Stars</p>
+                                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">55 Stars</p>
                                                                                                   <Image 
                                                                                             src={Star as StaticImageData} 
                                                                                           className="w-5 h-5 aspect-square object-cover"
@@ -1433,7 +1413,7 @@ const HomeTab = () => {
                                                                   <div className="h-2" />
                                                                                     <button onClick={() => {Itm == 0 ? '' : handleOpenLink()}} className={`${Itm ==0?'opacity-70':''} bg-[#ffae19]/[0.9] glowbox  flex px-3 rounded-xl border-white border-4  border-double  py-[8px] items-center justify-center text-center`}>
                                                                                      
-                                                                                     <p className="text-base text-white  font-bold">{Itm == 0 ? '' : 'Buy' } {Itm == 1 ? '+10,000 Extra WalkCoin' :Itm == 2 ? '+20,000 Extra WalkCoin' : Itm == 3 ? '+30,000 Extra WalkCoin' : Itm == 4 ? '+7 Extra Tickets': Itm == 5 ? '+15 Extra Tickets' : Itm == 6 ? '+25 Extra Tickets' : 'No Item Selected'}</p>
+                                                                                     <p className="text-base text-white  font-bold">{Itm == 0 ? '' : 'Buy' } {Itm == 1 ? '+10,000 Extra WalkCoin' :Itm == 2 ? '+15,000 Extra WalkCoin' : Itm == 3 ? '+20,000 Extra WalkCoin' : Itm == 4 ? '+5 Extra Tickets': Itm == 5 ? '+10 Extra Tickets' : Itm == 6 ? '+15 Extra Tickets' : 'No Item Selected'}</p>
                                                                                     
                                                                                     
                                                                                       </button>
@@ -1577,7 +1557,7 @@ const HomeTab = () => {
                                                                       className="w-7 h-7 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(25000).toLocaleString()}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(10000).toLocaleString()}</p>
                                                                                   </div>
                                                                                  
                                                                                   <div className="flex items-center">
@@ -1615,7 +1595,7 @@ const HomeTab = () => {
                                                                       className="w-7 h-7 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(50000).toLocaleString()}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(15000).toLocaleString()}</p>
                                                                                   </div>
                                                                                  
                                                                                   <div className="flex items-center">
@@ -1656,7 +1636,7 @@ const HomeTab = () => {
                                                                       className="w-7 h-7 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
-                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(100000).toLocaleString()}</p>
+                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">+{Number(20000).toLocaleString()}</p>
                                                                                   </div>
                                                                                  
                                                                                   <div className="flex items-center">
@@ -1687,11 +1667,11 @@ const HomeTab = () => {
                                                                              
                                                                               </div>
                                                                               <div className="flex mr-3 ml-3 mt-4 items-center space-x-1 justify-center">
-               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? 'You currently receive 0 extra WalkCoin tokens and 0 extra Raffle tickets from the vip club every two hours. ' : "You aren't currently receiving anything from the VIP club"}</p>
+               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? `You currently receive ${vipwalkcoinplus} extra WalkCoin tokens and ${vipticketplus} extra Raffle tickets from the vip club every two hours.` : "You aren't currently receiving anything from the VIP club"}</p>
                
                       </div>
                       <div className="flex mr-3 ml-3 items-center space-x-1 mt-4 justify-center">
-               <p className="text-[12px] text-[#ffae19]/[0.8]">
+               <p className="text-[13px] text-[#ffae19]/[0.8]">
                Add the following VIP code to your name in Telegram:
                                                                   </p>
                       </div>
@@ -1724,7 +1704,7 @@ const HomeTab = () => {
                 
                 <div className="flex mr-3 ml-3 items-center space-x-1 justify-center">
                 
-               <p className="text-[12px] text-[#ffae19]/[0.9]">
+               <p className="text-[13px] text-[#ffae19]/[0.9]">
                Once you have updated your name you will need to reload the app for the changes to take effect.
                                                                   </p>
                       </div>
@@ -1895,11 +1875,42 @@ const HomeTab = () => {
 
        <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
-        
 
-        <div className="flex justify-center items-center  mt-4 ">
+        <div className="flex grow mr-4 ml-4 mt-5 justify-between items-between">
+ 
+        <button onClick={() => setVip(true)} className={` flex space-x-1 bg-[#ffae19]/[0.9] glowbox border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
+                           
+          
+                           <div className="flex-1 text-center">
+                           <div className="flex items-center space-x-1 justify-center">
+                         
+                      <p className=" text-white font-semibold text-base truncate">VIP Club</p>
+                           </div>
+                           </div>
+                           <Image 
+            src={Vipticket as StaticImageData} 
+          className="w-8 h-8 aspect-square object-cover"
+          alt=""
+        />
+                           </button>
+
+                           <button onClick={() => setOpen(true)} className={` flex  bg-[#ffae19]/[0.9] glowbox border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
+                           
+          
+                           <div className="flex-1 text-center">
+                           <div className="flex items-center space-x-1 justify-center">
+                         
+                      <p className=" text-white font-semibold text-base truncate">Need Extra WalkCoin ?</p>
+                           </div>
+                           </div>
+                           </button>
+
+       
+  </div>
+
+        <div className="flex justify-center items-center mt-1 ">
           <div className="flex w-80 h-80 p-3"> 
-            <div className="flex grow w-full h-full relative  rounded-full border-4 border-double">
+            <div className="flex grow w-full h-full relative  rounded-full border-[#ffae19]/[0.9] glowbox border-4 border-double">
           <Image
        src={UserDt?.selectcharacter == "1"?  toypic:UserDt?.selectcharacter == "2" ? Mousey:UserDt?.selectcharacter == "3"?jackie:UserDt?.selectcharacter == "4"? swatguy:UserDt?.selectcharacter == "5"? ev:UserDt?.selectcharacter == "6"? AlienSoldier :Loading}
        className={`h-full w-full rounded-full absolute object-fill`}
