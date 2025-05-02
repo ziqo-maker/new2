@@ -1495,13 +1495,13 @@ const HomeTab = () => {
                <div className="flex w-[calc(100%-2rem)] mt-2  bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-full px-1 py-[3px] ">
                 <Image 
                 src={Vipticket as StaticImageData} 
-              className="w-11 h-11   aspect-square object-cover"
+              className="w-10 h-10   aspect-square object-cover"
               alt=""
             />
                       <div className="flex-grow text-center ">
                       <div className="flex flex-col items-center justify-center">
-                      <p className=" text-white font-black text-base mr-6 truncate">Number of VIP Tickets</p>
-                      <h1 className="text-base font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] mr-6 from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">{vipTicket}</h1>
+                      <p className=" text-white font-black text-[15px] mr-6 truncate">Number of VIP Tickets</p>
+                      <h1 className="text-[16px] font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] mr-6 from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">{vipTicket}</h1>
                       <p className="text-white font-Normal text-sm mr-6 glow">{hoursvip}h {minutesvip}m {secondsvip}s</p>
 
                       </div>
