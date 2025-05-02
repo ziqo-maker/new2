@@ -29,12 +29,10 @@ const TabContainer = () => {
     const { activeTab } = useTab()
      const { setUserData,UserDt } = React.useContext(NewUserContext);
  const [refresh, setRefresh] = useState<boolean>(false);
- const [chck, setChck] = useState<boolean>(false);
- var chckB = 0
       const timerRef = useRef<NodeJS.Timeout | null>(null);
        const [refreshB, setRefreshB] = useState<boolean>(false);
      useEffect(() => {
-      var chckC = 0
+           
            const initWebApp = async () => {
 
            
@@ -62,76 +60,52 @@ const TabContainer = () => {
         if (timerRef.current) {
           clearInterval(timerRef.current);
         };
+                    const gtpnt = Number(data.gtpoint)
                     const gtticket = Number(data.ticket)
        
+      
      setUserData({idd:String(data.idd),gtpoint:String(data.gtpoint),selectcharacter:String(data.selectcharacter),speedlvl:String(data.speedlvl),
                        upgrade:String(data.upgrade),username:String(data.username),value:String(data.value),firstname:String(data.firstname),ticket:String(gtticket)
-                     })       
-                     
-                     
-                     if(chck == false && chckB ==0 && chckC ==0){
-                      chckC++
-                      chckB++
-                      setChck(true)
-                      if(prm.length > 0){
-                        try {
-                          fetch('/api/invitereferal', {
-                          method: 'POST',
-                          headers: {
-                            'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
-                        })
-                        .then((res) => res.json())
-                        .then((data) => {
-                          if (data.success) {
-                            const gt = String(data.first)
-                            if(gt == "1"){
-                             
-                             new Toast({
-                               position: "top-center",
-                                                         toastMsg: `Hello, welcome to WalkCoin! The next time you open the app, you will receive your ${Number(50000).toLocaleString()} WalkCoin tokens.`,
-                                                         autoCloseTime: 15500,
-                                                         canClose: true,
-                                                         showProgress: true,
-                                                         pauseOnHover: true,
-                                                         pauseOnFocusLoss: true,
-                                                         type: "default",
-                                                         theme: "light"
-                                                       });
-                            }
-                          } else {
-                            
-                          }
-                        })
-                      } catch (err) {
-                      }
-                      }
+                     })                      
+                    
+                     if(prm.length > 0){
+                       try {
+                         fetch('/api/invitereferal', {
+                         method: 'POST',
+                         headers: {
+                           'Content-Type': 'application/json',
+                         },
+                         body: JSON.stringify({ idd:String(prm),idb: String(data.idd),referal:String(prm) }),
+                       })
+                       .then((res) => res.json())
+                       .then((data) => {
+                         if (data.success) {
+                           const gt = String(data.first)
+                           if(gt == "1"){
+                            new Toast({
+                              position: "top-center",
+                                                        toastMsg: `Hello, welcome to WalkCoin! The next time you open the app, you will receive your ${Number(50000).toLocaleString()} WalkCoin tokens.`,
+                                                        autoCloseTime: 15500,
+                                                        canClose: true,
+                                                        showProgress: true,
+                                                        pauseOnHover: true,
+                                                        pauseOnFocusLoss: true,
+                                                        type: "default",
+                                                        theme: "light"
+                                                      });
+                           }
+                         } else {
+                           
+                         }
+                       })
+                     } catch (err) {
+                     }
                      }
                      
 
-              
+ 
 
-           //          try {
-           //            fetch('/api/get-ticketbalance', {
-           //            method: 'POST',
-           //            headers: {
-           //              'Content-Type': 'application/json',
-           //            },
-           //            body: JSON.stringify({ idd: String(data.idd) }),
-           //          })
-           //          .then((res) => res.json())
-           //          .then((data) => {
-           //            if (data.success) {
-           //              const gtticket = Number(data.ticket)
-                        
-           // setUserData({idd:String(gtidd),speedlvl:String(gtspeedlvl),gtpoint:String(gtpnt),selectcharacter:String(selectchrctr),upgrade:String(gtupgrade),value:String(gtvalue),username:String(gtusername),ticket:String(gtticket),firstname:String(gtfirstname)})
-           //            } else {
-                        
-           //            }
-           //          })
-           //        } catch (err) {
-           //        }
+          
 
                    }
                  })
@@ -143,8 +117,6 @@ const TabContainer = () => {
           };
      
            initWebApp();
-
-         
     
           return () => {  if (timerRef.current) {
             clearInterval(timerRef.current);
@@ -192,6 +164,5 @@ const TabContainer = () => {
 }
 
 export default TabContainer
-
 
 
