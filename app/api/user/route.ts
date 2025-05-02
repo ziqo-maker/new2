@@ -41,8 +41,7 @@ export async function POST(req: NextRequest) {
 
         
       const fs = userData.first_name || userData.last_name  || userData.username || ''
-      let index = String(fs).indexOf("WalkCoin");
-      if(index < 0){
+      if(fs === String(user.firstName)){
         await prisma.user.update({
             where: { idd:String(userData.id) },
             data: { 
