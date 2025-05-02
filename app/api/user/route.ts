@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
         }
 
         
-      const fs = userData.first_name || userData.last_name || userData.username
+      const fs = userData.first_name || ''
       let userB = await prisma.ticket.findFirst({
             where: { idd:String(userData.id) }
         })
