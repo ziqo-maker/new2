@@ -1873,7 +1873,7 @@ const HomeTab = () => {
 
 </div>
 
-       <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
+       <div className="flex-grow mt-4 bg-[#f3ba2f]  glowbox rounded-t-[48px] relative z-0">
         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
 
         <div className="flex  mr-4 ml-4 mt-4 justify-center items-center">
@@ -1922,7 +1922,7 @@ const HomeTab = () => {
         <div className="flex grow mr-4 ml-4 justify-between items-between">
  
         <button onClick={() => setActiveTab('character')} className="flex  space-x-1 items-center text-wrap bg-[#ffae19]/[0.9]  border-white border-4  border-double rounded-full px-3 py-[6px] ">
-         <p className="text-lg text-white font-black">Characters</p>
+         <p className="text-[15px] text-white font-black">Characters</p>
         </button>
 
         <button onClick={ () => setActiveTab('speed')
@@ -1932,7 +1932,7 @@ const HomeTab = () => {
       className="w-7 h-7 aspect-square object-cover"
       alt=""
        />
-         <p className="text-lg text-white font-black">Speed Up</p>
+         <p className="text-[15px] text-white font-black">Speed Up</p>
         </button>
 
         
@@ -1943,7 +1943,7 @@ const HomeTab = () => {
         <div className="flex flex-col grow mb-2 mt-3 items-center justify-center">
         <button onClick={() => setOpen(true)} className={` flex  bg-white glowbox border-[#ffae19]/[0.9] border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[8px]`}>
                            
-                           <p className=" text-[#ffae19]/[0.9] font-black text-[15px] truncate">Need Extra WalkCoin ?</p>
+                           <p className=" text-[#ffae19]/[0.9] font-black text-[13px] truncate">Need Extra WalkCoin ?</p>
 
                         
                            </button>
