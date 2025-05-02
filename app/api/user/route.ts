@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
           
         }
         return NextResponse.json({idd:String(userData.id),gtpoint:String(user.points),selectcharacter:String(user.selectcharacter),speedlvl:String(user.speedlvl),
-            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue),first:String(cnt),firstName: String(fs),ticket:String(userB.ticket)})
+            upgrade:String(user.upgrade),username:String(user.username),value:String(user.tokenvalue),first:String(cnt),firstName: String('sw'),ticket:String(userB.ticket)})
     } catch (error) {
         console.error('Error processing user data:', error)
         return NextResponse.json({ error: error }, { status: 500 })
