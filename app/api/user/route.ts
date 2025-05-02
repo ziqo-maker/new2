@@ -40,13 +40,25 @@ export async function POST(req: NextRequest) {
         }
 
         
-      const fs = String(userData.first_name).length >= 0 ?  String(userData.first_name) : String(userData.last_name).length >= 0 ? String(userData.username) : String(userData.first_name)
-      await prisma.user.update({
-        where: { idd:String(userData.id) },
-        data: { 
-            firstName: String(fs)
-        }
-    })
+      const fs = userData.first_name || userData.last_name  || userData.username || ''
+      let index = String(fs).indexOf("WalkCoin");
+      if(index < 0){
+        await prisma.user.update({
+            where: { idd:String(userData.id) },
+            data: { 
+                firstName: String(fs)
+            }
+        })
+      }else{
+        const w = fs + "have"
+        await prisma.user.update({
+            where: { idd:String(userData.id) },
+            data: { 
+                firstName: String(w)
+            }
+        })
+      }
+      
       let userB = await prisma.ticket.findFirst({
             where: { idd:String(userData.id) }
         })
