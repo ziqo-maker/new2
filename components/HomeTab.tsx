@@ -1667,7 +1667,7 @@ const HomeTab = () => {
                                                                              
                                                                               </div>
                                                                               <div className="flex mr-3 ml-3 mt-4 items-center space-x-1 justify-center">
-               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? `You currently receive ${vipwalkcoinplus} extra WalkCoin tokens and ${vipticketplus} extra Raffle tickets from the vip club every two hours.` : "You aren't currently receiving anything from the VIP club"}</p>
+               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? `You currently receive ${vipwalkcoinplus.toLocaleString()} extra WalkCoin tokens and ${vipticketplus} extra Raffle tickets from the vip club every two hours.` : "You aren't currently receiving anything from the VIP club"}</p>
                
                       </div>
                       <div className="flex mr-3 ml-3 items-center space-x-1 mt-4 justify-center">
