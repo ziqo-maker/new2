@@ -1872,27 +1872,29 @@ const HomeTab = () => {
   }) }
 
 </div>
-<div className="flex  mr-4 ml-4 mt-2 justify-center items-center">
- 
-        <button onClick={() => setVip(true)} className={` flex space-x-1 bg-[#ffae19]/[0.9] glowbox border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
-                           
-          
-                           <div className="flex-1 text-center">
-                           <div className="flex items-center space-x-1 justify-center">
-                         
-                      <p className=" text-white font-semibold text-sm truncate">VIP Club</p>
-                           </div>
-                           </div>
-                           <Image 
-            src={Vipticket as StaticImageData} 
-          className="w-7 h-7 aspect-square object-cover"
-          alt=""
-        />
-                           </button>
-       
-  </div>
-       <div className="flex-grow mt-3 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
+
+       <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
+
+        <div className="flex  mr-4 ml-4 mt-4 justify-center items-center">
+ 
+ <button onClick={() => setVip(true)} className={` flex space-x-1 bg-[#ffae19]/[0.9] glowbox border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
+                    
+   
+                    <div className="flex-1 text-center">
+                    <div className="flex items-center space-x-1 justify-center">
+                  
+               <p className=" text-white font-semibold text-sm truncate">VIP Club</p>
+                    </div>
+                    </div>
+                    <Image 
+     src={Vipticket as StaticImageData} 
+   className="w-7 h-7 aspect-square object-cover"
+   alt=""
+ />
+                    </button>
+
+</div>
 
         <div className="flex justify-center items-center mt-1 ">
           <div className="flex w-80 h-80 p-3"> 
@@ -1938,14 +1940,14 @@ const HomeTab = () => {
   
         
 
-        <div className="flex flex-col grow mb-2 mt-2 items-center justify-center">
+        <div className="flex flex-col grow mb-2 mt-4 items-center justify-center">
         <button onClick={() => setOpen(true)} className={` flex  bg-white glowbox border-[#ffae19]/[0.9] border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
                            
                            <p className=" text-[#ffae19]/[0.9] font-semibold text-sm truncate">Need Extra WalkCoin ?</p>
 
                         
                            </button>
-        <div className="flex grow px-50 mt-2 justify-center items-center space-x-1">
+        <div className="flex grow px-50 mt-1 justify-center items-center space-x-1">
         <Image
         src={FootPrint as StaticImageData} 
       className="w-10 h-10"
