@@ -1900,7 +1900,7 @@ const HomeTab = () => {
                            <div className="flex-1 text-center">
                            <div className="flex items-center space-x-1 justify-center">
                          
-                      <p className=" text-white font-semibold text-base truncate">Need Extra WalkCoin ?</p>
+                      <p className=" text-white font-semibold text-[10px] text-base truncate">Need Extra WalkCoin ?</p>
                            </div>
                            </div>
                            </button>
