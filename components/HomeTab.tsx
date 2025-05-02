@@ -1873,7 +1873,7 @@ const HomeTab = () => {
 
 </div>
 
-       <div className="flex-grow mt-4 bg-[#f3ba2f]  glowbox rounded-t-[48px] relative z-0">
+       <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
 
         <div className="flex  mr-4 ml-4 mt-4 justify-center items-center">
