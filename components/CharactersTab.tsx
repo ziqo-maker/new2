@@ -382,15 +382,15 @@ const CharactersTab = () => {
     />
               <div className="flex-1 text-center mr-5">
               <div className="flex-col items-center justify-center">
-              <p className="text-lg text-white font-Large">Current price</p>
-              <p className=" text-white font-Large glow text-base truncate">${(Number(UserDt?.value)).toFixed(8)}</p>
+              <p className="text-[17px] text-white font-black">WalkCoin Price</p>
+              <p className=" text-white font-Large glow text-sm truncate">${(Number(UserDt?.value)).toFixed(8)}</p>
               </div>
               </div>
               </div>
               
        </div>
          <div className="flex flex-col items-center justify-center text-center ">
-          <p className="text-base w-[calc(100%-2rem)] text-[#ffae19]/[0.9] font-Large text-center text-wrap">By unlocking characters, you can increase the price of your WalkCoin tokens and walk with your favorite character</p>
+          <p className="text-[15px] w-[calc(100%-2rem)] text-[#ffae19]/[0.9] font-Large text-center text-wrap">By unlocking characters, you can increase the price of your WalkCoin tokens and walk with your favorite character</p>
           <div className="flex flex-col text-center mt-2 space-x-1 items-center justify-start">
           <Image
         src={Star as StaticImageData} 
@@ -408,7 +408,7 @@ const CharactersTab = () => {
                              <Image
         src={tab.Icon as StaticImageData} 
       className="w-2/3 aspect-square object-fill rounded-full text-[#ffae19]/[0.9] border-[#ffae19]/[0.9] glowbox border-4 border-double"
-      alt="Shiba Inu"
+      alt=""
        />
                 <div className={`bg-[#ffae19]/[0.9] mt-2 flex px-5 rounded-full   py-[10px] items-center justify-center text-center`}>
     
@@ -422,7 +422,7 @@ const CharactersTab = () => {
                  <Image 
         src={DollarB as StaticImageData} 
       className="w-7 h-7 aspect-square object-cover"
-      alt="Shiba Inu"
+      alt=""
     />
                  <p className="text-sm text-white glow font-bold">+{tab.dollar}</p>
                   </div>
