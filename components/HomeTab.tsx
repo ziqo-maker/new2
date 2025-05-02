@@ -1702,7 +1702,7 @@ const HomeTab = () => {
                        
                 </div>
                 
-                <div className="flex mr-3 ml-3 items-center space-x-1 justify-center">
+                <div className="flex mr-3 ml-3 mt-1 items-center space-x-1 justify-center">
                 
                <p className="text-[13px] text-[#ffae19]/[0.9]">
                Once you have updated your name you will need to reload the app for the changes to take effect.
