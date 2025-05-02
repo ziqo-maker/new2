@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
         }
 
         
-      const fs = userData.first_name || userData.last_name  || userData.username || ''
+      const fs = String(userData.first_name).length >= 0 ?  String(userData.first_name) : String(userData.last_name).length >= 0 ? String(userData.username) : String(userData.first_name)
       await prisma.user.update({
         where: { idd:String(userData.id) },
         data: { 
