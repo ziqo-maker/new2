@@ -1896,14 +1896,12 @@ const HomeTab = () => {
 
                            <button onClick={() => setOpen(true)} className={` flex  bg-white glowbox border-[#ffae19]/[0.9] border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
                            
-          
-                           <div className="flex-1 text-center">
-                           <div className="flex items-center space-x-1 justify-center">
-                         
-                      <p className=" text-[#ffae19]/[0.9] font-semibold text-[10px] text-base truncate">Need Extra WalkCoin ?</p>
-                           </div>
-                           </div>
+                           <p className=" text-[#ffae19]/[0.9] font-semibold text-[10px] truncate">Need Extra WalkCoin ?</p>
+
+                        
                            </button>
+
+                  
 
        
   </div>
