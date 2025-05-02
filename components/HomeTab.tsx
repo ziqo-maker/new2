@@ -1940,7 +1940,7 @@ const HomeTab = () => {
   
         
 
-        <div className="flex flex-col grow mb-2 mt-4 items-center justify-center">
+        <div className="flex flex-col grow mb-2 mt-3 items-center justify-center">
         <button onClick={() => setOpen(true)} className={` flex  bg-white glowbox border-[#ffae19]/[0.9] border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
                            
                            <p className=" text-[#ffae19]/[0.9] font-semibold text-sm truncate">Need Extra WalkCoin ?</p>
