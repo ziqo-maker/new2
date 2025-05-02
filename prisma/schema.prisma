@@ -140,3 +140,11 @@ model vipclub {
   date DateTime @default(now())
   dateMining DateTime @default(now())
 }
+
+model transactioncharacter {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  idcharacter String @db.VarChar(10)
+}
