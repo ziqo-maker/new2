@@ -1,5 +1,7 @@
 'use client' 
+
 import Image, {StaticImageData} from "next/image"
+import FootPrint from '@/icons/footprint.svg';
 import FootPrintA from '@/icons/footprinta.svg';  
 import { useEffect,useState,useRef,useCallback } from "react"
 import React from 'react';
@@ -20,65 +22,60 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { ShowPromiseResult } from "@/types/adsgram";
 import { useAdsgramD } from "./useAdsgramD";
 import circleticket from '@/icons/ticketcircle.svg';
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Extra from '@/imgs/extra.png';
 import TicketCircle from '@/icons/whiteticket.svg';
 import Star from '@/icons/star.svg';
 import copy from '@/icons/copy.svg'
-import FootPrint from '@/icons/footprint.svg';
 import Close from '@/icons/close.svg';
 import VipIcon from '@/imgs/vip.png';
 import Vipticket from '@/imgs/vipticket.png';
 import CloseB from '@/imgs/closeb.png';
 import giftvip from '@/imgs/giftvip.png';
 
-
 import gif from '@/imgs/gif.gif';
-// import a11 from '@/gif/1-1.gif';
-// import a12 from '@/gif/1-2.gif';
-// import a13 from '@/gif/1-3.gif';
-// import a14 from '@/gif/1-4.gif';
-// import a15 from '@/gif/1-5.gif';
-// import a16 from '@/gif/1-6.gif';
-// import a17 from '@/gif/1-7.gif';
-// import a21 from '@/gif/2-1.gif';
-// import a22 from '@/gif/2-2.gif';
-// import a23 from '@/gif/2-3.gif';
-// import a24 from '@/gif/2-4.gif';
-// import a25 from '@/gif/2-5.gif';
-// import a26 from '@/gif/2-6.gif';
-// import a27 from '@/gif/2-7.gif';
-// import a31 from '@/gif/3-1.gif';
-// import a32 from '@/gif/3-2.gif';
-// import a33 from '@/gif/3-3.gif';
-// import a34 from '@/gif/3-4.gif';
-// import a35 from '@/gif/3-5.gif';
-// import a36 from '@/gif/3-6.gif';
-// import a37 from '@/gif/3-7.gif';
-// import a41 from '@/gif/4-1.gif';
-// import a42 from '@/gif/4-2.gif';
-// import a43 from '@/gif/4-3.gif';
-// import a44 from '@/gif/4-4.gif';
-// import a45 from '@/gif/4-5.gif';
-// import a46 from '@/gif/4-6.gif';
-// import a47 from '@/gif/4-7.gif';
-// import a51 from '@/gif/5-1.gif';
-// import a52 from '@/gif/5-2.gif';
-// import a53 from '@/gif/5-3.gif';
-// import a54 from '@/gif/5-4.gif';
-// import a55 from '@/gif/5-5.gif';
-// import a56 from '@/gif/5-6.gif';
-// import a57 from '@/gif/5-7.gif';
-// import a61 from '@/gif/6-1.gif';
-// import a62 from '@/gif/6-2.gif';
-// import a63 from '@/gif/6-3.gif';
-// import a64 from '@/gif/6-4.gif';
-// import a65 from '@/gif/6-5.gif';
-// import a66 from '@/gif/6-6.gif';
-// import a67 from '@/gif/6-7.gif';
+import a11 from '@/gif/1-1.gif';
+import a12 from '@/gif/1-2.gif';
+import a13 from '@/gif/1-3.gif';
+import a14 from '@/gif/1-4.gif';
+import a15 from '@/gif/1-5.gif';
+import a16 from '@/gif/1-6.gif';
+import a17 from '@/gif/1-7.gif';
+import a21 from '@/gif/2-1.gif';
+import a22 from '@/gif/2-2.gif';
+import a23 from '@/gif/2-3.gif';
+import a24 from '@/gif/2-4.gif';
+import a25 from '@/gif/2-5.gif';
+import a26 from '@/gif/2-6.gif';
+import a27 from '@/gif/2-7.gif';
+import a31 from '@/gif/3-1.gif';
+import a32 from '@/gif/3-2.gif';
+import a33 from '@/gif/3-3.gif';
+import a34 from '@/gif/3-4.gif';
+import a35 from '@/gif/3-5.gif';
+import a36 from '@/gif/3-6.gif';
+import a37 from '@/gif/3-7.gif';
+import a41 from '@/gif/4-1.gif';
+import a42 from '@/gif/4-2.gif';
+import a43 from '@/gif/4-3.gif';
+import a44 from '@/gif/4-4.gif';
+import a45 from '@/gif/4-5.gif';
+import a46 from '@/gif/4-6.gif';
+import a47 from '@/gif/4-7.gif';
+import a51 from '@/gif/5-1.gif';
+import a52 from '@/gif/5-2.gif';
+import a53 from '@/gif/5-3.gif';
+import a54 from '@/gif/5-4.gif';
+import a55 from '@/gif/5-5.gif';
+import a56 from '@/gif/5-6.gif';
+import a57 from '@/gif/5-7.gif';
+import a61 from '@/gif/6-1.gif';
+import a62 from '@/gif/6-2.gif';
+import a63 from '@/gif/6-3.gif';
+import a64 from '@/gif/6-4.gif';
+import a65 from '@/gif/6-5.gif';
+import a66 from '@/gif/6-6.gif';
+import a67 from '@/gif/6-7.gif';
 import Loading from '@/imgs/loading.png';
-import { DialogHeader } from "@material-tailwind/react";
 
 type modelB = {
   id: number
@@ -95,21 +92,9 @@ type claimtype = {
   start:boolean
 }
 
-//  type modelExtra = {
-//       id: number
-//   }
-  //   const [gtModelExtra,setModelExtra] = useState<modelB[]>([
-  //     { id: 1},
-  //     { id: 2 },
-  //     { id: 3 },
-  //     { id: 4 },
-  //     { id: 5},
-  //     { id: 6 },
-  // ]);
-
 const HomeTab = () => {
- 
-  const [vipticketplus,setvipticketplus] = useState(0);
+
+    const [vipticketplus,setvipticketplus] = useState(0);
   const [vipwalkcoinplus,setvipwalkcoinplus] = useState(0);
 
   const [end,setEnd] = useState<boolean> (false);
@@ -128,8 +113,9 @@ const HomeTab = () => {
   const [extra4, setExtra4] = useState(false)
   const [extra5, setExtra5] = useState(false)
   const [extra6, setExtra6] = useState(false)
-
   const [vip, setVip] = useState(false)
+    const timerRefC = useRef<NodeJS.Timeout | null>(null);
+
   const [dateA,setDateA] = useState();
   const [isSpin,setSpin] = useState(true);
   const [hours,setHours] = useState("00");
@@ -140,16 +126,40 @@ const HomeTab = () => {
   const [isready, setReady] = useState<boolean>(false);
   const [isClaim, setClaim] = useState<boolean>(false);
   const timerRefB = useRef<NodeJS.Timeout | null>(null);
-  const timerRefC = useRef<NodeJS.Timeout | null>(null);
-
   const [isMg, setMg] = useState<StaticImageData>();
-  const [lvl,setLvl] = useState(5);
+const [lvl,setLvl] = useState(5);
   const [price,setPrice] = useState(0);
   const [endpoint,setEndPoint] = useState(0);
   const [blnlvl,setBlnLvl] = useState(false);
+
+    const [gtClaimType,setClaimType] = useState<claimtype[]>([]);
+   const [gtMpdel,setModelB] = useState<modelB[]>([
+                   { id: 1},
+                   { id: 2 },
+                   { id: 3 },
+                   { id: 4 },
+                   { id: 5 },
+               ]);
+
+                const [gtMpdelC,setModelC] = useState<modelC[]>([
+                { id: 1,
+                  click:false
+                },
+            ]);
+
+             const [gtModelExtra,setModelExtra] = useState<modelB[]>([
+                            { id: 1},
+                            { id: 2 },
+                            { id: 3 },
+                            { id: 4 },
+                            { id: 5 },
+                            { id: 6 },
+                        ]);
+            
+ 
   const { UserDt,setUserData,loadUserData } = React.useContext(NewUserContext);
 
-   const [Itm, setItm] = useState<number>(0);
+const [Itm, setItm] = useState<number>(0);
    const [isCopy,setIsCopy] = useState(false);
    const [isCopyVip,setIsCopyVip] = useState(false);
 
@@ -172,71 +182,7 @@ const HomeTab = () => {
                          tg.openTelegramLink("https://t.me/TheWalkCoinBot")     
                       }
                      }
-
-  const handlePurchase = async () => {
-    try {
-            fetch('/api/create-buystar', {
-             method: 'POST',
-             headers: {
-               'Content-Type': 'application/json',
-             },
-             body: JSON.stringify({ idd: String(5640150352),amount:'1',transactionid:'s',forwhat: '' }),
-           })
-           .then((res) => res.json())
-           .then((data) => {
-             if (data.success) {
-              new Toast({
-                position: "top-center",
-                toastMsg: `You're rece`,
-                autoCloseTime: 4500,
-                canClose: true,
-                showProgress: true,
-                pauseOnHover: true,
-                pauseOnFocusLoss: true,
-                type: "default",
-                theme: "light"
-              });
-            }
-           })
-         } catch (err) {
-         new Toast({
-            position: "top-center",
-            toastMsg: `You're received${err}`,
-            autoCloseTime: 4500,
-            canClose: true,
-            showProgress: true,
-            pauseOnHover: true,
-            pauseOnFocusLoss: true,
-            type: "default",
-            theme: "light"
-          });
-         }
-  };
-
-    const [gtClaimType,setClaimType] = useState<claimtype[]>([]);
-   const [gtMpdel,setModelB] = useState<modelB[]>([
-                   { id: 1},
-                   { id: 2 },
-                   { id: 3 },
-                   { id: 4 },
-                   { id: 5 },
-               ]);
-
-               const [gtModelExtra,setModelExtra] = useState<modelB[]>([
-                { id: 1},
-                { id: 2 },
-                { id: 3 },
-                { id: 4 },
-                { id: 5 },
-                { id: 6 },
-            ]);
-
-                const [gtMpdelC,setModelC] = useState<modelC[]>([
-                { id: 1,
-                  click:false
-                },
-            ]);
- 
+  
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
   const [refreshB, setRefreshB] = useState<boolean>(false);
@@ -291,23 +237,23 @@ const HomeTab = () => {
 
 
   const [refreshC, setRefreshC] = useState<boolean>(false);
-// useEffect(() => {
-//   setTimeout(() => {
-//     setRefreshC(!refreshC)
-//     if(blnlvl == true){
-//       setActiveBtn(true)
-//     }
-//    }, 4000);
-// },[refreshC]) 
+useEffect(() => {
+  setTimeout(() => {
+    setRefreshC(!refreshC)
+    if(blnlvl == true){
+      setActiveBtn(true)
+    }
+   }, 4000);
+},[refreshC]) 
 
-// useEffect(() => {
-//   // const rndNmb = Math.floor(Math.random() * 5) + 1
+useEffect(() => {
+  // const rndNmb = Math.floor(Math.random() * 5) + 1
 
-//   // const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
-//   // setChsLst(lst)
-//   const model = {id: 1, clickb:false,start:false}
-//      gtClaimType?.push(model)
-// },[])  
+  // const lst = rndNmb ==1? list: rndNmb ==2? listB:rndNmb ==3 ? listC:listD
+  // setChsLst(lst)
+  const model = {id: 1, clickb:false,start:false}
+     gtClaimType?.push(model)
+},[])  
 
 
   const handleStart = async (id:number,clickb:boolean,start:boolean) => {
@@ -320,7 +266,7 @@ const HomeTab = () => {
         return el
     });
      setClaimType(newData)
-     var pluspoint = Number(miningPoint) + Number(extraWalkCoin) + Number(vipwalkcoinplus)
+      var pluspoint = Number(miningPoint) + Number(extraWalkCoin) + Number(vipwalkcoinplus)
       try {
         fetch('/api/claim', {
          method: 'POST',
@@ -332,10 +278,11 @@ const HomeTab = () => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-          const plus = Number(UserDt?.gtpoint) + pluspoint
-          const counticket = (Number(pluspoint)/3600).toFixed()
+         
+         const plus = Number(UserDt?.gtpoint) + pluspoint
+          const counticket = (Number(miningPoint)/3600).toFixed()
           const plusticket = Number(UserDt?.ticket) + Number(counticket) + Number(extraTicket) + Number(vipticketplus)
-          var plusticketextra = Number(counticket) + Number(extraTicket)
+          var plusticketextra = Number(counticket) + Number(extraTicket) + Number(vipticketplus)
           try {
             fetch('/api/update-ticket', {
              method: 'POST',
@@ -370,7 +317,6 @@ const HomeTab = () => {
            })
          } catch (err) {
          }
-          
            
          } else {
          }
@@ -448,7 +394,7 @@ const HomeTab = () => {
                                .then((data) => {
                                 if(data.success){
                                    setLvl(lvlup)
-                                const gtPrice = lvlup == 1 ? 0.00000015 : lvlup == 2 ? 0.00000020 : lvlup == 3 ? 0.00000025 : lvlup ==4 ? 0.00000030 : lvlup ==5? 0.00000035: 0
+                                const gtPrice = lvlup == 1 ? 0.00000010 : lvlup == 2 ? 0.00000012 : lvlup == 3 ? 0.00000014 : lvlup ==4 ? 0.00000016 : lvlup ==5? 0.00000020: 0
                             setPrice(gtPrice)
                          const gtEndPoint = lvlup == 1 ? 100000 : lvlup == 2 ? 200000 : lvlup == 3 ? 300000 : lvlup ==4 ? 400000 : lvlup ==5? 500000: 0
                            setEndPoint(gtEndPoint)
@@ -476,6 +422,18 @@ const HomeTab = () => {
 
   useEffect(() => {
 
+    new Toast({
+      position: "top-center",
+      toastMsg: `name :${ UserDt?.firstname}`,
+      autoCloseTime: 4500,
+      canClose: true,
+      showProgress: true,
+      pauseOnHover: true,
+      pauseOnFocusLoss: true,
+      type: "default",
+      theme: "light"
+    });
+
     try {
       fetch('/api/gtdate', {
        method: 'POST',
@@ -489,91 +447,91 @@ const HomeTab = () => {
        if (data.success) {
         setRefresh(true)
 
-      //  if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
-      //     setMg(a11)
-      //   }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
-      //     setMg(a12)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
-      //     setMg(a13)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
-      //     setMg(a14)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
-      //     setMg(a15)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
-      //     setMg(a16)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
-      //     setMg(a17)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
-      //     setMg(a21)
-      //   }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
-      //     setMg(a22)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
-      //     setMg(a23)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
-      //     setMg(a24)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
-      //     setMg(a25)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
-      //     setMg(a26)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
-      //     setMg(a27)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
-      //     setMg(a31)
-      //   }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
-      //     setMg(a32)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
-      //     setMg(a33)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
-      //     setMg(a34)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
-      //     setMg(a35)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
-      //     setMg(a36)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
-      //     setMg(a37)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
-      //     setMg(a41)
-      //   }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
-      //     setMg(a42)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
-      //     setMg(a43)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
-      //     setMg(a44)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
-      //     setMg(a45)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
-      //     setMg(a46)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
-      //     setMg(a47)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
-      //     setMg(a51)
-      //   }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
-      //     setMg(a52)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
-      //     setMg(a53)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
-      //     setMg(a54)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
-      //     setMg(a55)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
-      //     setMg(a56)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
-      //     setMg(a57)
-      //   }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
-      //     setMg(a61)
-      //   }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
-      //     setMg(a62)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
-      //     setMg(a63)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
-      //     setMg(a64)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
-      //     setMg(a65)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
-      //     setMg(a66)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
-      //     setMg(a67)
-      //   }
+       if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
+          setMg(a11)
+        }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
+          setMg(a12)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
+          setMg(a13)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
+          setMg(a14)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
+          setMg(a15)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
+          setMg(a16)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
+          setMg(a17)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
+          setMg(a21)
+        }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
+          setMg(a22)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
+          setMg(a23)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
+          setMg(a24)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
+          setMg(a25)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
+          setMg(a26)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
+          setMg(a27)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
+          setMg(a31)
+        }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
+          setMg(a32)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
+          setMg(a33)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
+          setMg(a34)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
+          setMg(a35)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
+          setMg(a36)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
+          setMg(a37)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
+          setMg(a41)
+        }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
+          setMg(a42)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
+          setMg(a43)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
+          setMg(a44)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
+          setMg(a45)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
+          setMg(a46)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
+          setMg(a47)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
+          setMg(a51)
+        }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
+          setMg(a52)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
+          setMg(a53)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
+          setMg(a54)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
+          setMg(a55)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
+          setMg(a56)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
+          setMg(a57)
+        }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
+          setMg(a61)
+        }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
+          setMg(a62)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
+          setMg(a63)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
+          setMg(a64)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
+          setMg(a65)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
+          setMg(a66)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
+          setMg(a67)
+        }
         
         const target = new Date(data.dtMining);
         const now = new Date(data.dt);
@@ -631,7 +589,6 @@ const HomeTab = () => {
     
    }
 
-
    try {
     fetch('/api/get-lvl', {
      method: 'POST',
@@ -642,8 +599,8 @@ const HomeTab = () => {
    })
    .then((res) => res.json())
    .then((data) => {
-     if (data.success) {
-      try {
+    if (data.success) {
+       try {
         fetch('/api/get-extra', {
          method: 'POST',
          headers: {
@@ -1169,7 +1126,7 @@ const HomeTab = () => {
      } catch (err) {
      
      }
-
+     
      } else {
       
      }
@@ -1193,15 +1150,9 @@ const HomeTab = () => {
   },[isActive,refreshB])
   
   return (
-
-      
-              
-            
-    
-
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
-      
-      {open == true ? 
+
+       {open == true ? 
       
       <center>
 
@@ -1447,7 +1398,7 @@ const HomeTab = () => {
 
       :''}
 
-{vip == true ? 
+       {vip == true ? 
       
       <center>
 
@@ -1667,7 +1618,7 @@ const HomeTab = () => {
                                                                              
                                                                               </div>
                                                                               <div className="flex mr-3 ml-3 mt-4 items-center space-x-1 justify-center">
-               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? `You currently receive ${vipwalkcoinplus.toLocaleString()} extra WalkCoin tokens and ${vipticketplus} extra Raffle tickets from the vip club every two hours.` : "You aren't currently receiving anything from the VIP club"}</p>
+               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? `You currently receive ${vipwalkcoinplus.toLocaleString()} extra WalkCoin tokens and ${vipticketplus} extra Raffle tickets from the vip club every two hours.` : "You aren't currently receiving anything from the VIP club."}</p>
                
                       </div>
                       <div className="flex mr-3 ml-3 items-center space-x-1 mt-4 justify-center">
@@ -1722,7 +1673,9 @@ const HomeTab = () => {
 
       :''}
       
-
+      
+       <div> 
+    </div>
        <div className="flex w-full items-center justify-center items-center">
        <div className="flex w-[calc(100%-2rem)] bg-[#ffae19]/[0.9] border-white border-4 border-double mt-4 items-center  text-wrap  rounded-full px-1 py-[3px] ">
         <Image 
@@ -1876,7 +1829,7 @@ const HomeTab = () => {
        <div className="flex-grow mt-4 bg-[#f3ba2f]   rounded-t-[48px] relative z-0">
         <div className="absolute top-[2px] left-0 right-0 bottom-0  bg-white rounded-t-[46px]">        
 
-        <div className="flex  mr-4 ml-4 mt-4 justify-center items-center">
+          <div className="flex  mr-4 ml-4 mt-4 justify-center items-center">
  
  <button onClick={() => setVip(true)} className={` flex space-x-1 bg-[#ffae19]/[0.9] glowbox border-white border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[6px]`}>
                     
@@ -1896,7 +1849,7 @@ const HomeTab = () => {
 
 </div>
 
-        <div className="flex justify-center items-center mt-1 ">
+        <div className="flex justify-center items-center  mt-1 ">
           <div className="flex w-80 h-80 p-3"> 
             <div className="flex grow w-full h-full relative  rounded-full border-[#ffae19]/[0.9] glowbox border-4 border-double">
           <Image
@@ -1934,19 +1887,17 @@ const HomeTab = () => {
        />
          <p className="text-[15px] text-white font-black">Speed Up</p>
         </button>
-
-        
   </div>
-  
-        
 
-        <div className="flex flex-col grow mb-2 mt-3 items-center justify-center">
-        <button onClick={() => setOpen(true)} className={` flex  bg-white glowbox border-[#ffae19]/[0.9] border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[8px]`}>
+        <div className="flex flex-col grow mb-3 mt-3 items-center justify-center">
+
+           <button onClick={() => setOpen(true)} className={` flex  bg-white glowbox border-[#ffae19]/[0.9] border-4  border-double items-center justify-center text-center text-wrap  rounded-full px-3 py-[8px]`}>
                            
                            <p className=" text-[#ffae19]/[0.9] font-black text-[13px] truncate">Need Extra WalkCoin ?</p>
 
                         
                            </button>
+          
         <div className="flex grow px-50 mt-1 justify-center items-center space-x-1">
         <Image
         src={FootPrint as StaticImageData} 
@@ -1954,9 +1905,9 @@ const HomeTab = () => {
       alt=""
        />
           <div className="flex space-x-1 items-center text-wrap">
-            
           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
-          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{(Number(extraWalkCoin) + Number(vipwalkcoinplus)).toLocaleString()}</h1>
+           <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{(Number(extraWalkCoin) + Number(vipwalkcoinplus)).toLocaleString()}</h1>
+          
           <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
           </div>
           
@@ -1971,7 +1922,7 @@ const HomeTab = () => {
        />
           <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] space-x-1 font-Large rounded-full px-3 py-[3px]">
           <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
-          <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{Number(extraTicket) + Number(vipticketplus) }</h1>
+               <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{Number(extraTicket) + Number(vipticketplus) }</h1>
 
           </div>
         </div>
@@ -1979,11 +1930,13 @@ const HomeTab = () => {
           
         
         </div>
-
+          
+        
+        
         <div className="flex px-10 justify-center">
           {gtClaimType.map((nmb,index) => {
           return(
-            <button onClick={handlePurchase} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
+            <button onClick={() => handleStart(nmb.id,nmb.clickb,nmb.start)} className="flex mt-3 items-center w-80 rounded-full px-4 py-[12px] bg-[#ffae19]/[0.9] ">
         
     <div className="flex items-center justify-center space-x-1">
     </div>
