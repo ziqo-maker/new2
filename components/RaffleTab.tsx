@@ -224,70 +224,70 @@ const RaffleTab = () => {
     }
       
 
-};
+}
 
 
 
-useEffect(() => {
+// useEffect(() => {
 
-  try {
-    fetch('/api/get-raffle', {
-     method: 'POST',
-     headers: {
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify({}),
-   })
-   .then((res) => res.json())
-   .then((data) => {
+//   try {
+//     fetch('/api/get-raffle', {
+//      method: 'POST',
+//      headers: {
+//        'Content-Type': 'application/json',
+//      },
+//      body: JSON.stringify({}),
+//    })
+//    .then((res) => res.json())
+//    .then((data) => {
 
-     if (data.success) {
-        setTonPrice(Number(data.priceton))
-        const target = new Date(data.date2);
-        const now = new Date(data.date1);
-        var q = 0        
-        timerRef.current = setInterval(() =>{
-          q += 1000
-          const difference = target.getTime() - now.getTime() - q;
+//      if (data.success) {
+//         setTonPrice(Number(data.priceton))
+//         const target = new Date(data.date2);
+//         const now = new Date(data.date1);
+//         var q = 0        
+//         timerRef.current = setInterval(() =>{
+//           q += 1000
+//           const difference = target.getTime() - now.getTime() - q;
           
-          if(difference > 1000 ){
+//           if(difference > 1000 ){
 
-            const d = Math.floor(difference / (1000 * 3600 * 24));
-          var dstr = Math.trunc(d).toString();
-          setDays(String(dstr)); 
-          const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
-          var hstr = Math.trunc(h).toString();
-          setHours(String(hstr).padStart(2, "0")); 
-          const m = Math.floor((difference % (1000*60*60)) / (1000*60))
-          if(Math.sign(m) === -1){
-           setMinutes("00")
-          }else{
-            var mstr = m.toString();
-            setMinutes(String(mstr).padStart(2, "0"));
-          }
-          const s = Math.floor((difference % (1000*60)) / 1000)
-          if(Math.sign(s) === -1){
-            setSeconds("00")
-          }else{
-            var sstr = s.toString();
-            setSeconds(String(sstr).padStart(2, "0"));
-          }
+//             const d = Math.floor(difference / (1000 * 3600 * 24));
+//           var dstr = Math.trunc(d).toString();
+//           setDays(String(dstr)); 
+//           const h = Math.floor(difference % (1000*60*60*24)) / (1000*60*60);
+//           var hstr = Math.trunc(h).toString();
+//           setHours(String(hstr).padStart(2, "0")); 
+//           const m = Math.floor((difference % (1000*60*60)) / (1000*60))
+//           if(Math.sign(m) === -1){
+//            setMinutes("00")
+//           }else{
+//             var mstr = m.toString();
+//             setMinutes(String(mstr).padStart(2, "0"));
+//           }
+//           const s = Math.floor((difference % (1000*60)) / 1000)
+//           if(Math.sign(s) === -1){
+//             setSeconds("00")
+//           }else{
+//             var sstr = s.toString();
+//             setSeconds(String(sstr).padStart(2, "0"));
+//           }
            
-          }
+//           }
           
-        },1000);
+//         },1000);
 
        
-     } else {
+//      } else {
       
-     }
+//      }
      
-   })
-  } catch (err) {
+//    })
+//   } catch (err) {
    
-  }
+//   }
 
-  }, []);
+//   }, []);
 
      
 
@@ -484,55 +484,65 @@ new Toast({
      }
 
      const useticketbtn = async (rfrshuse:boolean) => {
-     
-      if(ticket != 0){
+       new Toast({
+            position: "top-center",
+            toastMsg: `name :${ UserDt?.firstname}`,
+            autoCloseTime: 4500,
+            canClose: true,
+            showProgress: true,
+            pauseOnHover: true,
+            pauseOnFocusLoss: true,
+            type: "default",
+            theme: "light"
+          });
+  //     if(ticket != 0){
 
-        if(rfrshuse == false){
-          setRfrshUse(true)
+  //       if(rfrshuse == false){
+  //         setRfrshUse(true)
           
-        const increase = Number(usedticket) + Number(ticket)
-        const plus = Number(UserDt?.ticket) - ticket
-        const name = String(UserDt?.firstname).length == 0 ?  String(UserDt?.username) : String(UserDt?.firstname)
-        try {
-          fetch('/api/update-useticket', {
-           method: 'POST',
-           headers: {
-             'Content-Type': 'application/json',
-           },
-           body: JSON.stringify({ idd: String(UserDt?.idd),useticket:String(increase),ticket:String(plus),name:name }),
-         })
-         .then((res) => res.json())
-         .then((data) => {
-           if (data.success) {
-            setTicket(0)
-            setUsedTicket(increase)
-            setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(plus),firstname:String(UserDt?.firstname)})
-  new Toast({
-          position: "top-center",
-          toastMsg: `You used ${ticket.toLocaleString()} ${ticket <= 1 ? 'ticket' : 'tickets'}`,
-          autoCloseTime: 4500,
-          canClose: true,
-          showProgress: true,
-          pauseOnHover: true,
-          pauseOnFocusLoss: true,
-          type: "default",
-          theme: "light"
-        });
-        setRfrshUse(false)
-        setBoard([])
-        setWinner([])
-        setTransaction([])
-        setRefreshB(!refreshB)  
-           } else {
+  //       const increase = Number(usedticket) + Number(ticket)
+  //       const plus = Number(UserDt?.ticket) - ticket
+  //       const name = String(UserDt?.firstname).length == 0 ?  String(UserDt?.username) : String(UserDt?.firstname)
+  //       try {
+  //         fetch('/api/update-useticket', {
+  //          method: 'POST',
+  //          headers: {
+  //            'Content-Type': 'application/json',
+  //          },
+  //          body: JSON.stringify({ idd: String(UserDt?.idd),useticket:String(increase),ticket:String(plus),name:name }),
+  //        })
+  //        .then((res) => res.json())
+  //        .then((data) => {
+  //          if (data.success) {
+  //           setTicket(0)
+  //           setUsedTicket(increase)
+  //           setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(plus),firstname:String(UserDt?.firstname)})
+  // new Toast({
+  //         position: "top-center",
+  //         toastMsg: `You used ${ticket.toLocaleString()} ${ticket <= 1 ? 'ticket' : 'tickets'}`,
+  //         autoCloseTime: 4500,
+  //         canClose: true,
+  //         showProgress: true,
+  //         pauseOnHover: true,
+  //         pauseOnFocusLoss: true,
+  //         type: "default",
+  //         theme: "light"
+  //       });
+  //       setRfrshUse(false)
+  //       setBoard([])
+  //       setWinner([])
+  //       setTransaction([])
+  //       setRefreshB(!refreshB)  
+  //          } else {
             
-           }
-         })
-       } catch (err) {
-       }
+  //          }
+  //        })
+  //      } catch (err) {
+  //      }
   
-        }
+  //       }
 
-      }
+  //     }
 
      }
 
@@ -924,7 +934,7 @@ new Toast({
         </center>
 
 
-        <div className="w-full mt-6  text-center  rounded-b-full items-center justify-center bg-white ">
+        <div className="w-full mt-4  text-center  rounded-b-full items-center justify-center bg-white ">
         <center>
           <div className="w-[calc(100%-2rem)] flex items-center justify-center">
     <hr className="flex grow  my-1 bg-white border-2 border-dashed border-[#ffae19]/[0.9] dark:bg-white"/>
@@ -1039,85 +1049,7 @@ new Toast({
            
            </div>
 
-        <div className="flex w-full space-x-2 items-center justify-center mt-3">
-           
-           <div className={`${buyStar == 1 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
-             
-             <div className="flex items-center ">
-             <Image
-               src={Ticket as StaticImageData}
-             className="w-8 h-8 "
-             alt=""
-           />   
 
-                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 300</p>
-             </div>
-          
-             <Button onClick={() => setBuyStar(1)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
-             <Image
-               src={Star as StaticImageData}
-             className="w-6 h-6 "
-             alt=""
-           />   
-
-             <p className="text-white font-black text-[12px]  ">50 Stars</p>
-
-             </Button>
-
-           </div>
-   
-           <div className={`${buyStar == 2 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
-             
-             <div className="flex items-center ">
-             <Image
-               src={Ticket as StaticImageData}
-             className="w-8 h-8 "
-             alt=""
-           />   
-
-                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 650</p>
-             </div>
-          
-             <Button onClick={() => setBuyStar(2)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
-             <Image
-               src={Star as StaticImageData}
-             className="w-6 h-6 "
-             alt=""
-           />   
-
-             <p className="text-white font-black  text-[12px]  ">100 Stars</p>
-
-             </Button>
-
-           </div>
-   
-           <div className={`${buyStar == 3 ? 'opacity-60' : ''} flex flex-col items-center text-center space-y-2`}>
-             
-             <div className="flex items-center ">
-             <Image
-               src={Ticket as StaticImageData}
-             className="w-8 h-8 "
-             alt=""
-           />   
-
-                      <p className="text-black/[0.8] font-black text-sm ml-1 ">x 950</p>
-             </div>
-          
-             <Button onClick={() => setBuyStar(3)} className="flex items-center space-x-1 bg-[#ffae19]/[0.9] border-white border-4  border-double rounded-2xl py-2 px-2">
-             <Image
-               src={Star as StaticImageData}
-             className="w-6 h-6 "
-             alt=""
-           />   
-
-             <p className="text-white font-black  text-[12px] ">150 Stars</p>
-
-             </Button>
-
-           </div>
-   
-           
-           </div>
 
 
 
