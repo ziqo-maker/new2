@@ -807,10 +807,10 @@ new Toast({
         />  
             
             <div className="flex flex-col items-center justify-center text-center">
-                <p className="text-black/[0.7] font-black text-sm">Sponsored</p>
+                <p className="text-black/[0.7] font-black text-sm">Sponsor</p>
 
  <button
-            onClick={handleWalletAction}
+            onClick={handleImoon}
             className="flex flex-col mt-1  bg-black text-center items-center justify-center text-white text-[15px] border-white border-4  border-double font-bold py-2 px-6 rounded-full"
           >
            
