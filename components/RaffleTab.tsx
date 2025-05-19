@@ -713,6 +713,14 @@ new Toast({
           }
          }
 
+     const handleImoon = () => {
+          if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+            const tg = window.Telegram.WebApp
+          tg.ready()
+             tg.openTelegramLink("https://imoon.casino/en?aff=b2c1001-1000775_0")     
+          }
+         }
+
     return (
         <div className=" flex justify-center overflow-y-auto">
          <div className="w-full h-screen bg-white flex-col ">
@@ -770,7 +778,7 @@ new Toast({
         {tonAddress ? (
         <div className="flex flex-col mt-2  items-center">
           <button
-            onClick={handleWalletAction}
+            onClick={handleImoon}
             className="bg-red-500 hover:bg-red-700 text-white text-[15px] font-bold py-2 px-4 rounded-full"
           >
             Disconnect Wallet
