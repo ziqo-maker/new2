@@ -787,7 +787,7 @@ new Toast({
       )}
                 </div>
 
-         <div className="w-full mt-2 flex flex-col text-center justify-center">
+         <div className="w-full flex flex-col text-center justify-center">
 
       <div className="flex mt-3 items-center justify-center space-x-2">
               
