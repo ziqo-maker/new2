@@ -717,7 +717,7 @@ new Toast({
           if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
             const tg = window.Telegram.WebApp
           tg.ready()
-             tg.openTelegramLink("https://imoon.casino/en?aff=b2c1001-1000775_0")     
+             tg.openLink("https://imoon.casino/en?aff=b2c1001-1000775_0")     
           }
          }
 
