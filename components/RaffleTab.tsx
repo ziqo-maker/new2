@@ -787,33 +787,36 @@ new Toast({
       )}
                 </div>
 
-           <div className="w-full mt-2 flex flex-col text-center justify-center">
-
-  <p className="text-black/[0.7] font-black text-base">Sponsored</p>
+         <div className="w-full mt-2 flex flex-col text-center justify-center">
 
       <div className="flex mt-3 items-center justify-center space-x-2">
               
 
                 <Image
             src={imoon as StaticImageData}
-          className="w-20 h-20 rounded-lg border-black border-4  border-double aspect-square object-fit "
+          className="w-24 h-24 rounded-lg border-black border-4  border-double aspect-square object-fit "
           alt=""
         />  
             
-      <button
+            <div className="flex flex-col items-center justify-center text-center">
+                <p className="text-black/[0.7] font-black text-sm">Sponsored</p>
+
+ <button
             onClick={handleWalletAction}
-            className="flex flex-col  bg-black text-center items-center justify-center text-white text-[15px] border-white border-4  border-double font-bold py-2 px-6 rounded-full"
+            className="flex flex-col mt-1  bg-black text-center items-center justify-center text-white text-[15px] border-white border-4  border-double font-bold py-2 px-6 rounded-full"
           >
            
           <Image
             src={imoonsvg as StaticImageData}
-          className="w-16 h-10 aspect-square object-fit "
+          className="w-14 h-8 aspect-square object-fit "
           alt=""
         />    
          
               <p className="text-white font-black  text-[10px]">Join iMoon and Start Winning!</p>
 
           </button>
+            </div>
+     
 
                 </div>
 
