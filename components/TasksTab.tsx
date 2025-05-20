@@ -662,7 +662,7 @@ const [watchAd,setWatchad] = useState<number> (0);
        }
       // }
 
-      if(gtTasksCreated.length == 0){
+      // if(gtTasksCreated.length == 0){
         try {
           fetch('/api/get-createtask', {
            method: 'POST',
@@ -711,7 +711,7 @@ const [watchAd,setWatchad] = useState<number> (0);
        } catch (err) {
         
        }
-      }
+      // }
 
        if(refresh == false) {
         timerRef.current = setInterval(() =>{
