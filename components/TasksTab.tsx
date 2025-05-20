@@ -426,7 +426,7 @@ const [watchAd,setWatchad] = useState<number> (0);
 
     useEffect(() => {
       
-      if(gtTasks.length == 0){
+      // if(gtTasks.length == 0){
         try {
           fetch('/api/get-tasks', {
            method: 'POST',
@@ -660,7 +660,7 @@ const [watchAd,setWatchad] = useState<number> (0);
        } catch (err) {
         
        }
-      }
+      // }
 
       if(gtTasksCreated.length == 0){
         try {
