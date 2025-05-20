@@ -442,6 +442,7 @@ const [watchAd,setWatchad] = useState<number> (0);
               if (timerRef.current) {
         clearInterval(timerRef.current);
       };
+      setLoading(false)
             const findpending: number[] = data.pendingtasks
             data.all.forEach((t: any)=> {
               const found = findpending.find(item => item === t.id);
@@ -461,7 +462,7 @@ const [watchAd,setWatchad] = useState<number> (0);
              const doneTasks: number[] = data.donetasks
              setDoneTasks(doneTasks.toString())
              gtTasks.push(model)
-             setLoading(false)
+             
             })
 
              try {
