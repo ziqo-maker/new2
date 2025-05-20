@@ -10,7 +10,6 @@ export async function POST(req: NextRequest) {
         const str: string = String(user?.donecreatedtasks);
         const t = str.split(',').map(Number);
         const getTasks = await prisma.taskuser.findMany({
-          take: 7,
             where: {
               NOT: {
                 id: {in: t}
