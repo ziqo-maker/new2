@@ -1,5 +1,5 @@
 'use client'
- 
+  
 import Image, {StaticImageData} from "next/image";
 import FootPrint from '@/icons/footprint.svg';
 import Dollar from '@/icons/Dollar.svg';
