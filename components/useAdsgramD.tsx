@@ -28,7 +28,7 @@ export function useAdsgramD({ blockId, onReward, onError }: useAdsgramParams): (
         })
         .catch((result: ShowPromiseResult) => {
           // user get error during playing ad
-          
+         
         });
     } else {
       

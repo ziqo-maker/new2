@@ -1,5 +1,5 @@
 'use client'
-       
+      
 import Image, {StaticImageData} from "next/image";
 import { useState,useEffect } from 'react'
 import Toast from 'typescript-toastify';
@@ -36,8 +36,20 @@ import sticker from '@/imgs/sticker.png';
 import snow from '@/imgs/snow.png';
 import whitedogs from '@/imgs/whitedogs.png';
 import layer from '@/imgs/layer.png';
-import net from '@/imgs/layer.png';
+import net from '@/imgs/net.png';
+import hub from '@/imgs/hub.png';
 import adswatchicon from '@/icons/adswatchicon.svg';
+import memes from '@/imgs/memes.png';
+import evobots from '@/imgs/evobots.png';
+import robus from '@/imgs/robus.png';
+import addup from '@/imgs/addup.png';
+import kombat from '@/imgs/kombat.png';
+import usdt from '@/imgs/usdt.png';
+import outmine from '@/imgs/kombat.png';
+import bawan from '@/imgs/bawan.png';
+import dino from '@/imgs/dino.png';
+import trump from '@/imgs/trump.png';
+import portal from '@/imgs/portal.png';
 
 
 type Task = {
@@ -92,6 +104,9 @@ const TasksTab = () => {
       const [refreshB, setRefreshB] = useState<boolean>(false);
           const [hideVisit, setHideVisit] = useState<boolean>(false);
       const [ad, setAd] = useState<boolean>(false);
+       const [adB, setAdB] = useState<boolean>(false);
+      const [adC, setAdC] = useState<boolean>(false);
+      const [adRefresh, setAdRefresh] = useState<boolean>(false);
       const [countAd,setCountAd] = useState<number> (0);
       const [wait,setWait] = useState<boolean> (false);
 
@@ -111,10 +126,9 @@ const [watchAd,setWatchad] = useState<number> (0);
         const [days,setDays] = useState("00");
    const [refreshAds,setRefreshAds] = useState<boolean> (true);
 
-        const [end,setEnd] = useState<boolean> (false);
+         const [end,setEnd] = useState<boolean> (false);
         const [start,setStart] = useState<boolean> (false);
-
-
+      
     const handlePendingB = async(id:string,pendingcreatedtasks:string | undefined,click:boolean | undefined,isDoing:boolean | undefined,url:string) => {
       const rndNmb = Math.floor(Math.random() * 2) + 1
       if(!click && !isDoing){
@@ -128,7 +142,7 @@ const [watchAd,setWatchad] = useState<number> (0);
        setTaskCreated(newData)
         const str = `${pendingcreatedtasks},${id}`
         setPendingCreatedTasks(str)
-        if(rndNmb == 1){
+        
           try {
             fetch('/api/pending-taskcreated', {
              method: 'POST',
@@ -146,7 +160,7 @@ const [watchAd,setWatchad] = useState<number> (0);
          } catch (err) {
           
          }
-        }
+        
         
       }
      
@@ -167,7 +181,7 @@ const [watchAd,setWatchad] = useState<number> (0);
        
        const str = `${pendingtasks},${id}`
         setPendingTasks(str)
-       if(rndNmb == 1){
+       
         try {
           fetch('/api/pendingtask', {
            method: 'POST',
@@ -185,7 +199,7 @@ const [watchAd,setWatchad] = useState<number> (0);
        } catch (err) {
         
        }
-       }
+       
         
      }
      
@@ -442,7 +456,7 @@ const [watchAd,setWatchad] = useState<number> (0);
               if (timerRef.current) {
         clearInterval(timerRef.current);
       };
-      setLoading(false)
+            setLoading(false)
             const findpending: number[] = data.pendingtasks
             data.all.forEach((t: any)=> {
               const found = findpending.find(item => item === t.id);
@@ -482,7 +496,7 @@ const [watchAd,setWatchad] = useState<number> (0);
                 const now = new Date(data.dt);
                 const difference = target.getTime() - now.getTime();
                  setWatchad(Number(data.cnt))
-                     
+                  setStart(true)
                  if (timerRefB.current) {
             clearInterval(timerRefB.current);
           }
@@ -714,6 +728,8 @@ const [watchAd,setWatchad] = useState<number> (0);
        }
       }
 
+      
+
        if(refresh == false) {
         timerRef.current = setInterval(() =>{
          
@@ -723,7 +739,7 @@ const [watchAd,setWatchad] = useState<number> (0);
       return () => {  if (timerRef.current) {
         clearInterval(timerRef.current);
       };
- if (timerRefB.current) {
+   if (timerRefB.current) {
       clearInterval(timerRefB.current);
     }
     };
@@ -746,11 +762,9 @@ const [watchAd,setWatchad] = useState<number> (0);
     },[])
 
 
-   useEffect(() => {
-      if(ad == true){
-        const handleAd = async () => {
-           
-          setWatchad(watchAd+1)
+       useEffect(() => {
+          if(ad == true){
+                
           try {
             fetch('/api/update-countads', {
              method: 'POST',
@@ -762,13 +776,21 @@ const [watchAd,setWatchad] = useState<number> (0);
            .then((res) => res.json())
            .then((data) => {
              if (data.success) {
-              
+               
+             setAdRefresh(false)
             }
             
            })
          } catch (err) {
-         }
-           
+         } 
+       }
+    },[ad])
+     
+      
+  useEffect(() => {
+      if(ad == true){
+        const handleAd = async () => {
+           setWatchad(watchAd+1)
           if(chsAd == 1){
 
             const pls = countAd+1
@@ -957,17 +979,19 @@ const [watchAd,setWatchad] = useState<number> (0);
 
 
     const onError = useCallback((result: ShowPromiseResult) => {
-      new Toast({
-              position: "top-center",
-              toastMsg: `Users try to watch too many ads, try again after a few seconds.`,
-              autoCloseTime: 4500,
-              canClose: true,
-              showProgress: true,
-              pauseOnHover: true,
-              pauseOnFocusLoss: true,
-              type: "default",
-              theme: "light"
-            });
+      if(start == true){
+                new Toast({
+        position: "top-center",
+        toastMsg: "You can't watch the video right now.",
+        autoCloseTime: 4500,
+        canClose: true,
+        showProgress: true,
+        pauseOnHover: true,
+        pauseOnFocusLoss: true,
+        type: "default",
+        theme: "light"
+      });
+       }
     }, []);
   
     /**
@@ -989,28 +1013,27 @@ const [watchAd,setWatchad] = useState<number> (0);
   });
 
 setAd(true)
-      
+setAdRefresh(true)
     }, []);
 
     const onRewardB = useCallback(() => {
       setChsAd(2)
-    
     setAd(true)
+   setAdRefresh(true)
     }, []);
 
     const onRewardC = useCallback(() => {
       setChsAd(3)
-    
     setAd(true)
+   setAdRefresh(true)
     }, []);
   
-  const showAd = useAdsgram({ blockId: "int-9612", onReward, onError });
+  const showAd = useAdsgram({ blockId: "int-8537", onReward, onError });
     const showAdB = useAdsgramB({ blockId: "int-9613", onRewardB, onError });
     const showAdC = useAdsgramC({ blockId: "int-8537", onRewardC, onError });
 
    const errorwatch = async() => {
-       if(start == true){
-                new Toast({
+      new Toast({
         position: "top-center",
         toastMsg: "You can't watch the video right now.",
         autoCloseTime: 4500,
@@ -1021,8 +1044,6 @@ setAd(true)
         type: "default",
         theme: "light"
       });
-       }
-    
     }
     
     return (
@@ -1078,15 +1099,15 @@ setAd(true)
                       
         <p className="text-white font-black mr-6 text-base">Number of videos played</p>
 
-                      <p className=" text-white glow font-Large  text-sm mr-6 truncate">{watchAd} / 54 </p>
+                      <p className=" text-white glow font-Large  text-sm mr-6 truncate">{watchAd > 54 ? '54' : watchAd} / 54 </p>
                       <p className="text-white font-Normal text-sm mr-6 glow">{hours}h {minutes}m {seconds}s</p>
 
                       </div>
                       </div>
                       </div>
-                      <div className="flex-grow flex-col mr-6 ml-6 text-center ">
-                      <p className={`text-base text-black font-normal`}>You can only watch 54 videos</p>
-                     <p className={`text-base text-black font-normal`}>every 24 hours</p>
+                      <div className="flex-grow text-center ">
+                      <p className={`text-base  mr-6 ml-6 text-black font-normal`}>You can only watch 54 videos every 24 hours</p>
+
                       </div>
                </div>
             
@@ -1193,7 +1214,7 @@ setAd(true)
                 <div className="flex items-center">
                
                 {/* <div className=" px-1"/> */}
-                <button onClick={() => {task.click ? '' : watchAd < 54 ? showAdB() : errorwatch() }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                <button onClick={() => {task.click ? '' : watchAd < 54 && start == true ? showAdB() : errorwatch() }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                 <p className={`text-white font-Large ${task.click? 'text-[0px]' : ''}`}>Start</p>
                   <div className="flex">
                   <svg aria-hidden="true" className={`${task.click? 'w-6 h-6' : 'w-0 h-0'} flex text-gray-200 animate-spin dark:text-gray-600 fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1267,7 +1288,7 @@ setAd(true)
                 <div className="flex items-center">
                
                 {/* <div className=" px-1"/> */}
-                <button onClick={() => {task.click ? '' : watchAd < 54 ? showAdC() : errorwatch() }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
+                <button onClick={() => {task.click ? '' : watchAd < 54 && start == true? showAdC() : errorwatch() }} className={`${task.click? 'glowwhite bg-white' : 'bg-black' } flex w-16 h-8 text-center items-center justify-center rounded-full px-3 py-[3px]`}>
                 <p className={`text-white font-Large ${task.click? 'text-[0px]' : ''}`}>Start</p>
                   <div className="flex">
                   <svg aria-hidden="true" className={`${task.click? 'w-6 h-6' : 'w-0 h-0'} flex text-gray-200 animate-spin dark:text-gray-600 fill-white`} viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1397,7 +1418,7 @@ setAd(true)
                          <div className="w-[calc(100%-2rem)] flex-1 mt-1 px-3  items-center bg-[#ffae19]/[0.9] border-white border-4 border-double rounded-full py-[5px] ">
                          <div className="grow flex items-center">
                          <Image
-    src={task.id == "1" ? colony as StaticImageData : task.id == "8" ? boori : task.id == "11" ? bees as StaticImageData : task.id == "12" ? pathlogo as StaticImageData : task.id == "13" ? br as StaticImageData : task.id == "14" ? sticker as StaticImageData : task.id == "17" ? snow as StaticImageData : task.id == "18" ? whitedogs as StaticImageData : task.id == "20" ? net as StaticImageData : task.icon}
+    src={task.id == "49" ? bees as StaticImageData : task.id == "31" ?  kombat as StaticImageData : task.id == "11" ? addup as StaticImageData : task.id == "41" ? dino as StaticImageData : task.id == "43" ? trump as StaticImageData : task.id == "25" ? robus as StaticImageData : task.id == "26" ? outmine as StaticImageData : task.id == "18" ? whitedogs as StaticImageData : task.id == "20" ? net as StaticImageData : task.icon}
   className="w-11 h-11  aspect-square object-cover  "
   alt="Shiba Inu"
 />
@@ -1453,7 +1474,7 @@ setAd(true)
                              <div className="w-[calc(100%-2rem)] flex-1 mt-1 px-3  items-center bg-[#ffae19]/[0.9] border-white border-4 border-double rounded-full py-[5px] ">
                              <div className="grow flex items-center">
                              <Image
-        src={task.id == "5" ? bees as StaticImageData : task.icon}
+        src={task.id == "5" ? portal as StaticImageData : task.icon}
       className="w-11 h-11  aspect-square object-cover  "
       alt="Shiba Inu"
     />
@@ -1498,14 +1519,7 @@ setAd(true)
                   
                     }) }
                     
-                    <div className={`${gtTasks.length == 0 && gtTasksCreated.length ==0 && Loading == false? 'mt-10' : 'w-0 h-0'} grow flex flex-col items-center justify-center text-center`}>
-                            <Image
-        src={NoTask as StaticImageData}
-      className={`${gtTasks.length == 0 && gtTasksCreated.length ==0 && Loading == false? 'w-20 h-20' : ''} object-fill`}
-      alt=""
-    />     
-              <p className={`${gtTasks.length == 0 && gtTasksCreated.length ==0 && Loading == false? 'text-base' : 'w-0 h-0 text-[0px]'} text-[#00000093] font-bold `}>No Task</p> 
-                            </div>
+                    
 
                      <div className="h-20 mt-5" />
 

@@ -20,7 +20,6 @@ import swatguy from '@/welcomeimg/swatguy.png';
 import toy from '@/welcomeimg/toy.png';
 import unlock from '@/icons/unlock.svg';
 import lock from '@/icons/lockb.svg';
-import Toast from 'typescript-toastify';
 
 type Task = {
   id:string
@@ -29,8 +28,7 @@ type Task = {
   status:string
 }
 
-
-    type modelB = {
+ type modelB = {
       id: number
   }
 
@@ -42,46 +40,8 @@ const WalletTab = () => {
     const [Loading,setLoading] = useState<boolean> (true);
        const [refresh, setRefresh] = useState<boolean>(false);
 
-          // useEffect(() => {
-          //   setTimeout(() => {
-          //     setRefresh(true)
-          //   }, 1000);  
-          //   try {
-          //     fetch('/api/get-withdraw', {
-          //      method: 'POST',
-          //      headers: {
-          //        'Content-Type': 'application/json',
-          //      },
-          //      body: JSON.stringify({ idd: String(UserDt?.idd) }),
-          //    })
-          //    .then((res) => res.json())
-          //    .then((data) => {
-          //     if(data.success){
-               
-          //       var nmb = 1
-          //       data.all.forEach((t: any)=> {
-                  
-          //         let model = {
-          //           id:String(nmb),
-          //           date:t.date,
-          //           amount:t.amount,
-          //           status:t.status
-          //        }
-          //        nmb++
-          //        gtTasks.push(model)
-          //        setLoading(false)
-          //       })
-              
-          //     }
-          //    })
-          //  } catch (err) {
-            
-          //  }
-           
-          // },[refresh])
 
-
-              const [gtMpdel,setModelB] = useState<modelB[]>([
+  const [gtMpdel,setModelB] = useState<modelB[]>([
                 { id: 1},
                 { id: 2 },
                 { id: 3 },
@@ -99,12 +59,24 @@ const WalletTab = () => {
                  const [A5, setA5] = useState<boolean>(false);
                  const [A6, setA6] = useState<boolean>(false);
 
-                 useEffect(() => {
-                  
-                  setRefreshC(true)
-                    if (timerRef.current) {
-                      clearInterval(timerRef.current);
-                    };
+                   useEffect(() => {
+
+                   try {
+              fetch('/api/get-withdraw', {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+               },
+               body: JSON.stringify({ idd: String(UserDt?.idd) }),
+             })
+             .then((res) => res.json())
+             .then((data) => {
+              if(data.success){
+              
+                setRefreshC(true)
+                    // if (timerRef.current) {
+                    //   clearInterval(timerRef.current);
+                    // };
                     const mapstr = UserDt?.upgrade.split(',').map(Number);
                     gtMpdel.forEach((t: any)=> {
                     
@@ -126,7 +98,29 @@ const WalletTab = () => {
                         }
                         
                     })
+               
+                var nmb = 1
+                const gtdata: Task[] = []
+                data.all.forEach((t: any)=> {
+                  
+                  let model = {
+                    id:String(nmb),
+                    date:t.date,
+                    amount:t.amount,
+                    status:t.status
+                 }
+                 nmb++
+                 gtdata.push(model)
+                })
+                setTask(gtdata)
+                setLoading(false)
+              
+              }
+             })
+           } catch (err) {
             
+           }
+                
                   if(refreshC == false) {
                     timerRef.current = setInterval(() =>{
                      
@@ -140,8 +134,6 @@ const WalletTab = () => {
                 };
             
                 },[refreshB])
-              
-
     
     return (
         <div className=" flex justify-center  overflow-auto">

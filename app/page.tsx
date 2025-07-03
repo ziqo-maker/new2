@@ -1,5 +1,5 @@
   'use client'
-   
+    
   import { useEffect, useState } from 'react'
   import { WebApp } from '@twa-dev/types'
   import { TabProvider } from '@/contexts/TabContext'
@@ -29,6 +29,7 @@ import a54 from '@/gif/5-5.gif';
 import a43 from '@/gif/4-4.gif';
 import a32 from '@/gif/3-3.gif';
 import a21 from '@/gif/2-2.gif';
+import telegramAnalytics from '@telegram-apps/analytics';
 
 const list: { mg: StaticImageData }[] = [
   { mg: alien },
@@ -65,6 +66,10 @@ const listB: { mg: StaticImageData }[] = [
       const [refreshB, setRefreshB] = useState<boolean>(false);
        const [first, setFirst] = useState<boolean>(false);
 
+     telegramAnalytics.init({
+    token: 'eyJhcHBfbmFtZSI6IldrQ25EYXRhIiwiYXBwX3VybCI6Imh0dHBzOi8vdC5tZS9UaGVXYWxrQ29pbkJvdCIsImFwcF9kb21haW4iOiJodHRwczovL3dsay1jb2luLTdwcnkudmVyY2VsLmFwcCJ9!pJOG/NpdGRm2Up//YIqyKBUJFDWLzOmTXJ6KCwR72vU=', 
+    appName: 'WkCnData', 
+});
        
     useEffect(() => {
 
@@ -153,9 +158,35 @@ const listB: { mg: StaticImageData }[] = [
 
     if (!user) return (
       <div className="container flex flex-col  mx-auto h-screen justify-between items-center w-full bg-[#ffae19] ">
-          <div className='flex h-0'/>
+        
 
+       <div className='mr-1 ml-1 flex-col text-wrap flex justify-center items-center text-center'>
+        <div className='flex space-x-1'>
+        <div className='flex flex-col justify-center items-center'>
+          <Image 
+        src={WalkTask as StaticImageData}
+         
+      className="size-8  aspect-square rounded-xl object-cover"
+      alt=""
+    />
+      
+                  <p className="text-white font-Large text-sm">WalkTask</p>
+
+        </div>
+        <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
+          
+          <Image 
+           src={getGoogleplay as StaticImageData} 
+         className="w-24 h-16 aspect-square object-cover"
+         alt=""
+       />
+       </button>
        
+       
+      
+       </div>
+      
+          </div>
 
           
             <div className='mr-2 ml-2 flex-col text-wrap flex space-y-1 justify-center items-center text-center'>
@@ -164,8 +195,10 @@ const listB: { mg: StaticImageData }[] = [
       className="size-20 glowbx rounded-full border-2 border-[#fda500] animate-waving-hand aspect-square object-fit"
       alt=""
     />
+              
     <Typewriter
   options={{
+     // strings: ["The servers are under maintenance and the server repair will take about a week. Please be patient. The raffle has been postponed, don't worry, the raffle tickets will be kept. Please contact the support team if you have any questions."],
     strings: ['Earn more, play smart and keep your WalkCoin growing'],
     autoStart: true,
     loop: true,
@@ -177,37 +210,41 @@ const listB: { mg: StaticImageData }[] = [
            
          
        <div className='mr-1 ml-1 flex-col text-wrap flex justify-center items-center text-center'>
-        <div className='flex space-x-1'>
+{/*         <div className='flex space-x-1'>
         <div className='flex flex-col justify-center items-center'>
           <Image 
         src={WalkTask as StaticImageData}
          
-      className="size-10  aspect-square rounded-xl object-cover"
+      className="size-8  aspect-square rounded-xl object-cover"
       alt=""
     />
       
-                  <p className="text-white font-Large">WalkTask</p>
+                  <p className="text-white font-Large text-sm">WalkTask</p>
 
         </div>
         <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
           
           <Image 
            src={getGoogleplay as StaticImageData} 
-         className="size-28 aspect-square object-cover"
+         className="size-24 aspect-square object-cover"
          alt=""
        />
        </button>
        
        
       
-       </div>
-         <p className="text-white font-Large font-bold text-wrap">Listing Date is set for July 28, 2025</p>
-       <div className='h-5' />
+       </div> */}
+       
+         <p className="text-white font-Large font-bold text-wrap">Contact us</p>
+          <p className="text-white font-Large text-sm">Vuorikatu 20</p>
+           <p className="text-white font-Large text-sm">00100 Helsinki, Finland</p>
+           <p className="text-white font-Large text-sm">voizynt@gmail.com</p>
+       <div className='h-2' />
           </div>
       </div>
     )
 
-    if (first) return (
+{/*     if (first) return (
     
   <div className=" flex-1 overflow-hidden max-w-xl mx-auto  h-screen bg-white">
       
@@ -304,7 +341,7 @@ const listB: { mg: StaticImageData }[] = [
     </div>
     </div>
   
-)
+) */}
 
     return (
          <UserNew>
@@ -319,4 +356,5 @@ const listB: { mg: StaticImageData }[] = [
         </UserNew>
       
     )
+    
   }

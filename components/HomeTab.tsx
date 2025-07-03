@@ -1,5 +1,5 @@
 'use client' 
-
+  
 import Image, {StaticImageData} from "next/image"
 import FootPrint from '@/icons/footprint.svg';
 import FootPrintA from '@/icons/footprinta.svg';  
@@ -31,50 +31,54 @@ import VipIcon from '@/imgs/vip.png';
 import Vipticket from '@/imgs/vipticket.png';
 import CloseB from '@/imgs/closeb.png';
 import giftvip from '@/imgs/giftvip.png';
+import ton from '@/imgs/ton.png';
+import offer from '@/imgs/offer.png'
+import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
+import { Address, beginCell,} from "@ton/core";
 
-// import gif from '@/imgs/gif.gif';
-// import a11 from '@/gif/1-1.gif';
-// import a12 from '@/gif/1-2.gif';
-// import a13 from '@/gif/1-3.gif';
-// import a14 from '@/gif/1-4.gif';
-// import a15 from '@/gif/1-5.gif';
-// import a16 from '@/gif/1-6.gif';
-// import a17 from '@/gif/1-7.gif';
-// import a21 from '@/gif/2-1.gif';
-// import a22 from '@/gif/2-2.gif';
-// import a23 from '@/gif/2-3.gif';
-// import a24 from '@/gif/2-4.gif';
-// import a25 from '@/gif/2-5.gif';
-// import a26 from '@/gif/2-6.gif';
-// import a27 from '@/gif/2-7.gif';
-// import a31 from '@/gif/3-1.gif';
-// import a32 from '@/gif/3-2.gif';
-// import a33 from '@/gif/3-3.gif';
-// import a34 from '@/gif/3-4.gif';
-// import a35 from '@/gif/3-5.gif';
-// import a36 from '@/gif/3-6.gif';
-// import a37 from '@/gif/3-7.gif';
-// import a41 from '@/gif/4-1.gif';
-// import a42 from '@/gif/4-2.gif';
-// import a43 from '@/gif/4-3.gif';
-// import a44 from '@/gif/4-4.gif';
-// import a45 from '@/gif/4-5.gif';
-// import a46 from '@/gif/4-6.gif';
-// import a47 from '@/gif/4-7.gif';
-// import a51 from '@/gif/5-1.gif';
-// import a52 from '@/gif/5-2.gif';
-// import a53 from '@/gif/5-3.gif';
-// import a54 from '@/gif/5-4.gif';
-// import a55 from '@/gif/5-5.gif';
-// import a56 from '@/gif/5-6.gif';
-// import a57 from '@/gif/5-7.gif';
-// import a61 from '@/gif/6-1.gif';
-// import a62 from '@/gif/6-2.gif';
-// import a63 from '@/gif/6-3.gif';
-// import a64 from '@/gif/6-4.gif';
-// import a65 from '@/gif/6-5.gif';
-// import a66 from '@/gif/6-6.gif';
-// import a67 from '@/gif/6-7.gif';
+import gif from '@/imgs/gif.gif';
+import a11 from '@/gif/1-1.gif';
+import a12 from '@/gif/1-2.gif';
+import a13 from '@/gif/1-3.gif';
+import a14 from '@/gif/1-4.gif';
+import a15 from '@/gif/1-5.gif';
+import a16 from '@/gif/1-6.gif';
+import a17 from '@/gif/1-7.gif';
+import a21 from '@/gif/2-1.gif';
+import a22 from '@/gif/2-2.gif';
+import a23 from '@/gif/2-3.gif';
+import a24 from '@/gif/2-4.gif';
+import a25 from '@/gif/2-5.gif';
+import a26 from '@/gif/2-6.gif';
+import a27 from '@/gif/2-7.gif';
+import a31 from '@/gif/3-1.gif';
+import a32 from '@/gif/3-2.gif';
+import a33 from '@/gif/3-3.gif';
+import a34 from '@/gif/3-4.gif';
+import a35 from '@/gif/3-5.gif';
+import a36 from '@/gif/3-6.gif';
+import a37 from '@/gif/3-7.gif';
+import a41 from '@/gif/4-1.gif';
+import a42 from '@/gif/4-2.gif';
+import a43 from '@/gif/4-3.gif';
+import a44 from '@/gif/4-4.gif';
+import a45 from '@/gif/4-5.gif';
+import a46 from '@/gif/4-6.gif';
+import a47 from '@/gif/4-7.gif';
+import a51 from '@/gif/5-1.gif';
+import a52 from '@/gif/5-2.gif';
+import a53 from '@/gif/5-3.gif';
+import a54 from '@/gif/5-4.gif';
+import a55 from '@/gif/5-5.gif';
+import a56 from '@/gif/5-6.gif';
+import a57 from '@/gif/5-7.gif';
+import a61 from '@/gif/6-1.gif';
+import a62 from '@/gif/6-2.gif';
+import a63 from '@/gif/6-3.gif';
+import a64 from '@/gif/6-4.gif';
+import a65 from '@/gif/6-5.gif';
+import a66 from '@/gif/6-6.gif';
+import a67 from '@/gif/6-7.gif';
 import Loading from '@/imgs/loading.png';
 
 type modelB = {
@@ -394,7 +398,7 @@ useEffect(() => {
                                .then((data) => {
                                 if(data.success){
                                    setLvl(lvlup)
-                                const gtPrice = lvlup == 1 ? 0.00000010 : lvlup == 2 ? 0.00000012 : lvlup == 3 ? 0.00000014 : lvlup ==4 ? 0.00000016 : lvlup ==5? 0.00000020: 0
+                                const gtPrice = lvlup == 1 ? 0.00000010 : lvlup == 2 ? 0.00000010 : lvlup == 3 ? 0.00000010 : lvlup ==4 ? 0.00000010 : lvlup ==5? 0.00000010: 0
                             setPrice(gtPrice)
                          const gtEndPoint = lvlup == 1 ? 100000 : lvlup == 2 ? 200000 : lvlup == 3 ? 300000 : lvlup ==4 ? 400000 : lvlup ==5? 500000: 0
                            setEndPoint(gtEndPoint)
@@ -422,18 +426,6 @@ useEffect(() => {
 
   useEffect(() => {
 
-    new Toast({
-      position: "top-center",
-      toastMsg: `name :${ UserDt?.firstname}`,
-      autoCloseTime: 4500,
-      canClose: true,
-      showProgress: true,
-      pauseOnHover: true,
-      pauseOnFocusLoss: true,
-      type: "default",
-      theme: "light"
-    });
-
     try {
       fetch('/api/gtdate', {
        method: 'POST',
@@ -447,91 +439,91 @@ useEffect(() => {
        if (data.success) {
         setRefresh(true)
 
-      //  if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
-      //     setMg(a11)
-      //   }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
-      //     setMg(a12)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
-      //     setMg(a13)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
-      //     setMg(a14)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
-      //     setMg(a15)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
-      //     setMg(a16)
-      //   } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
-      //     setMg(a17)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
-      //     setMg(a21)
-      //   }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
-      //     setMg(a22)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
-      //     setMg(a23)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
-      //     setMg(a24)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
-      //     setMg(a25)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
-      //     setMg(a26)
-      //   } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
-      //     setMg(a27)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
-      //     setMg(a31)
-      //   }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
-      //     setMg(a32)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
-      //     setMg(a33)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
-      //     setMg(a34)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
-      //     setMg(a35)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
-      //     setMg(a36)
-      //   } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
-      //     setMg(a37)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
-      //     setMg(a41)
-      //   }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
-      //     setMg(a42)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
-      //     setMg(a43)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
-      //     setMg(a44)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
-      //     setMg(a45)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
-      //     setMg(a46)
-      //   } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
-      //     setMg(a47)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
-      //     setMg(a51)
-      //   }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
-      //     setMg(a52)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
-      //     setMg(a53)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
-      //     setMg(a54)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
-      //     setMg(a55)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
-      //     setMg(a56)
-      //   } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
-      //     setMg(a57)
-      //   }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
-      //     setMg(a61)
-      //   }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
-      //     setMg(a62)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
-      //     setMg(a63)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
-      //     setMg(a64)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
-      //     setMg(a65)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
-      //     setMg(a66)
-      //   } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
-      //     setMg(a67)
-      //   }
+       if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "1"){
+          setMg(a11)
+        }else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "2"){
+          setMg(a12)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "3"){
+          setMg(a13)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "4"){
+          setMg(a14)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "5"){
+          setMg(a15)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "6"){
+          setMg(a16)
+        } else if(UserDt?.selectcharacter == "1" && UserDt?.speedlvl == "7"){
+          setMg(a17)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "1"){
+          setMg(a21)
+        }else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "2"){
+          setMg(a22)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "3"){
+          setMg(a23)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "4"){
+          setMg(a24)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "5"){
+          setMg(a25)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "6"){
+          setMg(a26)
+        } else if(UserDt?.selectcharacter == "2" && UserDt?.speedlvl == "7"){
+          setMg(a27)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "1"){
+          setMg(a31)
+        }else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "2"){
+          setMg(a32)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "3"){
+          setMg(a33)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "4"){
+          setMg(a34)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "5"){
+          setMg(a35)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "6"){
+          setMg(a36)
+        } else if(UserDt?.selectcharacter == "3" && UserDt?.speedlvl == "7"){
+          setMg(a37)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "1"){
+          setMg(a41)
+        }else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "2"){
+          setMg(a42)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "3"){
+          setMg(a43)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "4"){
+          setMg(a44)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "5"){
+          setMg(a45)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "6"){
+          setMg(a46)
+        } else if(UserDt?.selectcharacter == "4" && UserDt?.speedlvl == "7"){
+          setMg(a47)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "1"){
+          setMg(a51)
+        }else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "2"){
+          setMg(a52)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "3"){
+          setMg(a53)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "4"){
+          setMg(a54)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "5"){
+          setMg(a55)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "6"){
+          setMg(a56)
+        } else if(UserDt?.selectcharacter == "5" && UserDt?.speedlvl == "7"){
+          setMg(a57)
+        }  else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "1"){
+          setMg(a61)
+        }else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "2"){
+          setMg(a62)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "3"){
+          setMg(a63)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "4"){
+          setMg(a64)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "5"){
+          setMg(a65)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "6"){
+          setMg(a66)
+        } else if(UserDt?.selectcharacter == "6" && UserDt?.speedlvl == "7"){
+          setMg(a67)
+        }
         
         const target = new Date(data.dtMining);
         const now = new Date(data.dt);
@@ -600,6 +592,20 @@ useEffect(() => {
    .then((res) => res.json())
    .then((data) => {
     if (data.success) {
+       const gtlvl = String(data.lvl)
+        const nmbrlvl = Number(gtlvl)
+        setLvl(nmbrlvl)
+      const gtPrice = nmbrlvl == 1 ? 0.00000010 : nmbrlvl == 2 ? 0.00000010 : nmbrlvl == 3 ? 0.00000010 : nmbrlvl ==4 ? 0.00000010 : nmbrlvl ==5? 0.00000010: 0
+        setPrice(gtPrice)
+        const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
+        setEndPoint(gtEndPoint)
+        
+        if(nmbrlvl >= 6){
+          setBlnLvl(false)
+        }else if(nmbrlvl <= 5){
+          setBlnLvl(true)
+        }
+      
        try {
         fetch('/api/get-extra', {
          method: 'POST',
@@ -611,7 +617,7 @@ useEffect(() => {
        .then((res) => res.json())
        .then((data) => {
          if (data.success) {
-         
+        
           const items = String(data.items)
       const mapstr = items.split(',').map(Number);
       var plusextra = 0
@@ -641,19 +647,7 @@ useEffect(() => {
               })
               setExtraWalkCoin(plusextra)
               setExtraTicket(plusextraticket)
-             const gtlvl = String(data.lvl)
-        const nmbrlvl = Number(gtlvl)
-        setLvl(nmbrlvl)
-      const gtPrice = nmbrlvl == 1 ? 0.00000015 : nmbrlvl == 2 ? 0.00000020 : nmbrlvl == 3 ? 0.00000025 : nmbrlvl ==4 ? 0.00000030 : nmbrlvl ==5? 0.00000035: 0
-        setPrice(gtPrice)
-        const gtEndPoint = nmbrlvl == 1 ? 100000 : nmbrlvl == 2 ? 200000 : nmbrlvl == 3 ? 300000 : nmbrlvl ==4 ? 400000 : nmbrlvl ==5? 500000: 0
-        setEndPoint(gtEndPoint)
-        
-        if(nmbrlvl >= 6){
-          setBlnLvl(false)
-        }else if(nmbrlvl <= 5){
-          setBlnLvl(true)
-        }
+          
 
         if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
           const tg = window.Telegram.WebApp
@@ -1148,6 +1142,86 @@ useEffect(() => {
     }
   };
   },[isActive,refreshB])
+
+  const [tonConnectUI,setOptions] = useTonConnectUI()
+             const [tonAddress, setTonAddress] = useState<string | null>(null);
+             const [verifybuy, setVerifyBuy] = useState(false);
+             const [wallet, setWallet] = useState(false);
+
+             const handleWalletConnection = useCallback((address: string) => {
+              setTonAddress(address);
+              console.log("Wallet connected successfully!");
+            }, []);
+          
+            const handleWalletDisconnection = useCallback(() => {
+              setTonAddress(null);
+              console.log("Wallet disconnected successfully!");
+            }, []);
+  
+             useEffect(() => {
+                 const checkWalletConnection = async () => {
+                   if (tonConnectUI.account?.address) {
+                     handleWalletConnection(tonConnectUI.account?.address);
+                   } else {
+                     handleWalletDisconnection();
+                   }
+                 };
+             
+                 checkWalletConnection();
+             
+                 const unsubscribe = tonConnectUI.onStatusChange((wallet) => {
+                   if (wallet) {
+                     handleWalletConnection(wallet.account.address);
+                   } else {
+                     handleWalletDisconnection();
+                   }
+                 });
+             
+                 return () => {
+                   unsubscribe();
+                 };
+               }, [tonConnectUI, handleWalletConnection, handleWalletDisconnection]);
+             
+
+
+  const handlePaymentExtra = async () => {
+             
+    
+                 if (tonConnectUI.account?.address) {
+                  setWallet(false)        
+                     try {
+             
+                       const amount = Itm == 1 ? '100000000' : Itm == 2 ? '130000000' : Itm == 3 ? '250000000' : Itm == 4 ? '100000000' :Itm == 5 ? '130000000' : Itm == 6 ? '250000000' : Itm == 7 ? '320000000' : Itm == 8 ? '320000000' :'0'
+                       
+                     
+                          var tail = "Extra"+"-"+String(Itm)+"-"+ String(UserDt?.idd)
+                          await tonConnectUI.sendTransaction({
+                             validUntil: Math.floor(Date.now() / 1000) + 60,
+                             messages: [
+                                 {
+                                     address: "UQD3X829OTABBFBWUASyK1h1zAYF7OjkEDWXtVss-DrL_dgy",
+                                     amount: amount,
+                                     payload: beginCell().storeUint(0, 32).storeStringTail(tail).endCell().toBoc().toString('base64'),
+                                 },
+                             ],
+                         });
+             
+                           
+                             setVerifyBuy(true)
+                             
+                        
+                 
+                     } catch (error) {
+                       
+                     } 
+                   
+             
+                 } else {
+                  setWallet(true)
+                  
+                 }
+             
+             }
   
   return (
      <div className="w-full bg-white overflow-y-auto text-white h-screen text-wrap font-bold flex flex-col max-w-xl">
@@ -1210,13 +1284,23 @@ useEffect(() => {
                                                                       alt="Shiba Inu"
                                                                     />
                                                                               </div>
-                                                                              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+                                                                              <div className="flex flex-col w-full mt-1 rounded-lg bg-white">
+                                                                              <div className="flex items-center space-x-1.5 px-1 py-1 justify-center">
                                                                               <p className=" text-black font-bold glow text-[13px] text-wrap">15 Stars</p>
                                                                               <Image 
                                                                         src={Star as StaticImageData} 
                                                                       className="w-5 h-5 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">0.1 TON</p>
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
                                                                               </div>
                                                                               </button>
                                                                 
@@ -1234,7 +1318,9 @@ useEffect(() => {
                                                                       alt="Shiba Inu"
                                                                     />
                                                                               </div>
-                                                                              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+
+                                                                              <div className="flex flex-col w-full mt-1 rounded-lg bg-white">
+                                                                              <div className="flex items-center space-x-1.5 px-1 py-1 justify-center">
                                                                               <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
                                                                               <Image 
                                                                         src={Star as StaticImageData} 
@@ -1242,6 +1328,16 @@ useEffect(() => {
                                                                       alt="Shiba Inu"
                                                                     />
                                                                               </div>
+                                                                              <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">0.13 TON</p>
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
+                                                                              
                                                                               </button>
                                                                               </div>
                                                                               <div className="h-3" />
@@ -1260,13 +1356,23 @@ useEffect(() => {
                                                                       alt="Shiba Inu"
                                                                     />
                                                                               </div>
-                                                                              <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
+                                                                              <div className="flex flex-col w-full mt-1 rounded-lg bg-white">
+                                                                              <div className="flex items-center space-x-1.5 px-1 py-1 justify-center">
                                                                               <p className=" text-black font-bold glow text-[13px] text-wrap">55 Stars</p>
                                                                               <Image 
                                                                         src={Star as StaticImageData} 
                                                                       className="w-5 h-5 aspect-square object-cover"
                                                                       alt="Shiba Inu"
                                                                     />
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">0.25 TON</p>
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
                                                                               </div>
                                                                               </button>
       
@@ -1284,14 +1390,24 @@ useEffect(() => {
                                                                                           alt="Shiba Inu"
                                                                                         />
                                                                                                   </div>
-                                                                                                  <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">15 Stars</p>
-                                                                                                  <Image 
-                                                                                            src={Star as StaticImageData} 
-                                                                                          className="w-5 h-5 aspect-square object-cover"
-                                                                                          alt="Shiba Inu"
-                                                                                        />
-                                                                                                  </div>
+                                                                                                  <div className="flex flex-col w-full mt-1 rounded-lg bg-white">
+                                                                              <div className="flex items-center space-x-1.5 px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">15 Stars</p>
+                                                                              <Image 
+                                                                        src={Star as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">0.1 TON</p>
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
                                                                                                   </button>
                                                                               </div>
                                                                              
@@ -1318,21 +1434,31 @@ useEffect(() => {
                                                                                           alt="Shiba Inu"
                                                                                         />
                                                                                                   </div>
-                                                                                                  <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
-                                                                                                  <Image 
-                                                                                            src={Star as StaticImageData} 
-                                                                                          className="w-5 h-5 aspect-square object-cover"
-                                                                                          alt="Shiba Inu"
-                                                                                        />
-                                                                                                  </div>
+                                                                                                  <div className="flex flex-col w-full mt-1 rounded-lg bg-white">
+                                                                              <div className="flex items-center space-x-1.5 px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">30 Stars</p>
+                                                                              <Image 
+                                                                        src={Star as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">0.13 TON</p>
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
                                                                                                   </button>
                                                                                                   
                                                                                     
                                                                                                   <button onClick={() => {extra6 == true ? '':setItm(6)}} className={`${Itm == 6 || extra6 == true? 'opacity-60' : ''} flex flex-col text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
                                                                                                   <div className="flex space-x-1.5 items-center justify-center px-2 py-0.5 mt-1 ">
                                                                                                   <Image 
-                                                                                            src={FootPrint as StaticImageData} 
+                                                                                            src={TicketCircle as StaticImageData} 
                                                                                           className="w-6 h-6 aspect-square object-cover"
                                                                                           alt="Shiba Inu"
                                                                                         />
@@ -1343,30 +1469,154 @@ useEffect(() => {
                                                                                           alt="Shiba Inu"
                                                                                         />
                                                                                                   </div>
-                                                                                                  <div className="flex items-center space-x-1.5 rounded-lg bg-white mt-1 px-1 py-1 justify-center">
-                                                                                                  <p className=" text-black font-bold glow text-[13px] text-wrap">55 Stars</p>
+                                                                                                  <div className="flex flex-col w-full mt-1 rounded-lg bg-white">
+                                                                              <div className="flex items-center space-x-1.5 px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">55 Stars</p>
+                                                                              <Image 
+                                                                        src={Star as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] text-wrap">0.25 TON</p>
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
+                                                                                                  </button>
+                                                                                    
+                                                                                            
+                                                                                                 
+                                                                                                  </div>
+                                                                                                  <div className="h-1" />
+                                                                                                  
+                                                                                                  <div className="flex flex-col w-full justify-center   items-center ">
                                                                                                   <Image 
-                                                                                            src={Star as StaticImageData} 
-                                                                                          className="w-5 h-5 aspect-square object-cover"
+                                                                        src={offer as StaticImageData} 
+                                                                      className="w-16 h-16 aspect-square object-cover"
+                                                                      alt=""
+                                                                    />
+
+                                                                      <div className="flex justify-center space-x-3  items-center  rounded-full ">
+                                                                                                  
+                                                                                                  
+                                                                                                 
+                                  
+                                                                                                  <button onClick={() => {extra3 == true || extra2 == true || extra1 == true ? '':setItm(7)}} className={`${Itm == 7 || extra3 == true || extra2 == true || extra1 == true? 'opacity-70' : ''} flex flex-col items-center text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                                                  <p className="text-white   font-bold glow text-[13px] mt-1 px-2 ">Extra WalkCoin</p>
+
+                                                                                                  <div className="flex space-x-1.5 items-center justify-center px-2 mt-1  ">
+                                                                                                  <Image 
+                                                                                            src={FootPrint as StaticImageData} 
+                                                                                          className="w-6 h-6 aspect-square object-cover"
+                                                                                          alt="Shiba Inu"
+                                                                                        />
+                                                                                                  <p className="text-white   font-bold glow text-sm px-1 ">+{Number(45000).toLocaleString()}</p>
+                                                                                                  <Image 
+                                                                                            src={Extra as StaticImageData} 
+                                                                                          className="w-7 h-7 aspect-square object-cover"
                                                                                           alt="Shiba Inu"
                                                                                         />
                                                                                                   </div>
+                                                                                                  <div className="flex flex-col w-full mt-2 rounded-lg bg-white">
+                                                                                            
+                                                                                                  <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                                                  <div className="flex flex-col items-center justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] line-through
+                                                                                   text-wrap">0.48 TON</p>
+                                                                              <p className="text-black font-bold glow text-[12px] ">0.32 TON</p>
+                                                                           
+                                                                              </div>
+                                                                             
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                              </div>
+                                                                                                  </button>
+                                                                                                  
+                                                                                    
+                                                                                                  <button onClick={() => {extra5 == true || extra4 == true || extra6 == true ? '':setItm(8)}} className={`${Itm == 8 || extra5 == true || extra4 == true || extra6 == true? 'opacity-70' : ''} flex flex-col items-center text-center bg-[#ffae19]/[0.9] text-white border-4 border-white rounded-xl border-double`}>
+                                                                                                  <p className="text-white   font-bold glow text-[13px] mt-1 px-2 ">Extra Raffle Tickets</p>
+
+                                                                                                  <div className="flex space-x-1.5 items-center justify-center px-2 mt-1  ">
+                                                                                                  <Image 
+                                                                                            src={TicketCircle as StaticImageData} 
+                                                                                          className="w-6 h-6 aspect-square object-cover"
+                                                                                          alt="Shiba Inu"
+                                                                                        />
+                                                                                                  <p className="text-white   font-bold glow text-sm px-4 ">+30</p>
+                                                                                                  <Image 
+                                                                                            src={Extra as StaticImageData} 
+                                                                                          className="w-7 h-7 aspect-square object-cover"
+                                                                                          alt="Shiba Inu"
+                                                                                        />
+                                                                                                  </div>
+                                                                                                  <div className="flex flex-col w-full mt-2 rounded-lg bg-white">
+                                                                                                  <div className="flex items-center space-x-1.5   px-1 py-1 justify-center">
+                                                                                                  <div className="flex flex-col items-center justify-center">
+                                                                              <p className=" text-black font-bold glow text-[13px] line-through
+                                                                                   text-wrap">0.48 TON</p>
+                                                                              <p className="text-black font-bold glow text-[12px] ">0.32 TON</p>
+                                                                           
+                                                                              </div>
+                                                                             
+                                                                              <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt="Shiba Inu"
+                                                                    />
+                                                                              </div>
+                                                                             
+                                                                              </div>
                                                                                                   </button>
                                                                                     
-                                                                                                  
+                                                                                            
                                                                                                  
                                                                                                   </div>
-                                                                                                  <div className="h-3" />
-                                                                                                  <div className="flex flex-col  justify-center space-x-2  items-center ">
-                                                                                                  <p className="text-sm  text-[#ffae19]/[0.8]">
+                                                                                                    
+                                                                                                  <p className="mt-2 text-[13px] font-black text-[#6609BE]">
                                                                                                   *Purchase each item only once
                                                                   </p>
-                                                                  <div className="h-2" />
-                                                                                    <button onClick={() => {Itm == 0 ? '' : handleOpenLink()}} className={`${Itm ==0?'opacity-70':''} bg-[#ffae19]/[0.9] glowbox  flex px-3 rounded-xl border-white border-4  border-double  py-[8px] items-center justify-center text-center`}>
+                                                                  {wallet == true ? 
+                                                                  <p className="mt-2 mr-3 ml-3 text-[13px] font-black text-[#6609BE]">
+                                                                  No TON wallet connected. Go to the raffle section and connect your wallet.
+                                                                  </p>
+                                                                   : ''
+                                                                  }
+                                                                  {verifybuy == true?
+                                                                  <p className="mt-2 mr-3 ml-3 text-[13px] font-black text-[#6609BE]">
+                                                                  Your transaction was successful and your extra item will be automatically activated 30 minutes after the transaction is confirmed, thank you for your patience.
+                                                                  </p>
+                                                                   : ''
+                                                                  }
+                                                                  <div className="h-3" />
+                                                                  <button onClick={() => {Itm == 0  ? '' : handlePaymentExtra()}} className={`${Itm ==0?'opacity-70':''} space-x-2 bg-[#ffae19]/[0.9] glowbox  flex px-3 rounded-xl border-white border-4  border-double  py-[8px] items-center justify-center text-center`}>
                                                                                      
-                                                                                     <p className="text-base text-white  font-bold">{Itm == 0 ? '' : 'Buy' } {Itm == 1 ? '+10,000 Extra WalkCoin' :Itm == 2 ? '+15,000 Extra WalkCoin' : Itm == 3 ? '+20,000 Extra WalkCoin' : Itm == 4 ? '+5 Extra Tickets': Itm == 5 ? '+10 Extra Tickets' : Itm == 6 ? '+15 Extra Tickets' : 'No Item Selected'}</p>
+                                                                                     <p className="text-[14px] text-white  font-bold">{Itm == 0? '' : 'Buy' } {Itm == 1 ? '+10,000 Extra WalkCoin | 0.1 TON' :Itm == 2 ? '+15,000 Extra WalkCoin | 0.13 TON' : Itm == 3 ? '+20,000 Extra WalkCoin | 0.25 TON' : Itm == 4 ? '+5 Extra Raffle Tickets | 0.1 TON': Itm == 5 ? '+10 Extra Raffle Tickets | 0.13 TON' : Itm == 6 ? '+15 Extra Raffle Tickets | 0.25 TON' : Itm == 7 ? '+45,000 Extra WalkCoin | 0.32 TON' : Itm == 8 ? '+30 Extra Raffle Tickets | 0.32 TON' : 'No Item Selected'}</p>
                                                                                     
+                                                                                     <Image 
+                                                                        src={ton as StaticImageData} 
+                                                                      className="w-6 h-6 aspect-square object-cover"
+                                                                      alt=""
+                                                                    />
+                                                                                      </button>
+                                                                                      <div className="h-3" />
+                                                                                    <button onClick={() => {Itm == 0 || Itm == 7 || Itm == 8 ? '' : handleOpenLink()}} className={`${Itm ==0 || Itm == 7 || Itm == 8?'opacity-70':''} space-x-2 bg-[#ffae19]/[0.9] glowbox  flex px-3 rounded-xl border-white border-4  border-double  py-[8px] items-center justify-center text-center`}>
+                                                                                     
+                                                                                     <p className="text-[14px] text-white  font-bold">{Itm == 0 || Itm == 7 || Itm == 8 ? '' : 'Buy' } {Itm == 1 ? '+10,000 Extra WalkCoin | 15 Stars' :Itm == 2 ? '+15,000 Extra WalkCoin | 30 Stars' : Itm == 3 ? '+20,000 Extra WalkCoin | 55 Stars' : Itm == 4 ? '+5 Extra Raffle Tickets| 15 Stars': Itm == 5 ? '+10 Extra Raffle Tickets | 30 Stars' : Itm == 6 ? '+15 Extra Raffle Tickets | 55 Stars' : 'No Item Selected'}</p>
                                                                                     
+                                                                                     <Image 
+                                                                        src={Star as StaticImageData} 
+                                                                      className="w-5 h-5 aspect-square object-cover"
+                                                                      alt=""
+                                                                    />
                                                                                       </button>
                                                                                        <div className="w-full flex items-center justify-center">
                                                                                        <button onClick={() => {isCopy == false ? handleCopyLink() : ''}} className="flex ml-0.5 mt-2 bg-[#ffae19]/[0.9] border-white border-4 border-double items-center  text-wrap  rounded-2xl px-2 py-[4px] ">
@@ -1452,7 +1702,7 @@ useEffect(() => {
                       <div className="flex-grow text-center ">
                       <div className="flex flex-col items-center justify-center">
                       <p className=" text-white font-black text-[15px] mr-6 truncate">Number of VIP Tickets</p>
-                      <h1 className="text-[16px] font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] mr-6 from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">{vipTicket}</h1>
+                      <h1 className="text-[16px] font-black mr-6 text-[#6609BE]">{vipTicket}</h1>
                       <p className="text-white font-Normal text-sm mr-6 glow">{hoursvip}h {minutesvip}m {secondsvip}s</p>
 
                       </div>
@@ -1466,7 +1716,7 @@ useEffect(() => {
                       <div className="flex-grow text-center ">
                       <div className="flex items-center space-x-1 justify-center">
                       <p className=" text-white font-bold text-base truncate">VIP club status:</p>
-                      <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? 'Active' : 'Inactive'}</h1>
+                      <h1 className="text-sm font-black text-[#6609BE]">{activevip == true ? 'Active' : 'Inactive'}</h1>
 
                       </div>
                       </div>
@@ -1618,7 +1868,7 @@ useEffect(() => {
                                                                              
                                                                               </div>
                                                                               <div className="flex mr-3 ml-3 mt-4 items-center space-x-1 justify-center">
-               <p className="text-[13px] font-bold bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-900 via-purple-500 to-indigo-500 inline-block text-transparent bg-clip-text">{activevip == true ? `You currently receive ${vipwalkcoinplus.toLocaleString()} extra WalkCoin tokens and ${vipticketplus} extra Raffle tickets from the vip club every two hours.` : "You aren't currently receiving anything from the VIP club."}</p>
+               <p className="text-[13px] font-bold text-[#6609BE]">{activevip == true ? `You currently receive ${vipwalkcoinplus.toLocaleString()} extra WalkCoin tokens and ${vipticketplus} extra Raffle tickets from the vip club every two hours.` : "You aren't currently receiving anything from the VIP club."}</p>
                
                       </div>
                       <div className="flex mr-3 ml-3 items-center space-x-1 mt-4 justify-center">
@@ -1906,7 +2156,7 @@ useEffect(() => {
        />
           <div className="flex space-x-1 items-center text-wrap">
           <p className="text-xl text-[#ffae19] font-Large text-wrap">{miningPoint.toLocaleString()}</p>
-           <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{(Number(extraWalkCoin) + Number(vipwalkcoinplus)).toLocaleString()}</h1>
+           <h1 className="text-sm font-black text-[#6609BE]">+{(Number(extraWalkCoin) + Number(vipwalkcoinplus)).toLocaleString()}</h1>
           
           <p className="text-base text-white bg-[#ffae19]/[0.9] font-Large rounded-full px-2 py-[3px]">×{UserDt?.speedlvl}</p>
           </div>
@@ -1922,7 +2172,7 @@ useEffect(() => {
        />
           <div className="flex items-center text-wrap bg-[#ffae19]/[0.9] space-x-1 font-Large rounded-full px-3 py-[3px]">
           <p className="text-base text-white font-Large text-wrap">{(Number(miningPoint)/3600).toFixed()} / {Number(UserDt?.speedlvl)*2}</p>
-               <h1 className="text-sm font-black bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))]  from-blue-900 via-purple-500  to-indigo-500 inline-block text-transparent bg-clip-text">+{Number(extraTicket) + Number(vipticketplus) }</h1>
+               <h1 className="text-sm font-black text-[#6609BE]">+{Number(extraTicket) + Number(vipticketplus) }</h1>
 
           </div>
         </div>

@@ -23,18 +23,20 @@ import Tick from '@/icons/tick.svg';
 import { useTonConnectUI,SendTransactionRequest } from "@tonconnect/ui-react";
 import { Address, beginCell,} from "@ton/core";
 
+
 const CharactersTab = () => {
 
     type model = {
         id: number; label: string; Icon: StaticImageData,cost:number,dollar:string,unlock:boolean,ticket:number,star:number,ton:number
     }
 
-    const { UserDt,setUserData } = React.useContext(NewUserContext);
-
-    const [gtTasks,setTask] = useState<model[]>([]);
     type modelB = {
       id: number
   }
+
+    const { UserDt,setUserData } = React.useContext(NewUserContext);
+
+    const [gtTasks,setTask] = useState<model[]>([]);
     const [gtMpdel,setModelB] = useState<modelB[]>([
       { id: 1},
       { id: 2 },
@@ -49,7 +51,7 @@ const CharactersTab = () => {
  
     useEffect(() => {
       const upgrade = UserDt?.upgrade
-      
+      if(upgrade != "0" && refresh == false){
         setRefresh(true)
         if (timerRef.current) {
           clearInterval(timerRef.current);
@@ -63,24 +65,24 @@ const CharactersTab = () => {
               const model = {id: 1, label: 'Ty', Icon: Toy,cost : 0,dollar:'0.00000001',unlock:true,ticket:0,star: 0,ton:0}
               gtTasks.push(model)
             }else if (t.id == 2){
-              const model = { id: 2, label: 'Mousey', Icon: Mousey,cost : 2000000,dollar:'0.00000020',unlock:contain,ticket:125,star: 25,ton:0.12 }
+              const model = { id: 2, label: 'Mousey', Icon: Mousey,cost : 3750000,dollar:'0.00000020',unlock:contain,ticket:125,star: 25,ton:0.12 }
               gtTasks.push(model)
             }else if (t.id == 3){
-              const model = { id: 3, label: 'Jackie', Icon: Jackie,cost : 4000000,dollar:'0.00000025',unlock:contain,ticket:250,star: 75,ton:0.35 }
+              const model = { id: 3, label: 'Jackie', Icon: Jackie,cost : 7500000,dollar:'0.00000025',unlock:contain,ticket:250,star: 75,ton:0.35 }
                 gtTasks.push(model)
             }else if(t.id == 4){
-              const model =  { id: 4, label: 'Swat Guy', Icon: SwatGuy,cost : 6000000,dollar:'0.00000030',unlock:contain,ticket:375,star: 100,ton:0.47 }
+              const model =  { id: 4, label: 'Swat Guy', Icon: SwatGuy,cost : 13500000,dollar:'0.00000030',unlock:contain,ticket:375,star: 100,ton:0.47 }
               gtTasks.push(model)
             }else if(t.id == 5){
-              const model =  { id: 5, label: 'Eve', Icon: Ev,cost : 10000000,dollar:'0.00000040',unlock:contain,ticket:500,star: 150,ton:0.70 }
+              const model =  { id: 5, label: 'Eve', Icon: Ev,cost : 18000000,dollar:'0.00000040',unlock:contain,ticket:500,star: 150,ton:0.70 }
               gtTasks.push(model)
             }else if(t.id == 6){
-              const model = { id: 6, label: 'Alien Soldier', Icon: AlienSoldier,cost : 15000000,dollar:'0.00000050',unlock:contain,ticket:1000,star: 250,ton:1.17 }
+              const model = { id: 6, label: 'Alien Soldier', Icon: AlienSoldier,cost : 25000000,dollar:'0.00000050',unlock:contain,ticket:1000,star: 250,ton:1.17 }
                 gtTasks.push(model)
             }
             
         })
-      
+      }
 
       if(refresh == false) {
         timerRef.current = setInterval(() =>{
@@ -100,7 +102,7 @@ const CharactersTab = () => {
     const handle = async(cost:number,id:number,unlock:boolean,dollar:String,ticket:number) => {
 
     if(unlock == true){
-      const ticketupdate = Number(UserDt?.ticket) + Number(ticket)
+
         try {
             fetch('/api/updateselectedcharacter', {
              method: 'POST',
@@ -112,36 +114,19 @@ const CharactersTab = () => {
            .then((res) => res.json())
            .then((data) => {
             if(data.success){
-              try {
-                fetch('/api/update-ticket', {
-                 method: 'POST',
-                 headers: {
-                   'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify({ idd: String(UserDt?.idd),ticket: String(ticketupdate) }),
-               })
-               .then((res) => res.json())
-               .then((data) => {
-                 if (data.success) {
-                  setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(id),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
-                  new Toast({
-                                position: "top-center",
-                                toastMsg: "Close and reopen the app to see the changes",
-                                autoCloseTime: 8500,
-                                canClose: true,
-                                showProgress: true,
-                                pauseOnHover: true,
-                                pauseOnFocusLoss: true,
-                                type: "default",
-                                theme: "light"
-                              });
-                }
-               
-               })
-                   
-             } catch (err) {
-             }
-                
+                setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(UserDt?.gtpoint),selectcharacter:String(id),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
+               new Toast({
+                             position: "top-center",
+                             toastMsg: "Close and reopen the mini app to see the changes",
+                             autoCloseTime: 8500,
+                             canClose: true,
+                             showProgress: true,
+                             pauseOnHover: true,
+                             pauseOnFocusLoss: true,
+                             type: "default",
+                             theme: "light"
+                           });
+             
             }else{
               new Toast({
                   position: "top-center",
@@ -165,7 +150,7 @@ const CharactersTab = () => {
         const decreasepoint = Number(UserDt?.gtpoint) - cost
         const updatepgrade = UserDt?.upgrade+','+String(id)
          const updatevalue = (Number(UserDt?.value)+Number(dollar)).toFixed(8)
-
+        const ticketupdate = Number(UserDt?.ticket) + Number(ticket)
          try {
                       fetch('/api/upgradecharacter', {
                        method: 'POST',
@@ -177,24 +162,45 @@ const CharactersTab = () => {
                      .then((res) => res.json())
                      .then((data) => {
                       if(data.success){
-                        var newData = gtTasks.map(el => {
-                            if(el.id == id)
-                               return Object.assign({}, el, {unlock:true})
-                            return el
-                        });
-                         setTask(newData)
-                         setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(id),upgrade:String(updatepgrade),value:String(updatevalue),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
-                         new Toast({
-                          position: "top-center",
-                          toastMsg: "Close and reopen the mini app to see the changes",
-                          autoCloseTime: 8500,
-                          canClose: true,
-                          showProgress: true,
-                          pauseOnHover: true,
-                          pauseOnFocusLoss: true,
-                          type: "default",
-                          theme: "light"
-                        });
+
+                       try {
+                          fetch('/api/update-ticket', {
+                           method: 'POST',
+                           headers: {
+                             'Content-Type': 'application/json',
+                           },
+                           body: JSON.stringify({ idd: String(UserDt?.idd),ticket: String(ticketupdate) }),
+                         })
+                         .then((res) => res.json())
+                         .then((data) => {
+                           if (data.success) {
+                            
+                            var newData = gtTasks.map(el => {
+                              if(el.id == id)
+                                 return Object.assign({}, el, {unlock:true})
+                              return el
+                          });
+                           setTask(newData)
+                           setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(id),upgrade:String(updatepgrade),value:String(updatevalue),username:String(UserDt?.username),ticket:String(ticketupdate),firstname:String(UserDt?.firstname)})
+                           new Toast({
+                            position: "top-center",
+                            toastMsg: "Close and reopen the mini app to see the changes",
+                            autoCloseTime: 8500,
+                            canClose: true,
+                            showProgress: true,
+                            pauseOnHover: true,
+                            pauseOnFocusLoss: true,
+                            type: "default",
+                            theme: "light"
+                          });
+
+                          }
+                         
+                         })
+                             
+                       } catch (err) {
+                       }
+                       
                       }else{
                         new Toast({
                             position: "top-center",
@@ -216,32 +222,9 @@ const CharactersTab = () => {
     }
 
    }
-       
-   const handleCopyLink = () => {
-             const inviteLink = `/characters`
-             navigator.clipboard.writeText(inviteLink)
-               new Toast({
-                           position: "top-center",
-                           toastMsg: 'The command is copied',
-                           autoCloseTime: 4500,
-                           canClose: true,
-                           showProgress: true,
-                           pauseOnHover: true,
-                           pauseOnFocusLoss: true,
-                           type: "default",
-                           theme: "light"
-                         });
-           }
-      
-           const handleOpenLink = () => {
-            if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-              const tg = window.Telegram.WebApp
-            tg.ready()
-               tg.openTelegramLink("https://t.me/TheWalkCoinBot")     
-            }
-           }
 
-            const [tonConnectUI,setOptions] = useTonConnectUI()
+
+ const [tonConnectUI,setOptions] = useTonConnectUI()
            const [tonAddress, setTonAddress] = useState<string | null>(null);
            const [verifybuy, setVerifyBuy] = useState(0);
 
@@ -292,10 +275,32 @@ const CharactersTab = () => {
                const tempAddress = Address.parse(address).toString();
                return `${tempAddress.slice(0, 4)}...${tempAddress.slice(-4)}`;
              };
-           
-            
 
-           const handlePayment = async (id:number,ton:number) => {
+ const handleCopyLink = () => {
+             const inviteLink = `/characters`
+             navigator.clipboard.writeText(inviteLink)
+               new Toast({
+                           position: "top-center",
+                           toastMsg: 'The command is copied',
+                           autoCloseTime: 4500,
+                           canClose: true,
+                           showProgress: true,
+                           pauseOnHover: true,
+                           pauseOnFocusLoss: true,
+                           type: "default",
+                           theme: "light"
+                         });
+           }
+      
+           const handleOpenLink = () => {
+            if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+              const tg = window.Telegram.WebApp
+            tg.ready()
+               tg.openTelegramLink("https://t.me/TheWalkCoinBot")     
+            }
+           }
+
+ const handlePayment = async (id:number,ton:number) => {
            
            
                if (tonConnectUI.account?.address) {
@@ -322,13 +327,14 @@ const CharactersTab = () => {
                   } catch (err) {
                   }
                
+                       var tail = "Unlock Character" + "-" + String(UserDt?.idd)
                         await tonConnectUI.sendTransaction({
                            validUntil: Math.floor(Date.now() / 1000) + 60,
                            messages: [
                                {
                                    address: "UQD3X829OTABBFBWUASyK1h1zAYF7OjkEDWXtVss-DrL_dgy",
                                    amount: amount,
-                                   payload: beginCell().storeUint(0, 32).storeStringTail("Unlock Character").endCell().toBoc().toString('base64'),
+                                   payload: beginCell().storeUint(0, 32).storeStringTail(tail).endCell().toBoc().toString('base64'),
                                },
                            ],
                        });
@@ -527,6 +533,7 @@ alt="Shiba Inu"
          </div>
         </div>
     )
+ 
 }
 
 export default CharactersTab

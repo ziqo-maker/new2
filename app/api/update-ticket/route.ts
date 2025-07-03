@@ -6,11 +6,9 @@ export async function POST(req: NextRequest) {
         
         const {idd,ticket} = await req.json()
 
-        await prisma.ticket.updateMany({
+         await prisma.ticket.updateMany({
             where: { idd },
-            data: { 
-                ticket
-            }
+            data: { ticket }
         })
         
         return NextResponse.json({success :true})

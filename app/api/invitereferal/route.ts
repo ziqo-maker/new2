@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
                     }
                 })
 
-                let gtticket = await prisma.ticket.findFirst({
+                      let gtticket = await prisma.ticket.findFirst({
                     where: { idd }
                 })
                 if(gtticket){
@@ -45,8 +45,7 @@ export async function POST(req: NextRequest) {
                         }
                     })
                 }
-                
-
+    
                 await prisma.user.update({
                     where: { idd:idb },
                     data: {  

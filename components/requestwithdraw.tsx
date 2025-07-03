@@ -2,7 +2,7 @@
 
 import TetherC from '@/icons/tetherc.svg';
 import Image, {StaticImageData} from "next/image";
-import React,{ useState } from 'react'
+import React,{ useState,useRef,useEffect } from 'react'
 import { NewUserContext } from '@/contexts/UserContextB';
 import { Button, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
@@ -10,6 +10,11 @@ import Info from '@/icons/info.svg';
 import Toast from 'typescript-toastify';
 import { useTab } from '@/contexts/TabContext'
 
+
+
+type modelB = {
+ id: number
+}
 
 const Withdraw = () => {
      
@@ -23,72 +28,135 @@ const Withdraw = () => {
 
    const { activeTab, setActiveTab } = useTab()
 
+   const [gtMpdel,setModelB] = useState<modelB[]>([
+    { id: 1},
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+    { id: 5},
+    { id: 6 },
+]);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+     const [refreshB, setRefreshB] = useState<boolean>(false);
+     const [refreshC, setRefreshC] = useState<boolean>(false);
+
+     const [A2, setA2] = useState<boolean>(false);
+     const [A3, setA3] = useState<boolean>(false);
+     const [A4, setA4] = useState<boolean>(false);
+     const [A5, setA5] = useState<boolean>(false);
+     const [A6, setA6] = useState<boolean>(false);
+
+     useEffect(() => {
+      
+      setRefreshC(true)
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        };
+        const mapstr = UserDt?.upgrade.split(',').map(Number);
+        gtMpdel.forEach((t: any)=> {
+        
+            const found = mapstr?.find(item => item === t.id);
+            const contain = found !== undefined
+            
+             if(t.id == 1){
+              
+            }else if (t.id == 2){
+              setA2(contain)
+            }else if (t.id == 3){
+              setA3(contain)
+            }else if(t.id == 4){
+              setA4(contain)
+            }else if(t.id == 5){
+              setA5(contain)
+            }else if(t.id == 6){
+              setA6(contain)
+            }
+            
+        })
+
+      if(refreshC == false) {
+        timerRef.current = setInterval(() =>{
+         
+        setRefreshB(!refreshB)
+        },3000);
+       }
+
+      return () => {  if (timerRef.current) {
+        clearInterval(timerRef.current);
+      };
+    };
+
+    },[refreshB])
+
    const handle = async (network:string,address:string,amount:string,) => {
     const deduction = network == 'TON'? String((Number(amount)+0.65).toFixed(2)) : network == 'BSC(BEP20)'?String((Number(amount)+0.11).toFixed(2)): '0';
     const calpoint = Number(deduction) / Number(UserDt?.value)
-    if(network == 'Select Network' || address.length ==0 || amount == '0'){
- new Toast({
-          position: "top-center",
-          toastMsg: "You must fill in all of the fields.",
-          autoCloseTime: 4500,
-          canClose: true,
-          showProgress: true,
-          pauseOnHover: true,
-          pauseOnFocusLoss: true,
-          type: "default",
-          theme: "light"
-        });
-    }else if(calpoint > Number(UserDt?.gtpoint)){
-      new Toast({
-        position: "top-center",
-        toastMsg: "Not enough balance",
-        autoCloseTime: 4500,
-        canClose: true,
-        showProgress: true,
-        pauseOnHover: true,
-        pauseOnFocusLoss: true,
-        type: "default",
-        theme: "light"
-      });
-
-    }else if(((Number(amount)+0.11)).toFixed(2) >= Number(1.50).toFixed(2) &&  network == 'BSC(BEP20)' || ((Number(amount)+0.65)).toFixed(2) >= Number(1.50).toFixed(2) && network == 'TON'){
-     
-      const actualreceive = network == 'TON' && (Number(amount)-0.65) > 0? String((Number(amount)-0.65).toFixed(2)) : network == 'BSC(BEP20)' && (Number(amount)-0.11)>0?String((Number(amount)-0.11).toFixed(2)): '0';
-      
-      const points = Number(UserDt?.gtpoint) - calpoint
-      
-      try {
-        fetch('/api/request-withdraw', {
-         method: 'POST',
-         headers: {
-           'Content-Type':'application/json',
-         },
-         body: JSON.stringify({idd:String(UserDt?.idd),points:points,amount:String(actualreceive),address:address,network:network,status:'pending' }),
-       })
-       .then((res) => res.json())
-       .then((data) => {
-         if (data.success) {
-          setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(points),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
-          new Toast({
-            position: "top-center",
-            toastMsg: "Your request has been registered.",
-            autoCloseTime: 6500,
-            canClose: true,
-            showProgress: true,
-            pauseOnHover: true,
-            pauseOnFocusLoss: true,
-            type: "default",
-            theme: "light"
-          });
-         setActiveTab('wallet')
-         } else {
-         }
-       })
-     } catch (err) {
-     }
+    if(A2 == true && A3 == true && A4 == true && A5 == true && A6 == true){
+      if(network == 'Select Network' || address.length ==0 || amount == '0'){
+        new Toast({
+                 position: "top-center",
+                 toastMsg: "You must fill in all of the fields.",
+                 autoCloseTime: 4500,
+                 canClose: true,
+                 showProgress: true,
+                 pauseOnHover: true,
+                 pauseOnFocusLoss: true,
+                 type: "default",
+                 theme: "light"
+               });
+           }else if(calpoint > Number(UserDt?.gtpoint)){
+             new Toast({
+               position: "top-center",
+               toastMsg: "Not enough balance",
+               autoCloseTime: 4500,
+               canClose: true,
+               showProgress: true,
+               pauseOnHover: true,
+               pauseOnFocusLoss: true,
+               type: "default",
+               theme: "light"
+             });
+       
+           }else if(((Number(amount)+0.11)).toFixed(2) >= Number(1.50).toFixed(2) &&  network == 'BSC(BEP20)' || ((Number(amount)+0.65)).toFixed(2) >= Number(1.50).toFixed(2) && network == 'TON'){
+            
+             const actualreceive = network == 'TON' && (Number(amount)-0.65) > 0? String((Number(amount)-0.65).toFixed(2)) : network == 'BSC(BEP20)' && (Number(amount)-0.11)>0?String((Number(amount)-0.11).toFixed(2)): '0';
+             
+            const points = Number(UserDt?.gtpoint) - calpoint
+             
+             try {
+               fetch('/api/request-withdraw', {
+                method: 'POST',
+                headers: {
+                  'Content-Type':'application/json',
+                },
+                body: JSON.stringify({idd:String(UserDt?.idd),points:points,amount:String(actualreceive),address:address,network:network,status:'pending' }),
+              })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.success) {
+                 setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String((Number(points).toFixed())),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
+                 new Toast({
+                   position: "top-center",
+                   toastMsg: "Your request has been registered.",
+                   autoCloseTime: 6500,
+                   canClose: true,
+                   showProgress: true,
+                   pauseOnHover: true,
+                   pauseOnFocusLoss: true,
+                   type: "default",
+                   theme: "light"
+                 });
+                setActiveTab('wallet')
+                } else {
+                }
+              })
+            } catch (err) {
+            }
+           }
     }
 
    }
+
        
     return (
         <div className="flex justify-center overflow-auto">
@@ -103,13 +171,18 @@ const Withdraw = () => {
     />
             </center>  
             <div className="flex-1 text-center font-bold text-wrap">
-              <p className="mr-20 ml-20 text-[#ffae19]/[0.9] font-Large text-xl glow">Withdrawal</p>
+              <p className="mr-20 ml-20 text-black/[0.5] font-Large text-xl glow">Withdrawal</p>
               </div>         
         </div>
 
         <div className="flex-1 text-center font-bold text-wrap">
               </div>
               <p className={`mr-4 ml-4 flex justify-center grow text-[#db0000]/[0.9] font-bold font-Large text-xl glow mt-5`}>All fields are required</p>
+              {A2 == true && A3 == true && A4 == true && A5 == true && A6 == true ?
+               ''
+              :
+              <p className={`mr-4 ml-4 flex justify-center grow text-[#db0000]/[0.9] font-normal font-Large text-base glow mt-1`}>*You aren't eligible to burn Walkcoin</p>
+              }
 
       </center>
               
@@ -194,7 +267,7 @@ const Withdraw = () => {
     <div className='flex w-[calc(100%-4rem)] mt-1 justify-between items-start'>
     <p className={`font-normal text-sm glow text-[#ca2929f9]`}>Minimum withdrawal</p>
     <div className='flex space-x-1'>
-    <p className={`font-normal text-sm text-[#ca2929f9]`}>1.50</p> 
+    <p className={`font-normal text-sm text-[#ca2929f9]`}>20</p> 
     <p className={`font-normal text-sm text-black/[0.6]`}>USDT</p> 
 
     </div>
@@ -207,11 +280,13 @@ const Withdraw = () => {
     <p className={`font-normal text-sm text-black/[0.6]`}>USDT</p> 
     </div>
     </div>
-    <div className='h-10' />
+                   
+        <div className={`${((Number(UserDt?.gtpoint)*Number(UserDt?.value)).toFixed(8)) >= Number(20).toFixed(2)? 'h-5' : 'h-10' }`} />
+
 
     <button onClick={() => {handle(network,address,amount)}} data-dialog-target="dialog" className="relative w-[calc(100%-6rem)]">
     <div className="flex justify-center items-center space-x-2 px-4 pb-2 pt-2 w-full text-base text-white border-[#ffae19]/[0.9]  rounded-full bg-[#6b4d11]/[0.9] appearance-none dark:text-white border-4  focus:outline-none focus:ring-0 peer">
-    <p className={`font-bold text-lg text-white glow text-nowrap`}>{amount == '0' ? 'Request' : ((Number(amount)+0.11)).toFixed(2) >= Number(1.50).toFixed(2) &&  network == 'BSC(BEP20)' || ((Number(amount)+0.65)).toFixed(2) >= Number(1.50).toFixed(2) && network == 'TON' ? 'Request' : 'Withdrawal limit 1.50 USDT' }</p>
+    <p className={`font-bold text-lg text-white glow text-nowrap`}>{amount == '0' ? 'Request' : ((Number(amount)+0.11)).toFixed(2) >= Number(20).toFixed(2) &&  network == 'BSC(BEP20)' || ((Number(amount)+0.65)).toFixed(2) >= Number(20).toFixed(2) && network == 'TON' ? 'Request' : 'Withdrawal limit 20 USDT' }</p>
     </div>
      </button>  
 

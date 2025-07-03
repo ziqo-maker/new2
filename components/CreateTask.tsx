@@ -1,5 +1,5 @@
 'use client'
-
+ 
 import Etc from '@/icons/etc.svg';
 import FootPrint from '@/icons/footprint.svg';
 import Image, {StaticImageData} from "next/image";
@@ -31,7 +31,7 @@ const CreateTask = () => {
 
     const handle = async(describe:string,link:string,keyword:string,contact:string,project:string,clicks:number,platform:string,keyworddescribe:string) => {
 
-      const calclicks = clicks*20000
+      const calclicks = clicks*100000
       const nmbpoint = Number(UserDt?.gtpoint)
   
       if(link.length == 0 || describe.length == 0 || contact.length ==0 || project.length ==0|| clicks==0 || platform.length ==0){
@@ -73,7 +73,7 @@ const CreateTask = () => {
            .then((res) => res.json())
            .then((data) => {
             if(data.success){
-              setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),firstname:String(data.firstname),ticket:String(data.ticket)})
+              setUserData({idd:String(UserDt?.idd),speedlvl:String(UserDt?.speedlvl),gtpoint:String(decreasepoint),selectcharacter:String(UserDt?.selectcharacter),upgrade:String(UserDt?.upgrade),value:String(UserDt?.value),username:String(UserDt?.username),ticket:String(UserDt?.ticket),firstname:String(UserDt?.firstname)})
               new Toast({
                 position: "top-center",
                 toastMsg: "Done.",
@@ -147,7 +147,7 @@ const CreateTask = () => {
       className="w-7 h-7 "
       alt=""
     />     
-              <p className="text-white font-normal  text-base">+{(20000).toLocaleString()}</p> 
+              <p className="text-white font-normal  text-base">+{(35000).toLocaleString()}</p> 
                             </div>
               </div>
               <div className="px-1"/>
@@ -306,7 +306,7 @@ const CreateTask = () => {
       className="w-8 h-8 aspect-square object-cover"
       alt=""
     />
-    <p className={`font-normal text-base text-black text-wrap`}>{(Number(click)*20000).toLocaleString()}</p>        
+    <p className={`font-normal text-base text-black text-wrap`}>{(Number(click)*100000).toLocaleString()}</p>        
     </div>
     
     </div>
@@ -321,7 +321,7 @@ const CreateTask = () => {
       className="w-8 h-8 aspect-square object-cover"
       alt="Shiba Inu"
     />
-    <p className={`font-normal text-base text-black text-wrap`}>{(20000).toLocaleString()}</p>        
+    <p className={`font-normal text-base text-black text-wrap`}>{(100000).toLocaleString()}</p>        
     </div>
     </div>
     
@@ -357,7 +357,7 @@ const CreateTask = () => {
       className="w-7 h-7 aspect-square object-cover"
       alt=""
     />
-     <p className={`flex font-normal text-base text-black text-wrap`}>{(Number(click)*20000).toLocaleString()}</p>        
+     <p className={`flex font-normal text-base text-black text-wrap`}>{(Number(click)*100000).toLocaleString()}</p>        
 
         </div>      
       </div>

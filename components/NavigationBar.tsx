@@ -26,7 +26,7 @@ const NavigationBar = () => {
     return (
         <div className="fixed bottom-0 rounded-t-3xl left-1/2 transform -translate-x-1/2 w-full max-w-xl bg-[#ffae19] grow flex justify-around items-center z-50 text-xs ">
         
-           {tabs.map((tab) => {
+            {tabs.map((tab) => {
                         const isActive = activeTab === tab.id
                         return (
                             <button
@@ -34,7 +34,7 @@ const NavigationBar = () => {
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`flex flex-col items-center m-1 p-2 rounded-2xl ${isActive ? 'w-1/6' : 'w-1/6'}`}
                             >
-                             {String(tab.label) != "Raffle"? (
+                                {String(tab.label) != "Raffle"? (
  <tab.Icon
  className={`w-7 h-7 ${isActive ? 'text-[#ffffff]' : 'text-[#6b4d11]/[0.8]'
      }`}
@@ -49,15 +49,19 @@ const NavigationBar = () => {
                                 
                                 )}
                                 
+    
                                 <span
                                     className={`text-xs font-medium ${isActive ? 'text-[#ffffff]' : 'text-[#6b4d11]/[0.8]'
                                         }`}
                                 >
                                     {tab.label}
                                 </span>
+                                
                             </button>
+                            
                         )
                     })}
+            
         </div>
     )
 }

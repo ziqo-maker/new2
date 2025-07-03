@@ -151,11 +151,11 @@ const InviteTab = () => {
               if(data.success){
                 
                 if(data.all.length == 0){
-                  const model = {id: 1, done:false,count:2,price:0.00000015,clickb:false}
+                  const model = {id: 1, done:false,count:2,price:0.00000005,clickb:false}
                   gtShow?.push(model)
-                  const modelB = {id: 2, done:false,count:5,price:0.00000025,clickb:false}
+                  const modelB = {id: 2, done:false,count:5,price:0.00000010,clickb:false}
                   gtShow?.push(modelB)
-                  const modelC = {id: 3, done:false,count:15,price:0.00000035,clickb:false}
+                  const modelC = {id: 3, done:false,count:15,price:0.00000015,clickb:false}
                   gtShow?.push(modelC)
                 }else{
                    var blnA = false
@@ -166,30 +166,30 @@ const InviteTab = () => {
                     const gttask = String(t.task)
                     if(gttask == "1"){
                       blnA = true
-                      const model = {id: 1, done:true,count:2,price:0.00000015,clickb:false}
+                      const model = {id: 1, done:true,count:2,price:0.00000005,clickb:false}
                        gtShow?.push(model)
                     }else if(gttask == "2"){
                       blnB = true
-                      const model = {id: 2, done:true,count:5,price:0.00000025,clickb:false}
+                      const model = {id: 2, done:true,count:5,price:0.00000010,clickb:false}
                       gtShow?.push(model)
                     }else if(gttask == "3"){
                       blnC = true
-                      const model = {id: 3, done:true,count:15,price:0.00000035,clickb:false}
+                      const model = {id: 3, done:true,count:15,price:0.00000015,clickb:false}
                       gtShow?.push(model)
                     }
         
                   })
         
                   if(!blnA){
-                    const model = {id: 1, done:false,count:2,price:0.00000015,clickb:false}
+                    const model = {id: 1, done:false,count:2,price:0.00000005,clickb:false}
                     gtShow?.push(model)
                   }
                   if(!blnB){
-                    const model = {id: 2, done:false,count:5,price:0.00000025,clickb:false}
+                    const model = {id: 2, done:false,count:5,price:0.00000010,clickb:false}
                     gtShow?.push(model)
                   } 
                   if(!blnC){
-                    const model = {id: 3, done:false,count:15,price:0.00000035,clickb:false}
+                    const model = {id: 3, done:false,count:15,price:0.00000015,clickb:false}
                     gtShow?.push(model)
                   }  
         
@@ -293,7 +293,7 @@ const InviteTab = () => {
   className="w-6 h-6 "
   alt=""
 />     
-          <p className="text-white font-normal  text-base">{Number(100000).toLocaleString()} WalkCoin for you</p> 
+          <p className="text-white font-normal  text-base">{Number(100000).toLocaleString()} WalkCoin And 7 Tickets for you</p> 
                         </div>
                         <div className="grow flex items-center space-x-1">
                         <Image
@@ -368,7 +368,9 @@ const InviteTab = () => {
                  
                 <div className="flex-1 text-center font-bold ">
               <p className="mr-4 ml-4 text-black font-normal text-sm  ">Note: The reward for the invitation is limited, you will only be rewarded for 10 invitations, but your friends get their reward the same as before.</p>
-              </div>
+                           <p className="mr-4 ml-4 text-black font-normal text-sm mt-1 ">*There is no limit to receiving tickets as a reward, You can receive tickets for each successful invitation. </p>
+
+                </div>
                
              
               <div className="flex-1 mt-3 text-start font-bold ">
