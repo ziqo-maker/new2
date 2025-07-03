@@ -110,32 +110,9 @@ model winners {
   name String @db.VarChar(100)
 }
 
-model buywithstar {
-  id Int @id @default(autoincrement())
-  idd String @db.VarChar(500)
-  amount String @db.VarChar(100)
-  date DateTime @default(now())
-  transactionid String @db.Text
-  forwhat String @db.VarChar(200)
-}
-
 model watchads {
   id Int @id @default(autoincrement())
   cnt Int @default(0)
-  idd String @db.VarChar(500)
-  date DateTime @default(now())
-  dateMining DateTime @default(now())
-}
-
-model extra {
-  id Int @id @default(autoincrement())
-  idd String @db.VarChar(500)
-  items String @db.VarChar(100)
-}
-
-model vipclub {
-  id Int @id @default(autoincrement())
-  ticket Int @default(0)
   idd String @db.VarChar(500)
   date DateTime @default(now())
   dateMining DateTime @default(now())
@@ -147,4 +124,18 @@ model transactioncharacter {
   amount String @db.VarChar(100)
   date DateTime @default(now())
   idcharacter String @db.VarChar(10)
+}
+
+model extra {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500) @unique
+  items String @db.VarChar(100)
+}
+
+model vipclub {
+  id Int @id @default(autoincrement())
+  ticket Int @default(0)
+  idd String @db.VarChar(500) @unique
+  date DateTime @default(now())
+  dateMining DateTime @default(now())
 }
