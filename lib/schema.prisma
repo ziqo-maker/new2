@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  points Int @default(0)
+  username String @db.VarChar(50)
+  firstName String @db.VarChar(500) @map("first_name")
+  lastName String @db.VarChar(500) @map("last_name")
+  idd String @db.VarChar(500) @unique
+  date DateTime @default(now())
+  dateMining DateTime @default(now())
+  isMining Int @default(0)
+  isClaim Int @default(0)
+  donetasks String @db.MediumText
+  donecreatedtasks String @db.MediumText
+  pendingtasks String @db.MediumText
+  pendingcreatedtasks String @db.MediumText
+  speedlvl Int @default(1)
+  upgrade String @db.VarChar(50)
+  selectcharacter Int @default(1)
+  tokenvalue String @db.VarChar(50)
+  referal String @db.MediumText
+  invite String @db.MediumText
+}
+
+model Doing {
+  id Int @id @default(autoincrement())
+  url String @db.Text
+  title String @db.VarChar(500)
+  icon String @db.VarChar(100)
+  cost Int @default(15000)
+}
+
+model taskuser {
+  id Int @id @default(autoincrement())
+  describe String @db.Text
+  url String @db.VarChar(250)
+  platform String @db.VarChar(100)
+  keyword String @db.VarChar(50)
+  keyworddescribe String @db.VarChar(100)
+  contact String @db.VarChar(300)
+  project String @db.Text
+  clicks Int @default(0)
+  verify String @db.VarChar(50)
+}
+
+model Payment {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  network String @db.VarChar(100)
+  address String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  status String @db.VarChar(50)
+}
+
+model InviteTask {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  task String @db.VarChar(5)
+}
+
+model price {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  lvl String @db.VarChar(10)
+}
+
+model Raffle {
+  id Int @id @default(autoincrement())
+  date1 DateTime @default(now())
+  date2 String @db.VarChar(500)
+  priceton String @db.VarChar(100)
+}
+
+model ticket {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  ticket String @db.Text
+}
+
+model useticket {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  ticket String @db.Text
+  name String @db.VarChar(500)
+}
+
+model transaction {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  tickets String @db.VarChar(100)
+  status String @db.VarChar(50)
+}
+
+model winners {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  name String @db.VarChar(100)
+}
+
+model watchads {
+  id Int @id @default(autoincrement())
+  cnt Int @default(0)
+  idd String @db.VarChar(500)
+  date DateTime @default(now())
+  dateMining DateTime @default(now())
+}
+
+model transactioncharacter {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500)
+  amount String @db.VarChar(100)
+  date DateTime @default(now())
+  idcharacter String @db.VarChar(10)
+}
+
+model extra {
+  id Int @id @default(autoincrement())
+  idd String @db.VarChar(500) @unique
+  items String @db.VarChar(100)
+}
+
+model vipclub {
+  id Int @id @default(autoincrement())
+  ticket Int @default(0)
+  idd String @db.VarChar(500) @unique
+  date DateTime @default(now())
+  dateMining DateTime @default(now())
+}
