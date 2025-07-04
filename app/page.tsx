@@ -19,36 +19,6 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import test from '@/imgs/test.png';
 import Marquee from 'react-fast-marquee'
-import alien from '@/welcomeimg/alien.png';
-import eve from '@/welcomeimg/eve.png';
-import jacky from '@/welcomeimg/jacky.png';
-import mousey from '@/welcomeimg/mousey.png';
-import swatguy from '@/welcomeimg/swatguy.png';
-import a65 from '@/gif/6-6.gif';
-import a54 from '@/gif/5-5.gif';
-import a43 from '@/gif/4-4.gif';
-import a32 from '@/gif/3-3.gif';
-import a21 from '@/gif/2-2.gif';
-import telegramAnalytics from '@telegram-apps/analytics';
-
-const list: { mg: StaticImageData }[] = [
-  { mg: alien },
-  { mg: eve },
-  { mg: jacky },
-  { mg: mousey },
-  { mg: swatguy },
-
-]
-
-const listB: { mg: StaticImageData }[] = [
-  { mg: a65 },
-  { mg: a54 },
-  { mg: a43 },
-  { mg: a32 },
-  { mg: a21 },
-
-]
-
 
 
   declare global {
@@ -65,11 +35,6 @@ const listB: { mg: StaticImageData }[] = [
     const [refresh, setRefresh] = useState<boolean>(false);
       const [refreshB, setRefreshB] = useState<boolean>(false);
        const [first, setFirst] = useState<boolean>(false);
-
-     telegramAnalytics.init({
-    token: 'eyJhcHBfbmFtZSI6IldrQ25EYXRhIiwiYXBwX3VybCI6Imh0dHBzOi8vdC5tZS9UaGVXYWxrQ29pbkJvdCIsImFwcF9kb21haW4iOiJodHRwczovL3dsay1jb2luLTdwcnkudmVyY2VsLmFwcCJ9!pJOG/NpdGRm2Up//YIqyKBUJFDWLzOmTXJ6KCwR72vU=', 
-    appName: 'WkCnData', 
-});
        
     useEffect(() => {
 
@@ -210,30 +175,6 @@ const listB: { mg: StaticImageData }[] = [
            
          
        <div className='mr-1 ml-1 flex-col text-wrap flex justify-center items-center text-center'>
-{/*         <div className='flex space-x-1'>
-        <div className='flex flex-col justify-center items-center'>
-          <Image 
-        src={WalkTask as StaticImageData}
-         
-      className="size-8  aspect-square rounded-xl object-cover"
-      alt=""
-    />
-      
-                  <p className="text-white font-Large text-sm">WalkTask</p>
-
-        </div>
-        <button onClick={() => window.open("https://play.google.com/store/apps/details?id=com.walktask.app&pcampaignid=web_share")}>
-          
-          <Image 
-           src={getGoogleplay as StaticImageData} 
-         className="size-24 aspect-square object-cover"
-         alt=""
-       />
-       </button>
-       
-       
-      
-       </div> */}
        
          <p className="text-white font-Large font-bold text-wrap">Contact us</p>
           <p className="text-white font-Large text-sm">Vuorikatu 20</p>
@@ -243,105 +184,6 @@ const listB: { mg: StaticImageData }[] = [
           </div>
       </div>
     )
-
-{/*     if (first) return (
-    
-  <div className=" flex-1 overflow-hidden max-w-xl mx-auto  h-screen bg-white">
-      
-    <div className="flex flex-col justify-between bg-black w-full h-full m-auto  relative group bg-white">
-
-    <div className='flex justify-between items-center mr-3 ml-3 mt-4 '>
-    <div className={`${currentIndex == 0 ? 'invisible' : ''}  text-2xl text-white`}>
-    <IoIosArrowDropleftCircle onClick={prevSlide} size={40} color='#ffb835' />
-    </div>
-      <div className='flex'>
-      {slides.map((slide, slideIndex) => (
-          <div
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-            className='text-2xl cursor-pointer'
-          > 
-            
-            <GoDotFill size={20} color={`${slideIndex == currentIndex ? '#ffb835' : ''}`} />
-
-          </div>
-          
-        ))}
-      </div>
-      
-      <div className={`${currentIndex == 0 ? '' : 'invisible'}  text-2xl text-white`}>
-      <IoIosArrowDroprightCircle onClick={nextSlide} size={40} color='#ffb835' />
-      </div>
-
-      </div>
-      
-      <div className="flex flex-col text-center font-bold text-wrap">
-              <p className="mr-3 ml-3 mt-1 text-[#ffae19]/[0.9] font-Large text-xl glow">{currentIndex == 0 ? 'Unlocking Characters!': 'Speed up!'}</p>
-              <p className="mr-3 ml-3 mt-1 text-[#ffae19]/[0.9] font-normal  text-lg">{currentIndex == 0 ? 'By unlocking characters, you can increase the price of your WalkCoin tokens and walk with your favorite character.': "You can earn more WalkCoin tokens by increasing your character's walking speed."}</p>
-              </div>
-               <div className={`${currentIndex ==0? 'h-9' : 'h-4'}`} />
-               <div className='flex flex-col grow justify-center items-center'>
-               <section className="flex  justify-center w-full h-full">
-          <div className="items-center justify-center items-center  ">
-            <Marquee gradientWidth={120} gradient={true} className=" items-center  overflow-hidden ">
-            
-            {
-            list.map((mg,index) => {
-              return (
-                <Image 
-                 key={index}
-                src={mg.mg}
-              className={`${currentIndex == 0 ? 'w-full h-full' : 'w-0 h-0'}  aspect-square  object-cover`}
-              alt=""
-            />
-              )
-            })
-            }
-
-            {
-              listB.map((mg,index) => {
-                return (
-                  <div key={index} className={`${currentIndex == 0 ? 'w-0 h-0 p-0 p-0' : 'flex  h-80 p-5'} `}> 
-            <div className={`${currentIndex ==0? 'w-0 h-0' : 'flex grow w-full h-full relative  rounded-full border-4 border-double'}`}>
-           
-           <Image 
-                  src={mg.mg}
-                  className={`${currentIndex == 0 ? 'w-0 h-0' : 'w-full h-full'}  aspect-square rounded-full object-fill`}
-                  alt=""
-              />
-        
-            </div> 
-   
-          </div>
-                
-                )
-              })
-            }
-           
-          
-            </Marquee>
-          </div>
-        </section>
-                        
-                                 
-                       </div>
-
-          
-      
-      <div className='flex w-full justify-center items-center'>
-      <button onClick={currentIndex == 0 ? () => {goToSlide(1)} : () => {setFirst(false)}}>
-    <div className="flex items-center w-80 rounded-full px-4 py-[12px] border-white border-4 border-double bg-[#ffae19]/[0.9] items-center justify-center">
-    <p className={`font-bold text-lg text-white glow text-nowrap`}>{currentIndex == 0 ? 'Next': 'Start'}</p>
-    </div>
-     </button>  
-      </div>
-     
-     <div className='h-5 '/>
-      
-    </div>
-    </div>
-  
-) */}
 
     return (
          <UserNew>
