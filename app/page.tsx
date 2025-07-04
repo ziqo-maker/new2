@@ -19,35 +19,6 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import test from '@/imgs/test.png';
 import Marquee from 'react-fast-marquee'
-import alien from '@/welcomeimg/alien.png';
-import eve from '@/welcomeimg/eve.png';
-import jacky from '@/welcomeimg/jacky.png';
-import mousey from '@/welcomeimg/mousey.png';
-import swatguy from '@/welcomeimg/swatguy.png';
-import a65 from '@/gif/6-6.gif';
-import a54 from '@/gif/5-5.gif';
-import a43 from '@/gif/4-4.gif';
-import a32 from '@/gif/3-3.gif';
-import a21 from '@/gif/2-2.gif';
-import telegramAnalytics from '@telegram-apps/analytics';
-
-const list: { mg: StaticImageData }[] = [
-  { mg: alien },
-  { mg: eve },
-  { mg: jacky },
-  { mg: mousey },
-  { mg: swatguy },
-
-]
-
-const listB: { mg: StaticImageData }[] = [
-  { mg: a65 },
-  { mg: a54 },
-  { mg: a43 },
-  { mg: a32 },
-  { mg: a21 },
-
-]
 
 
 
@@ -65,11 +36,6 @@ const listB: { mg: StaticImageData }[] = [
     const [refresh, setRefresh] = useState<boolean>(false);
       const [refreshB, setRefreshB] = useState<boolean>(false);
        const [first, setFirst] = useState<boolean>(false);
-
-     telegramAnalytics.init({
-    token: 'eyJhcHBfbmFtZSI6IldrQ25EYXRhIiwiYXBwX3VybCI6Imh0dHBzOi8vdC5tZS9UaGVXYWxrQ29pbkJvdCIsImFwcF9kb21haW4iOiJodHRwczovL3dsay1jb2luLTdwcnkudmVyY2VsLmFwcCJ9!pJOG/NpdGRm2Up//YIqyKBUJFDWLzOmTXJ6KCwR72vU=', 
-    appName: 'WkCnData', 
-});
        
     useEffect(() => {
 
