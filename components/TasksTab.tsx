@@ -1,5 +1,5 @@
 'use client'
-      
+       
 import Image, {StaticImageData} from "next/image";
 import { useState,useEffect } from 'react'
 import Toast from 'typescript-toastify';
