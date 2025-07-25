@@ -53,6 +53,7 @@ import portal from '@/imgs/portal.png';
 import trx from '@/imgs/trx.png';
 import dystopia from '@/imgs/dystopia.png';
 import funton from '@/imgs/Funton.png';
+import industry from '@/imgs/industry.png';
 
 type Task = {
     id:string
@@ -1420,7 +1421,7 @@ setAdRefresh(true)
                          <div className="w-[calc(100%-2rem)] flex-1 mt-1 px-3  items-center bg-[#ffae19]/[0.9] border-white border-4 border-double rounded-full py-[5px] ">
                          <div className="grow flex items-center">
                          <Image
-    src={task.id == "49" ? bees as StaticImageData : task.id == "52" ?  trx as StaticImageData : task.id == "54" ? dystopia as StaticImageData : task.id == "31" ? kombat as StaticImageData : task.id == "3" ? boinkers as StaticImageData : task.id == "25" ? robus as StaticImageData : task.id == "0" ? funton as StaticImageData : task.id == "18" ? whitedogs as StaticImageData : task.id == "20" ? net as StaticImageData : task.icon}
+    src={task.id == "49" ? bees as StaticImageData : task.id == "52" ?  trx as StaticImageData : task.id == "54" ? dystopia as StaticImageData : task.id == "31" ? kombat as StaticImageData : task.id == "3" ? boinkers as StaticImageData : task.id == "25" ? robus as StaticImageData : task.id == "17" ? industry as StaticImageData : task.id == "18" ? whitedogs as StaticImageData : task.id == "20" ? net as StaticImageData : task.icon}
   className="w-11 h-11  aspect-square object-cover  "
   alt="Shiba Inu"
 />
