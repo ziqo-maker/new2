@@ -1033,7 +1033,7 @@ setAdRefresh(true)
    setAdRefresh(true)
     }, []);
   
-  const showAd = useAdsgram({ blockId: "int-8537", onReward, onError });
+  const showAd = useAdsgram({ blockId: "int-13168", onReward, onError });
     const showAdB = useAdsgramB({ blockId: "int-9613", onRewardB, onError });
     const showAdC = useAdsgramC({ blockId: "int-8537", onRewardC, onError });
 
