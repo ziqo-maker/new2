@@ -1034,7 +1034,7 @@ setAdRefresh(true)
     }, []);
   
   const showAd = useAdsgram({ blockId: "int-13168", onReward, onError });
-    const showAdB = useAdsgramB({ blockId: "int-13169", onRewardB, onError });
+    const showAdB = useAdsgramB({ blockId: "13170", onRewardB, onError });
     const showAdC = useAdsgramC({ blockId: "int-13168", onRewardC, onError });
 
    const errorwatch = async() => {
