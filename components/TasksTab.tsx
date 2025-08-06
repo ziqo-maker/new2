@@ -1035,7 +1035,7 @@ setAdRefresh(true)
   
   const showAd = useAdsgram({ blockId: "int-13168", onReward, onError });
     const showAdB = useAdsgramB({ blockId: "13170", onRewardB, onError });
-    const showAdC = useAdsgramC({ blockId: "13195", onRewardC, onError });
+    const showAdC = useAdsgramC({ blockId: "int-13578", onRewardC, onError });
 
    const errorwatch = async() => {
       new Toast({
@@ -1537,5 +1537,6 @@ setAdRefresh(true)
 }
 
 export default TasksTab
+
 
 
