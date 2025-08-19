@@ -229,7 +229,7 @@ const WalletTab = () => {
                        </button>
                        
                 </div>
-                <p className="text-black/[0.8] ml-1 text-sm text-wrap font-bold text-start">Unlock characters to be eligible to Burn WalkCoin</p>
+                <p className="text-black/[0.8] ml-1 text-sm text-wrap font-bold text-start">Unlock characters to become eligible to burn WalkCoin tokens and prepare for the airdrop</p>
 
                 <div className="w-full py-4">
   <div className="relative flex items-center justify-between w-full">
@@ -559,3 +559,4 @@ const WalletTab = () => {
 }
 
 export default WalletTab
+
