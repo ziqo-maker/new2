@@ -497,6 +497,7 @@ const WalletTab = () => {
 
            
              <div className="h-2" />
+              <p className="text-[#db0000]/[0.9] ml-1 font-bold text-[12px] text-wrap">ℹ️ For information on the new airdrop terms, visit the official WalkCoin announcement channel.</p>
                <p className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">We decided to appreciate user activity and help the project grow. From now on, you can burn your WalkCoin before listing.</p>
                <center>
             <p className={`font-bold text-sm mt-4 mr-3 ml-3  text-gray-700 text-wrap`}>WalkCoin Burning Reward Details</p> 
@@ -559,4 +560,5 @@ const WalletTab = () => {
 }
 
 export default WalletTab
+
 
