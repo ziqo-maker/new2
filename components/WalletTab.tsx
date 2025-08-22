@@ -499,7 +499,7 @@ const WalletTab = () => {
   <p className=" text-[#ffae19]/[0.9] font-black text-[13px] truncate">WHO IS ELIGIBLE FOR AIRDROP ?</p>
 </div>
  <div className="h-1" />
-<ol className="relative ml-4.5">                  
+<ol className="relative ml-4">                  
     <li className="mb-5 ms-0 ">        
     
          <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 bg-[#ffae19]/[0.9]">
@@ -522,7 +522,7 @@ const WalletTab = () => {
     </li>
 </ol>
              
-               <p className="text-black/[0.7] mt-1 ml-1 font-bold text-[12px] text-wrap">We decided to appreciate user activity and help the project grow. From now on, you can burn your WalkCoin before listing.</p>
+               <p className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">We decided to appreciate user activity and help the project grow. From now on, you can burn your WalkCoin before listing.</p>
                <center>
             <p className={`font-bold text-sm mt-4 mr-3 ml-3  text-gray-700 text-wrap`}>WalkCoin Burning Reward Details</p> 
             
@@ -531,7 +531,7 @@ const WalletTab = () => {
 
            </div>
     
-    <div className="relative overflow-x-auto mt-2 mr-4 ml-4  ">
+    <div className="relative overflow-x-auto mr-4 ml-4  ">
     <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase   bg-[#6b4d11]/[0.2] ">
             <tr>
@@ -584,6 +584,7 @@ const WalletTab = () => {
 }
 
 export default WalletTab
+
 
 
 
