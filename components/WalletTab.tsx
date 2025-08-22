@@ -470,7 +470,7 @@ const WalletTab = () => {
 
  
 
-<div className="flex w-full  items-center justify-center text-center space-x-2">
+<div className="flex w-full  items-center justify-center text-center">
                 
                
      
@@ -493,32 +493,32 @@ const WalletTab = () => {
                        
                 </div>  
 
-                   <div className="h-2" />
+                   <div className="h-2 mt-2" />
 
 <div className="w-full text-start justify-start">
   <p className=" text-[#ffae19]/[0.9] font-black text-[13px] truncate">WHO IS ELIGIBLE FOR AIRDROP ?</p>
 </div>
  <div className="h-1" />
-<ol className="relative ml-4">                  
+<ol className="relative ml-4.5">                  
     <li className="mb-5 ms-0 ">        
     
-       <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 bg-[#ffae19]/[0.9]">
+         <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 bg-[#ffae19]/[0.9]">
     
         </span>
-        <h3 className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">Unlock all characters</h3>
+        <h3 className="text-black/[0.7] font-bold text-[12px] text-wrap">Unlock all characters</h3>
     
     </li>
     <li className="mb-5 ms-0">            
-        <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 ring-4 ring-white dark:[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9]">
+         <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 bg-[#ffae19]/[0.9]">
     
         </span>
-        <h3 className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">Have at least 10,000,000 WalkCoin tokens</h3>
+        <h3 className="text-black/[0.7] font-bold text-[12px] text-wrap">Have at least 10,000,000 WalkCoin tokens</h3>
     </li>
     <li className="mb-5 ms-0">            
-        <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 ring-4 ring-white dark:[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9]">
+         <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 bg-[#ffae19]/[0.9]">
     
         </span>
-        <h3 className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">Invite 1 friend</h3>
+        <h3 className="text-black/[0.7] font-bold text-[12px] text-wrap">Invite 1 friend</h3>
     </li>
 </ol>
              
@@ -531,7 +531,7 @@ const WalletTab = () => {
 
            </div>
     
-    <div className="relative overflow-x-auto mt-4 mr-4 ml-4  ">
+    <div className="relative overflow-x-auto mt-2 mr-4 ml-4  ">
     <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase   bg-[#6b4d11]/[0.2] ">
             <tr>
@@ -584,6 +584,7 @@ const WalletTab = () => {
 }
 
 export default WalletTab
+
 
 
 
