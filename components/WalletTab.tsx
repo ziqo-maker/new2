@@ -502,7 +502,7 @@ const WalletTab = () => {
 <ol className="relative ml-4">                  
     <li className="mb-5 ms-0 ">        
     
-         <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 ring-4 ring-white dark:[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9]">
+       <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 bg-[#ffae19]/[0.9]">
     
         </span>
         <h3 className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">Unlock all characters</h3>
@@ -584,6 +584,7 @@ const WalletTab = () => {
 }
 
 export default WalletTab
+
 
 
 
