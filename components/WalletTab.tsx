@@ -492,12 +492,36 @@ const WalletTab = () => {
                     
                        
                 </div>  
-                  
-    
 
-           
-{/*              <div className="h-1" /> */}
-              <p className="text-[#db0000]/[0.9] ml-1 font-bold text-[12px] text-wrap">ℹ️ For information on the new airdrop terms, visit the official WalkCoin announcement channel.</p>
+                   <div className="h-2" />
+
+<div className="w-full text-start justify-start">
+  <p className=" text-[#ffae19]/[0.9] font-black text-[13px] truncate">WHO IS ELIGIBLE FOR AIRDROP ?</p>
+</div>
+ <div className="h-1" />
+<ol className="relative ml-4">                  
+    <li className="mb-5 ms-0 ">        
+    
+         <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 ring-4 ring-white dark:[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9]">
+    
+        </span>
+        <h3 className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">Unlock all characters</h3>
+    
+    </li>
+    <li className="mb-5 ms-0">            
+        <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 ring-4 ring-white dark:[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9]">
+    
+        </span>
+        <h3 className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">Have at least 10,000,000 WalkCoin tokens</h3>
+    </li>
+    <li className="mb-5 ms-0">            
+        <span className="absolute flex items-center justify-center mt-0.5 w-3 h-3 rounded-full -start-4 ring-4 ring-white dark:[#ffae19]/[0.9] dark:bg-[#ffae19]/[0.9]">
+    
+        </span>
+        <h3 className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">Invite 1 friend</h3>
+    </li>
+</ol>
+             
                <p className="text-black/[0.7] mt-1 ml-1 font-bold text-[12px] text-wrap">We decided to appreciate user activity and help the project grow. From now on, you can burn your WalkCoin before listing.</p>
                <center>
             <p className={`font-bold text-sm mt-4 mr-3 ml-3  text-gray-700 text-wrap`}>WalkCoin Burning Reward Details</p> 
@@ -560,6 +584,7 @@ const WalletTab = () => {
 }
 
 export default WalletTab
+
 
 
 
