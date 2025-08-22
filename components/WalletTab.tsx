@@ -524,14 +524,14 @@ const WalletTab = () => {
              
                <p className="text-black/[0.7] ml-1 font-bold text-[12px] text-wrap">We decided to appreciate user activity and help the project grow. From now on, you can burn your WalkCoin before listing.</p>
                <center>
-            <p className={`font-bold text-sm mt-4 mr-3 ml-3  text-gray-700 text-wrap`}>WalkCoin Burning Reward Details</p> 
+            <p className={`font-bold text-sm mt-3 mr-3 ml-3  text-gray-700 text-wrap`}>WalkCoin Burning Reward Details</p> 
             
                </center>
              
 
            </div>
     
-    <div className="relative overflow-x-auto mr-4 ml-4  ">
+    <div className="relative overflow-x-auto mt-4 mr-4 ml-4  ">
     <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase   bg-[#6b4d11]/[0.2] ">
             <tr>
@@ -577,13 +577,14 @@ const WalletTab = () => {
 
 
        </div>
-       <div className="h-20 mt-5" />
+       <div className="h-30 mt-5" />
          </div>
         </div>
     )
 }
 
 export default WalletTab
+
 
 
 
