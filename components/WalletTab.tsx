@@ -577,13 +577,14 @@ const WalletTab = () => {
 
 
        </div>
-       <div className="h-30 mt-5" />
+       <div className="h-20 mt-5" />
          </div>
         </div>
     )
 }
 
 export default WalletTab
+
 
 
 
