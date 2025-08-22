@@ -531,7 +531,7 @@ const WalletTab = () => {
 
            </div>
     
-    <div className="relative overflow-x-auto mt-4 mr-4 ml-4  ">
+    <div className="relative overflow-x-auto mt-2 mr-4 ml-4  ">
     <table className="w-full text-sm   text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase   bg-[#6b4d11]/[0.2] ">
             <tr>
@@ -573,6 +573,7 @@ const WalletTab = () => {
           }) }
         
     </table>
+                 <div className="h-10 mt-5" />
 </div>
 
 
@@ -584,6 +585,7 @@ const WalletTab = () => {
 }
 
 export default WalletTab
+
 
 
 
