@@ -259,7 +259,14 @@ useEffect(() => {
      gtClaimType?.push(model)
 },[])  
 
-
+useEffect(() => {
+ 	const script = document.createElement('script');
+ 	script.src = "https://js.onclckmn.com/static/onclicka.js";
+ 	script.dataset.admpid = '363469'; // tag id (Ad code)
+ 	script.async = true;
+ 	document.head.appendChild(script);
+}, []);
+   
   const handleStart = async (id:number,clickb:boolean,start:boolean) => {
      
     if(isClaim && clickb== false){
