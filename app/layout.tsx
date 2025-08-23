@@ -16,10 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-     <head>
-      <meta name='admaven-placement' content='BqdgHpdw4' />
-      </head>
       <body className={inter.className}>    
+       <Script async src="https://js.onclckmn.com/static/onclicka.js" data-admpid="363469" strategy="beforeInteractive" />
       <Script src="https://sad.adsgram.ai/js/sad.min.js" strategy="beforeInteractive"/>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
         {children}
